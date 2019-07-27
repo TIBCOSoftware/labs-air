@@ -1,0 +1,85 @@
+[
+  {
+    "name": "Reading",
+    "ttl": 0,
+    "properties": [
+      {
+        "name": "id",
+        "type": "string",
+        "pk-index": 0
+      },
+      {
+        "name": "device",
+        "type": "String"
+      },
+      {
+        "name": "instrument",
+        "type": "String"
+      },
+      {
+        "name": "value",
+        "type": "string"
+      }
+    ]
+  },
+  {
+    "name": "LightSensor",
+    "ttl": -1,
+    "properties": [
+      {
+        "name": "device",
+        "type": "String",
+        "pk-index": 0
+      },
+      {
+        "name": "value",
+        "type": "int"
+      }
+    ]
+  },
+  {
+    "name": "RotaryAngleSensor",
+    "ttl": -1,
+    "properties": [
+      {
+        "name": "device",
+        "type": "String",
+        "pk-index": 0
+      },
+      {
+        "name": "value",
+        "type": "int"
+      }
+    ]
+  },
+  {
+    "name": "Button",
+    "ttl": -1,
+    "properties": [
+      {
+        "name": "device",
+        "type": "String",
+        "pk-index": 0
+      },
+      {
+        "name": "value",
+        "type": "bool"
+      }
+    ]
+  },
+  {
+    "name": "Led",
+    "ttl": -1,
+    "properties": [
+      {
+        "name": "device",
+        "type": "String",
+        "pk-index": 0
+      },
+      {
+        "name": "value",
+        "type": "bool"
+      }
+    ]
+  }
+]

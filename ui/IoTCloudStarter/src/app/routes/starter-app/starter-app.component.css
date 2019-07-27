@@ -1,0 +1,9 @@
+/* This sets the sibling of router-outlet - ie) the routed component to full width */
+/* note: this outer component must have encapsulation: ViewEncapsulation.None */
+router-outlet + * {
+  width: 100%;
+}
+
+.tcs-starter-app-router-pane {
+  overflow: hidden;
+}

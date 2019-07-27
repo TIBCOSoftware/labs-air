@@ -1,0 +1,155 @@
+<div class="tcs-home-content" fxLayout="column" fxFlex="grow" fxLayoutAlign="start stretch"
+  style="padding-left: 20px; padding-right: 20px; margin-top: 10px;">
+
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <mat-form-field fxFlex="40%">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Devices">
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="column" fxLayoutGap="20px" style="height: 100%;">
+    <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between stretch" style="min-height: 300px">
+      <mat-card fxFlex="55%">
+        <mat-card-header>
+          <div mat-card-avatar class="device-header-image"></div>
+          <mat-card-title>Devices</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="table-container mat-elevation-z8">
+            <table mat-table [dataSource]="devicesDataSource" matSort>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let device"> {{device.name}} </td>
+              </ng-container>
+
+              <!-- Id Column -->
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> Id </th>
+                <td mat-cell *matCellDef="let device"> {{device.id}} </td>
+              </ng-container>
+
+              <!-- Operating State Column -->
+              <ng-container matColumnDef="operatingState">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Operating State </th>
+                <td mat-cell *matCellDef="let device"> {{device.operatingState}} </td>
+              </ng-container>
+
+              <!-- Admin State Column -->
+              <ng-container matColumnDef="adminState">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Admin State </th>
+                <td mat-cell *matCellDef="let device"> {{device.adminState}} </td>
+              </ng-container>
+
+              <!-- Description Column -->
+              <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+                <td mat-cell *matCellDef="let device"> {{device.description}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="deviceDisplayedColumns; sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: deviceDisplayedColumns;" (click)="onDeviceClicked(row)"
+                [ngClass]="{'selected': deviceSelection.isSelected(row) }">
+              </tr>
+            </table>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <mat-card fxFlex="45%">
+        <mat-card-header>
+          <div mat-card-avatar class="device-header-image"></div>
+          <mat-card-title>Instruments</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="table-container mat-elevation-z8">
+            <table mat-table [dataSource]="resourcesDataSource" matSort>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let resource"> {{resource.name}} </td>
+              </ng-container>
+
+              <!-- Description Column -->
+              <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+                <td mat-cell *matCellDef="let resource"> {{resource.description}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="resourceDisplayedColumns; sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: resourceDisplayedColumns;" (click)="onResourceClicked(row)"
+                [ngClass]="{'selected': resourceSelection.isSelected(row) }">
+              </tr>
+            </table>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div fxLayout="row" fxLayoutGap="15px" style="min-height: 300px">
+      <mat-card fxFlex>
+        <mat-card-header>
+          <div mat-card-avatar class="device-header-image"></div>
+          <mat-card-title>Intrument Readings</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <canvas baseChart 
+            [datasets]="chartDatasets" 
+            [options]="chartOptions" 
+            [legend]="chartLegend"
+            [chartType]="chartType">
+          </canvas>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div fxLayout="row" fxLayoutGap="15px" style="min-height: 300px">
+      <mat-card fxFlex>
+        <mat-card-header>
+          <div mat-card-avatar class="device-header-image"></div>
+          <mat-card-title>Instrument Details</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+
+          <form [formGroup]="instrumentForm" class="instrument-form" fxLayout="row wrap" fxLayoutGap="15px">
+            <mat-form-field fxFlex="18%" appearance="fill">
+              <mat-label>Value Type</mat-label>
+              <input matInput [readonly]=true formControlName="valueType">
+            </mat-form-field>
+            <mat-form-field fxFlex="18%" appearance="fill">
+              <mat-label>Minimun Value</mat-label>
+              <input matInput [readonly]=true formControlName="valueMinimum">
+            </mat-form-field>
+            <mat-form-field fxFlex="18%" appearance="fill">
+              <mat-label>Maximun Value</mat-label>
+              <input matInput [readonly]=true formControlName="valueMaximum">
+            </mat-form-field>
+            <mat-form-field fxFlex="18%" appearance="fill">
+              <mat-label>Default Value</mat-label>
+              <input matInput [readonly]=true formControlName="valueDefault">
+            </mat-form-field>
+            <mat-form-field fxFlex="18%" appearance="fill">
+              <mat-label>Unit</mat-label>
+              <input matInput [readonly]=true formControlName="valueUnit">
+            </mat-form-field>
+            <mat-form-field fxFlex="18%" appearance="fill">
+              <mat-label>Interface</mat-label>
+              <input matInput [readonly]=true formControlName="interface">
+            </mat-form-field>
+            <mat-form-field fxFlex="18%" appearance="fill">
+              <mat-label>Pin Number</mat-label>
+              <input matInput [readonly]=true formControlName="interfacePinNumber">
+            </mat-form-field>
+            <mat-form-field fxFlex="18%" appearance="fill">
+              <mat-label>Type</mat-label>
+              <input matInput [readonly]=true formControlName="interfaceType">
+            </mat-form-field>
+          </form>
+
+        </mat-card-content>
+
+      </mat-card>
+    </div>
+
+  </div>
+
+</div>

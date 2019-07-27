@@ -1,0 +1,31 @@
+.table-container {
+    overflow: auto;
+}
+  
+table {
+    width: 100%;
+}
+  
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+  
+.mat-row.selected {
+    background: #dddddd;
+}
+
+.mat-header-cell {
+    font-size: 18px;
+}
+
+.device-header-image {
+    background-image: url('/assets/img/device.png');
+    background-size: cover;
+}
+
+.query-row button {
+  margin-right: 8px;
+  margin-top: 8px;
+  margin-left: 10px;
+}

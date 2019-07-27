@@ -1,0 +1,33 @@
+{
+    "id": "",
+    "version": "1.0",
+    "landingPage": [
+        {
+            "key": "id1",
+            "description": "User",
+            "title": "Welcome to your IoTCloudStarter App",
+            "subtitle": "A highly customizable IoTCloudStarter application to manage Live Apps cases",
+            "highlights": [
+                {
+                    "title": "Engage",
+                    "iconURL": "ic-documentation",
+                    "content": "Handle all case related requests in a single place - e.g. create cases, action cases, approve requests."
+                },
+                {
+                    "title": "Collaborate",
+                    "iconURL": "ic-community",
+                    "content": "Collaborate on cases using unstructured data such as notes and documents."
+                },
+                {
+                    "title": "Track",
+                    "iconURL": "ic-graph",
+                    "content": "Track and respond to high priority cases using actions; review status using audit trails."
+                }
+            ],
+            "backgroundURL": "",
+            "homeRoute": "/starterApp/home/",
+            "roles": ["User"],
+            "priority": 5
+        }
+    ]
+}

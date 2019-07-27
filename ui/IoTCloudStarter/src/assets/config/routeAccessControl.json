@@ -1,0 +1,26 @@
+{
+  "routes": [
+    {
+      "routeUrl": "configuration",
+      "requiredRoleId": "Administrator"
+    }
+  ],
+  "buttons": [
+    {
+      "buttonId": "configure",
+      "requiredRoleId": "Administrator"
+    },
+    {
+      "buttonId": "caseStart",
+      "requiredRoleId": "User"
+    },
+    {
+      "buttonId": "refresh",
+      "requiredRoleId": "User"
+    },
+    {
+      "buttonId": "favorite",
+      "requiredRoleId": "User"
+    }
+  ]
+}

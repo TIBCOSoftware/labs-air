@@ -1,0 +1,18 @@
+<div fxLayout="column" class="iot-dashboard-top-level" fxFlex>
+    <div fxFlex fxLayout="column" style="padding-bottom: 20px">
+        <div>
+            <mat-tab-group (selectedTabChange)="tabChange($event)">
+                <mat-tab *ngFor="let page of allowedPages" label="{{page}}"></mat-tab>
+            </mat-tab-group>
+        </div>
+        <div fxFlex fxLayout="column">
+            <app-spotfire-dashboard fxFlex
+                [url]="spotfireServer" 
+                [path]="analysisPath"
+                [customization]="configuration"
+                [markingOn]="markingOn"
+                (markingEvent)="marking($event)">
+            </app-spotfire-dashboard>
+        </div>
+    </div>
+</div>

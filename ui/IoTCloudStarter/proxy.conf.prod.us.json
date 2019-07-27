@@ -1,0 +1,290 @@
+{
+  "/idm/v3/login-oauth": {
+    "target": {
+      "host": "liveapps.cloud.tibco.com",
+      "protocol": "https:",
+      "port": 443
+    },
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "info",
+    "cookieDomainRewrite": {
+      "*": "localhost"
+    },
+    "cookiePathRewrite": {
+      "*": "/"
+    }
+  },
+  "/as/token.oauth2": {
+    "target": {
+      "host": "sso-ext.tibco.com",
+      "protocol": "https:",
+      "port": 443
+    },
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "info",
+    "cookieDomainRewrite": {
+      "*": "cloud.tibco.com"
+    },
+    "cookiePathRewrite": {
+      "*": "/"
+    }
+  },
+  "/idm/v1/login-oauth": {
+    "target": {
+      "host": "liveapps.cloud.tibco.com",
+      "protocol": "https:",
+      "port": 443
+    },
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "info",
+    "cookieDomainRewrite": {
+      "*": "localhost"
+    }
+  },
+  "/tsc-ws/v1/tsc-domain": {
+    "target": {
+      "host": "liveapps.cloud.tibco.com",
+      "protocol": "https:",
+      "port": 443
+    },
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "info",
+    "cookieDomainRewrite": {
+      "*": "localhost"
+    }
+  },
+  "/idm/v1/reauthorize": {
+    "target": {
+      "host": "liveapps.cloud.tibco.com",
+      "protocol": "https:",
+      "port": 443
+    },
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "info",
+    "cookieDomainRewrite": {
+      "*": "localhost"
+    }
+  },
+  "/tsc-ws": {
+    "target": {
+      "host": "liveapps.cloud.tibco.com",
+      "protocol": "https:",
+      "port": 443
+    },
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "info",
+    "cookieDomainRewrite": {
+      "*": "localhost"
+    }
+  },
+  "/griddetails": {
+    "target": {
+      "host": "liveapps.cloud.tibco.com",
+      "protocol": "https:",
+      "port": 443
+    },
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "info",
+    "cookieDomainRewrite": {
+      "*": "localhost"
+    }
+  },
+  "/tsc-ws-content": {
+    "target": {
+      "host": "liveapps.cloud.tibco.com",
+      "protocol": "https:",
+      "port": 443
+    },
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "info",
+    "cookieDomainRewrite": {
+      "*": "localhost"
+    }
+  },
+  "/organisation/v1/": {
+    "target": {
+      "host": "liveapps.cloud.tibco.com",
+      "protocol": "https:",
+      "port": 443
+    },
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "info",
+    "headers": {
+      "Origin": "https://liveapps.cloud.tibco.com"
+    }
+  },
+  "/case/v1/cases": {
+    "target": {
+      "host": "liveapps.cloud.tibco.com",
+      "protocol": "https:",
+      "port": 443
+    },
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "info",
+    "headers": {
+      "Origin": "https://liveapps.cloud.tibco.com"
+    }
+  },
+  "/case/v1/types": {
+    "target": {
+      "host": "liveapps.cloud.tibco.com",
+      "protocol": "https:",
+      "port": 443
+    },
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "info",
+    "headers": {
+      "Origin": "https://liveapps.cloud.tibco.com"
+    }
+  },
+  "/case/reports": {
+    "target": {
+      "host": "liveapps.cloud.tibco.com",
+      "protocol": "https:",
+      "port": 443
+    },
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "info",
+    "headers": {
+      "Origin": "https://liveapps.cloud.tibco.com"
+    }
+  },
+  "/process/v1/": {
+    "target": {
+      "host": "liveapps.cloud.tibco.com",
+      "protocol": "https:",
+      "port": 443
+    },
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "info",
+    "headers": {
+      "Origin": "https://liveapps.cloud.tibco.com"
+    }
+  },
+  "/pageflow/v1/": {
+    "target": {
+      "host": "liveapps.cloud.tibco.com",
+      "protocol": "https:",
+      "port": 443
+    },
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "info",
+    "headers": {
+      "Origin": "https://liveapps.cloud.tibco.com"
+    }
+  },
+  "/event/v1/": {
+    "target": {
+      "host": "liveapps.cloud.tibco.com",
+      "protocol": "https:",
+      "port": 443
+    },
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "info",
+    "headers": {
+      "Origin": "https://liveapps.cloud.tibco.com"
+    }
+  },
+  "/clientstate/v1/states": {
+    "target": {
+      "host": "liveapps.cloud.tibco.com",
+      "protocol": "https:",
+      "port": 443
+    },
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "info",
+    "headers": {
+      "Origin": "https://liveapps.cloud.tibco.com"
+    }
+  },
+  "/webresource/": {
+    "target": {
+      "host": "liveapps.cloud.tibco.com",
+      "protocol": "https:",
+      "port": 443
+    },
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "info",
+    "headers": {
+      "Origin": "https://liveapps.cloud.tibco.com"
+    }
+  },
+  "/webresource/v1": {
+    "target": {
+      "host": "liveapps.cloud.tibco.com",
+      "protocol": "https:",
+      "port": 443
+    },
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "info",
+    "headers": {
+      "Origin": "https://liveapps.cloud.tibco.com"
+    }
+  },
+  "/collaboration/v1/": {
+    "target": {
+      "host": "liveapps.cloud.tibco.com",
+      "protocol": "https:",
+      "port": 443
+    },
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "info",
+    "headers": {
+      "Origin": "https://liveapps.cloud.tibco.com"
+    }
+  },
+  "/coredata/api/v1/*": {
+    "target": "http://localhost:48080",
+    "secure": "false",
+    "changeOrigin": true,
+    "logLevel": "info",
+    "pathRewrite":{"^/coredata" : ""}
+  },
+  "/coremeta/api/v1/*": {
+    "target": "http://localhost:48081",
+    "secure": "false",
+    "changeOrigin": true,
+    "logLevel": "info",
+    "pathRewrite":{"^/coremeta" : ""}
+  },
+  "/corecommand/api/v1/*": {
+    "target": "http://localhost:48082",
+    "secure": "false",
+    "changeOrigin": true,
+    "logLevel": "info",
+    "pathRewrite":{"^/corecommand" : ""}
+  },
+  "/exportdistro/api/v1/*": {
+    "target": "http://localhost:48070",
+    "secure": "false",
+    "changeOrigin": true,
+    "logLevel": "info",
+    "pathRewrite":{"^/exportdistro" : ""}
+  },
+  "/exportclient/api/v1/*": {
+    "target": "http://localhost:48071",
+    "secure": "false",
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite":{"^/exportclient" : ""}
+  }
+}

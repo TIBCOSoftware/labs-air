@@ -1,0 +1,93 @@
+<div class="tcs-home-content" fxLayout="column" fxFlex="grow" fxLayoutAlign="start stretch"
+  style="padding-left: 20px; padding-right: 20px; margin-top: 10px;">
+
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <mat-form-field fxFlex="40%">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Gateways">
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="column" fxLayoutGap="20px" style="height: 100%;">
+    <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between stretch" style="min-height: 300px">
+      <mat-card fxFlex="40%">
+        <mat-card-header>
+          <div mat-card-avatar class="gateway-header-image"></div>
+          <mat-card-title>Gateways Summary</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="table-container mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort>
+
+              <!-- Created Column -->
+              <ng-container matColumnDef="created">
+                <th mat-header-cell *matHeaderCellDef> Created </th>
+                <td mat-cell *matCellDef="let gateway"> {{gateway.createdts}} </td>
+              </ng-container>
+
+              <!-- Updated Column -->
+              <ng-container matColumnDef="updated">
+                <th mat-header-cell *matHeaderCellDef> Updated </th>
+                <td mat-cell *matCellDef="let gateway"> {{gateway.updatedts}} </td>
+              </ng-container>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="uuid">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                <td mat-cell *matCellDef="let gateway"> {{gateway.uuid}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"
+                [ngClass]="{'selected': selection.isSelected(row) }">
+              </tr>
+            </table>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <mat-card fxFlex>
+        <mat-card-header>
+          <div mat-card-avatar class="gateway-header-image"></div>
+          <mat-card-title>Gateway Locations</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div fxLayout="row" fxLayoutGap="15px" style="min-height: 300px">
+      <mat-card fxFlex>
+        <mat-card-header>
+          <div mat-card-avatar class="gateway-header-image"></div>
+          <mat-card-title>Gateway Details</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form [formGroup]="gatewayForm" class="gateway-form" fxLayout="row wrap" fxLayoutGap="15px">
+            <mat-form-field fxFlex="40%" appearance="fill">
+              <mat-label>Name</mat-label>
+              <input matInput formControlName="uuid" placeholder="Enter gateway's name">
+            </mat-form-field>
+            <mat-form-field fxFlex="40%" appearance="fill">
+              <mat-label>Address</mat-label>
+              <input matInput formControlName="address" placeholder="Enter gateway's IP Address">
+            </mat-form-field>
+            <mat-form-field fxFlex="40%" appearance="fill">
+              <mat-label>Latitude</mat-label>
+              <input matInput formControlName="latitude" placeholder="Enter gateway's latitude">
+            </mat-form-field>
+            <mat-form-field fxFlex="40%" appearance="fill">
+              <mat-label>Longitude</mat-label>
+              <input matInput formControlName="longitude" placeholder="Enter gateway's longitude">
+            </mat-form-field>
+          </form>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button (click)="addGateway()" color="primary">Add Gateway</button>
+          <button mat-raised-button (click)="updateGateway()" color="primary">Update Gateway</button>
+          <button mat-raised-button [disabled]="subscriptionDisabled" [routerLink]="['/starterApp/home/gatewaysubscription', selectedGateway]"  color="primary">Subscriptions</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+  </div>
+
+</div>
