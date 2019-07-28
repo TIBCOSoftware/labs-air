@@ -1,5 +1,5 @@
 [Service]
-Host = "localhost"
+Host = "host.docker.internal"
 Port = 49982
 ConnectRetries = 20
 Labels = []
