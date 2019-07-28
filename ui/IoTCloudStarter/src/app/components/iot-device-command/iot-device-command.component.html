@@ -149,7 +149,7 @@
               </ng-container>
 
               <tr mat-header-row *matHeaderRowDef="commandsDisplayedColumns; sticky: true"></tr>
-              <tr mat-row *matRowDef="let row; columns: commandsDisplayedColumns;"></tr>
+              <tr mat-row *matRowDef="let row; columns: commandsDisplayedColumns; let i = index;"></tr>
             </table>
           </div>
 

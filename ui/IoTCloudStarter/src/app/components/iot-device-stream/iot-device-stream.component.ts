@@ -3,7 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 
 import { SelectionModel } from '@angular/cdk/collections';
 
-import { Device, Reading, Resource } from '../../shared/models/iot.model';
+import { Device, TSReading, Resource } from '../../shared/models/iot.model';
 import { EdgeService } from '../../services/edge/edge.service';
 import { DgraphService } from '../../services/graph/dgraph.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -151,7 +151,7 @@ export class IotDeviceStreamComponent implements OnInit, AfterViewInit {
     this.graphService.getReadingsStartingAt(this.streamDeviceName, 
       this.streamResourceName, this.streamLastQuery)
       .subscribe(res => {
-        this.resourceReadings = res as Reading[];
+        this.resourceReadings = res as TSReading[];
 
         console.log("reading data: ", this.resourceReadings);
 
@@ -197,7 +197,7 @@ export class IotDeviceStreamComponent implements OnInit, AfterViewInit {
   public getResourceReadingsOrig(deviceName, resourceName) {
     this.graphService.getReadings(deviceName, resourceName)
       .subscribe(res => {
-        this.resourceReadings = res as Reading[];
+        this.resourceReadings = res as TSReading[];
 
         console.log("reading data: ", this.resourceReadings);
 

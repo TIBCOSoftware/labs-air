@@ -6,7 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { LogLevel, LogService } from '@tibco-tcstk/tc-core-lib';
 
 import { Gateway, Subscription } from '../../shared/models/iot.model';
-import { Reading } from '../../shared/models/iot.model';
+import { TSReading } from '../../shared/models/iot.model';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -21,7 +21,8 @@ const httpMutateOptions = {
 })
 export class DgraphService {
 
-  private dgraphUrl = 'http://137.117.38.255:8080';
+  // Defined as a proxy.  (i.e. http://137.117.38.255:8080)
+  private dgraphUrl = '/dgraph';
 
   constructor(private logger: LogService,
     private http: HttpClient) {
@@ -120,7 +121,7 @@ export class DgraphService {
 
   }
 
-  getReadings(deviceName, instrumentName): Observable<Reading[]> {
+  getReadings(deviceName, instrumentName): Observable<TSReading[]> {
     const url = `${this.dgraphUrl}/query`;
 
     // return this.http.post<any>(url, `{resp(func: has(reading)) @cascade {value created ~resource_reading @filter(eq(uuid, "${deviceName}_${instrumentName}")) {~device_resource @filter (eq(uuid, "${deviceName}")) {}}}}`, httpOptions)
@@ -138,13 +139,13 @@ export class DgraphService {
     }`;
     return this.http.post<any>(url, query, httpOptions)
       .pipe(
-        map(response => response.data.resp as Reading[]),
+        map(response => response.data.resp as TSReading[]),
         tap(_ => this.logger.info('fetched readings')),
-        catchError(this.handleError<Reading[]>('getReadings', []))
+        catchError(this.handleError<TSReading[]>('getReadings', []))
       );
   }
 
-  getReadingsStartingAt(deviceName, instrumentName, fromts): Observable<Reading[]> {
+  getReadingsStartingAt(deviceName, instrumentName, fromts): Observable<TSReading[]> {
     const url = `${this.dgraphUrl}/query`;
 
     let myquery = `{resp(func: has(reading)) @filter(gt(created, ${fromts})) @cascade {value created ~resource_reading @filter(eq(uuid, "${deviceName}_${instrumentName}")) { }}}`;
@@ -164,9 +165,9 @@ export class DgraphService {
     // return this.http.post<any>(url, `{resp(func: has(reading)) @filter(gt(created, ${fromts})) @cascade {value created ~resource_reading @filter(eq(uuid, "${deviceName}_${instrumentName}")) { }}}`, httpOptions)
     return this.http.post<any>(url, query, httpOptions)
       .pipe(
-        map(response => response.data.resp as Reading[]),
+        map(response => response.data.resp as TSReading[]),
         tap(_ => this.logger.info('fetched readings')),
-        catchError(this.handleError<Reading[]>('getReadings', []))
+        catchError(this.handleError<TSReading[]>('getReadings', []))
       );
   }
 

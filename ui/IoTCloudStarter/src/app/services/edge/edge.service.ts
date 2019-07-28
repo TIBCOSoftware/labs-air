@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { LogLevel, LogService } from '@tibco-tcstk/tc-core-lib';
 
-import { Device, Subscription } from '../../shared/models/iot.model';
+import { Device, Subscription, GetCommandResponse } from '../../shared/models/iot.model';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -101,10 +101,15 @@ export class EdgeService {
   // Core Metadata Operations
   // URL: http://localhost:48081/api/v1
 
-  runGetCommand(cmdPath: string) {
+  getCommand(cmdPath: string): Observable<GetCommandResponse> {
     let url = `${this.edgeCoreCommandUrl}${cmdPath}`
 
     console.log("Get command Url: ", url);
+    return this.http.get<GetCommandResponse>(url, httpOptions)
+      .pipe(
+        tap(_ => this.logger.info(`fetched get response`)),
+        catchError(this.handleError<GetCommandResponse>(`getCommand response`))
+      );
 
   }
 

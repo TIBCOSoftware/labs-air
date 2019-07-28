@@ -128,7 +128,21 @@ export class Gateway {
   subscriptions: Subscription[];
 }
 
+export class GetCommandResponse {
+  device: string;
+  origin: number;
+  readings: Reading[];
+}
+
 export class Reading {
+  origin: number;
+  device: string;
+  name: string;
+  value: string;
+}
+
+// TSReading - Time series reading.
+export class TSReading {
   value: string;
   created: number;
 }

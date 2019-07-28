@@ -11,6 +11,7 @@ import { debounceTime, distinctUntilChanged, startWith, tap, delay } from 'rxjs/
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 interface CommandEditor {
+  idx: number;
   id: string;
   name: string;
   method: string;
@@ -94,11 +95,13 @@ export class IotDeviceCommandComponent implements OnInit, AfterViewInit {
 
     this.commands = [];
 
+    let cnt = 0;
     deviceCommands.forEach((cmd, index) => {
 
       // Check if get available
       if (cmd.get.path != null) {
         this.commands.push({
+          idx: cnt,
           id: cmd.id,
           name: cmd.name,
           method: 'get',
@@ -106,11 +109,13 @@ export class IotDeviceCommandComponent implements OnInit, AfterViewInit {
           returnVal: '',
           paramVal: ''
         });
+        cnt++;
       }
 
       // Check if put available
       if (cmd.put.path != null) {
         this.commands.push({
+          idx: cnt,
           id: cmd.id,
           name: cmd.name,
           method: 'put',
@@ -118,6 +123,7 @@ export class IotDeviceCommandComponent implements OnInit, AfterViewInit {
           returnVal: '',
           paramVal: ''
         });
+        cnt++;
       }
 
     });
@@ -128,12 +134,22 @@ export class IotDeviceCommandComponent implements OnInit, AfterViewInit {
 
   sendCommand(row) {
   
+    console.log("Commad to use: ", row);
 
-    let cmdPath = `device/${this.deviceSelected}/command/${row.id}`;
+    if (row.method == "get") {
+      let cmdPath = `device/${this.deviceSelected}/command/${row.id}`;
 
-    console.log("Generated command path: ", cmdPath);
+      console.log("Generated GET command path: ", cmdPath);
 
-    this.edgeService.runGetCommand(cmdPath);
+      this.edgeService.getCommand(cmdPath)
+      .subscribe(res => {
+        
+        this.commandsDataSource.data[row.idx].returnVal = res.readings[0].value;
+      });
+    }
+    else {
+
+    }
 
   }
 
