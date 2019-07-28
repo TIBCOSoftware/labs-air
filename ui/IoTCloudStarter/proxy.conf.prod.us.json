@@ -284,7 +284,14 @@
     "target": "http://localhost:48071",
     "secure": "false",
     "changeOrigin": true,
-    "logLevel": "debug",
+    "logLevel": "info",
     "pathRewrite":{"^/exportclient" : ""}
+  },
+  "/dgraph/*": {
+    "target": "http://137.117.38.255:8080",
+    "secure": "false",
+    "changeOrigin": true,
+    "logLevel": "info",
+    "pathRewrite":{"^/dgraph" : ""}
   }
 }
