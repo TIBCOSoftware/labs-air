@@ -1,0 +1,152 @@
+{
+	"nodes": [
+		{
+			"name": "reading",
+			"key": [
+				"uuid"
+			],
+			"attributes": [
+				{
+					"name": "uuid",
+					"type": "String"
+				},
+				{
+					"name": "reading",
+					"type": "String"
+				},
+				{
+					"name": "value",
+					"type": "String"
+				},
+				{
+					"name": "created",
+					"type": "Long"
+				},
+				{
+					"name": "type",
+					"type": "String"
+				}
+			]
+		},
+		{
+			"name": "resource",
+			"key": [
+				"uuid"
+			],
+			"attributes": [
+				{
+					"name": "uuid",
+					"type": "String"
+				},
+				{
+					"name": "resource",
+					"type": "String"
+				},
+				{
+					"name": "name",
+					"type": "String"
+				},
+				{
+					"name": "type",
+					"type": "String"
+				}
+			]
+		},
+		{
+			"name": "device",
+			"key": [
+				"uuid"
+			],
+			"attributes": [
+				{
+					"name": "uuid",
+					"type": "String"
+				},
+				{
+					"name": "device",
+					"type": "String"
+				},
+				{
+					"name": "name",
+					"type": "String"
+				},
+				{
+					"name": "operatingState",
+					"type": "String"
+				},
+				{
+					"name": "adminState",
+					"type": "String"
+				},
+				{
+					"name": "description",
+					"type": "String"
+				},
+				{
+					"name": "type",
+					"type": "String"
+				}
+			]
+		},
+		{
+			"name": "gateway",
+			"key": [
+				"uuid"
+			],
+			"attributes": [
+				{
+					"name": "gateway",
+					"type": "String"
+				},
+				{
+					"name": "url",
+					"type": "String"
+				},
+				{
+					"name": "uuid",
+					"type": "String"
+				},
+				{
+					"name": "latitude",
+					"type": "Double"
+				},
+				{
+					"name": "longitude",
+					"type": "Double"
+				},
+				{
+					"name": "createdts",
+					"type": "String"
+				},
+				{
+					"name": "updatedts",
+					"type": "String"
+				},
+				{
+					"name": "type",
+					"type": "String"
+				}
+			]
+		}
+	],
+	"edges": [
+		{
+			"to": "device",
+			"name": "gateway_device",
+			"from": "gateway",
+			"direction": 2
+		},
+		{
+			"to": "resource",
+			"name": "device_resource",
+			"from": "device",
+			"direction": 2
+		},
+		{
+			"to": "reading",
+			"name": "resource_reading",
+			"from": "resource",
+			"direction": 2
+		}
+	]
+}
