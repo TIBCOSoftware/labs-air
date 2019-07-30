@@ -1,0 +1,1355 @@
+{
+    "imports": [
+        "github.com/project-flogo/flow",
+        "git.tibco.com/git/product/ipaas/wi-contrib.git/contributions/General/activity/log",
+        "github.com/project-flogo/flow/activity/subflow",
+        "git.tibco.com/git/product/ipaas/wi-postgres.git/src/app/PostgreSQL/activity/insert",
+        "git.tibco.com/git/product/ipaas/wi-contrib.git/contributions/General/activity/mapper",
+        "git.tibco.com/git/product/ipaas/wi-plugins.git/contributions/kafka/src/app/Kafka/activity/producer",
+        "git.tibco.com/git/product/ipaas/wi-mqtt.git/Mqtt/trigger/subscribe"
+    ],
+    "name": "tibcolabs_air_app",
+    "description": "  ",
+    "version": "1.1.0",
+    "type": "flogo:app",
+    "appModel": "1.1.0",
+    "triggers": [
+        {
+            "ref": "#subscribe",
+            "name": "MQTTSubscriber",
+            "description": "",
+            "settings": {
+                "mqttConnection": {
+                    "id": "a52886f0-af4d-11e9-920f-49d703a919c0",
+                    "type": "flogo:connector",
+                    "version": "1.0.0",
+                    "name": "connection",
+                    "hashTags": [],
+                    "inputMappings": {},
+                    "outputMappings": {},
+                    "iteratorMappings": {},
+                    "title": "MQTT Connector",
+                    "description": "MQTT Connector",
+                    "ref": "git.tibco.com/git/product/ipaas/wi-mqtt.git/Mqtt/connector/connection",
+                    "settings": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "required": true,
+                            "display": {
+                                "name": "Connection Name",
+                                "visible": true
+                            },
+                            "value": "tibcolabs-air-mqtt"
+                        },
+                        {
+                            "name": "description",
+                            "type": "string",
+                            "display": {
+                                "name": "Description",
+                                "visible": true
+                            },
+                            "value": ""
+                        },
+                        {
+                            "name": "broker",
+                            "type": "string",
+                            "required": true,
+                            "display": {
+                                "name": "Broker URL",
+                                "visible": true,
+                                "Description": "Enter a broker URL in the form '<protocol>://<host>:<port>'"
+                            },
+                            "value": "tcp://3.218.102.175:1883"
+                        },
+                        {
+                            "name": "user",
+                            "type": "string",
+                            "required": false,
+                            "display": {
+                                "name": "Username",
+                                "visible": true,
+                                "Description": "Enter a username if this connection requires one"
+                            },
+                            "value": ""
+                        },
+                        {
+                            "name": "password",
+                            "type": "string",
+                            "required": false,
+                            "display": {
+                                "name": "Password",
+                                "visible": true,
+                                "type": "password",
+                                "encryptable": true,
+                                "Description": "Enter a password if this connection requires one"
+                            },
+                            "value": "SECRET:W3qLYZHdeOnSiYL+0tliRg=="
+                        },
+                        {
+                            "name": "encryptionMode",
+                            "type": "string",
+                            "display": {
+                                "name": "Encryption Mode",
+                                "description": "Choose the type of authentication to use"
+                            },
+                            "allowed": [
+                                "None",
+                                "TLS-Cert",
+                                "TLS-ClientAuth"
+                            ],
+                            "value": "None"
+                        },
+                        {
+                            "name": "cacert",
+                            "type": "string",
+                            "required": false,
+                            "display": {
+                                "name": "Cacert",
+                                "description": "Select the CA certificate file used to sign the broker's certificate",
+                                "visible": false,
+                                "type": "fileselector",
+                                "fileExtensions": [
+                                    ".crt",
+                                    ".cert",
+                                    ".pem"
+                                ],
+                                "readonly": false,
+                                "valid": true
+                            },
+                            "value": ""
+                        },
+                        {
+                            "name": "clientcert",
+                            "type": "string",
+                            "required": false,
+                            "display": {
+                                "name": "Client Cert",
+                                "description": "Select the client certificate file for connections requiring client auth",
+                                "visible": false,
+                                "type": "fileselector",
+                                "fileExtensions": [
+                                    ".crt",
+                                    ".cert",
+                                    ".pem"
+                                ],
+                                "readonly": false,
+                                "valid": true
+                            },
+                            "value": ""
+                        },
+                        {
+                            "name": "clientkey",
+                            "type": "string",
+                            "required": false,
+                            "display": {
+                                "name": "Client Key",
+                                "description": "Select the client key file used for connections requiring client auth",
+                                "visible": false,
+                                "type": "fileselector",
+                                "fileExtensions": [
+                                    ".key",
+                                    ".pem"
+                                ],
+                                "readonly": false,
+                                "valid": true
+                            },
+                            "value": ""
+                        }
+                    ],
+                    "outputs": [],
+                    "inputs": [],
+                    "handler": {
+                        "settings": []
+                    },
+                    "reply": [],
+                    "s3Prefix": "Tibco",
+                    "key": "Tibco/Mqtt/connector/connection/connector.json",
+                    "display": {
+                        "description": "MQTT Connector",
+                        "category": "Mqtt",
+                        "smallIcon": "icons/mqtt.png",
+                        "largeIcon": "icons/mqtt.png",
+                        "visible": true
+                    },
+                    "actions": [
+                        {
+                            "name": "Save"
+                        }
+                    ],
+                    "feature": {},
+                    "propertyMap": {},
+                    "keyfield": "name",
+                    "isValid": true,
+                    "lastUpdatedTime": 1564109916862,
+                    "user": "eihkymzngv24drdfeyg3otoucgynht2q",
+                    "connectorName": "tibcolabs-air-mqtt",
+                    "connectorDescription": " "
+                }
+            },
+            "id": "MQTTSubscriber",
+            "handlers": [
+                {
+                    "description": "",
+                    "settings": {
+                        "topic": "EdgeXDataTopic1",
+                        "qos": 2,
+                        "valueType": "JSON",
+                        "showwill": false,
+                        "will": "",
+                        "willtopic": "",
+                        "willqos": 0,
+                        "willretain": false
+                    },
+                    "action": {
+                        "ref": "github.com/project-flogo/flow",
+                        "settings": {
+                            "flowURI": "res://flow:mqtt_sub"
+                        },
+                        "input": {
+                            "id": "=$.jsonValue.id",
+                            "device": "=$.jsonValue.device",
+                            "origin": "=$.jsonValue.origin",
+                            "readings": {
+                                "mapping": {
+                                    "@foreach($.jsonValue.readings)": {
+                                        "=": "$loop"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "schemas": {
+                        "output": {
+                            "jsonValue": {
+                                "type": "json",
+                                "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"device\":{\"type\":\"string\"},\"origin\":{\"type\":\"number\"},\"readings\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"origin\":{\"type\":\"number\"},\"device\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}}}}}}",
+                                "fe_metadata": "{\n    \"id\":\"f7dd8d66-6494-433b-900d-70f9990a4635\",\n    \"device\":\"Random-Boolean-Device\",\n    \"origin\":1564111671975285000,\n    \"readings\":[{\"origin\":1564111671968145100,\"device\":\"Random-Boolean-Device\",\"name\":\"RandomValue_Bool\",\"value\":\"true\"}]\n}"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "resources": [
+        {
+            "id": "flow:mqtt_sub",
+            "data": {
+                "name": "mqtt_sub",
+                "description": "",
+                "links": [
+                    {
+                        "id": 1,
+                        "from": "LogMessage",
+                        "to": "StartaSubFlow",
+                        "type": "default"
+                    }
+                ],
+                "tasks": [
+                    {
+                        "id": "LogMessage",
+                        "name": "LogMessage",
+                        "settings": {
+                            "iterate": "=$flow.readings"
+                        },
+                        "type": "iterator",
+                        "activity": {
+                            "ref": "#log",
+                            "input": {
+                                "Log Level": "INFO",
+                                "flowInfo": false,
+                                "message": "=\"mqtt_sub flow : \"+$flow.id+\",\"+$flow.device+\",\"+$flow.origin+\",\"+$iteration[value].origin+\",\"+$iteration[value].device+\",\"+$iteration[value].name+\",\"+$iteration[value].value"
+                            }
+                        }
+                    },
+                    {
+                        "id": "StartaSubFlow",
+                        "name": "StartaSubFlow",
+                        "activity": {
+                            "ref": "#subflow",
+                            "settings": {
+                                "flowURI": "res://flow:PersistentService"
+                            },
+                            "input": {
+                                "id": "=$flow.id",
+                                "device": "=$flow.device",
+                                "origin": "=$flow.origin",
+                                "readings": {
+                                    "mapping": {
+                                        "@foreach($flow.readings)": {
+                                            "origin": "=$.origin",
+                                            "device": "=$.device",
+                                            "name": "=$.name",
+                                            "value": "=$.value"
+                                        }
+                                    }
+                                }
+                            },
+                            "schemas": {
+                                "input": {
+                                    "input": {
+                                        "type": "json",
+                                        "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"device\":{\"type\":\"string\"},\"origin\":{\"type\":\"number\"},\"readings\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"origin\":{\"type\":\"number\"},\"device\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}}}}}}",
+                                        "fe_metadata": "{\n    \"id\":\"f7dd8d66-6494-433b-900d-70f9990a4635\",\n    \"device\":\"Random-Boolean-Device\",\n    \"origin\":1564111671975285000,\n    \"readings\":[{\"origin\":1564111671968145100,\"device\":\"Random-Boolean-Device\",\"name\":\"RandomValue_Bool\",\"value\":\"true\"}]\n}"
+                                    }
+                                },
+                                "output": {
+                                    "output": {
+                                        "type": "json",
+                                        "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"output\":{\"type\":\"string\"}}}",
+                                        "fe_metadata": "{\n    \"output\":\"value\"\n}"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "metadata": {
+                    "input": [
+                        {
+                            "name": "id",
+                            "type": "string"
+                        },
+                        {
+                            "name": "device",
+                            "type": "string"
+                        },
+                        {
+                            "name": "origin",
+                            "type": "float64"
+                        },
+                        {
+                            "name": "readings",
+                            "type": "array",
+                            "schema": {
+                                "type": "json",
+                                "value": "{\"type\":\"object\",\"properties\":{\"origin\":{\"type\":\"number\"},\"device\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}}}"
+                            }
+                        }
+                    ],
+                    "output": [
+                        {
+                            "name": "id",
+                            "type": "string"
+                        },
+                        {
+                            "name": "device",
+                            "type": "string"
+                        },
+                        {
+                            "name": "origin",
+                            "type": "float64"
+                        },
+                        {
+                            "name": "readings",
+                            "type": "array",
+                            "schema": {
+                                "type": "json",
+                                "value": "{\"type\":\"object\",\"properties\":{\"origin\":{\"type\":\"number\"},\"device\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}}}"
+                            }
+                        }
+                    ],
+                    "fe_metadata": {
+                        "input": "{\n    \"id\": \"b710ad27-4eb0-417f-96b8-02830642d8a1\",\n    \"device\": \"Random-Integer-Device\",\n    \"origin\": 1564113092999608300,\n    \"readings\": [\n        {\n            \"origin\": 1564113092992998000,\n            \"device\": \"Random-Integer-Device\",\n            \"name\": \"RandomValue_Int64\",\n            \"value\": \"-6427502364192134104\"\n        }\n    ]\n}",
+                        "output": "{\n    \"id\":\"f7dd8d66-6494-433b-900d-70f9990a4635\",\n    \"device\":\"Random-Boolean-Device\",\n    \"origin\":1564111671975285000,\n    \"readings\":[{\"origin\":1564111671968145100,\"device\":\"Random-Boolean-Device\",\"name\":\"RandomValue_Bool\",\"value\":\"true\"}]\n}"
+                    }
+                }
+            }
+        },
+        {
+            "id": "flow:PostgresService",
+            "data": {
+                "name": "PostgresService",
+                "description": "",
+                "links": [
+                    {
+                        "id": 1,
+                        "from": "LogMessage",
+                        "to": "PostgreSQLInsert",
+                        "type": "default"
+                    },
+                    {
+                        "id": 2,
+                        "from": "PostgreSQLInsert",
+                        "to": "LogMessage2",
+                        "type": "default"
+                    }
+                ],
+                "tasks": [
+                    {
+                        "id": "LogMessage",
+                        "name": "LogMessage",
+                        "settings": {
+                            "iterate": "=$flow.readings"
+                        },
+                        "type": "iterator",
+                        "activity": {
+                            "ref": "#log",
+                            "input": {
+                                "Log Level": "INFO",
+                                "flowInfo": true,
+                                "message": "=\"PostgresService : \"+$flow.id+\",\"+$flow.device+\",\"+$flow.origin+\",\"+$iteration[value].name+\",\"+string.substringAfter($iteration[value].name, \"_\")+\",\"+$iteration[value].value"
+                            }
+                        }
+                    },
+                    {
+                        "id": "PostgreSQLInsert",
+                        "name": "PostgreSQLInsert",
+                        "settings": {
+                            "iterate": "=$flow.readings"
+                        },
+                        "type": "iterator",
+                        "activity": {
+                            "ref": "#insert",
+                            "input": {
+                                "Connection": {
+                                    "type": "flogo:connector",
+                                    "version": "2.0.1",
+                                    "name": "postgresql-connector",
+                                    "hashTags": [],
+                                    "inputMappings": {},
+                                    "outputMappings": {},
+                                    "iteratorMappings": {},
+                                    "title": "PostgreSQL Connector",
+                                    "description": "Connector to connect to a PostgreSQL database server",
+                                    "ref": "git.tibco.com/git/product/ipaas/wi-postgres.git/src/app/PostgreSQL/connector/connection",
+                                    "settings": [
+                                        {
+                                            "name": "name",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Connection Name",
+                                                "visible": true
+                                            },
+                                            "value": "tibcolabs-air-postgresql"
+                                        },
+                                        {
+                                            "name": "description",
+                                            "type": "string",
+                                            "display": {
+                                                "name": "Description",
+                                                "visible": true
+                                            },
+                                            "value": ""
+                                        },
+                                        {
+                                            "name": "host",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Host",
+                                                "description": "PostgreSQL Database Host name",
+                                                "type": "string",
+                                                "visible": true,
+                                                "appPropertySupport": true
+                                            },
+                                            "value": "=$property[\"PostgreSQL.tibcolabs-air-postgresql.Host\"]"
+                                        },
+                                        {
+                                            "name": "port",
+                                            "type": "integer",
+                                            "required": true,
+                                            "value": "=$property[\"PostgreSQL.tibcolabs-air-postgresql.Port\"]",
+                                            "display": {
+                                                "name": "Port",
+                                                "description": "PostgreSQL Database Port",
+                                                "type": "integer",
+                                                "visible": true,
+                                                "appPropertySupport": true
+                                            }
+                                        },
+                                        {
+                                            "name": "databaseName",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Database Name",
+                                                "description": "Name of the Database",
+                                                "type": "string",
+                                                "visible": true,
+                                                "appPropertySupport": true
+                                            },
+                                            "value": "=$property[\"PostgreSQL.tibcolabs-air-postgresql.Database_Name\"]"
+                                        },
+                                        {
+                                            "name": "user",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "User",
+                                                "description": "Name of the Database User",
+                                                "visible": true,
+                                                "appPropertySupport": true
+                                            },
+                                            "value": "=$property[\"PostgreSQL.tibcolabs-air-postgresql.User\"]"
+                                        },
+                                        {
+                                            "name": "password",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Password",
+                                                "description": "PostgreSQL Database Port",
+                                                "type": "password",
+                                                "visible": true,
+                                                "appPropertySupport": true
+                                            },
+                                            "value": "=$property[\"PostgreSQL.tibcolabs-air-postgresql.Password\"]"
+                                        }
+                                    ],
+                                    "outputs": [],
+                                    "inputs": [],
+                                    "handler": {
+                                        "settings": []
+                                    },
+                                    "reply": [],
+                                    "s3Prefix": "Tibco",
+                                    "key": "Tibco/PostgreSQL/connector/connection/connector.json",
+                                    "display": {
+                                        "description": "Connector to connect to a PostgreSQL database server",
+                                        "category": "PostgreSQL",
+                                        "visible": true,
+                                        "smallIcon": "icons/ic-postgres-connection@2x.png",
+                                        "largeIcon": "icons/ic-postgres-connection@3x.png"
+                                    },
+                                    "actions": [
+                                        {
+                                            "name": "Connect"
+                                        }
+                                    ],
+                                    "feature": {},
+                                    "propertyMap": {},
+                                    "keyfield": "name",
+                                    "isValid": true,
+                                    "lastUpdatedTime": 1564120390760,
+                                    "createdTime": 1564120390760,
+                                    "user": "eihkymzngv24drdfeyg3otoucgynht2q",
+                                    "subscriptionId": "TIB_SUB_01BB7F22MGX01K6MQK0TD02DYV",
+                                    "id": "a646de80-af69-11e9-b1e1-21c3ee21ed35",
+                                    "connectorName": " ",
+                                    "connectorDescription": " "
+                                },
+                                "QueryName": "",
+                                "Query": "INSERT INTO sensor_data (id, device, origin, attrname, attrtype, attrvalue) VALUES (?id, ?device, ?origin, ?attrname, ?attrtype, ?attrvalue);",
+                                "Fields": "[{\"FieldName\":\"attrtype\",\"Type\":\"VARCHAR\",\"Selected\":false,\"Parameter\":true,\"isEditable\":false,\"Value\":true},{\"FieldName\":\"attrvalue\",\"Type\":\"VARCHAR\",\"Selected\":false,\"Parameter\":true,\"isEditable\":false,\"Value\":true},{\"FieldName\":\"id\",\"Type\":\"VARCHAR\",\"Selected\":false,\"Parameter\":true,\"isEditable\":false,\"Value\":true},{\"FieldName\":\"device\",\"Type\":\"VARCHAR\",\"Selected\":false,\"Parameter\":true,\"isEditable\":false,\"Value\":true},{\"FieldName\":\"origin\",\"Type\":\"VARCHAR\",\"Selected\":false,\"Parameter\":true,\"isEditable\":false,\"Value\":true},{\"FieldName\":\"attrname\",\"Type\":\"VARCHAR\",\"Selected\":false,\"Parameter\":true,\"isEditable\":false,\"Value\":true}]",
+                                "State": "a646de80-af69-11e9-b1e1-21c3ee21ed35INSERT INTO sensor_data (id, device, origin, attrname, attrtype, attrvalue) VALUES (?id, ?device, ?origin, ?attrname, ?attrtype, ?attrvalue);",
+                                "input": {
+                                    "mapping": {
+                                        "values": [
+                                            {
+                                                "id": "=$flow.id",
+                                                "device": "=$flow.device",
+                                                "origin": "=string.tostring($flow.origin)",
+                                                "attrname": "=$iteration[value].name",
+                                                "attrvalue": "=$iteration[value].value",
+                                                "attrtype": "=string.substringAfter($iteration[value].name, \"_\")"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "schemas": {
+                                "input": {
+                                    "input": {
+                                        "type": "json",
+                                        "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"definitions\":{},\"properties\":{\"values\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"attrtype\":{\"type\":\"string\"},\"attrvalue\":{\"type\":\"string\"},\"id\":{\"type\":\"string\"},\"device\":{\"type\":\"string\"},\"origin\":{\"type\":\"string\"},\"attrname\":{\"type\":\"string\"}}}},\"parameters\":{\"type\":\"object\",\"properties\":{}}}}",
+                                        "fe_metadata": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"definitions\":{},\"properties\":{\"values\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"attrtype\":{\"type\":\"string\"},\"attrvalue\":{\"type\":\"string\"},\"id\":{\"type\":\"string\"},\"device\":{\"type\":\"string\"},\"origin\":{\"type\":\"string\"},\"attrname\":{\"type\":\"string\"}}}},\"parameters\":{\"type\":\"object\",\"properties\":{}}}}"
+                                    }
+                                },
+                                "output": {
+                                    "Output": {
+                                        "type": "json",
+                                        "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"definitions\":{},\"properties\":{\"records\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{}}}}}",
+                                        "fe_metadata": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"definitions\":{},\"properties\":{\"records\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{}}}}}"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "id": "LogMessage2",
+                        "name": "LogMessage2",
+                        "settings": {
+                            "iterate": "=$activity[PostgreSQLInsert].Output.records"
+                        },
+                        "type": "iterator",
+                        "activity": {
+                            "ref": "#log",
+                            "input": {
+                                "Log Level": "INFO",
+                                "flowInfo": false,
+                                "message": "=\"PostgresService : \"+$iteration[value]"
+                            }
+                        }
+                    }
+                ],
+                "metadata": {
+                    "input": [
+                        {
+                            "name": "id",
+                            "type": "string"
+                        },
+                        {
+                            "name": "device",
+                            "type": "string"
+                        },
+                        {
+                            "name": "origin",
+                            "type": "float64"
+                        },
+                        {
+                            "name": "readings",
+                            "type": "array",
+                            "schema": {
+                                "type": "json",
+                                "value": "{\"type\":\"object\",\"properties\":{\"origin\":{\"type\":\"number\"},\"device\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}}}"
+                            }
+                        }
+                    ],
+                    "output": [
+                        {
+                            "name": "message",
+                            "type": "string"
+                        }
+                    ],
+                    "fe_metadata": {
+                        "input": "{\n    \"id\":\"b710ad27-4eb0-417f-96b8-02830642d8a1\",\n    \"device\":\"Random-Integer-Device\",\n    \"origin\":1564113092999608200,\n    \"readings\":\n    [\n        {\n            \"origin\":1564113092992997800,\n            \"device\":\"Random-Integer-Device\",\n            \"name\":\"RandomValue_Int64\",\n            \"value\":\"-6427502364192134104\"\n        }\n    ]\n}\n",
+                        "output": "{\n    \"message\": \"value\"\n}"
+                    }
+                }
+            }
+        },
+        {
+            "id": "flow:PersistentService",
+            "data": {
+                "name": "PersistentService",
+                "description": "",
+                "links": [
+                    {
+                        "id": 1,
+                        "from": "LogMessage",
+                        "to": "Mapper",
+                        "type": "default"
+                    },
+                    {
+                        "id": 2,
+                        "from": "Mapper",
+                        "to": "LogMessage1",
+                        "type": "default"
+                    },
+                    {
+                        "id": 3,
+                        "from": "LogMessage1",
+                        "to": "LogMessage2",
+                        "type": "expression",
+                        "value": "$activity[Mapper].output.bit0==\"1\""
+                    },
+                    {
+                        "id": 4,
+                        "from": "LogMessage2",
+                        "to": "StartaSubFlow",
+                        "type": "default"
+                    },
+                    {
+                        "id": 5,
+                        "from": "LogMessage1",
+                        "to": "LogMessage3",
+                        "type": "expression",
+                        "value": "$activity[Mapper].output.bit1==\"1\""
+                    },
+                    {
+                        "id": 6,
+                        "from": "LogMessage3",
+                        "to": "StartaSubFlow1",
+                        "type": "default"
+                    },
+                    {
+                        "id": 7,
+                        "from": "LogMessage1",
+                        "to": "LogMessage4",
+                        "type": "expression",
+                        "value": "$activity[Mapper].output.bit2==\"1\""
+                    },
+                    {
+                        "id": 8,
+                        "from": "LogMessage1",
+                        "to": "LogMessage5",
+                        "type": "expression",
+                        "value": "$activity[Mapper].output.bit3==\"3\""
+                    }
+                ],
+                "tasks": [
+                    {
+                        "id": "LogMessage",
+                        "name": "LogMessage",
+                        "settings": {
+                            "iterate": "=$flow.readings"
+                        },
+                        "type": "iterator",
+                        "activity": {
+                            "ref": "#log",
+                            "input": {
+                                "Log Level": "INFO",
+                                "flowInfo": false,
+                                "message": "=\"PersistentService : \"+$flow.id+\",\"+$flow.device+\",\"+$flow.origin+\",\"+$iteration[value].origin+\",\"+$iteration[value].device+\",\"+$iteration[value].name+\",\"+$iteration[value].value"
+                            }
+                        }
+                    },
+                    {
+                        "id": "Mapper",
+                        "name": "Mapper",
+                        "activity": {
+                            "ref": "#mapper",
+                            "input": {
+                                "input": {
+                                    "mapping": {
+                                        "bit0": "=string.substring($property[\"PersistFlag\"], 0, 1)",
+                                        "bit1": "=string.substring($property[\"PersistFlag\"], 1, 1)",
+                                        "bit2": "=string.substring($property[\"PersistFlag\"], 2, 1)",
+                                        "bit3": "=string.substring($property[\"PersistFlag\"], 3, 1)"
+                                    }
+                                }
+                            },
+                            "schemas": {
+                                "input": {
+                                    "input": {
+                                        "type": "json",
+                                        "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"bit0\":{\"type\":\"string\"},\"bit1\":{\"type\":\"string\"},\"bit2\":{\"type\":\"string\"},\"bit3\":{\"type\":\"string\"}}}",
+                                        "fe_metadata": "{\n    \"bit0\":\"value\",\n    \"bit1\":\"value\",\n    \"bit2\":\"value\",\n    \"bit3\":\"value\"\n}"
+                                    }
+                                },
+                                "output": {
+                                    "output": {
+                                        "type": "json",
+                                        "value": "{\n  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"bit0\": {\n      \"type\": \"string\"\n    },\n    \"bit1\": {\n      \"type\": \"string\"\n    },\n    \"bit2\": {\n      \"type\": \"string\"\n    },\n    \"bit3\": {\n      \"type\": \"string\"\n    }\n  }\n}",
+                                        "fe_metadata": "{\n  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"bit0\": {\n      \"type\": \"string\"\n    },\n    \"bit1\": {\n      \"type\": \"string\"\n    },\n    \"bit2\": {\n      \"type\": \"string\"\n    },\n    \"bit3\": {\n      \"type\": \"string\"\n    }\n  }\n}"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "id": "LogMessage1",
+                        "name": "LogMessage1",
+                        "activity": {
+                            "ref": "#log",
+                            "input": {
+                                "Log Level": "INFO",
+                                "flowInfo": false,
+                                "message": "=\"PersistentService : \"+$activity[Mapper].output.bit0+\",\"+$activity[Mapper].output.bit1+\",\"+$activity[Mapper].output.bit2+\",\"+$activity[Mapper].output.bit3"
+                            }
+                        }
+                    },
+                    {
+                        "id": "LogMessage2",
+                        "name": "LogMessage2",
+                        "activity": {
+                            "ref": "#log",
+                            "input": {
+                                "Log Level": "INFO",
+                                "flowInfo": false,
+                                "message": "PersistentService : Persist to PostgresDB"
+                            }
+                        }
+                    },
+                    {
+                        "id": "StartaSubFlow",
+                        "name": "StartaSubFlow",
+                        "activity": {
+                            "ref": "#subflow",
+                            "settings": {
+                                "flowURI": "res://flow:PostgresService"
+                            },
+                            "input": {
+                                "id": "=$flow.id",
+                                "device": "=$flow.device",
+                                "origin": "=$flow.origin",
+                                "readings": {
+                                    "mapping": {
+                                        "@foreach($flow.readings)": {
+                                            "=": "$loop"
+                                        }
+                                    }
+                                }
+                            },
+                            "schemas": {
+                                "input": {
+                                    "input": {
+                                        "type": "json",
+                                        "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"device\":{\"type\":\"string\"},\"origin\":{\"type\":\"number\"},\"readings\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"origin\":{\"type\":\"number\"},\"device\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}}}}}}",
+                                        "fe_metadata": "{\n    \"id\":\"b710ad27-4eb0-417f-96b8-02830642d8a1\",\n    \"device\":\"Random-Integer-Device\",\n    \"origin\":1564113092999608200,\n    \"readings\":\n    [\n        {\n            \"origin\":1564113092992997800,\n            \"device\":\"Random-Integer-Device\",\n            \"name\":\"RandomValue_Int64\",\n            \"value\":\"-6427502364192134104\"\n        }\n    ]\n}\n"
+                                    }
+                                },
+                                "output": {
+                                    "output": {
+                                        "type": "json",
+                                        "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"message\":{\"type\":\"string\"}}}",
+                                        "fe_metadata": "{\n    \"message\": \"value\"\n}"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "id": "LogMessage3",
+                        "name": "LogMessage3",
+                        "activity": {
+                            "ref": "#log",
+                            "input": {
+                                "Log Level": "INFO",
+                                "flowInfo": false,
+                                "message": "PersistentService : Persist to Kafka"
+                            }
+                        }
+                    },
+                    {
+                        "id": "StartaSubFlow1",
+                        "name": "StartaSubFlow1",
+                        "activity": {
+                            "ref": "#subflow",
+                            "settings": {
+                                "flowURI": "res://flow:KafkaService"
+                            },
+                            "input": {
+                                "id": "=$flow.id",
+                                "device": "=$flow.device",
+                                "origin": "=$flow.origin",
+                                "readings": {
+                                    "mapping": {
+                                        "@foreach($flow.readings)": {
+                                            "=": "$loop"
+                                        }
+                                    }
+                                }
+                            },
+                            "schemas": {
+                                "input": {
+                                    "input": {
+                                        "type": "json",
+                                        "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"device\":{\"type\":\"string\"},\"origin\":{\"type\":\"number\"},\"readings\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"origin\":{\"type\":\"number\"},\"device\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}}}}}}",
+                                        "fe_metadata": "{\n    \"id\": \"b710ad27-4eb0-417f-96b8-02830642d8a1\",\n    \"device\": \"Random-Integer-Device\",\n    \"origin\": 1564113092999608300,\n    \"readings\": [\n        {\n            \"origin\": 1564113092992998000,\n            \"device\": \"Random-Integer-Device\",\n            \"name\": \"RandomValue_Int64\",\n            \"value\": \"-6427502364192134104\"\n        }\n    ]\n}"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "id": "LogMessage4",
+                        "name": "LogMessage4",
+                        "activity": {
+                            "ref": "#log",
+                            "input": {
+                                "Log Level": "INFO",
+                                "flowInfo": false,
+                                "message": "PersistentService : Persist to Redis"
+                            }
+                        }
+                    },
+                    {
+                        "id": "LogMessage5",
+                        "name": "LogMessage5",
+                        "activity": {
+                            "ref": "#log",
+                            "input": {
+                                "Log Level": "INFO",
+                                "flowInfo": false,
+                                "message": "PersistentService : Reserved"
+                            }
+                        }
+                    }
+                ],
+                "metadata": {
+                    "input": [
+                        {
+                            "name": "id",
+                            "type": "string"
+                        },
+                        {
+                            "name": "device",
+                            "type": "string"
+                        },
+                        {
+                            "name": "origin",
+                            "type": "float64"
+                        },
+                        {
+                            "name": "readings",
+                            "type": "array",
+                            "schema": {
+                                "type": "json",
+                                "value": "{\"type\":\"object\",\"properties\":{\"origin\":{\"type\":\"number\"},\"device\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}}}"
+                            }
+                        }
+                    ],
+                    "output": [
+                        {
+                            "name": "output",
+                            "type": "string"
+                        }
+                    ],
+                    "fe_metadata": {
+                        "input": "{\n    \"id\":\"f7dd8d66-6494-433b-900d-70f9990a4635\",\n    \"device\":\"Random-Boolean-Device\",\n    \"origin\":1564111671975285000,\n    \"readings\":[{\"origin\":1564111671968145100,\"device\":\"Random-Boolean-Device\",\"name\":\"RandomValue_Bool\",\"value\":\"true\"}]\n}",
+                        "output": "{\n    \"output\":\"value\"\n}"
+                    }
+                }
+            }
+        },
+        {
+            "id": "flow:KafkaService",
+            "data": {
+                "name": "KafkaService",
+                "description": "",
+                "links": [
+                    {
+                        "id": 1,
+                        "from": "LogMessage",
+                        "to": "Mapper",
+                        "type": "default"
+                    },
+                    {
+                        "id": 2,
+                        "from": "Mapper",
+                        "to": "Mapper1",
+                        "type": "default"
+                    },
+                    {
+                        "id": 3,
+                        "from": "Mapper1",
+                        "to": "LogMessage2",
+                        "type": "default"
+                    },
+                    {
+                        "id": 4,
+                        "from": "LogMessage2",
+                        "to": "KafkaProducer",
+                        "type": "default"
+                    }
+                ],
+                "tasks": [
+                    {
+                        "id": "LogMessage",
+                        "name": "LogMessage",
+                        "settings": {
+                            "iterate": "=$flow.readings"
+                        },
+                        "type": "iterator",
+                        "activity": {
+                            "ref": "#log",
+                            "input": {
+                                "Log Level": "INFO",
+                                "flowInfo": false,
+                                "message": "=\"KafkaService : \"+$flow.id+\",\"+$flow.device+\",\"+$flow.origin+\",\"+$iteration[value].origin+\",\"+$iteration[value].device+\",\"+$iteration[value].name+\",\"+$iteration[value].value"
+                            }
+                        }
+                    },
+                    {
+                        "id": "Mapper",
+                        "name": "Mapper",
+                        "activity": {
+                            "ref": "#mapper",
+                            "input": {
+                                "input": {
+                                    "mapping": {
+                                        "id": "=$flow.id",
+                                        "device": "=$flow.device",
+                                        "origin": "=$flow.origin",
+                                        "readings": {
+                                            "@foreach($flow.readings)": {
+                                                "=": "$loop"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "schemas": {
+                                "input": {
+                                    "input": {
+                                        "type": "json",
+                                        "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"device\":{\"type\":\"string\"},\"origin\":{\"type\":\"number\"},\"readings\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"origin\":{\"type\":\"number\"},\"device\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}}}}}}",
+                                        "fe_metadata": "{\n    \"id\": \"b710ad27-4eb0-417f-96b8-02830642d8a1\",\n    \"device\": \"Random-Integer-Device\",\n    \"origin\": 1564113092999608300,\n    \"readings\": [\n        {\n            \"origin\": 1564113092992998000,\n            \"device\": \"Random-Integer-Device\",\n            \"name\": \"RandomValue_Int64\",\n            \"value\": \"-6427502364192134104\"\n        }\n    ]\n}"
+                                    }
+                                },
+                                "output": {
+                                    "output": {
+                                        "type": "json",
+                                        "value": "{\n  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"id\": {\n      \"type\": \"string\"\n    },\n    \"device\": {\n      \"type\": \"string\"\n    },\n    \"origin\": {\n      \"type\": \"number\"\n    },\n    \"readings\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"origin\": {\n            \"type\": \"number\"\n          },\n          \"device\": {\n            \"type\": \"string\"\n          },\n          \"name\": {\n            \"type\": \"string\"\n          },\n          \"value\": {\n            \"type\": \"string\"\n          }\n        }\n      }\n    }\n  }\n}",
+                                        "fe_metadata": "{\n  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"id\": {\n      \"type\": \"string\"\n    },\n    \"device\": {\n      \"type\": \"string\"\n    },\n    \"origin\": {\n      \"type\": \"number\"\n    },\n    \"readings\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"origin\": {\n            \"type\": \"number\"\n          },\n          \"device\": {\n            \"type\": \"string\"\n          },\n          \"name\": {\n            \"type\": \"string\"\n          },\n          \"value\": {\n            \"type\": \"string\"\n          }\n        }\n      }\n    }\n  }\n}"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "id": "Mapper1",
+                        "name": "Mapper1",
+                        "activity": {
+                            "ref": "#mapper",
+                            "input": {
+                                "input": {
+                                    "mapping": {
+                                        "msg": "=string.tostring($activity[Mapper].output)"
+                                    }
+                                }
+                            },
+                            "schemas": {
+                                "input": {
+                                    "input": {
+                                        "type": "json",
+                                        "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"msg\":{\"type\":\"string\"}}}",
+                                        "fe_metadata": "{\"msg\":\"value\"}"
+                                    }
+                                },
+                                "output": {
+                                    "output": {
+                                        "type": "json",
+                                        "value": "{\n  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"msg\": {\n      \"type\": \"string\"\n    }\n  }\n}",
+                                        "fe_metadata": "{\n  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"msg\": {\n      \"type\": \"string\"\n    }\n  }\n}"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "id": "LogMessage2",
+                        "name": "LogMessage2",
+                        "activity": {
+                            "ref": "#log",
+                            "input": {
+                                "Log Level": "INFO",
+                                "flowInfo": false,
+                                "message": "=$activity[Mapper1].output.msg"
+                            }
+                        }
+                    },
+                    {
+                        "id": "KafkaProducer",
+                        "name": "KafkaProducer",
+                        "activity": {
+                            "ref": "#producer",
+                            "input": {
+                                "kafkaConnection": {
+                                    "id": "1e13f7c0-b200-11e9-920f-49d703a919c0",
+                                    "type": "flogo:connector",
+                                    "version": "1.1.2",
+                                    "name": "tibco-kafka",
+                                    "hashTags": [],
+                                    "inputMappings": {},
+                                    "outputMappings": {},
+                                    "iteratorMappings": {},
+                                    "title": "Apache Kafka Client Configuration",
+                                    "description": "",
+                                    "ref": "git.tibco.com/git/product/ipaas/wi-plugins.git/contributions/kafka/src/app/Kafka/connector/kafka",
+                                    "settings": [
+                                        {
+                                            "name": "name",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Name",
+                                                "description": "Name of the configuration"
+                                            },
+                                            "value": "tibcolabs-air-kafka"
+                                        },
+                                        {
+                                            "name": "description",
+                                            "type": "string",
+                                            "display": {
+                                                "name": "Description",
+                                                "description": "Connection description"
+                                            },
+                                            "value": "Apache Kafka client configuration"
+                                        },
+                                        {
+                                            "name": "brokers",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Brokers",
+                                                "description": "A list of host/port pairs to use for establishing the initial connection to the Kafka cluster",
+                                                "appPropertySupport": true
+                                            },
+                                            "value": "=$property[\"Kafka.tibcolabs-air-kafka.Brokers\"]"
+                                        },
+                                        {
+                                            "name": "authMode",
+                                            "type": "string",
+                                            "display": {
+                                                "name": "Auth Mode",
+                                                "description": "Choose authentication mode to connect to Kafka cluster"
+                                            },
+                                            "allowed": [
+                                                "None",
+                                                "SASL/PLAIN",
+                                                "SSL"
+                                            ],
+                                            "value": "None"
+                                        },
+                                        {
+                                            "name": "userName",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "User Name",
+                                                "visible": false,
+                                                "description": "User name for SASL authentication",
+                                                "appPropertySupport": true,
+                                                "readonly": false,
+                                                "valid": true
+                                            },
+                                            "value": ""
+                                        },
+                                        {
+                                            "name": "password",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Password",
+                                                "type": "password",
+                                                "visible": false,
+                                                "description": "Password for SASL authentication",
+                                                "appPropertySupport": true,
+                                                "readonly": false,
+                                                "valid": true
+                                            },
+                                            "value": "SECRET:ADnZ3xsyipxnhn7N/icNRQ=="
+                                        },
+                                        {
+                                            "name": "clientCert",
+                                            "type": "string",
+                                            "display": {
+                                                "description": "A PEM encoded certificate file",
+                                                "name": "Client Certificate",
+                                                "visible": false,
+                                                "type": "fileselector",
+                                                "fileExtensions": [
+                                                    ".pem",
+                                                    ".cert",
+                                                    ".cer",
+                                                    ".crt"
+                                                ],
+                                                "readonly": false,
+                                                "valid": true
+                                            },
+                                            "value": ""
+                                        },
+                                        {
+                                            "name": "clientKey",
+                                            "type": "string",
+                                            "display": {
+                                                "description": "A PEM encoded private key file",
+                                                "name": "Client Key",
+                                                "visible": false,
+                                                "type": "fileselector",
+                                                "fileExtensions": [
+                                                    ".pem",
+                                                    ".cert",
+                                                    ".cer",
+                                                    ".crt",
+                                                    ".key"
+                                                ],
+                                                "readonly": false,
+                                                "valid": true
+                                            },
+                                            "value": ""
+                                        },
+                                        {
+                                            "name": "caCert",
+                                            "type": "string",
+                                            "display": {
+                                                "description": "A PEM encoded CA or Server certificate file",
+                                                "name": "CA or Server Certificate",
+                                                "visible": false,
+                                                "type": "fileselector",
+                                                "fileExtensions": [
+                                                    ".pem",
+                                                    ".cert",
+                                                    ".cer",
+                                                    ".crt"
+                                                ],
+                                                "readonly": false,
+                                                "valid": true
+                                            },
+                                            "value": ""
+                                        },
+                                        {
+                                            "name": "connectionTimeout",
+                                            "type": "integer",
+                                            "display": {
+                                                "name": "Connection Timeout",
+                                                "description": "The amount of time in seconds to wait for the initial connection",
+                                                "appPropertySupport": true
+                                            },
+                                            "value": "=$property[\"Kafka.tibcolabs-air-kafka.Connection_Timeout\"]"
+                                        },
+                                        {
+                                            "name": "retryBackoff",
+                                            "type": "integer",
+                                            "display": {
+                                                "name": "Retry Backoff",
+                                                "description": "The amount of time in milliseconds to wait for leader election to occur before retrying",
+                                                "appPropertySupport": true
+                                            },
+                                            "value": "=$property[\"Kafka.tibcolabs-air-kafka.Retry_Backoff\"]"
+                                        },
+                                        {
+                                            "name": "retryMax",
+                                            "type": "integer",
+                                            "display": {
+                                                "name": "Max Retry",
+                                                "description": "The total number of times to retry a metadata request when the cluster is in the middle of a leader election"
+                                            },
+                                            "value": 3
+                                        },
+                                        {
+                                            "name": "refreshFrequency",
+                                            "type": "integer",
+                                            "display": {
+                                                "name": "Refresh Frequency",
+                                                "description": "The amount of time in seconds after which metadata is refreshed in the background. Set 0 to disable it."
+                                            },
+                                            "value": 40
+                                        }
+                                    ],
+                                    "outputs": [],
+                                    "inputs": [],
+                                    "handler": {
+                                        "settings": []
+                                    },
+                                    "reply": [],
+                                    "s3Prefix": "Tibco",
+                                    "key": "Tibco/Kafka/connector/kafka/connector.json",
+                                    "display": {
+                                        "category": "Kafka",
+                                        "smallIcon": "icons/kafka.png",
+                                        "largeIcon": "icons/kafka.png"
+                                    },
+                                    "actions": [
+                                        {
+                                            "name": "Save",
+                                            "display": {
+                                                "readonly": false,
+                                                "valid": true,
+                                                "visible": true
+                                            }
+                                        }
+                                    ],
+                                    "feature": {},
+                                    "propertyMap": {},
+                                    "keyfield": "name",
+                                    "isValid": true,
+                                    "lastUpdatedTime": 1564404943259,
+                                    "user": "eihkymzngv24drdfeyg3otoucgynht2q",
+                                    "connectorName": "tibcolabs-air-kafka",
+                                    "connectorDescription": " "
+                                },
+                                "ackMode": "All",
+                                "ackTimeout": 10000,
+                                "compressionType": "None",
+                                "valueType": "String",
+                                "maxRequestSize": 1048576,
+                                "maxMessages": 0,
+                                "frequency": 1000,
+                                "topic": "=$property[\"Kafka_Topic\"]",
+                                "key": "",
+                                "stringValue": "=$activity[Mapper1].output.msg"
+                            },
+                            "schemas": {
+                                "input": {
+                                    "headers": {
+                                        "type": "json",
+                                        "value": "{\"type\":\"object\",\"properties\":{\"Message\":{\"type\":\"string\"}},\"required\":[]}",
+                                        "fe_metadata": "[{\"parameterName\":\"Message\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"isEditable\":true}]"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "metadata": {
+                    "input": [
+                        {
+                            "name": "id",
+                            "type": "string"
+                        },
+                        {
+                            "name": "device",
+                            "type": "string"
+                        },
+                        {
+                            "name": "origin",
+                            "type": "float64"
+                        },
+                        {
+                            "name": "readings",
+                            "type": "array",
+                            "schema": {
+                                "type": "json",
+                                "value": "{\"type\":\"object\",\"properties\":{\"origin\":{\"type\":\"number\"},\"device\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}}}"
+                            }
+                        }
+                    ],
+                    "output": [],
+                    "fe_metadata": {
+                        "input": "{\n    \"id\": \"b710ad27-4eb0-417f-96b8-02830642d8a1\",\n    \"device\": \"Random-Integer-Device\",\n    \"origin\": 1564113092999608300,\n    \"readings\": [\n        {\n            \"origin\": 1564113092992998000,\n            \"device\": \"Random-Integer-Device\",\n            \"name\": \"RandomValue_Int64\",\n            \"value\": \"-6427502364192134104\"\n        }\n    ]\n}"
+                    }
+                }
+            }
+        }
+    ],
+    "properties": [
+        {
+            "name": "PostgreSQL.tibcolabs-air-postgresql.Host",
+            "type": "string",
+            "value": "3.218.102.175"
+        },
+        {
+            "name": "PostgreSQL.tibcolabs-air-postgresql.Port",
+            "type": "float64",
+            "value": 5432
+        },
+        {
+            "name": "PostgreSQL.tibcolabs-air-postgresql.Database_Name",
+            "type": "string",
+            "value": "tibcolabs_air"
+        },
+        {
+            "name": "PostgreSQL.tibcolabs-air-postgresql.User",
+            "type": "string",
+            "value": "other_user"
+        },
+        {
+            "name": "PostgreSQL.tibcolabs-air-postgresql.Password",
+            "type": "string",
+            "value": "SECRET:WfunEPIqLM49Zx64RCo5ZDANlRkoyEzllCCzCzKFUT5iuCQ="
+        },
+        {
+            "name": "PersistFlag",
+            "type": "string",
+            "value": "1110"
+        },
+        {
+            "name": "Kafka.tibcolabs-air-kafka.Brokers",
+            "type": "string",
+            "value": "3.218.102.175:9092,3.221.228.215:9092,3.222.144.249:9092"
+        },
+        {
+            "name": "Kafka.tibcolabs-air-kafka.Connection_Timeout",
+            "type": "float64",
+            "value": 30
+        },
+        {
+            "name": "Kafka.tibcolabs-air-kafka.Retry_Backoff",
+            "type": "float64",
+            "value": 250
+        },
+        {
+            "name": "Kafka_Topic",
+            "type": "string",
+            "value": "tibcolabs_air"
+        }
+    ],
+    "contrib": "W3sicmVmIjoiZ2l0LnRpYmNvLmNvbS9naXQvcHJvZHVjdC9pcGFhcy93aS1tcXR0LmdpdC9NcXR0IiwiczNsb2NhdGlvbiI6IlRpYmNvL01xdHQifSx7InJlZiI6ImdpdC50aWJjby5jb20vZ2l0L3Byb2R1Y3QvaXBhYXMvd2ktY29udHJpYi5naXQvY29udHJpYnV0aW9ucy9HZW5lcmFsIiwiczNsb2NhdGlvbiI6IlRpYmNvL0dlbmVyYWwifSx7InJlZiI6ImdpdC50aWJjby5jb20vZ2l0L3Byb2R1Y3QvaXBhYXMvd2ktcG9zdGdyZXMuZ2l0L3NyYy9hcHAvUG9zdGdyZVNRTCIsInMzbG9jYXRpb24iOiJUaWJjby9Qb3N0Z3JlU1FMIn0seyJyZWYiOiJnaXQudGliY28uY29tL2dpdC9wcm9kdWN0L2lwYWFzL3dpLXBsdWdpbnMuZ2l0L2NvbnRyaWJ1dGlvbnMva2Fma2Evc3JjL2FwcC9LYWZrYSIsInMzbG9jYXRpb24iOiJUaWJjby9LYWZrYSJ9XQ==",
+    "fe_metadata": "UEsDBAoAAAAIAMhs/k6rqSRGFQAAABMAAAAIAAAAYXBwLmpzb26rViopykxPTy1yy8kvL1ayio6tBQBQSwECFAAKAAAACADIbP5Oq6kkRhUAAAATAAAACAAAAAAAAAAAAAAAAAAAAAAAYXBwLmpzb25QSwUGAAAAAAEAAQA2AAAAOwAAAAAA"
+}
