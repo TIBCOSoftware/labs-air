@@ -6,6 +6,7 @@ import {IotDeviceCommandComponent} from '../../components/iot-device-command/iot
 import {IotDeviceDashboardComponent} from '../../components/iot-device-dashboard/iot-device-dashboard.component';
 import {IotGatewayDashboardComponent} from '../../components/iot-gateway-dashboard/iot-gateway-dashboard.component';
 import {IotDeviceStreamComponent} from '../../components/iot-device-stream/iot-device-stream.component';
+import {IotDeviceProvisionComponent} from '../../components/iot-device-provision/iot-device-provision.component';
 import {IotDashboardComponent} from '../../components/iot-dashboard/iot-dashboard.component';
 import {
   AuthGuard,
@@ -101,6 +102,19 @@ export const STARTER_APP_ROUTES =
       {
         path: 'device',
         component: IotDeviceComponent,
+        canActivate: [AuthGuard],
+        resolve: {
+          claims: ClaimsResolver,
+          laConfigHolder: LaConfigResolver,
+          groups: GroupsResolver,
+          roles: RolesResolver,
+          access: AccessResolver,
+          customFormDefs: FormResolver
+        }
+      },
+      {
+        path: 'deviceprovision',
+        component: IotDeviceProvisionComponent,
         canActivate: [AuthGuard],
         resolve: {
           claims: ClaimsResolver,

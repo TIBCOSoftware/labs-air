@@ -40,6 +40,10 @@ export class IotHomeCockpitComponent extends LiveAppsHomeCockpitComponent {
             route: '/starterApp/home/device',
             title: 'Devices',
         }, {
+            icon: 'settings_remote',
+            route: '/starterApp/home/deviceprovision',
+            title: 'Device Provisioning',
+        }, {
             icon: 'timeline',
             route: '/starterApp/home/devicecommand',
             title: 'Device Commands',

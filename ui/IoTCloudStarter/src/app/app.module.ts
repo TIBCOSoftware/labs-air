@@ -38,6 +38,7 @@ import { IotDashboardComponent } from './components/iot-dashboard/iot-dashboard.
 import { SpotfireDashboardComponent } from './components/spotfire-dashboard/spotfire-dashboard.component';
 import { IotGatewayDashboardComponent } from './components/iot-gateway-dashboard/iot-gateway-dashboard.component';
 import { IotDeviceProfileComponent } from './components/iot-device-profile/iot-device-profile.component';
+import { IotDeviceProvisionComponent } from './components/iot-device-provision/iot-device-provision.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { IotDeviceProfileComponent } from './components/iot-device-profile/iot-d
     SpotfireDashboardComponent,
     IotDashboardComponent,
     IotGatewayDashboardComponent,
-    IotDeviceProfileComponent
+    IotDeviceProfileComponent,
+    IotDeviceProvisionComponent
   ],
   imports: [
     AppRoutingModule,
