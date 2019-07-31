@@ -12,8 +12,8 @@ import { debounceTime, distinctUntilChanged, startWith, tap, delay } from 'rxjs/
 //import { fromEvent } from 'rxjs/observable/fromEvent';
 import { MatPaginator, MatSort, MatTableDataSource, MatDatepickerInputEvent } from '@angular/material';
 
-import {BaseChartDirective, defaultColors, Label, MultiDataSet, SingleDataSet} from 'ng2-charts';
-import {ChartType} from 'chart.js';
+import { BaseChartDirective, defaultColors, Label, MultiDataSet, SingleDataSet } from 'ng2-charts';
+import { ChartType } from 'chart.js';
 import { stringToKeyValue } from '@angular/flex-layout/extended/typings/style/style-transforms';
 import 'chartjs-plugin-streaming';
 
@@ -22,7 +22,7 @@ import 'chartjs-plugin-streaming';
   templateUrl: './iot-device.component.html',
   styleUrls: ['./iot-device.component.css']
 })
-export class IotDeviceComponent implements OnInit , AfterViewInit {
+export class IotDeviceComponent implements OnInit, AfterViewInit {
   // Form variables
   instrumentForm: FormGroup;
 
@@ -36,15 +36,15 @@ export class IotDeviceComponent implements OnInit , AfterViewInit {
 
   public chartDatasets = [
     {
-      label: '', 
+      label: '',
       borderColor: 'blue',
       //backgroundColor: 'rgba(54, 162, 235, 0.2)',
       type: 'line',
       // pointRadius: 0,
       fill: true,
-       lineTension: 0,
-       borderWidth: 2, 
-      data:[]
+      lineTension: 0,
+      borderWidth: 2,
+      data: []
     },
   ];
 
@@ -84,13 +84,13 @@ export class IotDeviceComponent implements OnInit , AfterViewInit {
 
   public chartStreamingDatasets = [
     {
-      label: '', 
+      label: '',
       borderColor: 'blue',
       type: 'line',
       fill: true,
-       lineTension: 0,
-       borderWidth: 2, 
-      data:[]
+      lineTension: 0,
+      borderWidth: 2,
+      data: []
     },
   ];
 
@@ -131,7 +131,7 @@ export class IotDeviceComponent implements OnInit , AfterViewInit {
 
   public chartLegend = true;
   public chartStreamingLegend = true;
-  
+
   public chartType = 'line';
   public resourceReadings = [];
 
@@ -146,30 +146,30 @@ export class IotDeviceComponent implements OnInit , AfterViewInit {
   deviceDisplayedColumns: string[] = ['name', 'id', 'operatingState', 'adminState', 'description'];
   deviceSelection = new SelectionModel<Device>(false, []);
 
-  
+
   resourcesDataSource = new MatTableDataSource<Resource>();
   resourceDisplayedColumns: string[] = ['name', 'description'];
   resourceSelection = new SelectionModel<Resource>(false, []);
 
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
-  @ViewChild(BaseChartDirective, {static: false}) deviceReportChart: BaseChartDirective;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
+  @ViewChild(BaseChartDirective, { static: false }) deviceReportChart: BaseChartDirective;
 
   constructor(private edgeService: EdgeService,
     private graphService: DgraphService,
     private formBuilder: FormBuilder) {
 
-      this.instrumentForm = this.formBuilder.group( {
-        valueType: [''],
-        valueMinimum: [''],
-        valueMaximum: [''],
-        valueDefault: [''],
-        valueUnit: [''],
-        interface: [''],
-        interfacePinNumber: [''],
-        interfaceType: ['']
-      });
+    this.instrumentForm = this.formBuilder.group({
+      valueType: [''],
+      valueMinimum: [''],
+      valueMaximum: [''],
+      valueDefault: [''],
+      valueUnit: [''],
+      interface: [''],
+      interfacePinNumber: [''],
+      interfaceType: ['']
+    });
 
-    }
+  }
 
   ngOnInit() {
     this.getDevices();
@@ -177,27 +177,27 @@ export class IotDeviceComponent implements OnInit , AfterViewInit {
 
   public getDevices() {
     this.edgeService.getDevices()
-    .subscribe(res => {
-      this.devicesDataSource.data = res as Device[];
-    })
+      .subscribe(res => {
+        this.devicesDataSource.data = res as Device[];
+      })
   }
 
 
   public getResourceReadings(deviceName, resourceName) {
     this.graphService.getReadings(deviceName, resourceName)
-    .subscribe(res=> {
-      this.resourceReadings = res as TSReading[];
+      .subscribe(res => {
+        this.resourceReadings = res as TSReading[];
 
-      console.log("reading data: ", this.resourceReadings);
+        console.log("reading data: ", this.resourceReadings);
 
-      // Reset data for streaming chart dataset
-      this.chartStreamingDatasets[0].data = [];
+        // Reset data for streaming chart dataset
+        this.chartStreamingDatasets[0].data = [];
 
-      // Set Data for chart dataset
-      this.setChartDataSet();
+        // Set Data for chart dataset
+        this.setChartDataSet();
 
-      //this.chartDatasets[0].data = this.dataset;
-    })
+        //this.chartDatasets[0].data = this.dataset;
+      })
   }
 
   public setChartDataSet() {
@@ -206,47 +206,51 @@ export class IotDeviceComponent implements OnInit , AfterViewInit {
 
     this.resourceReadings.forEach(
       reading => {
-        
+
         if (isNaN(reading.value)) {
-          this.timeSeriesData.push({x: new Date(reading.created).toISOString(), y: reading.value == 'true' ? 1 : 0});
+          this.timeSeriesData.push({ x: new Date(reading.created).toISOString(), y: reading.value == 'true' ? 1 : 0 });
         }
         else {
-          this.timeSeriesData.push({x: new Date(reading.created).toISOString(), y: reading.value});
+          this.timeSeriesData.push({ x: new Date(reading.created).toISOString(), y: reading.value });
         }
       }
     );
     console.log("data transformed: ", this.timeSeriesData);
-    
+
     this.chartDatasets[0].data = this.timeSeriesData;
   }
 
   public getStreamData(chart: any) {
 
-    console.log("in getting streaming data");
+    if (this.resourceSelection.hasValue()) {
 
-    this.graphService.getReadingsStartingAt(this.deviceSelected, 
-      this.resourceSelected, this.streamLastQuery)
-      .subscribe(res => {
-        this.resourceReadings = res as TSReading[];
 
-        console.log("reading data: ", this.resourceReadings);
+      console.log("in getting streaming data");
 
-        
-        this.resourceReadings.forEach(
-          reading => {
-    
-            if (isNaN(reading.value)) {
-              chart.data.datasets[0].data.push({ x: new Date(reading.created).toISOString(), y: reading.value == 'true' ? 1 : 0 });
+      this.graphService.getReadingsStartingAt(this.deviceSelected,
+        this.resourceSelected, this.streamLastQuery)
+        .subscribe(res => {
+          this.resourceReadings = res as TSReading[];
+
+          console.log("reading data: ", this.resourceReadings);
+
+
+          this.resourceReadings.forEach(
+            reading => {
+
+              if (isNaN(reading.value)) {
+                chart.data.datasets[0].data.push({ x: new Date(reading.created).toISOString(), y: reading.value == 'true' ? 1 : 0 });
+              }
+              else {
+                chart.data.datasets[0].data.push({ x: new Date(reading.created).toISOString(), y: reading.value });
+              }
+
+              this.streamLastQuery = reading.created;
             }
-            else {
-              chart.data.datasets[0].data.push({ x: new Date(reading.created).toISOString(), y: reading.value });
-            }
+          );
 
-            this.streamLastQuery = reading.created;
-          }
-        );
-
-      })
+        })
+    }
 
   }
 
@@ -276,6 +280,9 @@ export class IotDeviceComponent implements OnInit , AfterViewInit {
     this.deviceSelection.select(row);
     this.deviceSelected = row.name;
 
+    // Clear resource selection
+    this.resourceSelection.clear();
+
     // this.getResourceReadings();
     this.resourcesDataSource.data = row.profile.deviceResources as Resource[];
   }
@@ -288,22 +295,21 @@ export class IotDeviceComponent implements OnInit , AfterViewInit {
       this.queryByDateDisabled = false;
     }
 
-
     this.resourceSelection.select(row);
     this.chartDatasets[0].label = row.name;
 
     // Update Instrument Form
     this.instrumentForm.patchValue({
-      valueType:    row.properties.value.type,
+      valueType: row.properties.value.type,
       valueMinimum: row.properties.value.minimum,
       valueMaximum: row.properties.value.maximum,
       valueDefault: row.properties.value.defaultValue,
-      valueUnit:    row.properties.units.defaultValue,
-      interface:    row.attributes.Interface,
+      valueUnit: row.properties.units.defaultValue,
+      interface: row.attributes.Interface,
       interfacePinNumber: row.attributes.Pin_Num,
-      interfaceType:row.attributes.Type
+      interfaceType: row.attributes.Type
     });
-    
+
     this.resourceSelected = row.name;
     this.getResourceReadings(this.deviceSelected, this.resourceSelected);
   }
