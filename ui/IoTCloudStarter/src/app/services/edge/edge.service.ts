@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { LogLevel, LogService } from '@tibco-tcstk/tc-core-lib';
 
-import { Device, Subscription, GetCommandResponse } from '../../shared/models/iot.model';
+import { Device, Profile, Service, Subscription, GetCommandResponse } from '../../shared/models/iot.model';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -98,8 +98,52 @@ export class EdgeService {
       );
   }
 
-  // Core Metadata Operations
-  // URL: http://localhost:48081/api/v1
+  addDevice(device: any): Observable<String> {
+    const url = `${this.edgeCoreMetadataUrl}device`;
+
+    return this.http.post<string>(url, device, httpTextResponseOptions)
+      .pipe(
+        tap(_ => this.logger.info('added new device')),
+        catchError(this.handleError<string>('addDevice'))
+      );
+  }
+
+  deleteDeviceByName(deviceName: string): Observable<String> {
+    const url = `${this.edgeCoreMetadataUrl}device/${deviceName}`;
+
+    return this.http.delete<string>(url, httpTextResponseOptions)
+      .pipe(
+        tap(_ => this.logger.info('added new device')),
+        catchError(this.handleError<string>('addDevice'))
+      );
+  }
+
+  getProfiles(): Observable<Profile[]> {
+    const url = `${this.edgeCoreMetadataUrl}deviceprofile`;
+
+    console.log("GetProfiles service called for url:", url);
+
+    return this.http.get<Profile[]>(url, httpOptions)
+      .pipe(
+        tap(_ => this.logger.info('fetched profiles')),
+        catchError(this.handleError<Profile[]>('getProfiles', []))
+      );
+  }
+
+  getServices(): Observable<Service[]> {
+    const url = `${this.edgeCoreMetadataUrl}deviceservice`;
+
+    console.log("GetServices service called for url:", url);
+
+    return this.http.get<Service[]>(url, httpOptions)
+      .pipe(
+        tap(_ => this.logger.info('fetched services')),
+        catchError(this.handleError<Service[]>('getServices', []))
+      );
+  }
+
+  // Core Command Operations
+  // URL: http://localhost:48082/api/v1
 
   getCommand(cmdPath: string): Observable<GetCommandResponse> {
     let url = `${this.edgeCoreCommandUrl}${cmdPath}`
