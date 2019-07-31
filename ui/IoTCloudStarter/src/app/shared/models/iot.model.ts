@@ -88,6 +88,8 @@ export class Device {
   name: string;
   adminState: string;
   operatingState: string;
+  location: string;
+  labels: string[];
   profile: Profile;
   service: Service;
 }
@@ -116,6 +118,21 @@ export class Subscription {
   compression: string;
   deviceIdentifierFilter: string;
   valueDescriptorFilter: string;
+}
+
+export class Addressable {
+  created: number;
+  modified: number;
+  origin: number;
+  id: string;
+  name: string;
+  protocol: string;
+  method: string;
+  address: string;
+  port: number;
+  path: string;
+  baseURL: string;
+  url: string;
 }
 
 export class Gateway {
