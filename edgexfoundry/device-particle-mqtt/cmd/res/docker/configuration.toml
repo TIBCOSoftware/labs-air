@@ -1,9 +1,9 @@
 [Service]
-Host = "edgex-device-mqtt"
+Host = "tibcolabs-device-particle-mqtt"
 Port = 49982
 ConnectRetries = 3
 Labels = []
-OpenMsg = "device simple started"
+OpenMsg = "device particle started"
 Timeout = 5000
 EnableAsyncReadings = true
 AsyncBufferSize = 16
@@ -45,7 +45,7 @@ Type = "consul"
   MaxCmdValueLen = 256
   RemoveCmd = ""
   RemoveCmdArgs = ""
-  ProfilesDir = ""
+  ProfilesDir = "/custom-config"
 
 [Logging]
 EnableRemote = true
@@ -54,22 +54,68 @@ File = "./device-mqtt.log"
 [Writable]
 LogLevel = "INFO"
 
+# Pre-define Devices
+[[DeviceList]]
+  Name = "mesh-argon-10"
+  Profile = "Particle-Device"
+  Description = "Particle mesh device"
+  Labels = [ "industrial", "mqtt" ]
+  [DeviceList.Protocols]
+    [DeviceList.Protocols.mqtt]
+      Schema = "tcp"
+      Host = "108.217.182.180"
+      Port = "1883"
+      ClientId = "CommandPublisher"
+      User = "mqtt_admin"
+      Password = "mqtt_admin"
+      Topic = "CommandTopic_mesh-argon-10"
+
+[[DeviceList]]
+  Name = "mesh-xenon-11"
+  Profile = "Particle-Device"
+  Description = "Particle mesh device"
+  Labels = [ "industrial", "mqtt" ]
+  [DeviceList.Protocols]
+    [DeviceList.Protocols.mqtt]
+      Schema = "tcp"
+      Host = "108.217.182.180"
+      Port = "1883"
+      ClientId = "CommandPublisher"
+      User = "mqtt_admin"
+      Password = "mqtt_admin"
+      Topic = "CommandTopic_mesh-xenon-11"
+
+[[DeviceList]]
+  Name = "mesh-xenon-12"
+  Profile = "Particle-Device"
+  Description = "Particle mesh device"
+  Labels = [ "industrial", "mqtt" ]
+  [DeviceList.Protocols]
+    [DeviceList.Protocols.mqtt]
+      Schema = "tcp"
+      Host = "108.217.182.180"
+      Port = "1883"
+      ClientId = "CommandPublisher"
+      User = "mqtt_admin"
+      Password = "mqtt_admin"
+      Topic = "CommandTopic_mesh-xenon-12"
+
 # Driver configs
 [Driver]
 IncomingSchema = "tcp"
-IncomingHost = "0.0.0.0"
+IncomingHost = "108.217.182.180"
 IncomingPort = "1883"
-IncomingUser = "admin"
-IncomingPassword = "public"
+IncomingUser = "mqtt_admin"
+IncomingPassword = "mqtt_admin"
 IncomingQos = "0"
 IncomingKeepAlive = "3600"
 IncomingClientId = "IncomingDataSubscriber"
 IncomingTopic = "DataTopic"
 ResponseSchema = "tcp"
-ResponseHost = "0.0.0.0"
+ResponseHost = "108.217.182.180"
 ResponsePort = "1883"
-ResponseUser = "admin"
-ResponsePassword = "public"
+ResponseUser = "mqtt_admin"
+ResponsePassword = "mqtt_admin"
 ResponseQos = "0"
 ResponseKeepAlive = "3600"
 ResponseClientId = "CommandResponseSubscriber"
