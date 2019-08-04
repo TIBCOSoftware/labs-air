@@ -9,7 +9,7 @@ import { DgraphService } from '../../services/graph/dgraph.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { switchMap, debounceTime, distinctUntilChanged, startWith, tap, delay } from 'rxjs/operators';
 
-import { MatPaginator, MatSort, MatTableDataSource, MatDatepickerInputEvent } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDatepickerInputEvent, MatSnackBar } from '@angular/material';
 
 export interface SelectItem {
   value: string;
@@ -73,7 +73,8 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
   constructor(private edgeService: EdgeService,
     private graphService: DgraphService,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private _snackBar: MatSnackBar) {
 
     this.subscriptionForm = this.formBuilder.group({
       name: [''],
@@ -202,6 +203,16 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
     this.edgeService.addRegisteration(this.gateway, sub)
       .subscribe(res => {
         console.log("Result from subscribe: ", res);
+
+        let message = 'Success';
+        if (res == undefined) {
+          message = 'Failure';
+        }
+
+        this._snackBar.open(message, "Add Subscription", {
+          duration: 3000,
+        });
+
       });
 
     this.graphService.updateSubscription(sub)
@@ -244,6 +255,15 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
     this.edgeService.updateRegisteration(this.gateway, sub)
       .subscribe(res => {
         console.log("Result from update ", res);
+
+        let message = 'Success';
+        if (res == undefined) {
+          message = 'Failure';
+        }
+
+        this._snackBar.open(message, "Update Subscription", {
+          duration: 3000,
+        });
       });
 
     this.graphService.updateSubscription(sub)
@@ -256,7 +276,17 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
     this.edgeService.deleteRegisteration(this.gateway, this.subscriptionForm.controls['name'].value)
       .subscribe(res => {
         console.log("Result from delete ", res);
-      })
+
+        let message = 'Success';
+        if (res == undefined) {
+          message = 'Failure';
+        }
+
+        this._snackBar.open(message, "Remove Subscription", {
+          duration: 3000,
+        });
+
+      });
   }
 
 }
