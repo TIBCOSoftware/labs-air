@@ -171,6 +171,32 @@ export class DgraphService {
       );
   }
 
+  getReadingsBetween(deviceName, instrumentName, fromts, tots): Observable<TSReading[]> {
+    const url = `${this.dgraphUrl}/query`;
+
+    let myquery = `{resp(func: has(reading)) @filter(gt(created, ${fromts})) @cascade {value created ~resource_reading @filter(eq(uuid, "${deviceName}_${instrumentName}")) { }}}`;
+    let query = `{
+      var(func: has(resource)) @filter(eq(uuid, "${deviceName}_${instrumentName}")) {
+        readings as resource_reading @filter(gt(created, ${fromts}) AND lt(created, ${tots})) (first:-500) {
+        }
+      }
+      resp(func: uid(readings)) {
+        created
+        value
+      }
+    }`;
+
+    console.log("the query is: ", query);
+
+    // return this.http.post<any>(url, `{resp(func: has(reading)) @filter(gt(created, ${fromts})) @cascade {value created ~resource_reading @filter(eq(uuid, "${deviceName}_${instrumentName}")) { }}}`, httpOptions)
+    return this.http.post<any>(url, query, httpOptions)
+      .pipe(
+        map(response => response.data.resp as TSReading[]),
+        tap(_ => this.logger.info('fetched readings')),
+        catchError(this.handleError<TSReading[]>('getReadings', []))
+      );
+  }
+
 
   /*
   * Handle Http operation that failed.

@@ -31,6 +31,8 @@ export class IotDeviceComponent implements OnInit, AfterViewInit {
   // Form variables
   instrumentForm: FormGroup;
 
+  queryStartDate = Date.now();
+  queryEndDate = Date.now();
   queryByDateDisabled = true;
   startDateSelected = false;
   endDateSelected = false;
@@ -207,6 +209,23 @@ export class IotDeviceComponent implements OnInit, AfterViewInit {
       })
   }
 
+  public getResourceReadingsBetween(deviceName, resourceName, fromts, tots) {
+    this.graphService.getReadingsBetween(deviceName, resourceName, fromts, tots)
+      .subscribe(res => {
+        this.resourceReadings = res as TSReading[];
+
+        console.log("reading data: ", this.resourceReadings);
+
+        // Reset data for streaming chart dataset
+        this.chartStreamingDatasets[0].data = [];
+
+        // Set Data for chart dataset
+        this.setChartDataSet();
+
+        //this.chartDatasets[0].data = this.dataset;
+      })
+  }
+
   public setChartDataSet() {
 
     this.timeSeriesData = [];
@@ -346,7 +365,8 @@ export class IotDeviceComponent implements OnInit, AfterViewInit {
   }
 
   onQueryByDateClicked() {
-
+    // Query data by date
+    this.getResourceReadingsBetween(this.deviceSelected, this.resourceSelected, this.queryStartDate, this.queryEndDate);
   }
 
   onQueryLastValuesClicked() {
@@ -356,6 +376,10 @@ export class IotDeviceComponent implements OnInit, AfterViewInit {
 
   startDateEvent(event: MatDatepickerInputEvent<Date>) {
     console.log("Date Event received: ", event);
+
+    this.queryStartDate = event.value.valueOf();
+    console.log("Date value: ", this.queryStartDate);
+
     this.startDateSelected = true;
 
     if (this.endDateSelected) {
@@ -365,6 +389,10 @@ export class IotDeviceComponent implements OnInit, AfterViewInit {
 
   endDateEvent(event: MatDatepickerInputEvent<Date>) {
     console.log("Date Event received: ", event);
+
+    this.queryEndDate = event.value.valueOf();
+    console.log("Date value: ", this.queryEndDate);
+
     this.endDateSelected = true;
 
     if (this.startDateSelected) {
