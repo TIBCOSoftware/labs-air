@@ -1,8 +1,16 @@
 <div class="tcs-home-content" fxLayout="column" fxFlex="grow" fxLayoutAlign="start stretch"
   style="padding-left: 20px; padding-right: 20px; margin-top: 10px;">
 
-  <div fxLayout="row" fxLayoutAlign="center center">
-    <mat-form-field fxFlex="40%">
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
+    <mat-form-field fxFlex="1 1 18%" appearance="standard">
+      <mat-label>Select a Gateway</mat-label>
+      <mat-select [(value)]="gatewaySelected" (selectionChange)="onGatewaySelected($event)">
+        <mat-option *ngFor="let item of gatewayList" [value]="item.value">
+          {{item.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field fxFlex="1 1 40%" appearance="standard">
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Devices">
     </mat-form-field>
   </div>
@@ -100,24 +108,26 @@
 
 
               <mat-form-field fxFlex="20%" appearance="fill">
-                <input matInput [disabled]="queryLastValuesDisabled" [matDatepicker]="pickerStartDate" placeholder="Choose start date"
-                (dateChange)="startDateEvent($event)">
+                <input matInput [disabled]="queryLastValuesDisabled" [matDatepicker]="pickerStartDate"
+                  placeholder="Choose start date" (dateChange)="startDateEvent($event)">
                 <mat-datepicker-toggle matSuffix [for]="pickerStartDate"></mat-datepicker-toggle>
                 <mat-datepicker #pickerStartDate></mat-datepicker>
               </mat-form-field>
 
               <mat-form-field fxFlex="20%" appearance="fill">
-                <input matInput [disabled]="queryLastValuesDisabled" [matDatepicker]="pickerEndDate" placeholder="Choose end date"
-                (dateChange)="endDateEvent($event)">
+                <input matInput [disabled]="queryLastValuesDisabled" [matDatepicker]="pickerEndDate"
+                  placeholder="Choose end date" (dateChange)="endDateEvent($event)">
                 <mat-datepicker-toggle matSuffix [for]="pickerEndDate"></mat-datepicker-toggle>
                 <mat-datepicker #pickerEndDate></mat-datepicker>
               </mat-form-field>
 
               <div class="query-row">
-                  <button  mat-raised-button [disabled]="queryByDateDisabled" (click)="onQueryByDateClicked()" color="primary">Query By Date</button>
-                  <button  mat-raised-button [disabled]="queryLastValuesDisabled" (click)="onQueryLastValuesClicked()" color="primary">Query Last 300 Values</button>
+                <button mat-raised-button [disabled]="queryByDateDisabled" (click)="onQueryByDateClicked()"
+                  color="primary">Query By Date</button>
+                <button mat-raised-button [disabled]="queryLastValuesDisabled" (click)="onQueryLastValuesClicked()"
+                  color="primary">Query Last 300 Values</button>
               </div>
-              
+
 
             </form>
           </div>

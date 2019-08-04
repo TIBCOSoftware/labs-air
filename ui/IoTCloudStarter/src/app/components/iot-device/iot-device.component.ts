@@ -17,6 +17,11 @@ import { ChartType } from 'chart.js';
 import { stringToKeyValue } from '@angular/flex-layout/extended/typings/style/style-transforms';
 import 'chartjs-plugin-streaming';
 
+export interface SelectItem {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-iot-device',
   templateUrl: './iot-device.component.html',
@@ -30,7 +35,8 @@ export class IotDeviceComponent implements OnInit, AfterViewInit {
   startDateSelected = false;
   endDateSelected = false;
   queryLastValuesDisabled = true;
-
+  gatewayList: SelectItem[] = [];
+  gatewaySelected: '';
 
   // Chart variables
 
@@ -172,11 +178,12 @@ export class IotDeviceComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.getDevices();
+    this.getGateways();
+    // this.getDevices();
   }
 
-  public getDevices() {
-    this.edgeService.getDevices()
+  public getDevices(gateway) {
+    this.edgeService.getDevices(gateway)
       .subscribe(res => {
         this.devicesDataSource.data = res as Device[];
       })
@@ -232,7 +239,7 @@ export class IotDeviceComponent implements OnInit, AfterViewInit {
         .subscribe(res => {
           this.resourceReadings = res as TSReading[];
 
-          console.log("reading data: ", this.resourceReadings);
+          console.log("reading data in getStreamingData: ", this.resourceReadings);
 
 
           this.resourceReadings.forEach(
@@ -269,6 +276,30 @@ export class IotDeviceComponent implements OnInit, AfterViewInit {
 
   applyFilter(filterValue: string) {
     this.devicesDataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  getGateways() {
+    console.log("Getting Gateways called")
+
+    this.graphService.getGateways()
+      .subscribe(res => {
+
+        this.gatewayList = [];
+        console.log("Gateways Returned: ", res);
+        res.forEach((gate, index) => {
+          this.gatewayList.push({
+            value: gate.uuid,
+            viewValue: gate.uuid
+          });
+        });
+        console.log("Updated gateway list: ", this.gatewayList);
+      })
+  }
+
+  onGatewaySelected(event) {
+    console.log("Option selected: ", event.value);
+
+    this.getDevices(event.value);
   }
 
   onDeviceClicked(row) {

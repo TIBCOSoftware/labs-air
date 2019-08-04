@@ -180,6 +180,7 @@ export class DgraphService {
   */
   private handleError<T>(operation = 'operation', result?: T) {
     console.log("Got an error.  Handling Error");
+
     return (error: any): Observable<T> => {
 
       console.log("Before error report");

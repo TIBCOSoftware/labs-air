@@ -25,6 +25,7 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
   // Form variables
   subscriptionForm: FormGroup;
 
+  gateway = "";
   subscriptionSelected = "";
   hidePassword = true;
 
@@ -105,8 +106,9 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
   ngOnInit() {
 
     console.log("Getting subscriptions");
+    this.gateway = this.route.snapshot.paramMap.get('gatewayId');
 
-    this.getSubscriptions(this.route.snapshot.paramMap.get('gatewayId'));
+    this.getSubscriptions(this.gateway);
   }
 
   public getSubscriptions(gatewayId: string) {
@@ -197,7 +199,7 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
     sub.modified = ts;
     sub.uid = this.subscriptionForm.controls['uid'].value;
 
-    this.edgeService.addRegisteration(sub)
+    this.edgeService.addRegisteration(this.gateway, sub)
       .subscribe(res => {
         console.log("Result from subscribe: ", res);
       });
@@ -239,7 +241,7 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
     sub.modified = ts;
     sub.uid = this.subscriptionForm.controls['uid'].value;
 
-    this.edgeService.updateRegisteration(sub)
+    this.edgeService.updateRegisteration(this.gateway, sub)
       .subscribe(res => {
         console.log("Result from update ", res);
       });
@@ -251,7 +253,7 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
   }
 
   deleteSubscription() {
-    this.edgeService.deleteRegisteration(this.subscriptionForm.controls['name'].value)
+    this.edgeService.deleteRegisteration(this.gateway, this.subscriptionForm.controls['name'].value)
       .subscribe(res => {
         console.log("Result from delete ", res);
       })

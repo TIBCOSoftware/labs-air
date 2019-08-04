@@ -20,6 +20,11 @@ interface CommandEditor {
   paramVal: string
 }
 
+interface SelectItem {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-iot-device-command',
   templateUrl: './iot-device-command.component.html',
@@ -27,9 +32,11 @@ interface CommandEditor {
 })
 export class IotDeviceCommandComponent implements OnInit, AfterViewInit {
 
-
+  gatewaySelected: "";
   deviceSelected = "";
   resourceSelected = "";
+
+  gatewayList: SelectItem[] = [];
 
   devicesDataSource = new MatTableDataSource<Device>();
   deviceDisplayedColumns: string[] = ['name', 'id', 'operatingState', 'adminState', 'description'];
@@ -46,20 +53,22 @@ export class IotDeviceCommandComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  constructor(private edgeService: EdgeService) {
+  constructor(private edgeService: EdgeService,
+    private graphService: DgraphService) {
 
   }
 
   ngOnInit() {
-    this.getDevices();
+    this.getGateways();
+    // this.getDevices();
   }
 
   ngAfterViewInit() {
     this.devicesDataSource.sort = this.sort;
   }
 
-  public getDevices() {
-    this.edgeService.getDevices()
+  public getDevices(gateway) {
+    this.edgeService.getDevices(gateway)
       .subscribe(res => {
         this.devicesDataSource.data = res as Device[];
       })
@@ -67,6 +76,31 @@ export class IotDeviceCommandComponent implements OnInit, AfterViewInit {
 
   applyFilter(filterValue: string) {
     this.devicesDataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  getGateways() {
+    console.log("Getting Gateways called")
+
+    this.graphService.getGateways()
+      .subscribe(res => {
+
+        this.gatewayList = [];
+        console.log("Gateways Returned: ", res);
+        res.forEach((gate, index) => {
+          this.gatewayList.push({
+            value: gate.uuid,
+            viewValue: gate.uuid
+          });
+        });
+        console.log("Updated gateway list: ", this.gatewayList);
+      })
+  }
+
+  onGatewaySelected(event) {
+    console.log("Option selected: ", event.value);
+
+    this.gatewaySelected = event.value;
+    this.getDevices(event.value);
   }
 
   onDeviceClicked(row) {
@@ -141,7 +175,7 @@ export class IotDeviceCommandComponent implements OnInit, AfterViewInit {
 
       console.log("Generated GET command path: ", cmdPath);
 
-      this.edgeService.getCommand(cmdPath)
+      this.edgeService.getCommand(this.gatewaySelected, cmdPath)
       .subscribe(res => {
         
         this.commandsDataSource.data[row.idx].returnVal = res.readings[0].value;

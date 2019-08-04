@@ -13,7 +13,15 @@
 
                     <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px">
                         <mat-form-field fxFlex="1 1 18%" appearance="fill">
-                            <mat-label>Device Profile</mat-label>
+                            <mat-label>Select a Gateway</mat-label>
+                            <mat-select formControlName="deviceGateway" (selectionChange)="onGatewaySelected($event)">
+                                <mat-option *ngFor="let item of gatewayList" [value]="item.value">
+                                    {{item.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field fxFlex="1 1 18%" appearance="fill">
+                            <mat-label>Select Device Profile</mat-label>
                             <mat-select formControlName="deviceProfile">
                                 <mat-option *ngFor="let item of profileList" [value]="item.value">
                                     {{item.viewValue}}
@@ -21,7 +29,7 @@
                             </mat-select>
                         </mat-form-field>
                         <mat-form-field fxFlex="1 1 18%" appearance="fill">
-                            <mat-label>Device Service</mat-label>
+                            <mat-label>Select Device Service</mat-label>
                             <mat-select formControlName="deviceService">
                                 <mat-option *ngFor="let item of serviceList" [value]="item.value">
                                     {{item.viewValue}}

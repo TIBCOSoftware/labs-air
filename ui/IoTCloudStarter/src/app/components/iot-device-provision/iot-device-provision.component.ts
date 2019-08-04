@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, Input } from '@angular/core';
 import { Profile, Service, Device } from '../../shared/models/iot.model';
 import { EdgeService } from '../../services/edge/edge.service';
+import { DgraphService } from '../../services/graph/dgraph.service';
 import { MatSort, MatTableDataSource } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -24,10 +25,11 @@ export class IotDeviceProvisionComponent implements OnInit, AfterViewInit {
   deviceServicesDataSource = new MatTableDataSource<Service>();
 
   profileList: SelectItem[] = [];
-
   serviceList: SelectItem[] = [];
+  gatewayList: SelectItem[] = [];
 
   constructor(private edgeService: EdgeService,
+    private graphService: DgraphService,
     private formBuilder: FormBuilder) {
 
     this.provisionForm = this.formBuilder.group({
@@ -45,23 +47,41 @@ export class IotDeviceProvisionComponent implements OnInit, AfterViewInit {
       protocolTopic: [''],
       deviceProfile: [''],
       deviceService: [''],
+      deviceGateway: ['']
     });
 
   }
 
   ngOnInit() {
-    this.getProfiles();
-    this.getServices();
-
-
+    this.getGateways();
+    // this.getProfiles();
+    // this.getServices();
   }
 
   ngAfterViewInit() {
     // this.deviceProfilesDataSource.sort = this.sort;
   }
 
-  getProfiles() {
-    this.edgeService.getProfiles()
+  getGateways() {
+    console.log("Getting Gateways called")
+
+    this.graphService.getGateways()
+      .subscribe(res => {
+
+        this.gatewayList = [];
+        console.log("Gateways Returned: ", res);
+        res.forEach((gate, index) => {
+          this.gatewayList.push({
+            value: gate.uuid,
+            viewValue: gate.uuid
+          });
+        });
+        console.log("Updated gateway list: ", this.gatewayList);
+      })
+  }
+
+  getProfiles(gateway) {
+    this.edgeService.getProfiles(gateway)
       .subscribe(res => {
         this.deviceProfilesDataSource.data = res as Profile[];
 
@@ -77,8 +97,8 @@ export class IotDeviceProvisionComponent implements OnInit, AfterViewInit {
       })
   }
 
-  getServices() {
-    this.edgeService.getServices()
+  getServices(gateway) {
+    this.edgeService.getServices(gateway)
       .subscribe(res => {
         this.deviceServicesDataSource.data = res as Service[];
 
@@ -132,7 +152,7 @@ export class IotDeviceProvisionComponent implements OnInit, AfterViewInit {
       }
     }
 
-    this.edgeService.addDevice(device)
+    this.edgeService.addDevice(this.provisionForm.controls['deviceGateway'].value, device)
       .subscribe(res => {
         console.log("Result from add device: ", res);
       });
@@ -144,10 +164,28 @@ export class IotDeviceProvisionComponent implements OnInit, AfterViewInit {
   deleteDevice() {
     let deviceName = this.provisionForm.controls['deviceName'].value;
 
-    this.edgeService.deleteDeviceByName(deviceName)
+    this.edgeService.deleteDeviceByName(this.provisionForm.controls['deviceGateway'].value, deviceName)
       .subscribe(res => {
         console.log("Result from delete device: ", res);
       });
+  }
+
+  onGatewaySelected(event) {
+    console.log("Option selected: ", event.value);
+
+    this.getProfiles(event.value);
+    this.getServices(event.value);
+  }
+
+  onProfileSelected(event) {
+    console.log("Option selected: ", event.value);
+
+  }
+
+  onServiceSelected(event) {
+    console.log("Option selected: ", event.value);
+
+    // Enable buttons
   }
 
 

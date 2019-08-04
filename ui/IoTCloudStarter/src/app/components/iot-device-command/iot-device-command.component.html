@@ -1,8 +1,16 @@
 <div class="tcs-home-content" fxLayout="column" fxFlex="grow" fxLayoutAlign="start stretch"
   style="padding-left: 20px; padding-right: 20px; margin-top: 10px;">
 
-  <div fxLayout="row" fxLayoutAlign="center center">
-    <mat-form-field fxFlex="40%">
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
+    <mat-form-field fxFlex="1 1 18%" appearance="standard">
+      <mat-label>Select a Gateway</mat-label>
+      <mat-select [(value)]="gatewaySelected" (selectionChange)="onGatewaySelected($event)">
+        <mat-option *ngFor="let item of gatewayList" [value]="item.value">
+          {{item.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field fxFlex="1 1 40%" appearance="standard">
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Devices">
     </mat-form-field>
   </div>

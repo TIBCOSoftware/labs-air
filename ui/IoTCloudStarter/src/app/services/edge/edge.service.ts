@@ -38,8 +38,8 @@ export class EdgeService {
   // Core Metadata Operations
   // URL: http://localhost:48081/api/v1
 
-  getDevices(): Observable<Device[]> {
-    const url = `${this.edgeCoreMetadataUrl}device`;
+  getDevices(gateway: string): Observable<Device[]> {
+    const url = `/${gateway}${this.edgeCoreMetadataUrl}device`;
 
     console.log("GetDevices service called for url:", url);
 
@@ -89,8 +89,8 @@ export class EdgeService {
         });
   }
 
-  getDevice(id: string): Observable<Device> {
-    const url = `${this.edgeCoreMetadataUrl}device/${id}`;
+  getDevice(gateway: string, id: string): Observable<Device> {
+    const url = `/${gateway}${this.edgeCoreMetadataUrl}device/${id}`;
     return this.http.get<Device>(url, httpOptions)
       .pipe(
         tap(_ => this.logger.info(`fetched device id=${id}`)),
@@ -98,8 +98,8 @@ export class EdgeService {
       );
   }
 
-  addDevice(device: any): Observable<String> {
-    const url = `${this.edgeCoreMetadataUrl}device`;
+  addDevice(gateway: string, device: any): Observable<String> {
+    const url = `/${gateway}${this.edgeCoreMetadataUrl}device`;
 
     return this.http.post<string>(url, device, httpTextResponseOptions)
       .pipe(
@@ -108,8 +108,8 @@ export class EdgeService {
       );
   }
 
-  deleteDeviceByName(deviceName: string): Observable<String> {
-    const url = `${this.edgeCoreMetadataUrl}device/${deviceName}`;
+  deleteDeviceByName(gateway: string, deviceName: string): Observable<String> {
+    const url = `/${gateway}${this.edgeCoreMetadataUrl}device/${deviceName}`;
 
     return this.http.delete<string>(url, httpTextResponseOptions)
       .pipe(
@@ -118,8 +118,8 @@ export class EdgeService {
       );
   }
 
-  getProfiles(): Observable<Profile[]> {
-    const url = `${this.edgeCoreMetadataUrl}deviceprofile`;
+  getProfiles(gateway: string): Observable<Profile[]> {
+    const url = `/${gateway}${this.edgeCoreMetadataUrl}deviceprofile`;
 
     console.log("GetProfiles service called for url:", url);
 
@@ -130,8 +130,8 @@ export class EdgeService {
       );
   }
 
-  getServices(): Observable<Service[]> {
-    const url = `${this.edgeCoreMetadataUrl}deviceservice`;
+  getServices(gateway: string): Observable<Service[]> {
+    const url = `/${gateway}${this.edgeCoreMetadataUrl}deviceservice`;
 
     console.log("GetServices service called for url:", url);
 
@@ -145,8 +145,8 @@ export class EdgeService {
   // Core Command Operations
   // URL: http://localhost:48082/api/v1
 
-  getCommand(cmdPath: string): Observable<GetCommandResponse> {
-    let url = `${this.edgeCoreCommandUrl}${cmdPath}`
+  getCommand(gateway: string, cmdPath: string): Observable<GetCommandResponse> {
+    let url = `/${gateway}${this.edgeCoreCommandUrl}${cmdPath}`
 
     console.log("Get command Url: ", url);
     return this.http.get<GetCommandResponse>(url, httpOptions)
@@ -160,8 +160,8 @@ export class EdgeService {
   // Export Client Operations
   // URL: http://localhost:48071/api/v1
 
-  addRegisteration(subscription: Subscription): Observable<String> {
-    const url = `${this.edgeExportClientUrl}registration`;
+  addRegisteration(gateway: string, subscription: Subscription): Observable<String> {
+    const url = `/${gateway}${this.edgeExportClientUrl}registration`;
 
     let deviceFilter = [];
     if (subscription.deviceIdentifierFilter.length > 0) {
@@ -209,8 +209,8 @@ export class EdgeService {
       );
   }
 
-  updateRegisteration(subscription: Subscription): Observable<string> {
-    const url = `${this.edgeExportClientUrl}registration`;
+  updateRegisteration(gateway: string, subscription: Subscription): Observable<string> {
+    const url = `/${gateway}${this.edgeExportClientUrl}registration`;
 
     let deviceFilter = [];
     if (subscription.deviceIdentifierFilter.length > 0) {
@@ -256,8 +256,8 @@ export class EdgeService {
       );
   }
 
-  deleteRegisteration(subscriptionName: string): Observable<string> {
-    const url = `${this.edgeExportClientUrl}registration/name/${subscriptionName}`;
+  deleteRegisteration(gateway: string, subscriptionName: string): Observable<string> {
+    const url = `/${gateway}${this.edgeExportClientUrl}registration/name/${subscriptionName}`;
 
     return this.http.delete<string>(url)
       .pipe(
