@@ -21,13 +21,13 @@
               <!-- Created Column -->
               <ng-container matColumnDef="created">
                 <th mat-header-cell *matHeaderCellDef> Created </th>
-                <td mat-cell *matCellDef="let gateway"> {{gateway.createdts}} </td>
+                <td mat-cell *matCellDef="let gateway"> {{gateway.createdts | date: dateFormat}} </td>
               </ng-container>
 
               <!-- Updated Column -->
               <ng-container matColumnDef="updated">
                 <th mat-header-cell *matHeaderCellDef> Updated </th>
-                <td mat-cell *matCellDef="let gateway"> {{gateway.updatedts}} </td>
+                <td mat-cell *matCellDef="let gateway"> {{gateway.updatedts | date: dateFormat}} </td>
               </ng-container>
 
               <!-- Name Column -->
@@ -82,7 +82,9 @@
         </mat-card-content>
         <mat-card-actions>
           <button mat-raised-button (click)="addGateway()" color="primary">Add Gateway</button>
-          <button mat-raised-button (click)="updateGateway()" color="primary">Update Gateway</button>
+          <button mat-raised-button [disabled]="subscriptionDisabled" (click)="updateGateway()" color="primary">Update Gateway</button>
+          <button mat-raised-button [disabled]="subscriptionDisabled" (click)="deleteGateway()" color="primary">Remove Gateway</button>
+          <button mat-raised-button [disabled]="subscriptionDisabled" (click)="pingGateway()" color="primary">Ping Gateway</button>
           <button mat-raised-button [disabled]="subscriptionDisabled" [routerLink]="['/starterApp/home/gatewaysubscription', selectedGateway]"  color="primary">Subscriptions</button>
         </mat-card-actions>
       </mat-card>

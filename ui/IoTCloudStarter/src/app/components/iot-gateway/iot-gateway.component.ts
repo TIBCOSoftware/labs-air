@@ -1,15 +1,17 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from "@angular/router";
 
 import { SelectionModel } from '@angular/cdk/collections';
 
 import { Gateway } from '../../shared/models/iot.model';
+import { EdgeService } from '../../services/edge/edge.service';
 import { DgraphService } from '../../services/graph/dgraph.service';
 import { debounceTime, distinctUntilChanged, startWith, tap, delay } from 'rxjs/operators';
 //import { merge } from "rxjs/observable/merge";
 //import { fromEvent } from 'rxjs/observable/fromEvent';
 // // import { DevicesDataSource } from "../services/edge/devices.datasource";
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LogLevel, LogService } from '@tibco-tcstk/tc-core-lib';
 
@@ -20,27 +22,26 @@ import { LogLevel, LogService } from '@tibco-tcstk/tc-core-lib';
 })
 export class IotGatewayComponent implements OnInit, AfterViewInit {
 
-  subscriptionDisabled = true; 
+  subscriptionDisabled = true;
   selectedGateway = '';
+  dateFormat = 'yyyy-MM-dd  HH:mm:ss'
 
   gatewayForm: FormGroup;
   dataSource = new MatTableDataSource<Gateway>();
   displayedColumns: string[] = ['uuid', 'created', 'updated'];
   selection = new SelectionModel<Gateway>(false, []);
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   constructor(private graphService: DgraphService,
+    private edgeService: EdgeService,
     private formBuilder: FormBuilder,
-    private logger: LogService) {
+    private logger: LogService,
+    private _snackBar: MatSnackBar,
+    private _datePipe: DatePipe) {
 
     logger.level = LogLevel.Debug;
 
-    this.gatewayForm = this.formBuilder.group( {
-      uuid: ['', Validators.required],
-      address: ['', Validators.required],
-      latitude: ['', Validators.required],
-      longitude: ['', Validators.required],
-    });
+    this.resetGatewayForm();
 
   }
 
@@ -71,12 +72,87 @@ export class IotGatewayComponent implements OnInit, AfterViewInit {
       })
   }
 
-  public addGateway() {
+  addGateway() {
+    console.log("Adding Gateway");
 
+    if (this.gatewayExist(this.gatewayForm.controls['uuid'].value)) {
+      console.log("Current Time: ", this._datePipe.transform(new Date(), 'yyyy-MM-ddTHH:mm:ssZZZZZ'));
+      let message = 'Fail - Not unique';
+
+      this._snackBar.open(message, "Add Gateway", {
+        duration: 3000,
+      });
+    }
+    else {
+      let gate = new Gateway();
+
+      let dateNow = this._datePipe.transform(new Date(), 'yyyy-MM-ddTHH:mm:ssZZZZZ');
+
+      gate.uuid = this.gatewayForm.controls['uuid'].value;
+      gate.address = this.gatewayForm.controls['address'].value;
+      gate.createdts = dateNow;
+      gate.latitude = this.gatewayForm.controls['latitude'].value;
+      gate.longitude = this.gatewayForm.controls['longitude'].value;
+      gate.updatedts = dateNow;
+
+      this.graphService.addGateway(gate)
+        .subscribe(res => {
+          console.log("Added gateway");
+
+          this.getGateways();
+          this.resetGatewayForm();
+        })
+    }
   }
 
-  public updateGateway() {
+  updateGateway() {
+    let gate = new Gateway();
 
+    let dateNow = this._datePipe.transform(new Date(), 'yyyy-MM-ddTHH:mm:ssZZZZZ');
+
+    gate.uid = this.gatewayForm.controls['uid'].value;
+    gate.uuid = this.gatewayForm.controls['uuid'].value;
+    gate.address = this.gatewayForm.controls['address'].value;
+    gate.latitude = this.gatewayForm.controls['latitude'].value;;
+    gate.longitude = this.gatewayForm.controls['longitude'].value;;
+    gate.updatedts = dateNow;
+
+    this.graphService.updateGateway(gate)
+      .subscribe(res => {
+        console.log("Updated gateway");
+
+        this.getGateways();
+        this.resetGatewayForm();
+      })
+  }
+
+  deleteGateway() {
+
+    this.graphService.deleteGateway(this.gatewayForm.controls['uid'].value)
+      .subscribe(res => {
+        console.log("Deleted gateway");
+
+        this.getGateways();
+        this.resetGatewayForm();
+      })
+  }
+
+  pingGateway() {
+
+    this.edgeService.pingCoreMetadata(this.selectedGateway)
+      .subscribe(res => {
+        console.log("Received ping response: ", res);
+
+        let message = 'Success';
+        if (res == undefined) {
+          message = 'Failure';
+        }
+
+        this._snackBar.open(message, "Ping Gateway", {
+          duration: 3000,
+        });
+
+      })
   }
 
   ngAfterViewInit() {
@@ -106,6 +182,7 @@ export class IotGatewayComponent implements OnInit, AfterViewInit {
 
     // Update Gateway Form
     this.gatewayForm.patchValue({
+      uid: row.uid,
       uuid: row.uuid,
       address: row.address,
       latitude: row.latitude,
@@ -114,7 +191,31 @@ export class IotGatewayComponent implements OnInit, AfterViewInit {
 
   }
 
+  gatewayExist(gatewayUuid: string): boolean {
+    let found = false;
 
+    this.dataSource.data.forEach(
+      gateway => {
 
+        if (gateway.uuid == gatewayUuid) {
+          found = true;
 
+        }
+      }
+    );
+
+    return found;
+  }
+
+  resetGatewayForm() {
+    this.gatewayForm = this.formBuilder.group({
+      uid: [''],
+      uuid: ['', Validators.required],
+      address: ['', Validators.required],
+      latitude: ['', Validators.required],
+      longitude: ['', Validators.required],
+    });
+
+    this.subscriptionDisabled = true;
+  }
 }

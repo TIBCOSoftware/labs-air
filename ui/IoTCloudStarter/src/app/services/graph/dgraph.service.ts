@@ -34,11 +34,75 @@ export class DgraphService {
   getGateways(): Observable<Gateway[]> {
     console.log("GetGateways service called")
     const url = `${this.dgraphUrl}/query`;
-    return this.http.post<any>(url, '{resp(func: has(gateway)) {uuid address latitude longitude createdts updatedts}}', httpOptions)
+    let query = `{
+      resp(func: has(gateway)) {
+        uid uuid address latitude longitude createdts updatedts
+      }
+    }`;
+
+    return this.http.post<any>(url, query, httpOptions)
       .pipe(
         map(response => response.data.resp as Gateway[]),
         tap(_ => this.logger.info('fetched gateways')),
         catchError(this.handleError<Gateway[]>('getGateways', []))
+      );
+  }
+
+  updateGateway(gateway: Gateway): Observable<string> {
+    const url = `${this.dgraphUrl}/mutate`;
+    let query = `{
+      set {
+        <${gateway.uid}> <address> "${gateway.address}" .
+        <${gateway.uid}> <latitude> "${gateway.latitude}" .
+        <${gateway.uid}> <longitude> "${gateway.longitude}" .
+        <${gateway.uid}> <updatedts> "${gateway.updatedts}" .
+      }
+    }`;
+    console.log('Update Gateway Mutate statement: ', query);
+
+    return this.http.post<any>(url, query, httpMutateOptions)
+      .pipe(
+        tap(_ => this.logger.info('updated gateway')),
+        catchError(this.handleError<string>('updateGateway'))
+      );
+  }
+
+  addGateway(gateway: Gateway): Observable<string> {
+    const url = `${this.dgraphUrl}/mutate`;
+    let query = `{
+      set {
+        _:Gateway <gateway> "" .
+        _:Gateway <type> "gateway" .
+        _:Gateway <uuid> "${gateway.uuid}" .
+        _:Gateway <address> "${gateway.address}" .
+        _:Gateway <latitude> "${gateway.latitude}" .
+        _:Gateway <longitude> "${gateway.longitude}" .
+        _:Gateway <createdts> "${gateway.createdts}" .
+        _:Gateway <updatedts> "${gateway.updatedts}" .
+      }
+    }`;
+    console.log('Add Gateway Mutate statement: ', query);
+
+    return this.http.post<any>(url, query, httpMutateOptions)
+      .pipe(
+        tap(_ => this.logger.info('add gateway')),
+        catchError(this.handleError<string>('addGateway'))
+      );
+  }
+
+  deleteGateway(gatewayUid: number): Observable<string> {
+    const url = `${this.dgraphUrl}/mutate`;
+    let query = `{
+      delete {
+        <${gatewayUid}> * * .
+      }
+    }`;
+    console.log('Delete Gateway Mutate statement: ', query);
+
+    return this.http.post<any>(url, query, httpMutateOptions)
+      .pipe(
+        tap(_ => this.logger.info('deleted gateway')),
+        catchError(this.handleError<string>('deleteGateway'))
       );
   }
 

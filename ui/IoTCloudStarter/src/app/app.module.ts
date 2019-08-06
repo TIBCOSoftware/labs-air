@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { DatePipe } from '@angular/common';
 import { AppComponent } from './app.component';
 import {TcLiveappsLibModule} from '@tibco-tcstk/tc-liveapps-lib';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -94,7 +94,10 @@ import { IotDeviceProvisionComponent } from './components/iot-device-provision/i
     ReactiveFormsModule,
     SpotfireViewerModule
   ],
-  providers: [LogService],
+  providers: [
+    LogService,
+    DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

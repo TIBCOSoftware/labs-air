@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map, tap, timeout } from 'rxjs/operators';
 import { LogLevel, LogService } from '@tibco-tcstk/tc-core-lib';
 
 import { Device, Profile, Service, Subscription, GetCommandResponse } from '../../shared/models/iot.model';
@@ -37,6 +37,20 @@ export class EdgeService {
 
   // Core Metadata Operations
   // URL: http://localhost:48081/api/v1
+
+  pingCoreMetadata(gateway: string): Observable<string> {
+
+    const url = `/${gateway}${this.edgeCoreMetadataUrl}ping`;
+
+    console.log("In PingCoreMetadata with url: ", url);
+
+    return this.http.get<string>(url, httpTextResponseOptions)
+      .pipe(
+        timeout(2000),
+        tap(_ => this.logger.info('received ping response')),
+        catchError(this.handleError<string>('pingGateway'))
+      );
+  }
 
   getDevices(gateway: string): Observable<Device[]> {
     const url = `/${gateway}${this.edgeCoreMetadataUrl}device`;

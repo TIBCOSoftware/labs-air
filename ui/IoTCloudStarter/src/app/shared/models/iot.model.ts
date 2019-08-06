@@ -136,6 +136,7 @@ export class Addressable {
 }
 
 export class Gateway {
+  uid: number;
   createdts: string;
   updatedts: string;
   uuid: string;
