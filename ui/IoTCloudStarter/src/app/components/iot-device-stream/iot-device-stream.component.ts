@@ -121,8 +121,9 @@ export class IotDeviceStreamComponent implements OnInit, AfterViewInit {
   }
 
   public getDevices() {
+    let gateway = null;
     // Hardcoded for gateway1
-    this.edgeService.getDevices("gateway1")
+    this.edgeService.getDevices(gateway)
       .subscribe(res => {
         this.devicesDataSource.data = res as Device[];
       })

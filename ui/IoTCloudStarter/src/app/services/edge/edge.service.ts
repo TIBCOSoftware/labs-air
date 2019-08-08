@@ -5,14 +5,20 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError, map, tap, timeout } from 'rxjs/operators';
 import { LogLevel, LogService } from '@tibco-tcstk/tc-core-lib';
 
-import { Device, Profile, Service, Subscription, GetCommandResponse } from '../../shared/models/iot.model';
+import { Device, Profile, Service, Subscription, GetCommandResponse, Gateway } from '../../shared/models/iot.model';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer XXXXXXXXXXXXXXXXXXXXXXXX'
+  })
 };
 
 const httpTextResponseOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer XXXXXXXXXXXXXXXXXXXXXXXX'
+  }),
   observe: 'body' as 'body',
   responseType: 'text' as 'json'
 };
@@ -29,6 +35,12 @@ export class EdgeService {
   private edgeExportClientUrl = '/exportclient/api/v1/';
   private edgeExportDistroUrl = '/exportdistro/api/v1/';
 
+  private gatewayCoreMetadataPath = '/edgexgateway/metadata/api/v1';
+  private gatewayCoreDataPath = '/edgexgateway/coredata/api/v1';
+  private gatewayCoreCommandPath = '/edgexgateway/command/api/v1';
+  private gatewayExportClientPath = '/edgexgateway/exportclient/api/v1';
+  private gatewayExportDistroPath = '/edgexgateway/exportdistro/api/v1';
+
   constructor(private http: HttpClient,
     private logger: LogService) {
     logger.level = LogLevel.Debug;
@@ -38,7 +50,23 @@ export class EdgeService {
   // Core Metadata Operations
   // URL: http://localhost:48081/api/v1
 
-  pingCoreMetadata(gateway: string): Observable<string> {
+  pingCoreMetadata(gateway: Gateway): Observable<string> {
+
+    // const url1 = `https://localhost:8443/metadata/api/v1/ping`;
+    const url = `/${gateway.uuid}${this.gatewayCoreMetadataPath}/ping`;
+
+    const authorizedHeaders = httpTextResponseOptions.headers.set('Authorization', 'Bearer ' + gateway.accessToken);
+    httpTextResponseOptions.headers = authorizedHeaders;
+
+    return this.http.get<string>(url, httpTextResponseOptions)
+      .pipe(
+        timeout(2000),
+        tap(_ => this.logger.info('received ping response')),
+        catchError(this.handleError<string>('pingGateway'))
+      );
+  }
+
+  pingCoreMetadataUnauthorized(gateway: string): Observable<string> {
 
     const url = `/${gateway}${this.edgeCoreMetadataUrl}ping`;
 
@@ -52,7 +80,21 @@ export class EdgeService {
       );
   }
 
-  getDevices(gateway: string): Observable<Device[]> {
+  getDevices(gateway: Gateway): Observable<Device[]> {
+    const url = `/${gateway.uuid}${this.gatewayCoreMetadataPath}/device`;
+    console.log("GetDevices service called for url:", url);
+
+    const authorizedHeaders = httpOptions.headers.set('Authorization', 'Bearer ' + gateway.accessToken);
+    httpOptions.headers = authorizedHeaders;
+
+    return this.http.get<Device[]>(url, httpOptions)
+      .pipe(
+        tap(_ => this.logger.info('fetched devices')),
+        catchError(this.handleError<Device[]>('getDevices', []))
+      );
+  }
+
+  getDevicesUnauthorized(gateway: string): Observable<Device[]> {
     const url = `/${gateway}${this.edgeCoreMetadataUrl}device`;
 
     console.log("GetDevices service called for url:", url);
@@ -103,8 +145,12 @@ export class EdgeService {
         });
   }
 
-  getDevice(gateway: string, id: string): Observable<Device> {
-    const url = `/${gateway}${this.edgeCoreMetadataUrl}device/${id}`;
+  getDevice(gateway: Gateway, id: string): Observable<Device> {
+    const url = `/${gateway.uuid}${this.gatewayCoreMetadataPath}/device/${id}`;
+
+    const authorizedHeaders = httpOptions.headers.set('Authorization', 'Bearer ' + gateway.accessToken);
+    httpOptions.headers = authorizedHeaders;
+
     return this.http.get<Device>(url, httpOptions)
       .pipe(
         tap(_ => this.logger.info(`fetched device id=${id}`)),
@@ -112,8 +158,11 @@ export class EdgeService {
       );
   }
 
-  addDevice(gateway: string, device: any): Observable<String> {
-    const url = `/${gateway}${this.edgeCoreMetadataUrl}device`;
+  addDevice(gateway: Gateway, device: any): Observable<String> {
+    const url = `/${gateway.uuid}${this.gatewayCoreMetadataPath}/device`;
+
+    const authorizedHeaders = httpTextResponseOptions.headers.set('Authorization', 'Bearer ' + gateway.accessToken);
+    httpTextResponseOptions.headers = authorizedHeaders;
 
     return this.http.post<string>(url, device, httpTextResponseOptions)
       .pipe(
@@ -122,8 +171,11 @@ export class EdgeService {
       );
   }
 
-  deleteDeviceByName(gateway: string, deviceName: string): Observable<String> {
-    const url = `/${gateway}${this.edgeCoreMetadataUrl}device/${deviceName}`;
+  deleteDeviceByName(gateway: Gateway, deviceName: string): Observable<String> {
+    const url = `/${gateway.uuid}${this.gatewayCoreMetadataPath}/device/name/${deviceName}`;
+
+    const authorizedHeaders = httpTextResponseOptions.headers.set('Authorization', 'Bearer ' + gateway.accessToken);
+    httpTextResponseOptions.headers = authorizedHeaders;
 
     return this.http.delete<string>(url, httpTextResponseOptions)
       .pipe(
@@ -132,10 +184,13 @@ export class EdgeService {
       );
   }
 
-  getProfiles(gateway: string): Observable<Profile[]> {
-    const url = `/${gateway}${this.edgeCoreMetadataUrl}deviceprofile`;
+  getProfiles(gateway: Gateway): Observable<Profile[]> {
+    const url = `/${gateway.uuid}${this.gatewayCoreMetadataPath}/deviceprofile`;
 
     console.log("GetProfiles service called for url:", url);
+
+    const authorizedHeaders = httpOptions.headers.set('Authorization', 'Bearer ' + gateway.accessToken);
+    httpOptions.headers = authorizedHeaders;
 
     return this.http.get<Profile[]>(url, httpOptions)
       .pipe(
@@ -144,10 +199,12 @@ export class EdgeService {
       );
   }
 
-  getServices(gateway: string): Observable<Service[]> {
-    const url = `/${gateway}${this.edgeCoreMetadataUrl}deviceservice`;
+  getServices(gateway: Gateway): Observable<Service[]> {
+    const url = `/${gateway.uuid}${this.gatewayCoreMetadataPath}/deviceservice`;
 
     console.log("GetServices service called for url:", url);
+    const authorizedHeaders = httpOptions.headers.set('Authorization', 'Bearer ' + gateway.accessToken);
+    httpOptions.headers = authorizedHeaders;
 
     return this.http.get<Service[]>(url, httpOptions)
       .pipe(
@@ -159,10 +216,13 @@ export class EdgeService {
   // Core Command Operations
   // URL: http://localhost:48082/api/v1
 
-  getCommand(gateway: string, cmdPath: string): Observable<GetCommandResponse> {
-    let url = `/${gateway}${this.edgeCoreCommandUrl}${cmdPath}`
-
+  getCommand(gateway: Gateway, cmdPath: string): Observable<GetCommandResponse> {
+    const url = `/${gateway.uuid}${this.gatewayCoreCommandPath}/${cmdPath}`;
+    
     console.log("Get command Url: ", url);
+    const authorizedHeaders = httpOptions.headers.set('Authorization', 'Bearer ' + gateway.accessToken);
+    httpOptions.headers = authorizedHeaders;
+
     return this.http.get<GetCommandResponse>(url, httpOptions)
       .pipe(
         tap(_ => this.logger.info(`fetched get response`)),
@@ -174,8 +234,8 @@ export class EdgeService {
   // Export Client Operations
   // URL: http://localhost:48071/api/v1
 
-  addRegisteration(gateway: string, subscription: Subscription): Observable<String> {
-    const url = `/${gateway}${this.edgeExportClientUrl}registration`;
+  addRegisteration(gateway: Gateway, subscription: Subscription): Observable<String> {
+    const url = `/${gateway.uuid}${this.gatewayExportClientPath}/registration`;
 
     let deviceFilter = [];
     if (subscription.deviceIdentifierFilter.length > 0) {
@@ -216,6 +276,9 @@ export class EdgeService {
       "destination": subscription.destination
     }
 
+    const authorizedHeaders = httpTextResponseOptions.headers.set('Authorization', 'Bearer ' + gateway.accessToken);
+    httpTextResponseOptions.headers = authorizedHeaders;
+
     return this.http.post<string>(url, query, httpTextResponseOptions)
       .pipe(
         tap(_ => this.logger.info('registered to receive events')),
@@ -223,8 +286,8 @@ export class EdgeService {
       );
   }
 
-  updateRegisteration(gateway: string, subscription: Subscription): Observable<string> {
-    const url = `/${gateway}${this.edgeExportClientUrl}registration`;
+  updateRegisteration(gateway: Gateway, subscription: Subscription): Observable<string> {
+    const url = `/${gateway.uuid}${this.gatewayExportClientPath}/registration`;
 
     let deviceFilter = [];
     if (subscription.deviceIdentifierFilter.length > 0) {
@@ -263,6 +326,9 @@ export class EdgeService {
       "destination": subscription.destination
     }
 
+    const authorizedHeaders = httpTextResponseOptions.headers.set('Authorization', 'Bearer ' + gateway.accessToken);
+    httpTextResponseOptions.headers = authorizedHeaders;
+
     return this.http.put<string>(url, query, httpTextResponseOptions)
       .pipe(
         tap(_ => this.logger.info('registered to receive events')),
@@ -270,10 +336,13 @@ export class EdgeService {
       );
   }
 
-  deleteRegisteration(gateway: string, subscriptionName: string): Observable<string> {
-    const url = `/${gateway}${this.edgeExportClientUrl}registration/name/${subscriptionName}`;
+  deleteRegisteration(gateway: Gateway, subscriptionName: string): Observable<string> {
+    const url = `/${gateway.uuid}${this.gatewayExportClientPath}/registration/name/${subscriptionName}`;
 
-    return this.http.delete<string>(url)
+    const authorizedHeaders = httpTextResponseOptions.headers.set('Authorization', 'Bearer ' + gateway.accessToken);
+    httpTextResponseOptions.headers = authorizedHeaders;
+
+    return this.http.delete<string>(url, httpTextResponseOptions)
       .pipe(
         tap(_ => this.logger.info('registered to receive events')),
         catchError(this.handleError<string>('addRegistration'))

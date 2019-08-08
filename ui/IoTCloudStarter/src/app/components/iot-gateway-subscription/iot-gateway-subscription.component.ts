@@ -3,13 +3,13 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { SelectionModel } from '@angular/cdk/collections';
 
-import { Subscription } from '../../shared/models/iot.model';
+import { Subscription, Gateway } from '../../shared/models/iot.model';
 import { EdgeService } from '../../services/edge/edge.service';
 import { DgraphService } from '../../services/graph/dgraph.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { switchMap, debounceTime, distinctUntilChanged, startWith, tap, delay } from 'rxjs/operators';
 
-import { MatPaginator, MatSort, MatTableDataSource, MatDatepickerInputEvent, MatSnackBar } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
 
 export interface SelectItem {
   value: string;
@@ -25,7 +25,8 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
   // Form variables
   subscriptionForm: FormGroup;
 
-  gateway = "";
+  gatewayId = "";
+  gateway = null as Gateway;
   subscriptionSelected = "";
   hidePassword = true;
 
@@ -107,17 +108,18 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
   ngOnInit() {
 
     console.log("Getting subscriptions");
-    this.gateway = this.route.snapshot.paramMap.get('gatewayId');
+    this.gatewayId = this.route.snapshot.paramMap.get('gatewayId');
 
-    this.getSubscriptions(this.gateway);
+    this.getGatewayAndSubscriptions(this.gatewayId);
   }
 
-  public getSubscriptions(gatewayId: string) {
-    console.log("Getting subscriptions for: ", gatewayId);
+  public getGatewayAndSubscriptions(gatewayId: string) {
+    console.log("Getting gateway and subscriptions for: ", gatewayId);
 
-    this.graphService.getSubscriptions(gatewayId)
+    this.graphService.getGatewayAndSubscriptions(gatewayId)
       .subscribe(res => {
-        this.subscriptionsDataSource.data = res as Subscription[];
+        this.gateway = res[0] as Gateway;
+        this.subscriptionsDataSource.data = res[0].subscriptions as Subscription[];
       })
   }
 

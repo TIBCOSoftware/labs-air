@@ -15,8 +15,8 @@
                         <mat-form-field fxFlex="1 1 18%" appearance="fill">
                             <mat-label>Select a Gateway</mat-label>
                             <mat-select formControlName="deviceGateway" (selectionChange)="onGatewaySelected($event)">
-                                <mat-option *ngFor="let item of gatewayList" [value]="item.value">
-                                    {{item.viewValue}}
+                                <mat-option *ngFor="let item of gatewayList; let i = index" [value]="i">
+                                    {{item.uuid}}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>

@@ -137,12 +137,14 @@ export class Addressable {
 
 export class Gateway {
   uid: number;
+  description: string;
   createdts: string;
   updatedts: string;
   uuid: string;
   address: string;
   latitude: number;
   longitude: number;
+  accessToken: string;
   subscriptions: Subscription[];
 }
 

@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, Input } from '@angular/core';
-import { Profile, Service, Device } from '../../shared/models/iot.model';
+import { Profile, Service, Device, Gateway } from '../../shared/models/iot.model';
 import { EdgeService } from '../../services/edge/edge.service';
 import { DgraphService } from '../../services/graph/dgraph.service';
-import { MatSort, MatTableDataSource } from '@angular/material';
+import { MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export interface SelectItem {
@@ -26,11 +26,13 @@ export class IotDeviceProvisionComponent implements OnInit, AfterViewInit {
 
   profileList: SelectItem[] = [];
   serviceList: SelectItem[] = [];
-  gatewayList: SelectItem[] = [];
+  gatewayList: Gateway[] = [];
+  gatewaySelected: Gateway = null;
 
   constructor(private edgeService: EdgeService,
     private graphService: DgraphService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private _snackBar: MatSnackBar) {
 
     this.provisionForm = this.formBuilder.group({
       deviceName: [''],
@@ -68,14 +70,9 @@ export class IotDeviceProvisionComponent implements OnInit, AfterViewInit {
     this.graphService.getGateways()
       .subscribe(res => {
 
-        this.gatewayList = [];
         console.log("Gateways Returned: ", res);
-        res.forEach((gate, index) => {
-          this.gatewayList.push({
-            value: gate.uuid,
-            viewValue: gate.uuid
-          });
-        });
+        this.gatewayList = res;
+        
         console.log("Updated gateway list: ", this.gatewayList);
       })
   }
@@ -152,29 +149,48 @@ export class IotDeviceProvisionComponent implements OnInit, AfterViewInit {
       }
     }
 
-    this.edgeService.addDevice(this.provisionForm.controls['deviceGateway'].value, device)
+    this.edgeService.addDevice(this.gatewaySelected, device)
       .subscribe(res => {
         console.log("Result from add device: ", res);
+
+        let message = 'Success';
+        if (res == undefined) {
+          message = 'Failure';
+        }
+
+        this._snackBar.open(message, "Add Device", {
+          duration: 3000,
+        });
+
       });
-
-
 
   }
 
   deleteDevice() {
     let deviceName = this.provisionForm.controls['deviceName'].value;
 
-    this.edgeService.deleteDeviceByName(this.provisionForm.controls['deviceGateway'].value, deviceName)
+    this.edgeService.deleteDeviceByName(this.gatewaySelected, deviceName)
       .subscribe(res => {
         console.log("Result from delete device: ", res);
+
+        let message = 'Success';
+        if (res == undefined) {
+          message = 'Failure';
+        }
+
+        this._snackBar.open(message, "Delete Device", {
+          duration: 3000,
+        });
+
       });
   }
 
   onGatewaySelected(event) {
     console.log("Option selected: ", event.value);
 
-    this.getProfiles(event.value);
-    this.getServices(event.value);
+    this.gatewaySelected = this.gatewayList[event.value];
+    this.getProfiles(this.gatewaySelected);
+    this.getServices(this.gatewaySelected);
   }
 
   onProfileSelected(event) {

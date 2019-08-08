@@ -4,9 +4,9 @@
   <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
     <mat-form-field fxFlex="1 1 18%" appearance="standard">
       <mat-label>Select a Gateway</mat-label>
-      <mat-select [(value)]="gatewaySelected" (selectionChange)="onGatewaySelected($event)">
-        <mat-option *ngFor="let item of gatewayList" [value]="item.value">
-          {{item.viewValue}}
+      <mat-select [(value)]="gatewayIdSelected" (selectionChange)="onGatewaySelected($event)">
+        <mat-option *ngFor="let item of gatewayList; let i = index" [value]="i">
+          {{item.uuid}}
         </mat-option>
       </mat-select>
     </mat-form-field>

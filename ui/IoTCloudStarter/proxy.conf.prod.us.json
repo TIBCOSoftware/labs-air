@@ -252,6 +252,13 @@
       "Origin": "https://liveapps.cloud.tibco.com"
     }
   },
+  "/gateway1/edgexgateway/*": {
+    "target": "https://localhost:8443",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "info",
+    "pathRewrite":{"^/gateway1/edgexgateway" : ""}
+  },
   "/gateway1/coredata/api/v1/*": {
     "target": "http://localhost:48080",
     "secure": "false",

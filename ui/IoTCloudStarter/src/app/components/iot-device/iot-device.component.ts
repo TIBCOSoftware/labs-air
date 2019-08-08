@@ -3,7 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 
 import { SelectionModel } from '@angular/cdk/collections';
 
-import { Device, TSReading, Resource } from '../../shared/models/iot.model';
+import { Device, TSReading, Resource, Gateway } from '../../shared/models/iot.model';
 import { EdgeService } from '../../services/edge/edge.service';
 import { DgraphService } from '../../services/graph/dgraph.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -17,10 +17,6 @@ import { ChartType } from 'chart.js';
 import { stringToKeyValue } from '@angular/flex-layout/extended/typings/style/style-transforms';
 import 'chartjs-plugin-streaming';
 
-export interface SelectItem {
-  value: string;
-  viewValue: string;
-}
 
 @Component({
   selector: 'app-iot-device',
@@ -37,8 +33,8 @@ export class IotDeviceComponent implements OnInit, AfterViewInit {
   startDateSelected = false;
   endDateSelected = false;
   queryLastValuesDisabled = true;
-  gatewayList: SelectItem[] = [];
-  gatewaySelected: '';
+  gatewayList: Gateway[] = [];
+  gatewayIdSelected: '';
 
   // Chart variables
 
@@ -303,22 +299,23 @@ export class IotDeviceComponent implements OnInit, AfterViewInit {
     this.graphService.getGateways()
       .subscribe(res => {
 
-        this.gatewayList = [];
+        // this.gatewayList = [];
+        this.gatewayList = res;
         console.log("Gateways Returned: ", res);
-        res.forEach((gate, index) => {
-          this.gatewayList.push({
-            value: gate.uuid,
-            viewValue: gate.uuid
-          });
-        });
+        // res.forEach((gate, index) => {
+        //   this.gatewayList.push({
+        //     value: gate.uuid,
+        //     viewValue: gate.uuid
+        //   });
+        // });
         console.log("Updated gateway list: ", this.gatewayList);
       })
   }
 
   onGatewaySelected(event) {
-    console.log("Option selected: ", event.value);
+    console.log("Option selected: ", event);
 
-    this.getDevices(event.value);
+    this.getDevices(this.gatewayList[event.value]);
   }
 
   onDeviceClicked(row) {

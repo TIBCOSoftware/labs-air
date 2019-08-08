@@ -3,7 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 
 import { SelectionModel } from '@angular/cdk/collections';
 
-import { Device, Resource, Command } from '../../shared/models/iot.model';
+import { Device, Resource, Command, Gateway } from '../../shared/models/iot.model';
 import { EdgeService } from '../../services/edge/edge.service';
 import { DgraphService } from '../../services/graph/dgraph.service';
 import { debounceTime, distinctUntilChanged, startWith, tap, delay } from 'rxjs/operators';
@@ -20,11 +20,6 @@ interface CommandEditor {
   paramVal: string
 }
 
-interface SelectItem {
-  value: string;
-  viewValue: string;
-}
-
 @Component({
   selector: 'app-iot-device-command',
   templateUrl: './iot-device-command.component.html',
@@ -32,11 +27,12 @@ interface SelectItem {
 })
 export class IotDeviceCommandComponent implements OnInit, AfterViewInit {
 
-  gatewaySelected: "";
+  gatewaySelected: Gateway = null;
+  gatewayIdSelected: '';
   deviceSelected = "";
   resourceSelected = "";
 
-  gatewayList: SelectItem[] = [];
+  gatewayList: Gateway[] = [];
 
   devicesDataSource = new MatTableDataSource<Device>();
   deviceDisplayedColumns: string[] = ['name', 'id', 'operatingState', 'adminState', 'description'];
@@ -84,14 +80,9 @@ export class IotDeviceCommandComponent implements OnInit, AfterViewInit {
     this.graphService.getGateways()
       .subscribe(res => {
 
-        this.gatewayList = [];
         console.log("Gateways Returned: ", res);
-        res.forEach((gate, index) => {
-          this.gatewayList.push({
-            value: gate.uuid,
-            viewValue: gate.uuid
-          });
-        });
+        this.gatewayList = res;
+        
         console.log("Updated gateway list: ", this.gatewayList);
       })
   }
@@ -99,8 +90,8 @@ export class IotDeviceCommandComponent implements OnInit, AfterViewInit {
   onGatewaySelected(event) {
     console.log("Option selected: ", event.value);
 
-    this.gatewaySelected = event.value;
-    this.getDevices(event.value);
+    this.gatewaySelected = this.gatewayList[event.value];
+    this.getDevices(this.gatewaySelected);
   }
 
   onDeviceClicked(row) {

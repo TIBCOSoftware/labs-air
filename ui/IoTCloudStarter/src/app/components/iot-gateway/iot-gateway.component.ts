@@ -24,6 +24,7 @@ export class IotGatewayComponent implements OnInit, AfterViewInit {
 
   subscriptionDisabled = true;
   selectedGateway = '';
+  hideAccessToken = true;
   dateFormat = 'yyyy-MM-dd  HH:mm:ss'
 
   gatewayForm: FormGroup;
@@ -41,7 +42,15 @@ export class IotGatewayComponent implements OnInit, AfterViewInit {
 
     logger.level = LogLevel.Debug;
 
-    this.resetGatewayForm();
+    this.gatewayForm = this.formBuilder.group({
+      uid: [''],
+      uuid: ['', Validators.required],
+      description: ['', Validators.required],
+      address: ['', Validators.required],
+      latitude: ['', Validators.required],
+      longitude: ['', Validators.required],
+      accessToken: ['', Validators.required]
+    });
 
   }
 
@@ -112,9 +121,11 @@ export class IotGatewayComponent implements OnInit, AfterViewInit {
 
     gate.uid = this.gatewayForm.controls['uid'].value;
     gate.uuid = this.gatewayForm.controls['uuid'].value;
+    gate.description = this.gatewayForm.controls['description'].value;
     gate.address = this.gatewayForm.controls['address'].value;
-    gate.latitude = this.gatewayForm.controls['latitude'].value;;
-    gate.longitude = this.gatewayForm.controls['longitude'].value;;
+    gate.latitude = this.gatewayForm.controls['latitude'].value;
+    gate.longitude = this.gatewayForm.controls['longitude'].value;
+    gate.accessToken = this.gatewayForm.controls['accessToken'].value;
     gate.updatedts = dateNow;
 
     this.graphService.updateGateway(gate)
@@ -139,7 +150,8 @@ export class IotGatewayComponent implements OnInit, AfterViewInit {
 
   pingGateway() {
 
-    this.edgeService.pingCoreMetadata(this.selectedGateway)
+    if (this.selection.hasValue) {
+      this.edgeService.pingCoreMetadata(this.selection.selected[0])
       .subscribe(res => {
         console.log("Received ping response: ", res);
 
@@ -153,6 +165,8 @@ export class IotGatewayComponent implements OnInit, AfterViewInit {
         });
 
       })
+    }
+    
   }
 
   ngAfterViewInit() {
@@ -176,17 +190,18 @@ export class IotGatewayComponent implements OnInit, AfterViewInit {
 
     // Enable/Disable variables
     this.subscriptionDisabled = false;
-
     this.selection.select(row);
     this.selectedGateway = row.uuid;
-
+    
     // Update Gateway Form
     this.gatewayForm.patchValue({
       uid: row.uid,
       uuid: row.uuid,
+      description: row.description,
       address: row.address,
       latitude: row.latitude,
-      longitude: row.longitude
+      longitude: row.longitude,
+      accessToken: row.accessToken
     });
 
   }
@@ -208,13 +223,7 @@ export class IotGatewayComponent implements OnInit, AfterViewInit {
   }
 
   resetGatewayForm() {
-    this.gatewayForm = this.formBuilder.group({
-      uid: [''],
-      uuid: ['', Validators.required],
-      address: ['', Validators.required],
-      latitude: ['', Validators.required],
-      longitude: ['', Validators.required],
-    });
+    this.gatewayForm.reset();
 
     this.subscriptionDisabled = true;
   }

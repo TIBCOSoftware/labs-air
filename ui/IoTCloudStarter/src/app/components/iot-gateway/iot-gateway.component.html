@@ -62,30 +62,56 @@
         </mat-card-header>
         <mat-card-content>
           <form [formGroup]="gatewayForm" class="gateway-form" fxLayout="row wrap" fxLayoutGap="15px">
-            <mat-form-field fxFlex="40%" appearance="fill">
-              <mat-label>Name</mat-label>
-              <input matInput formControlName="uuid" placeholder="Enter gateway's name">
-            </mat-form-field>
-            <mat-form-field fxFlex="40%" appearance="fill">
-              <mat-label>Address</mat-label>
-              <input matInput formControlName="address" placeholder="Enter gateway's IP Address">
-            </mat-form-field>
-            <mat-form-field fxFlex="40%" appearance="fill">
-              <mat-label>Latitude</mat-label>
-              <input matInput formControlName="latitude" placeholder="Enter gateway's latitude">
-            </mat-form-field>
-            <mat-form-field fxFlex="40%" appearance="fill">
-              <mat-label>Longitude</mat-label>
-              <input matInput formControlName="longitude" placeholder="Enter gateway's longitude">
-            </mat-form-field>
+
+            <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px">
+              <mat-form-field fxFlex="30%" appearance="fill">
+                <mat-label>Gateway Id</mat-label>
+                <input matInput formControlName="uuid" placeholder="Enter gateway's id">
+              </mat-form-field>
+              <mat-form-field fxFlex="30%" appearance="fill">
+                <mat-label>Description</mat-label>
+                <input matInput formControlName="description" placeholder="Enter gateway's description">
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px">
+              <mat-form-field fxFlex="30%" appearance="fill">
+                <mat-label>Address</mat-label>
+                <input matInput formControlName="address" placeholder="Enter gateway's IP Address">
+              </mat-form-field>
+              <mat-form-field fxFlex="30%" appearance="fill">
+                <mat-label>Latitude</mat-label>
+                <input matInput formControlName="latitude" placeholder="Enter gateway's latitude">
+              </mat-form-field>
+              <mat-form-field fxFlex="30%" appearance="fill">
+                <mat-label>Longitude</mat-label>
+                <input matInput formControlName="longitude" placeholder="Enter gateway's longitude">
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px">
+              <mat-form-field fxFlex="60%" appearance="fill">
+                <mat-label>Access Token</mat-label>
+                <input matInput placeholder="Enter gateway's access token" [readonly]=false
+                  [type]="hideAccessToken ? 'password' : 'text'" formControlName="accessToken">
+                <button mat-icon-button matSuffix (click)="hideAccessToken = !hideAccessToken"
+                  [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideAccessToken">
+                  <mat-icon>{{hideAccessToken ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
           </form>
+
         </mat-card-content>
         <mat-card-actions>
           <button mat-raised-button (click)="addGateway()" color="primary">Add Gateway</button>
-          <button mat-raised-button [disabled]="subscriptionDisabled" (click)="updateGateway()" color="primary">Update Gateway</button>
-          <button mat-raised-button [disabled]="subscriptionDisabled" (click)="deleteGateway()" color="primary">Remove Gateway</button>
-          <button mat-raised-button [disabled]="subscriptionDisabled" (click)="pingGateway()" color="primary">Ping Gateway</button>
-          <button mat-raised-button [disabled]="subscriptionDisabled" [routerLink]="['/starterApp/home/gatewaysubscription', selectedGateway]"  color="primary">Subscriptions</button>
+          <button mat-raised-button [disabled]="subscriptionDisabled" (click)="updateGateway()" color="primary">Update
+            Gateway</button>
+          <button mat-raised-button [disabled]="subscriptionDisabled" (click)="deleteGateway()" color="primary">Remove
+            Gateway</button>
+          <button mat-raised-button [disabled]="subscriptionDisabled" (click)="pingGateway()" color="primary">Ping
+            Gateway</button>
+          <button mat-raised-button [disabled]="subscriptionDisabled"
+            [routerLink]="['/starterApp/home/gatewaysubscription', selectedGateway]"
+            color="primary">Subscriptions</button>
         </mat-card-actions>
       </mat-card>
     </div>

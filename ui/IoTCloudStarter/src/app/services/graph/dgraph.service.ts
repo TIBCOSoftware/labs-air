@@ -36,7 +36,7 @@ export class DgraphService {
     const url = `${this.dgraphUrl}/query`;
     let query = `{
       resp(func: has(gateway)) {
-        uid uuid address latitude longitude createdts updatedts
+        uid uuid description address latitude longitude accessToken createdts updatedts
       }
     }`;
 
@@ -53,8 +53,10 @@ export class DgraphService {
     let query = `{
       set {
         <${gateway.uid}> <address> "${gateway.address}" .
+        <${gateway.uid}> <description> "${gateway.description}" .
         <${gateway.uid}> <latitude> "${gateway.latitude}" .
         <${gateway.uid}> <longitude> "${gateway.longitude}" .
+        <${gateway.uid}> <accessToken> "${gateway.accessToken}" .
         <${gateway.uid}> <updatedts> "${gateway.updatedts}" .
       }
     }`;
@@ -74,9 +76,11 @@ export class DgraphService {
         _:Gateway <gateway> "" .
         _:Gateway <type> "gateway" .
         _:Gateway <uuid> "${gateway.uuid}" .
+        _:Gateway <description> "${gateway.description}" .
         _:Gateway <address> "${gateway.address}" .
         _:Gateway <latitude> "${gateway.latitude}" .
         _:Gateway <longitude> "${gateway.longitude}" .
+        _:Gateway <accessToken> "${gateway.accessToken}" .
         _:Gateway <createdts> "${gateway.createdts}" .
         _:Gateway <updatedts> "${gateway.updatedts}" .
       }
@@ -104,6 +108,49 @@ export class DgraphService {
         tap(_ => this.logger.info('deleted gateway')),
         catchError(this.handleError<string>('deleteGateway'))
       );
+  }
+
+  getGatewayAndSubscriptions(gatewayName): Observable<Gateway[]> {
+    const url = `${this.dgraphUrl}/query`;
+    let query = `{
+      resp(func: has(gateway)) @filter(eq(uuid, "${gatewayName}")) {
+        uid uuid description address latitude longitude accessToken createdts updatedts
+        subscriptions: gateway_subscription {
+          uid
+          name
+          port
+          uuid
+          user
+          path
+          enabled
+          encryptionAlgorithm
+          method
+          valueDescriptorFilter
+          consumer
+          destination
+          protocol
+          compression
+          password
+          deviceIdentifierFilter
+          initializingVector
+          origin
+          created
+          modified
+          topic
+          format
+          address
+          encryptionKey
+        }
+      }
+    }`;
+
+    return this.http.post<any>(url, query, httpOptions)
+      .pipe(
+        map(response => response.data.resp as Gateway[]),
+        tap(_ => this.logger.info('fetched Gateway')),
+        catchError(this.handleError<Gateway[]>('getGatewayWithSubscriptions', []))
+      );
+
   }
 
   getSubscriptions(gatewayName): Observable<Subscription[]> {
