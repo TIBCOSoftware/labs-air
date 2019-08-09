@@ -1,9 +1,17 @@
+
+.vscode
+**/debug
+**/debug.test
+*.txt
+*.html
+
 # Binaries for programs and plugins
 *.exe
 *.exe~
 *.dll
 *.so
 *.dylib
+cmd/support-flogo-rules
 
 # Test binary, build with `go test -c`
 *.test
@@ -15,8 +23,6 @@
 
 .idea/
 vendor/
-cmd/device-mqtt
-glide.lock
 go.sum
 
 # snap files

@@ -19,10 +19,8 @@ cmd/support-flogo-rules:
 
 docker:
 	docker build \
-		-f cmd/Dockerfile \
 		--label "git_sha=$(GIT_SHA)" \
-		-t edgexfoundry/docker-device-sdk-simple:$(GIT_SHA) \
-		-t edgexfoundry/docker-device-sdk-simple:$(VERSION)-dev \
+		-t tiblabsair/docker-support-flogo-rules:$(VERSION) \
 		.
 
 test:
