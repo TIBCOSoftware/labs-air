@@ -143,6 +143,7 @@ export class DgraphService {
         }
       }
     }`;
+    console.log('Get Gateway and Subscriptions query statement: ', query);
 
     return this.http.post<any>(url, query, httpOptions)
       .pipe(
@@ -197,6 +198,48 @@ export class DgraphService {
 
   }
 
+  addSubscription(gatewayUid: number, subscription: Subscription): Observable<string> {
+    const url = `${this.dgraphUrl}/mutate`;
+    let query = `{
+      set {
+        _:Subscription <name> "${subscription.name}" .
+        _:Subscription <uuid> "${subscription.name}" .
+        _:Subscription <type> "subscription" .
+        _:Subscription <subscription> "" .
+        _:Subscription <port> "${subscription.port}" .
+        _:Subscription <user> "${subscription.user}" .
+        _:Subscription <path> "${subscription.path}" .
+        _:Subscription <enabled> "${subscription.enabled}" .
+        _:Subscription <encryptionAlgorithm> "${subscription.encryptionAlgorithm}" .
+        _:Subscription <method> "${subscription.method}" .
+        _:Subscription <valueDescriptorFilter> "${subscription.valueDescriptorFilter}" .
+        _:Subscription <consumer> "${subscription.consumer}" .
+        _:Subscription <destination> "${subscription.destination}" .
+        _:Subscription <protocol> "${subscription.protocol}" .
+        _:Subscription <compression> "${subscription.compression}" .
+        _:Subscription <password> "${subscription.password}" .
+        _:Subscription <deviceIdentifierFilter> "${subscription.deviceIdentifierFilter}" .
+        _:Subscription <initializingVector> "${subscription.initializingVector}" .
+        _:Subscription <origin> "${subscription.origin}" .
+        _:Subscription <created> "${subscription.created}" .
+        _:Subscription <modified> "${subscription.modified}" .
+        _:Subscription <topic> "${subscription.topic}" .
+        _:Subscription <format> "${subscription.format}" .
+        _:Subscription <address> "${subscription.address}" .
+        _:Subscription <encryptionKey> "${subscription.encryptionKey}" .
+        <${gatewayUid}> <gateway_subscription> _:Subscription .
+      }
+    }`;
+    console.log('Mutate statement: ', query);
+
+    return this.http.post<any>(url, query, httpMutateOptions)
+      .pipe(
+        tap(_ => this.logger.info('add subscriptions')),
+        catchError(this.handleError<string>('addSubscriptions'))
+      );
+
+  }
+
   updateSubscription(subscription: Subscription): Observable<string> {
     const url = `${this.dgraphUrl}/mutate`;
     let query = `{
@@ -230,6 +273,23 @@ export class DgraphService {
         catchError(this.handleError<string>('updateSubscriptions'))
       );
 
+  }
+
+  deleteSubscription(gatewayUid: number, subscriptionUid: number): Observable<string> {
+    const url = `${this.dgraphUrl}/mutate`;
+    let query = `{
+      delete {
+        <${subscriptionUid}> * * .
+        <${gatewayUid}> <gateway_subscription> <${subscriptionUid}> .
+      }
+    }`;
+    console.log('Delete Subscription Mutate statement: ', query);
+
+    return this.http.post<any>(url, query, httpMutateOptions)
+      .pipe(
+        tap(_ => this.logger.info('deleted subscription')),
+        catchError(this.handleError<string>('deleteSubscription'))
+      );
   }
 
   getReadings(deviceName, instrumentName): Observable<TSReading[]> {

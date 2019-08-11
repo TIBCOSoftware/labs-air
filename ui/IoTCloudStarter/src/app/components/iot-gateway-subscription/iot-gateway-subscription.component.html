@@ -18,6 +18,12 @@
           <div class="table-container mat-elevation-z8">
             <table mat-table [dataSource]="subscriptionsDataSource" matSort>
 
+              <!-- Id Column -->
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> Id </th>
+                <td mat-cell *matCellDef="let subscription"> {{subscription.uid}} </td>
+              </ng-container>
+
               <!-- Name Column -->
               <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef> Name </th>
@@ -30,10 +36,16 @@
                 <td mat-cell *matCellDef="let subscription"> {{subscription.consumer}} </td>
               </ng-container>
 
-              <!-- Origin -->
-              <ng-container matColumnDef="origin">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Origin </th>
-                <td mat-cell *matCellDef="let subscription"> {{subscription.origin}} </td>
+              <!-- Created -->
+              <ng-container matColumnDef="created">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Created </th>
+                <td mat-cell *matCellDef="let subscription"> {{subscription.created | date: dateFormat}} </td>
+              </ng-container>
+
+              <!-- Updated -->
+              <ng-container matColumnDef="modified">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Modified </th>
+                <td mat-cell *matCellDef="let subscription"> {{subscription.modified | date: dateFormat}} </td>
               </ng-container>
 
               <tr mat-header-row *matHeaderRowDef="subscriptionDisplayedColumns; sticky: true"></tr>
@@ -64,12 +76,20 @@
                 </mat-select>
               </mat-form-field>
               <mat-form-field fxFlex="1 1 18%" appearance="fill">
+                <mat-label>Subscription Name</mat-label>
+                <input matInput [readonly]=false formControlName="name">
+              </mat-form-field>
+              <mat-form-field fxFlex="1 1 18%" appearance="fill">
                 <mat-label>Consumer Name</mat-label>
                 <input matInput [readonly]=false formControlName="consumer">
               </mat-form-field>
               <mat-form-field fxFlex="1 1 18%" appearance="fill">
                 <mat-label>Destination</mat-label>
-                <input matInput [readonly]=false formControlName="destination">
+                <mat-select formControlName="destination">
+                  <mat-option *ngFor="let item of destinations" [value]="item.value">
+                    {{item.viewValue}}
+                  </mat-option>
+                </mat-select>
               </mat-form-field>
             </div>
 
@@ -174,9 +194,12 @@
           </form>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button (click)="addSubscription()" color="primary">Add Subscription</button>
-          <button mat-raised-button (click)="updateSubscription()" color="primary">Update Subscription</button>
-          <button mat-raised-button (click)="deleteSubscription()" color="primary">Remove Subscription</button>
+          <button mat-raised-button [disabled]="graphOpsDisabled" (click)="addSubscription()" color="primary">Add Subscriber</button>
+          <button mat-raised-button [disabled]="graphOpsDisabled" (click)="updateSubscription()" color="primary">Update Subscriber</button>
+          <button mat-raised-button [disabled]="edgeOpsDisabled" (click)="deleteSubscription()" color="primary">Remove Subscriber</button>
+          <button mat-raised-button [disabled]="edgeOpsDisabled" (click)="addRegistration()" color="primary">Register</button>
+          <button mat-raised-button [disabled]="edgeOpsDisabled" (click)="updateRegistration()" color="primary">Update Registration</button>
+          <button mat-raised-button [disabled]="edgeOpsDisabled" (click)="deleteRegistration()" color="primary">Remove Registration</button>
         </mat-card-actions>
       </mat-card>
     </div>

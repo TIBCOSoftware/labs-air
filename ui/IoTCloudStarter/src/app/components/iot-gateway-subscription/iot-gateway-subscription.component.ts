@@ -29,16 +29,24 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
   gateway = null as Gateway;
   subscriptionSelected = "";
   hidePassword = true;
+  dateFormat = 'yyyy-MM-dd  HH:mm:ss'
+
+  edgeOpsDisabled = true;
+  graphOpsDisabled = true;
 
   subscriptionsDataSource = new MatTableDataSource<Subscription>();
-  subscriptionDisplayedColumns: string[] = ['name', 'consumer', 'origin'];
+  subscriptionDisplayedColumns: string[] = ['id', 'name', 'consumer', 'created', 'modified'];
   subscriptionSelection = new SelectionModel<Subscription>(false, []);
+
+  destinations: SelectItem[] = [
+    { value: 'REST_ENDPOINT', viewValue: 'REST_ENDPOINT' },
+    { value: 'MQTT_TOPIC', viewValue: 'MQTT_TOPIC' }
+  ];
 
   protocols: SelectItem[] = [
     { value: 'HTTP', viewValue: 'HTTP' },
     { value: 'HTTPS', viewValue: 'HTTPS' },
-    { value: 'MQTT', viewValue: 'MQTT' },
-    { value: 'KAFKA', viewValue: 'KAFKA' }
+    { value: 'tcp', viewValue: 'TCP' }
   ];
 
   methods: SelectItem[] = [
@@ -77,6 +85,10 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
     private formBuilder: FormBuilder,
     private _snackBar: MatSnackBar) {
 
+  }
+
+  ngOnInit() {
+
     this.subscriptionForm = this.formBuilder.group({
       name: [''],
       consumer: [''],
@@ -103,14 +115,13 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
       uid: ['']
     });
 
-  }
-
-  ngOnInit() {
+    this.onFormChanges();
 
     console.log("Getting subscriptions");
     this.gatewayId = this.route.snapshot.paramMap.get('gatewayId');
 
     this.getGatewayAndSubscriptions(this.gatewayId);
+
   }
 
   public getGatewayAndSubscriptions(gatewayId: string) {
@@ -118,8 +129,11 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
 
     this.graphService.getGatewayAndSubscriptions(gatewayId)
       .subscribe(res => {
+        console.log("Received response: ", res);
         this.gateway = res[0] as Gateway;
         this.subscriptionsDataSource.data = res[0].subscriptions as Subscription[];
+        this.edgeOpsDisabled = true;
+        this.graphOpsDisabled = true;
       })
   }
 
@@ -142,11 +156,12 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
   onsubscriptionClicked(row) {
 
     console.log('Row clicked: ', row);
+
     this.subscriptionSelection.select(row);
     this.subscriptionSelected = row.name;
 
     // Update Instrument Form
-    this.subscriptionForm.patchValue({
+    this.subscriptionForm.reset({
       name: row.name,
       consumer: row.consumer,
       destination: row.destination,
@@ -170,9 +185,18 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
       created: row.created,
       modified: row.modified,
       uid: row.uid
-    });
+    }, { emitEvent: false });
 
+    this.edgeOpsDisabled = false;
+    this.graphOpsDisabled = true;
+  }
 
+  resetSubscriptionForm() {
+    this.subscriptionForm.reset({
+    }, { emitEvent: false });
+
+    this.edgeOpsDisabled = true;
+    this.graphOpsDisabled = true;
   }
 
   addSubscription() {
@@ -197,9 +221,95 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
     sub.compression = this.subscriptionForm.controls['compression'].value;
     sub.deviceIdentifierFilter = this.subscriptionForm.controls['deviceIdentifierFilter'].value;
     sub.valueDescriptorFilter = this.subscriptionForm.controls['valueDescriptorFilter'].value;
-    sub.origin = this.subscriptionForm.controls['origin'].value;
+    sub.origin = ts;
     sub.created = ts;
     sub.modified = ts;
+    sub.uid = this.subscriptionForm.controls['uid'].value;
+
+    this.graphService.addSubscription(this.gateway.uid, sub)
+      .subscribe(res => {
+        console.log("Result from update dgraph", res);
+
+        this.getGatewayAndSubscriptions(this.gatewayId);
+        this.resetSubscriptionForm();
+      });
+  }
+
+  updateSubscription() {
+
+    console.log("Inside updatesubscription function");
+
+    let ts = Date.now();
+    let sub = new Subscription();
+    sub.name = this.subscriptionForm.controls['name'].value;
+    sub.consumer = this.subscriptionForm.controls['consumer'].value;
+    sub.destination = this.subscriptionForm.controls['destination'].value;
+    sub.protocol = this.subscriptionForm.controls['protocol'].value;
+    sub.method = this.subscriptionForm.controls['method'].value;
+    sub.address = this.subscriptionForm.controls['address'].value;
+    sub.port = this.subscriptionForm.controls['port'].value;
+    sub.path = this.subscriptionForm.controls['path'].value;
+    sub.format = this.subscriptionForm.controls['format'].value;
+    sub.enabled = this.subscriptionForm.controls['enabled'].value;
+    sub.user = this.subscriptionForm.controls['user'].value;
+    sub.password = this.subscriptionForm.controls['password'].value;
+    sub.topic = this.subscriptionForm.controls['topic'].value;
+    sub.encryptionAlgorithm = this.subscriptionForm.controls['encryptionAlgorithm'].value;
+    sub.encryptionKey = this.subscriptionForm.controls['encryptionKey'].value;
+    sub.initializingVector = this.subscriptionForm.controls['initializingVector'].value;
+    sub.compression = this.subscriptionForm.controls['compression'].value;
+    sub.deviceIdentifierFilter = this.subscriptionForm.controls['deviceIdentifierFilter'].value;
+    sub.valueDescriptorFilter = this.subscriptionForm.controls['valueDescriptorFilter'].value;
+    sub.origin = this.subscriptionForm.controls['origin'].value;
+    sub.created = this.subscriptionForm.controls['created'].value;
+    sub.modified = ts;
+    sub.uid = this.subscriptionForm.controls['uid'].value;
+
+    this.graphService.updateSubscription(sub)
+      .subscribe(res => {
+        console.log("Result from update dgraph", res);
+
+        this.getGatewayAndSubscriptions(this.gatewayId);
+        this.resetSubscriptionForm();
+      });
+  }
+
+  deleteSubscription() {
+    this.graphService.deleteSubscription(this.gateway.uid, this.subscriptionForm.controls['uid'].value)
+      .subscribe(res => {
+        console.log("Result from delete ", res);
+
+        this.getGatewayAndSubscriptions(this.gatewayId);
+        this.resetSubscriptionForm();
+
+      });
+  }
+
+  addRegistration() {
+    let ts = Date.now();
+    let sub = new Subscription();
+    sub.name = this.subscriptionForm.controls['name'].value;
+    sub.consumer = this.subscriptionForm.controls['consumer'].value;
+    sub.destination = this.subscriptionForm.controls['destination'].value;
+    sub.protocol = this.subscriptionForm.controls['protocol'].value;
+    sub.method = this.subscriptionForm.controls['method'].value;
+    sub.address = this.subscriptionForm.controls['address'].value;
+    sub.port = this.subscriptionForm.controls['port'].value;
+    sub.path = this.subscriptionForm.controls['path'].value;
+    sub.format = this.subscriptionForm.controls['format'].value;
+    sub.enabled = this.subscriptionForm.controls['enabled'].value;
+    sub.user = this.subscriptionForm.controls['user'].value;
+    sub.password = this.subscriptionForm.controls['password'].value;
+    sub.topic = this.subscriptionForm.controls['topic'].value;
+    sub.encryptionAlgorithm = this.subscriptionForm.controls['encryptionAlgorithm'].value;
+    sub.encryptionKey = this.subscriptionForm.controls['encryptionKey'].value;
+    sub.initializingVector = this.subscriptionForm.controls['initializingVector'].value;
+    sub.compression = this.subscriptionForm.controls['compression'].value;
+    sub.deviceIdentifierFilter = this.subscriptionForm.controls['deviceIdentifierFilter'].value;
+    sub.valueDescriptorFilter = this.subscriptionForm.controls['valueDescriptorFilter'].value;
+    sub.origin = this.subscriptionForm.controls['origin'].value;
+    sub.created = this.subscriptionForm.controls['created'].value;
+    sub.modified = this.subscriptionForm.controls['modified'].value;
     sub.uid = this.subscriptionForm.controls['uid'].value;
 
     this.edgeService.addRegisteration(this.gateway, sub)
@@ -216,17 +326,11 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
         });
 
       });
-
-    this.graphService.updateSubscription(sub)
-      .subscribe(res => {
-        console.log("Result from update dgraph", res)
-      });
-
   }
 
-  updateSubscription() {
+  updateRegistration() {
 
-    console.log("Inside updatesubscription function");
+    console.log("Inside updateRegistration function");
 
     let ts = Date.now();
     let sub = new Subscription();
@@ -267,14 +371,9 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
           duration: 3000,
         });
       });
-
-    this.graphService.updateSubscription(sub)
-      .subscribe(res => {
-        console.log("Result from update dgraph", res)
-      });
   }
 
-  deleteSubscription() {
+  deleteRegistration() {
     this.edgeService.deleteRegisteration(this.gateway, this.subscriptionForm.controls['name'].value)
       .subscribe(res => {
         console.log("Result from delete ", res);
@@ -284,11 +383,24 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
           message = 'Failure';
         }
 
-        this._snackBar.open(message, "Remove Subscription", {
+        this._snackBar.open(message, "Delete Registration", {
           duration: 3000,
         });
 
       });
+  }
+
+  onFormChanges(): void {
+    this.subscriptionForm.valueChanges.subscribe(val => {
+      console.log("Form has changed for: ", val.name);
+
+      if (this.subscriptionForm.dirty) {
+        console.log("form is dirty");
+        this.edgeOpsDisabled = true;
+        this.graphOpsDisabled = false;
+      }
+
+    });
   }
 
 }
