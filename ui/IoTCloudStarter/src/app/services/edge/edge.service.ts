@@ -254,11 +254,12 @@ export class EdgeService {
       "name": subscription.name,
       "addressable": {
         "origin": subscription.origin,
-        "name": subscription.name,
+        "name": subscription.consumer,
         "protocol": subscription.protocol,
         "method": subscription.method,
         "address": subscription.address,
         "port": subscription.port,
+        "topic": subscription.topic,
         "path": subscription.path
       },
       "filter": {
@@ -274,7 +275,7 @@ export class EdgeService {
       "format": subscription.format,
       "enable": subscription.enabled,
       "destination": subscription.destination
-    }
+    };
 
     const authorizedHeaders = httpTextResponseOptions.headers.set('Authorization', 'Bearer ' + gateway.accessToken);
     httpTextResponseOptions.headers = authorizedHeaders;
