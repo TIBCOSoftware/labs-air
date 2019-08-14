@@ -15,7 +15,7 @@
 
 .idea/
 vendor/
-cmd/device-mqtt
+cmd/device-enersys-mqtt
 glide.lock
 go.sum
 

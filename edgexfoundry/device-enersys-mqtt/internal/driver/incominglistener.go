@@ -79,6 +79,71 @@ func onIncomingDataReceived(client mqtt.Client, message mqtt.Message) {
 
 	driver.Logger.Info(fmt.Sprintf("[Incoming listener] Incoming reading received: topic=%v msg=%v", message.Topic(), string(message.Payload())))
 
+	// var ep EnersysPayload
+
+	// json.Unmarshal(message.Payload(), &ep)
+
+	payload := string(message.Payload())
+	payloadArray := strings.Split(payload, ",")
+
+	driver.Logger.Info(fmt.Sprintf("[------->MAG-Incoming listener] array length %d:", len(payloadArray)))
+
+	if len(payloadArray) != 111 {
+		return
+	}
+
+	deviceName := strings.TrimSpace(payloadArray[0])
+	dateString := strings.TrimSpace(payloadArray[110])
+	driver.Logger.Info(fmt.Sprintf("[------->MAG-Incoming listener] dateString:", dateString))
+	t, _ := time.Parse(`01/02/2006 15:04:05.000`, dateString)
+	tms := t.UTC().UnixNano() / 1000000
+
+	var dataArray []string = payloadArray[1:110]
+
+	service := sdk.RunningService()
+
+	for i, v := range dataArray {
+		fmt.Printf("Value[%d] = %s - %s\n", i, v, metrics[i])
+
+		// cmd := data["cmd"].(string)
+		devResource := metrics[i]
+
+		reading := strings.TrimSpace(dataArray[94])
+
+		deviceObject, ok := service.DeviceResource(deviceName, devResource, "get")
+		if !ok {
+			driver.Logger.Warn(fmt.Sprintf("[Incoming listener] Incoming reading ignored. No DeviceObject found : topic=%v msg=%v", message.Topic(), string(message.Payload())))
+			return
+		}
+
+		req := sdkModel.CommandRequest{
+			DeviceResourceName: devResource,
+			Type:               sdkModel.ParseValueType(deviceObject.Properties.Value.Type),
+		}
+
+		result, err := newResult(req, reading, tms)
+
+		driver.Logger.Info(fmt.Sprintf("[------->MAG-Incoming listener] NewResult:", result))
+
+		if err != nil {
+			driver.Logger.Warn(fmt.Sprintf("[Incoming listener] Incoming reading ignored.   topic=%v msg=%v error=%v", message.Topic(), string(message.Payload()), err))
+			return
+		}
+
+		asyncValues := &sdkModel.AsyncValues{
+			DeviceName:    deviceName,
+			CommandValues: []*sdkModel.CommandValue{result},
+		}
+
+		driver.AsyncCh <- asyncValues
+	}
+
+}
+
+func onIncomingDataReceivedWithJson(client mqtt.Client, message mqtt.Message) {
+
+	driver.Logger.Info(fmt.Sprintf("[Incoming listener] Incoming reading received: topic=%v msg=%v", message.Topic(), string(message.Payload())))
+
 	var ep EnersysPayload
 
 	json.Unmarshal(message.Payload(), &ep)

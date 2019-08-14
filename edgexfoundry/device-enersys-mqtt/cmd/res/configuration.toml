@@ -57,14 +57,14 @@ LogLevel = 'INFO'
 
 # Pre-define Devices
 [[DeviceList]]
-  Name = "enersysabc"
+  Name = "aaaaaaaaaa17"
   Profile = "Enersys-Device"
   Description = "Enersys device"
   Labels = [ "industrial", "mqtt" ]
   [DeviceList.Protocols]
     [DeviceList.Protocols.mqtt]
       Schema = "tcp"
-      Host = "137.117.38.255"
+      Host = "localhost"
       Port = "1883"
       ClientId = "CommandPublisher"
       User = "admin"
@@ -74,7 +74,7 @@ LogLevel = 'INFO'
 # Driver configs
 [Driver]
 IncomingSchema = "tcp"
-IncomingHost = "137.117.38.255"
+IncomingHost = "localhost"
 IncomingPort = "1883"
 IncomingUser = "admin"
 IncomingPassword = "public"
@@ -83,7 +83,7 @@ IncomingKeepAlive = "3600"
 IncomingClientId = "IncomingDataSubscriber"
 IncomingTopic = "EnersysData"
 ResponseSchema = "tcp"
-ResponseHost = "137.117.38.255"
+ResponseHost = "localhost"
 ResponsePort = "1883"
 ResponseUser = "admin"
 ResponsePassword = "public"
