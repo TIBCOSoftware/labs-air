@@ -1,9 +1,9 @@
 [Service]
-Host = "edgex-device-mqtt"
-Port = 49982
+Host = "labsair-device-enersys-mqtt"
+Port = 49985
 ConnectRetries = 3
 Labels = []
-OpenMsg = "device simple started"
+OpenMsg = "device enersys started"
 Timeout = 5000
 EnableAsyncReadings = true
 AsyncBufferSize = 16
@@ -54,23 +54,39 @@ File = "./device-mqtt.log"
 [Writable]
 LogLevel = "INFO"
 
+# Pre-define Devices
+[[DeviceList]]
+  Name = "aaaaaaaaaa17"
+  Profile = "Enersys-Device"
+  Description = "Enersys device"
+  Labels = [ "industrial", "mqtt" ]
+  [DeviceList.Protocols]
+    [DeviceList.Protocols.mqtt]
+      Schema = "tcp"
+      Host = "137.117.38.255"
+      Port = "1883"
+      ClientId = "CommandPublisher"
+      User = "admin"
+      Password = "public"
+      Topic = "CommandListenerTopic_aaaaaaaaaa17"
+
 # Driver configs
 [Driver]
 IncomingSchema = "tcp"
-IncomingHost = "0.0.0.0"
+IncomingHost = "137.117.38.255"
 IncomingPort = "1883"
 IncomingUser = "admin"
 IncomingPassword = "public"
 IncomingQos = "0"
 IncomingKeepAlive = "3600"
 IncomingClientId = "IncomingDataSubscriber"
-IncomingTopic = "DataTopic"
+IncomingTopic = "EnersysData"
 ResponseSchema = "tcp"
-ResponseHost = "0.0.0.0"
+ResponseHost = "137.117.38.255"
 ResponsePort = "1883"
 ResponseUser = "admin"
 ResponsePassword = "public"
 ResponseQos = "0"
 ResponseKeepAlive = "3600"
 ResponseClientId = "CommandResponseSubscriber"
-ResponseTopic = "ResponseTopic"
+ResponseTopic = "EnersysResponse"

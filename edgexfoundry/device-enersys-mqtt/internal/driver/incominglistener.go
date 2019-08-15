@@ -86,7 +86,7 @@ func onIncomingDataReceived(client mqtt.Client, message mqtt.Message) {
 	payload := string(message.Payload())
 	payloadArray := strings.Split(payload, ",")
 
-	driver.Logger.Info(fmt.Sprintf("[------->MAG-Incoming listener] array length %d:", len(payloadArray)))
+	// driver.Logger.Info(fmt.Sprintf("[------->MAG-Incoming listener] array length %d:", len(payloadArray)))
 
 	if len(payloadArray) != 111 {
 		return
@@ -94,7 +94,7 @@ func onIncomingDataReceived(client mqtt.Client, message mqtt.Message) {
 
 	deviceName := strings.TrimSpace(payloadArray[0])
 	dateString := strings.TrimSpace(payloadArray[110])
-	driver.Logger.Info(fmt.Sprintf("[------->MAG-Incoming listener] dateString:", dateString))
+	// driver.Logger.Info(fmt.Sprintf("[------->MAG-Incoming listener] dateString:", dateString))
 	t, _ := time.Parse(`01/02/2006 15:04:05.000`, dateString)
 	tms := t.UTC().UnixNano() / 1000000
 
@@ -116,14 +116,24 @@ func onIncomingDataReceived(client mqtt.Client, message mqtt.Message) {
 			return
 		}
 
+		valueType := ""
+		if deviceObject.Properties.Value.Type == "Float32" {
+			valueType = "String"
+		} else {
+			valueType = deviceObject.Properties.Value.Type
+		}
+
+		// req := sdkModel.CommandRequest{
+		// 	DeviceResourceName: devResource,
+		// 	Type:               sdkModel.ParseValueType(deviceObject.Properties.Value.Type),
+		// }
+
 		req := sdkModel.CommandRequest{
 			DeviceResourceName: devResource,
-			Type:               sdkModel.ParseValueType(deviceObject.Properties.Value.Type),
+			Type:               sdkModel.ParseValueType(valueType),
 		}
 
 		result, err := newResult(req, reading, tms)
-
-		driver.Logger.Info(fmt.Sprintf("[------->MAG-Incoming listener] NewResult:", result))
 
 		if err != nil {
 			driver.Logger.Warn(fmt.Sprintf("[Incoming listener] Incoming reading ignored.   topic=%v msg=%v error=%v", message.Topic(), string(message.Payload()), err))
@@ -155,7 +165,7 @@ func onIncomingDataReceivedWithJson(client mqtt.Client, message mqtt.Message) {
 	payloadDataArray := strings.Split(payloadData, ",")
 
 	dateString := strings.TrimSpace(payloadDataArray[109])
-	driver.Logger.Info(fmt.Sprintf("[------->MAG-Incoming listener] dateString:", dateString))
+	// driver.Logger.Info(fmt.Sprintf("[------->MAG-Incoming listener] dateString:", dateString))
 	t, _ := time.Parse(`01/02/2006 15:04:05.000`, dateString)
 	tms := t.UTC().UnixNano() / 1000000
 
@@ -183,8 +193,6 @@ func onIncomingDataReceivedWithJson(client mqtt.Client, message mqtt.Message) {
 		}
 
 		result, err := newResult(req, reading, tms)
-
-		driver.Logger.Info(fmt.Sprintf("[------->MAG-Incoming listener] NewResult:", result))
 
 		if err != nil {
 			driver.Logger.Warn(fmt.Sprintf("[Incoming listener] Incoming reading ignored.   topic=%v msg=%v error=%v", message.Topic(), string(message.Payload()), err))

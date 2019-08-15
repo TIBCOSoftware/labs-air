@@ -32,9 +32,8 @@ run:
 
 docker: $(DOCKERS)
 
-docker_device_mqtt_go:
+docker_device_enersys_mqtt:
 	docker build \
 		--label "git_sha=$(GIT_SHA)" \
-		-t edgexfoundry/docker-device-enersys-mqtt:$(GIT_SHA) \
-		-t edgexfoundry/docker-device-enersys-mqtt:$(VERSION)-dev \
+		-t magallardo/docker-device-enersys-mqtt:$(VERSION) \
 		.

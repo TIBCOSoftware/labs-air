@@ -20,7 +20,7 @@ cmd/support-flogo-rules:
 docker:
 	docker build \
 		--label "git_sha=$(GIT_SHA)" \
-		-t tiblabsair/docker-support-flogo-rules:$(VERSION) \
+		-t magallardo/docker-support-flogo-rules:$(VERSION) \
 		.
 
 test:

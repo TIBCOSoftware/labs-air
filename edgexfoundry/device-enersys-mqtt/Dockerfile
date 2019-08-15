@@ -3,7 +3,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-ARG ALPINE=golang:1.11-alpine
+ARG ALPINE=golang:1.12-alpine
 FROM ${ALPINE} AS builder
 ARG ALPINE_PKG_BASE="build-base git openssh-client"
 ARG ALPINE_PKG_EXTRA=""
@@ -14,7 +14,7 @@ RUN sed -e 's/dl-cdn[.]alpinelinux.org/nl.alpinelinux.org/g' -i~ /etc/apk/reposi
 # Install our build time packages.
 RUN apk add --no-cache ${ALPINE_PKG_BASE} ${ALPINE_PKG_EXTRA}
 
-WORKDIR $GOPATH/src/github.com/edgexfoundry/device-mqtt-go
+WORKDIR /device-enersys-mqtt
 
 COPY . .
 
@@ -27,9 +27,9 @@ RUN make $MAKE
 
 FROM scratch
 
-ENV APP_PORT=49982
+ENV APP_PORT=49985
 EXPOSE $APP_PORT
 
-COPY --from=builder /go/src/github.com/edgexfoundry/device-mqtt-go/cmd /
+COPY --from=builder /device-enersys-mqtt/cmd /
 
-ENTRYPOINT ["/device-mqtt","--profile=docker","--confdir=/res"]
+ENTRYPOINT ["/device-enersys-mqtt","--profile=docker","--confdir=/res"]

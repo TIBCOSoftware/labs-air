@@ -10,6 +10,8 @@ deviceResources:
   -
     name: "BatteryStateCharge"
     description: "Battery state of charge"
+    attributes:
+      { Pin_Num: "", Interface: "TS & V", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "100.0" }
@@ -18,6 +20,8 @@ deviceResources:
   -
     name: "BatteryStateHealth"
     description: "Battery state of health"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "100.0" }
@@ -26,6 +30,8 @@ deviceResources:
   -
     name: "TotalEnergyCharged"
     description: "Total energy charged accumulated throughout the battery life"
+    attributes:
+      { Pin_Num: "", Interface: "V", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "32766.0" }
@@ -34,6 +40,8 @@ deviceResources:
   -
     name: "TotalEnergyDischarged"
     description: "Total energy discharged accumulated throughout the battery life"
+    attributes:
+      { Pin_Num: "", Interface: "V", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "32766.0" }
@@ -42,6 +50,8 @@ deviceResources:
   -
     name: "EnergyCharged"
     description: "Energy charged during current trip."
+    attributes:
+      { Pin_Num: "", Interface: "V", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "255.938" }
@@ -50,6 +60,8 @@ deviceResources:
   -
     name: "EnergyDischarged"
     description: "Energy discharged during current trip."
+    attributes:
+      { Pin_Num: "", Interface: "V", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "255.938" }
@@ -58,6 +70,8 @@ deviceResources:
   -
     name: "MaxumunModSensorTemperature"
     description: "Maximum module sensor temperature of the battery pack"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-78.00", maximum: "177.75" }
@@ -66,6 +80,8 @@ deviceResources:
   -
     name: "MinumunModSensorTemperature"
     description: "Minimum module sensor temperature of the battery pack"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-78.00", maximum: "177.75" }
@@ -74,6 +90,8 @@ deviceResources:
   -
     name: "MaximumCellVoltage"
     description: "Maximum cell voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "7.99805" }
@@ -82,6 +100,8 @@ deviceResources:
   -
     name: "MinimumCellVoltage"
     description: "Minimum cell voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "7.99805" }
@@ -90,6 +110,8 @@ deviceResources:
   -
     name: "CurrentBatteryPower"
     description: "Current battery power"
+    attributes:
+      { Pin_Num: "", Interface: "V", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-512.00", maximum: "511.875" }
@@ -98,6 +120,8 @@ deviceResources:
   -
     name: "TotalBatterySystemAmperage"
     description: "Total battery system amperage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-2048.00", maximum: "2047.5" }
@@ -106,6 +130,8 @@ deviceResources:
   -
     name: "TotalBatteryPackVoltage"
     description: "Total battery pack voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "1023.75" }
@@ -114,6 +140,8 @@ deviceResources:
   -
     name: "AmbientTemperature"
     description: "Ambient Temperature"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-78.00", maximum: "177.75" }
@@ -122,6 +150,8 @@ deviceResources:
   -
     name: "CellVoltage1"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -130,6 +160,8 @@ deviceResources:
   -
     name: "CellVoltage2"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -138,6 +170,8 @@ deviceResources:
   -
     name: "CellVoltage3"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -146,6 +180,8 @@ deviceResources:
   -
     name: "CellVoltage4"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -154,6 +190,8 @@ deviceResources:
   -
     name: "CellVoltage5"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -162,6 +200,8 @@ deviceResources:
   -
     name: "CellVoltage6"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -170,6 +210,8 @@ deviceResources:
   -
     name: "CellVoltage7"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -178,6 +220,8 @@ deviceResources:
   -
     name: "CellVoltage8"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -186,6 +230,8 @@ deviceResources:
   -
     name: "CellVoltage9"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -194,6 +240,8 @@ deviceResources:
   -
     name: "CellVoltage10"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -202,6 +250,8 @@ deviceResources:
   -
     name: "CellVoltage11"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -210,6 +260,8 @@ deviceResources:
   -
     name: "CellVoltage12"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -218,6 +270,8 @@ deviceResources:
   -
     name: "CellVoltage13"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -226,6 +280,8 @@ deviceResources:
   -
     name: "CellVoltage14"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -234,6 +290,8 @@ deviceResources:
   -
     name: "CellVoltage15"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -242,6 +300,8 @@ deviceResources:
   -
     name: "CellVoltage16"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -250,6 +310,8 @@ deviceResources:
   -
     name: "CellVoltage17"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -258,6 +320,8 @@ deviceResources:
   -
     name: "CellVoltage18"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -266,6 +330,8 @@ deviceResources:
   -
     name: "CellVoltage19"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -274,6 +340,8 @@ deviceResources:
   -
     name: "CellVoltage20"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -282,6 +350,8 @@ deviceResources:
   -
     name: "CellVoltage21"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -290,6 +360,8 @@ deviceResources:
   -
     name: "CellVoltage22"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -298,6 +370,8 @@ deviceResources:
   -
     name: "CellVoltage23"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -306,6 +380,8 @@ deviceResources:
   -
     name: "CellVoltage24"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -314,6 +390,8 @@ deviceResources:
   -
     name: "CellVoltage25"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -322,6 +400,8 @@ deviceResources:
   -
     name: "CellVoltage26"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -330,6 +410,8 @@ deviceResources:
   -
     name: "CellVoltage27"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -338,6 +420,8 @@ deviceResources:
   -
     name: "CellVoltage28"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -346,6 +430,8 @@ deviceResources:
   -
     name: "CellVoltage29"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -354,6 +440,8 @@ deviceResources:
   -
     name: "CellVoltage30"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -362,6 +450,8 @@ deviceResources:
   -
     name: "CellVoltage31"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -370,6 +460,8 @@ deviceResources:
   -
     name: "CellVoltage32"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -378,6 +470,8 @@ deviceResources:
   -
     name: "CellVoltage33"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -386,6 +480,8 @@ deviceResources:
   -
     name: "CellVoltage34"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -394,6 +490,8 @@ deviceResources:
   -
     name: "CellVoltage35"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -402,6 +500,8 @@ deviceResources:
   -
     name: "CellVoltage36"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -410,6 +510,8 @@ deviceResources:
   -
     name: "CellVoltage37"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -418,6 +520,8 @@ deviceResources:
   -
     name: "CellVoltage38"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -426,6 +530,8 @@ deviceResources:
   -
     name: "CellVoltage39"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -434,6 +540,8 @@ deviceResources:
   -
     name: "CellVoltage40"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -442,6 +550,8 @@ deviceResources:
   -
     name: "CellVoltage41"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -450,6 +560,8 @@ deviceResources:
   -
     name: "CellVoltage42"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -458,6 +570,8 @@ deviceResources:
   -
     name: "CellVoltage43"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -466,6 +580,8 @@ deviceResources:
   -
     name: "CellVoltage44"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -474,6 +590,8 @@ deviceResources:
   -
     name: "CellVoltage45"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -482,6 +600,8 @@ deviceResources:
   -
     name: "CellVoltage46"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -490,6 +610,8 @@ deviceResources:
   -
     name: "CellVoltage47"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -498,6 +620,8 @@ deviceResources:
   -
     name: "CellVoltage48"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -506,6 +630,8 @@ deviceResources:
   -
     name: "CellVoltage49"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -514,6 +640,8 @@ deviceResources:
   -
     name: "CellVoltage50"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -522,6 +650,8 @@ deviceResources:
   -
     name: "CellVoltage51"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -530,6 +660,8 @@ deviceResources:
   -
     name: "CellVoltage52"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -538,6 +670,8 @@ deviceResources:
   -
     name: "CellVoltage53"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -546,6 +680,8 @@ deviceResources:
   -
     name: "CellVoltage54"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -554,6 +690,8 @@ deviceResources:
   -
     name: "CellVoltage55"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -562,6 +700,8 @@ deviceResources:
   -
     name: "CellVoltage56"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -570,6 +710,8 @@ deviceResources:
   -
     name: "CellVoltage57"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -578,6 +720,8 @@ deviceResources:
   -
     name: "CellVoltage58"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -586,6 +730,8 @@ deviceResources:
   -
     name: "CellVoltage59"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -594,6 +740,8 @@ deviceResources:
   -
     name: "CellVoltage60"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -602,6 +750,8 @@ deviceResources:
   -
     name: "CellVoltage61"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -610,6 +760,8 @@ deviceResources:
   -
     name: "CellVoltage62"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -618,6 +770,8 @@ deviceResources:
   -
     name: "CellVoltage63"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -626,6 +780,8 @@ deviceResources:
   -
     name: "CellVoltage64"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -634,6 +790,8 @@ deviceResources:
   -
     name: "CellVoltage65"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -642,6 +800,8 @@ deviceResources:
   -
     name: "CellVoltage66"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -650,6 +810,8 @@ deviceResources:
   -
     name: "CellVoltage67"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -658,6 +820,8 @@ deviceResources:
   -
     name: "CellVoltage68"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -666,6 +830,8 @@ deviceResources:
   -
     name: "CellVoltage69"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -674,6 +840,8 @@ deviceResources:
   -
     name: "CellVoltage70"
     description: "Cell Voltage"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "4.99967" }
@@ -682,6 +850,8 @@ deviceResources:
   -
     name: "CellTemperature1"
     description: "Cell Temperature"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-40.00", maximum: "215.938" }
@@ -690,6 +860,8 @@ deviceResources:
   -
     name: "CellTemperature2"
     description: "Cell Temperature"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-40.00", maximum: "215.938" }
@@ -698,6 +870,8 @@ deviceResources:
   -
     name: "CellTemperature3"
     description: "Cell Temperature"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-40.00", maximum: "215.938" }
@@ -706,6 +880,8 @@ deviceResources:
   -
     name: "CellTemperature4"
     description: "Cell Temperature"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-40.00", maximum: "215.938" }
@@ -714,6 +890,8 @@ deviceResources:
   -
     name: "CellTemperature5"
     description: "Cell Temperature"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-40.00", maximum: "215.938" }
@@ -722,6 +900,8 @@ deviceResources:
   -
     name: "CellTemperature6"
     description: "Cell Temperature"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-40.00", maximum: "215.938" }
@@ -730,6 +910,8 @@ deviceResources:
   -
     name: "CellTemperature7"
     description: "Cell Temperature"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-40.00", maximum: "215.938" }
@@ -738,6 +920,8 @@ deviceResources:
   -
     name: "CellTemperature8"
     description: "Cell Temperature"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-40.00", maximum: "215.938" }
@@ -746,6 +930,8 @@ deviceResources:
   -
     name: "CellTemperature9"
     description: "Cell Temperature"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-40.00", maximum: "215.938" }
@@ -754,6 +940,8 @@ deviceResources:
   -
     name: "CellTemperature10"
     description: "Cell Temperature"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-40.00", maximum: "215.938" }
@@ -762,6 +950,8 @@ deviceResources:
   -
     name: "BoardTemperature1"
     description: "Board Temperature"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-40.00", maximum: "215.938" }
@@ -770,6 +960,8 @@ deviceResources:
   -
     name: "BoardTemperature2"
     description: "Board Temperature"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-40.00", maximum: "215.938" }
@@ -778,6 +970,8 @@ deviceResources:
   -
     name: "BoardTemperature3"
     description: "Board Temperature"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-40.00", maximum: "215.938" }
@@ -786,6 +980,8 @@ deviceResources:
   -
     name: "BoardTemperature4"
     description: "Board Temperature"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-40.00", maximum: "215.938" }
@@ -794,6 +990,8 @@ deviceResources:
   -
     name: "BoardTemperature5"
     description: "Board Temperature"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-40.00", maximum: "215.938" }
@@ -802,6 +1000,8 @@ deviceResources:
   -
     name: "BoardTemperature6"
     description: "Board Temperature"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-40.00", maximum: "215.938" }
@@ -810,6 +1010,8 @@ deviceResources:
   -
     name: "BoardTemperature7"
     description: "Board Temperature"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-40.00", maximum: "215.938" }
@@ -818,6 +1020,8 @@ deviceResources:
   -
     name: "BoardTemperature8"
     description: "Board Temperature"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-40.00", maximum: "215.938" }
@@ -826,6 +1030,8 @@ deviceResources:
   -
     name: "BoardTemperature9"
     description: "Board Temperature"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-40.00", maximum: "215.938" }
@@ -834,6 +1040,8 @@ deviceResources:
   -
     name: "BoardTemperature10"
     description: "Board Temperature"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-40.00", maximum: "215.938" }
@@ -842,6 +1050,8 @@ deviceResources:
   -
     name: "BoardTemperature11"
     description: "Board Temperature"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-40.00", maximum: "215.938" }
@@ -850,6 +1060,8 @@ deviceResources:
   -
     name: "BoardTemperature12"
     description: "Board Temperature"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-40.00", maximum: "215.938" }
@@ -858,6 +1070,8 @@ deviceResources:
   -
     name: "BoardTemperature13"
     description: "Board Temperature"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-40.00", maximum: "215.938" }
@@ -866,6 +1080,8 @@ deviceResources:
   -
     name: "BoardTemperature14"
     description: "Board Temperature"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-40.00", maximum: "215.938" }
@@ -874,21 +1090,13 @@ deviceResources:
   -
     name: "BoardTemperature15"
     description: "Board Temperature"
+    attributes:
+      { Pin_Num: "", Interface: "TS", Type: "OUT" }
     properties:
       value:
         { type: "Float32", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "-40.00", maximum: "215.938" }
       units:
         { type: "String", readWrite: "R", defaultValue: "celcius" }
-  -
-    name: "LightSensor"
-    description: "Measures intensity of light. The brighter the light, the larger the value"
-    attributes:
-      { Pin_Num: "A0", Interface: "AIO", Type: "IN" }
-    properties:
-      value:
-        { type: "INT16", readWrite: "RW", minimum: "0", maximum: "", defaultValue: "0"}
-      units:
-        { type: "String", readWrite: "R", defaultValue: "lunen" }
 
 deviceCommands:
   -

@@ -1,6 +1,6 @@
 [Service]
 Host = "host.docker.internal"
-Port = 49983
+Port = 49985
 ConnectRetries = 20
 Labels = []
 OpenMsg = "device enersys started"
