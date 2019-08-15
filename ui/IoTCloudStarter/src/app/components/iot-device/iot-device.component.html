@@ -16,7 +16,7 @@
   </div>
 
   <div fxLayout="column" fxLayoutGap="20px" style="height: 100%;">
-    <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between stretch" style="min-height: 300px">
+    <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between stretch" style="min-height:300px; max-height: 300px ">
       <mat-card fxFlex="55%">
         <mat-card-header>
           <div mat-card-avatar class="device-header-image"></div>
@@ -70,8 +70,8 @@
           <mat-card-title>Instruments</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <div class="table-container mat-elevation-z8">
-            <table mat-table [dataSource]="resourcesDataSource" matSort>
+          <div class="table-container mat-elevation-z8" >
+            <table mat-table [dataSource]="resourcesDataSource" matSort >
 
               <!-- Name Column -->
               <ng-container matColumnDef="name">
