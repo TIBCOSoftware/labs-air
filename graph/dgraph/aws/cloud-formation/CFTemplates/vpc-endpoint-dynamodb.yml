@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'VPC: Endpoint to DynamoDB for private subnets'
+Parameters:
+  VpcId:
+    Description: 'VPC Id'
+    Type: String
+  RouteTableId:
+    Description: Route table IDs that are used by the VPC to reach the endpoint.
+    Type: String
+Resources:
+  DynamoDBEndpoint:
+    Type: 'AWS::EC2::VPCEndpoint'
+    Properties:
+      VpcId: !Ref VpcId
+      RouteTableIds:
+        - !Ref RouteTableId
+      ServiceName: !Sub 'com.amazonaws.${AWS::Region}.dynamodb'
+Outputs:
+  StackName:
+    Description: 'Stack name.'
+    Value: !Sub '${AWS::StackName}'
+  Endpoint:
+    Description: 'The VPC endpoint to DynamoDB.'
+    Value: !Ref DynamoDBEndpoint
+    Export:
+      Name: !Sub '${AWS::StackName}-DynamoDBEndpoint'

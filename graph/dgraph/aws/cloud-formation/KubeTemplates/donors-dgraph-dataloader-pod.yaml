@@ -1,0 +1,20 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: donors-dgraph-load-data-0
+  labels:
+    app: donors-dgraph-loader
+    dataset: donors
+spec:
+  volumes:
+    - name: datadir
+      persistentVolumeClaim:
+        claimName: datadir-donors-dgraph-server-0
+  containers:
+    - name: donors-dgraph-load-data-0
+      image: ubuntu
+      volumeMounts:
+      - name: datadir
+        mountPath: /dgraph
+      command: ["/bin/bash", "-ecx", "while :; do printf '.'; sleep 5 ; done"]
+---

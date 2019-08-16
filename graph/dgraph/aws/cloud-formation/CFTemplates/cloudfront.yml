@@ -1,0 +1,240 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  # Domain: example.com
+  DomainName:
+    Type: String
+    Description: "The base domain name for the web site (no 'www')"
+    MinLength: 4
+    MaxLength: 253
+    AllowedPattern: "[a-z0-9]+[-.a-z0-9]*(\\.[a-z][a-z]+)+"
+    ConstraintDescription: "Provide a valid domain name using only lowercase letters, numbers, and dash (-)"
+  CertificateArn:
+    Description: "AWS Certificate Manager Certificate ARN"
+    Type: String
+  DefaultTTL:
+    Type: Number
+    Description: "TTL in seconds"
+    Default: 30
+  MinimumTTL:
+    Description: "Minimum cache lifetime in seconds for the CloudFront distribution"
+    Default: 5
+    Type: Number
+  PriceClass:
+    Description: "Distribution price class. Default is US-only, PriceClass_All is worldwide but more expensive."
+    Default: PriceClass_100
+    AllowedValues:
+      - PriceClass_100
+      - PriceClass_200
+      - PriceClass_All
+    Type: String
+  ConvUIApiCrossStackName:
+    Type: String
+  TSCApiCrossStackName:
+    Type: String
+  Stage:
+    Type: String
+    Default: 'dev'
+Resources:
+
+  # Bucket for site content: example.com
+  SiteBucket:
+    Type: "AWS::S3::Bucket"
+    Properties:
+      BucketName: !Ref DomainName
+      AccessControl: PublicRead
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+
+  SiteBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref 'SiteBucket'
+      PolicyDocument:
+        Statement:
+        - Sid: PublicReadForGetBucketObjects
+          Effect: Allow
+          Principal: '*'
+          Action: s3:GetObject
+          Resource: !Join ['', ['arn:aws:s3:::', !Ref 'SiteBucket', /*]]
+
+
+  # Certificate for HTTPS accesss through CloudFront
+  # Certificate:
+  #   Type: "AWS::CertificateManager::Certificate"
+  #   Properties:
+  #     DomainName: !Ref DomainName
+  #     SubjectAlternativeNames:
+  #       - !Sub "www.${DomainName}"
+
+  # CDN serves S3 content over HTTPS for example.com
+  CloudFrontDistribution:
+    Type: "AWS::CloudFront::Distribution"
+    DependsOn: SiteBucket
+    Properties:
+      DistributionConfig:
+        DefaultCacheBehavior:
+          TargetOriginId: S3Origin
+          AllowedMethods: [HEAD, DELETE, POST, GET, OPTIONS, PUT, PATCH]
+          DefaultTTL: !Ref DefaultTTL
+          MinTTL: !Ref MinimumTTL
+          ForwardedValues:
+            QueryString: true
+            Cookies:
+             Forward: none
+          ViewerProtocolPolicy: redirect-to-https
+        CacheBehaviors:
+          -
+            TargetOriginId: ConvUIApiOrigin
+            ViewerProtocolPolicy: https-only
+            PathPattern: "api/*"
+            AllowedMethods: [HEAD, DELETE, POST, GET, OPTIONS, PUT, PATCH]
+            ForwardedValues:
+              QueryString: false
+              Headers:
+                - Accept
+                - Referer
+                - Athorization
+                - Content-Type
+          -
+            TargetOriginId: ConvUIApiOrigin
+            ViewerProtocolPolicy: https-only
+            PathPattern: "authenticate/*"
+            AllowedMethods: [HEAD, DELETE, POST, GET, OPTIONS, PUT, PATCH]
+            ForwardedValues:
+              QueryString: false
+              Headers:
+                - Accept
+                - Referer
+                - Athorization
+                - Content-Type
+          -
+            TargetOriginId: TSCApiOrigin
+            ViewerProtocolPolicy: redirect-to-https
+            PathPattern: "idm/*"
+            AllowedMethods: [HEAD, DELETE, POST, GET, OPTIONS, PUT, PATCH]
+            ForwardedValues:
+              QueryString: true
+              Headers:
+                - Accept
+                - Referer
+                - Athorization
+                - Content-Type
+          -
+            TargetOriginId: TSCApiOrigin
+            ViewerProtocolPolicy: redirect-to-https
+            PathPattern: "tsc-ws/*"
+            AllowedMethods: [HEAD, DELETE, POST, GET, OPTIONS, PUT, PATCH]
+            ForwardedValues:
+              QueryString: false
+              Headers:
+                - Accept
+                - Referer
+                - Athorization
+                - Content-Type
+          -
+            TargetOriginId: TSCApiOrigin
+            ViewerProtocolPolicy: redirect-to-https
+            PathPattern: "tsc-ws-content/*"
+            AllowedMethods: [HEAD, DELETE, POST, GET, OPTIONS, PUT, PATCH]
+            ForwardedValues:
+              QueryString: false
+              Headers:
+                - Accept
+                - Referer
+                - Athorization
+                - Content-Type
+          -
+            TargetOriginId: TSCApiOrigin
+            ViewerProtocolPolicy: redirect-to-https
+            PathPattern: "griddetails"
+            AllowedMethods: [HEAD, DELETE, POST, GET, OPTIONS, PUT, PATCH]
+            ForwardedValues:
+              QueryString: false
+              Headers:
+                - Accept
+                - Referer
+                - Athorization
+                - Content-Type
+          -
+            TargetOriginId: ConvUIApiOrigin
+            ViewerProtocolPolicy: redirect-to-https
+            PathPattern: "admin/*"
+            AllowedMethods: [HEAD, DELETE, POST, GET, OPTIONS, PUT, PATCH]
+            ForwardedValues:
+              QueryString: false
+              Headers:
+                - Accept
+                - Referer
+                - Athorization
+                - Content-Type
+          -
+            TargetOriginId: TSCApiOrigin
+            ViewerProtocolPolicy: https-only
+            PathPattern: "tsc/*"
+            AllowedMethods: [HEAD, DELETE, POST, GET, OPTIONS, PUT, PATCH]
+            ForwardedValues:
+              QueryString: true
+              Headers:
+                - Accept
+                - Referer
+                - Athorization
+                - Content-Type
+        CustomErrorResponses:
+          -
+            ErrorCachingMinTTL: 5
+            ErrorCode: 403
+            ResponseCode: 200
+            ResponsePagePath: "/index.html"
+          -
+            ErrorCachingMinTTL: 5
+            ErrorCode: 404
+            ResponseCode: 200
+            ResponsePagePath: "/index.html"
+        DefaultRootObject: index.html
+        Enabled: true
+        Aliases:
+          - !Ref DomainName
+        PriceClass: !Ref PriceClass
+        Origins:
+          -
+            DomainName:
+              Fn::GetAtt: [ SiteBucket , "DomainName" ]
+            Id: S3Origin
+            S3OriginConfig:
+              OriginAccessIdentity: ""
+          -
+            DomainName: !Sub
+            - "${ConvUIApiGatewayId}.execute-api.${AWS::Region}.amazonws.com"
+            - ConvUIApiGatewayId:
+                Fn::ImportValue: !Sub "${ConvUIApiCrossStackName}-ApiGatewayId"
+            Id: ConvUIApiOrigin
+            OriginPath: !Sub "/${Stage}"
+            CustomOriginConfig:
+              HTTPSPort: 443
+              OriginProtocolPolicy: https-only
+          -
+            DomainName: !Sub
+            - "${TSCApiGatewayId}.execute-api.${AWS::Region}.amazonws.com"
+            - TSCApiGatewayId:
+                Fn::ImportValue: !Sub "${TSCApiCrossStackName}-ApiGatewayId"
+            Id: TSCApiOrigin
+            OriginPath: !Sub "/${Stage}"
+            CustomOriginConfig:
+              HTTPSPort: 443
+              OriginProtocolPolicy: https-only
+
+
+        ViewerCertificate:
+         AcmCertificateArn: !Ref CertificateArn
+         SslSupportMethod: sni-only
+
+
+Outputs:
+  DomainName:
+    Description: Domain name
+    Value: !Ref DomainName
+  CloudFrontDomain:
+    Description: CloudFront distribution domain name
+    Value: !Ref CloudFrontDistribution

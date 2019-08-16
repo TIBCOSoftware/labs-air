@@ -1,0 +1,244 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: >-
+  AWS CloudFormation Template DynamoDB_Secondary_Indexes: Create a
+  DynamoDB table with local and global secondary indexes.
+Parameters:
+  Stage:
+    Type: String
+    Default: 'dev'
+  ConvUIUserlogsReadCapacityUnits:
+    Description: Provisioned read throughput
+    Type: Number
+    Default: '1'
+    MinValue: '1'
+    MaxValue: '10000'
+    ConstraintDescription: must be between 5 and 10000
+  ConvUIUserlogsWriteCapacityUnits:
+    Description: Provisioned write throughput
+    Type: Number
+    Default: '5'
+    MinValue: '1'
+    MaxValue: '10000'
+    ConstraintDescription: must be between 5 and 10000
+  ConvUIUsersReadCapacityUnits:
+    Description: Provisioned read throughput
+    Type: Number
+    Default: '1'
+    MinValue: '1'
+    MaxValue: '10000'
+    ConstraintDescription: must be between 5 and 10000
+  ConvUIUsersWriteCapacityUnits:
+    Description: Provisioned write throughput
+    Type: Number
+    Default: '1'
+    MinValue: '1'
+    MaxValue: '10000'
+    ConstraintDescription: must be between 5 and 10000
+  CounvUIUserProfilesReadCapacityUnits:
+    Description: Provisioned read throughput
+    Type: Number
+    Default: '3'
+    MinValue: '1'
+    MaxValue: '10000'
+    ConstraintDescription: must be between 5 and 10000
+  CounvUIUserProfilesWriteCapacityUnits:
+    Description: Provisioned write throughput
+    Type: Number
+    Default: '3'
+    MinValue: '1'
+    MaxValue: '10000'
+    ConstraintDescription: must be between 5 and 10000
+  IntentHistoryReadCapacityUnits:
+    Description: Provisioned read throughput
+    Type: Number
+    Default: '5'
+    MinValue: '5'
+    MaxValue: '10000'
+    ConstraintDescription: must be between 5 and 10000
+  IntentHistoryWriteCapacityUnits:
+    Description: Provisioned write throughput
+    Type: Number
+    Default: '5'
+    MinValue: '5'
+    MaxValue: '10000'
+    ConstraintDescription: must be between 5 and 10000
+  TransitionsReadCapacityUnits:
+    Description: Provisioned read throughput
+    Type: Number
+    Default: '5'
+    MinValue: '5'
+    MaxValue: '10000'
+    ConstraintDescription: must be between 5 and 10000
+  TransitionsWriteCapacityUnits:
+    Description: Provisioned write throughput
+    Type: Number
+    Default: '5'
+    MinValue: '5'
+    MaxValue: '10000'
+    ConstraintDescription: must be between 5 and 10000
+  DomainsReadCapacityUnits:
+    Description: Provisioned read throughput
+    Type: Number
+    Default: '5'
+    MinValue: '5'
+    MaxValue: '10000'
+    ConstraintDescription: must be between 5 and 10000
+  DomainsWriteCapacityUnits:
+    Description: Provisioned write throughput
+    Type: Number
+    Default: '5'
+    MinValue: '5'
+    MaxValue: '10000'
+    ConstraintDescription: must be between 5 and 10000
+  ObjectivesReadCapacityUnits:
+    Description: Provisioned read throughput
+    Type: Number
+    Default: '5'
+    MinValue: '5'
+    MaxValue: '10000'
+    ConstraintDescription: must be between 5 and 10000
+  ObjectivesWriteCapacityUnits:
+    Description: Provisioned write throughput
+    Type: Number
+    Default: '5'
+    MinValue: '5'
+    MaxValue: '10000'
+    ConstraintDescription: must be between 5 and 10000
+Resources:
+  ConvUIUsers:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      TableName: !Sub 'convui-${Stage}-users'
+      AttributeDefinitions:
+        - AttributeName: username
+          AttributeType: S
+      KeySchema:
+        - AttributeName: username
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: !Ref ConvUIUsersReadCapacityUnits
+        WriteCapacityUnits: !Ref ConvUIUsersWriteCapacityUnits
+  ConvUIUserlogs:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      TableName: !Sub 'convui-${Stage}-userlogs'
+      AttributeDefinitions:
+        - AttributeName: username
+          AttributeType: S
+        - AttributeName: date
+          AttributeType: S
+      KeySchema:
+        - AttributeName: username
+          KeyType: HASH
+        - AttributeName: date
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: !Ref ConvUIUserlogsReadCapacityUnits
+        WriteCapacityUnits: !Ref ConvUIUserlogsWriteCapacityUnits
+  CounvUIUserProfiles:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      TableName: !Sub 'convui-${Stage}-profiles'
+      AttributeDefinitions:
+        - AttributeName: username
+          AttributeType: S
+        - AttributeName: subscription
+          AttributeType: S
+      KeySchema:
+        - AttributeName: username
+          KeyType: HASH
+        - AttributeName: subscription
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: !Ref CounvUIUserProfilesReadCapacityUnits
+        WriteCapacityUnits: !Ref CounvUIUserProfilesWriteCapacityUnits
+  IntentHistory:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      TableName: !Sub 'convui-${Stage}-intentHistory'
+      AttributeDefinitions:
+        - AttributeName: orgDomainUser
+          AttributeType: S
+        - AttributeName: date
+          AttributeType: S
+      KeySchema:
+        - AttributeName: orgDomainUser
+          KeyType: HASH
+        - AttributeName: date
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: !Ref IntentHistoryReadCapacityUnits
+        WriteCapacityUnits: !Ref IntentHistoryWriteCapacityUnits
+  Transitions:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      TableName: !Sub 'convui-${Stage}-transitions'
+      AttributeDefinitions:
+        - AttributeName: from
+          AttributeType: S
+        - AttributeName: to
+          AttributeType: S
+      KeySchema:
+        - AttributeName: from
+          KeyType: HASH
+        - AttributeName: to
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: !Ref TransitionsReadCapacityUnits
+        WriteCapacityUnits: !Ref TransitionsWriteCapacityUnits
+  Domains:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      TableName: !Sub 'convui-${Stage}-domains'
+      AttributeDefinitions:
+        - AttributeName: organization
+          AttributeType: S
+        - AttributeName: domainName
+          AttributeType: S
+      KeySchema:
+        - AttributeName: organization
+          KeyType: HASH
+        - AttributeName: domainName
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: !Ref DomainsReadCapacityUnits
+        WriteCapacityUnits: !Ref DomainsWriteCapacityUnits
+  Objectives:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      TableName: !Sub 'convui-${Stage}-objectives'
+      AttributeDefinitions:
+        - AttributeName: orgDomain
+          AttributeType: S
+        - AttributeName: intentName
+          AttributeType: S
+      KeySchema:
+        - AttributeName: orgDomain
+          KeyType: HASH
+        - AttributeName: intentName
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: !Ref ObjectivesReadCapacityUnits
+        WriteCapacityUnits: !Ref ObjectivesWriteCapacityUnits
+Outputs:
+  ConvUIUsersTableName:
+    Value: !Ref ConvUIUsers
+    Description: Name of the created DynamoDB table
+  ConvUIUserlogsTableName:
+    Value: !Ref ConvUIUserlogs
+    Description: Name of the created DynamoDB table
+  ConvUIUserProfilesTableName:
+    Value: !Ref CounvUIUserProfiles
+    Description: Name of the created DynamoDB table
+  IntentHistoryTableName:
+    Value: !Ref IntentHistory
+    Description: Name of the created DynamoDB table
+  TransitionsTableName:
+    Value: !Ref Transitions
+    Description: Name of the created DynamoDB table
+  DomainsTableName:
+    Value: !Ref Domains
+    Description: Name of the created DynamoDB table
+  ObjectivesTableName:
+    Value: !Ref Objectives
+    Description: Name of the created DynamoDB table

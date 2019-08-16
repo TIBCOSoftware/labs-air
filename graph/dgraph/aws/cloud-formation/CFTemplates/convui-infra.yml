@@ -1,0 +1,448 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Infrastructure Stack
+Parameters:
+
+  KeyName:
+    Description: Existing EC2 KeyPair for SSH access.
+    Type: AWS::EC2::KeyPair::KeyName
+    ConstraintDescription: must be the name of an existing EC2 KeyPair.
+
+  InstanceType:
+    Description: EC2 instance type for the cluster.
+    Type: String
+    Default: m4.large
+    AllowedValues:
+    - m5.large
+    - m5.xlarge
+    - m5.2xlarge
+    - m5.4xlarge
+    - m5.12xlarge
+    - m5.24xlarge
+    - c5.large
+    - c5.xlarge
+    - c5.2xlarge
+    - c5.4xlarge
+    - c5.9xlarge
+    - c5.18xlarge
+    - r4.large
+    - r4.xlarge
+    - r4.2xlarge
+    - r4.4xlarge
+    - r4.8xlarge
+    - r4.16xlarge
+    - x1.16xlarge
+    - x1.32xlarge
+    - i3.large
+    - i3.xlarge
+    - i3.2xlarge
+    - i3.4xlarge
+    - i3.8xlarge
+    - i3.16xlarge
+    - p2.xlarge
+    - p2.8xlarge
+    - p2.16xlarge
+    - p3.2xlarge
+    - p3.8xlarge
+    - p3.16xlarge
+    - m4.large
+    - m4.xlarge
+    - m4.2xlarge
+    - m4.4xlarge
+    - m4.10xlarge
+    - m4.16xlarge
+    - c4.large
+    - c4.xlarge
+    - c4.2xlarge
+    - c4.4xlarge
+    - c4.8xlarge
+    - g3.4xlarge
+    - g3.8xlarge
+    - g3.16xlarge
+    - r3.large
+    - r3.xlarge
+    - r3.2xlarge
+    - r3.4xlarge
+    - r3.8xlarge
+    - t2.xlarge
+    ConstraintDescription: must be a valid Current Generation (non-burstable) EC2 instance type.
+
+  # Specifies the size of the root disk for all EC2 instances, including master
+  # and nodes.
+  DiskSizeGb:
+    Description: 'Size of the root disk for the EC2 instances, in GiB.  Default: 40'
+    Default: 40
+    Type: Number
+    MinValue: 8
+    MaxValue: 1024
+
+  BastionInstanceType:
+    Description: EC2 instance type for the bastion host (used for public SSH access).
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+    - t2.nano
+    - t2.micro
+    - t2.small
+    - t2.medium
+    - t2.large
+    - t2.xlarge
+    - t2.2xlarge
+    - m5.large
+    - m5.xlarge
+    - m5.2xlarge
+    - m5.4xlarge
+    - m5.12xlarge
+    - m5.24xlarge
+    - c5.large
+    - c5.xlarge
+    - c5.2xlarge
+    - c5.4xlarge
+    - c5.9xlarge
+    - c5.18xlarge
+    - r4.large
+    - r4.xlarge
+    - r4.2xlarge
+    - r4.4xlarge
+    - r4.8xlarge
+    - r4.16xlarge
+    - x1.16xlarge
+    - x1.32xlarge
+    - i3.large
+    - i3.xlarge
+    - i3.2xlarge
+    - i3.4xlarge
+    - i3.8xlarge
+    - i3.16xlarge
+    - p2.xlarge
+    - p2.8xlarge
+    - p2.16xlarge
+    - p3.2xlarge
+    - p3.8xlarge
+    - p3.16xlarge
+    - m4.large
+    - m4.xlarge
+    - m4.2xlarge
+    - m4.4xlarge
+    - m4.10xlarge
+    - m4.16xlarge
+    - c4.large
+    - c4.xlarge
+    - c4.2xlarge
+    - c4.4xlarge
+    - c4.8xlarge
+    - g3.4xlarge
+    - g3.8xlarge
+    - g3.16xlarge
+    - r3.large
+    - r3.xlarge
+    - r3.2xlarge
+    - r3.4xlarge
+    - r3.8xlarge
+    ConstraintDescription: must be a valid Current Generation EC2 instance type.
+
+  AvailabilityZone:
+    Description: The Availability Zone for this cluster. Heptio recommends
+      that you run one cluster per AZ and use tooling to coordinate across AZs.
+    Type: AWS::EC2::AvailabilityZone::Name
+    ConstraintDescription: must be the name of an AWS Availability Zone
+
+  AdminIngressLocation:
+    Description: CIDR block (IP address range) to allow SSH access to the
+      bastion host and HTTPS access to the Kubernetes API. Use 0.0.0.0/0
+      to allow access from all locations.
+    Type: String
+    MinLength: '9'
+    MaxLength: '18'
+    AllowedPattern: "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})"
+    ConstraintDescription: must be a valid IP CIDR range of the form x.x.x.x/x.
+
+  K8sNodeCapacity:
+    Default: '2'
+    Description: Initial number of Kubernetes nodes (1-20).
+    Type: Number
+    MinValue: '1'
+    MaxValue: '20'
+    ConstraintDescription: must be between 1 and 20 EC2 instances.
+
+  # Name of S3 Bucket containing CloudFormation templates
+  CFTemplatesS3BucketName:
+    Type: String
+
+  # S3 Bucket configuration: allows users to use their own downstream snapshots
+  # of the quickstart-aws-vpc and quickstart-linux-bastion templates
+  QSS3BucketName:
+    AllowedPattern: "^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$"
+    ConstraintDescription: Quick Start bucket name can include numbers, lowercase
+      letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen
+      (-).
+
+    Default: aws-quickstart
+    Description: Only change this if you have set up assets, like your own networking
+      configuration, in an S3 bucket. S3 bucket name for the Quick Start assets.
+      Quick Start bucket name can include numbers, lowercase letters, uppercase
+      letters, and hyphens (-). It cannot start or end with a hyphen (-).
+    Type: String
+
+  QSS3KeyPrefix:
+    AllowedPattern: ^[0-9a-zA-Z-/]*$
+    ConstraintDescription: Quick Start key prefix can include numbers, lowercase
+      letters, uppercase letters, hyphens (-), and forward slash (/).
+    Default: quickstart-heptio/
+    Description: Only change this if you have set up assets in an S3 bucket, as explained
+      in the S3 Bucket parameter. S3 key prefix for the Quick Start assets.
+      Quick Start key prefix can include numbers, lowercase letters, uppercase
+      letters, hyphens (-), and forward slash (/).
+    Type: String
+
+  NetworkingProvider:
+    AllowedValues:
+    - calico
+    - weave
+    ConstraintDescription: 'Currently supported values are "calico" and "weave"'
+    Default: calico
+    Description: Choose the networking provider to use for communication between
+      pods in the Kubernetes cluster. Supported configurations are calico
+      (https://docs.projectcalico.org/v2.6/getting-started/kubernetes/installation/hosted/kubeadm/)
+      and weave (https://github.com/weaveworks/weave/blob/master/site/kubernetes/kube-addon.md).
+    Type: String
+
+  ClusterDNSProvider:
+    AllowedValues:
+    - CoreDNS
+    - KubeDNS
+    ConstraintDescription: 'Currently supported values are "CoreDNS" and "KubeDNS"'
+    Default: CoreDNS
+    Description: Choose the cluster DNS provider to use for internal cluster DNS. Supported
+      configurations are CoreDNS and KubeDNS
+    Type: String
+
+  # DynamodDB Parameters
+  Stage:
+    Type: String
+    Default: 'dev'
+  ConvUIUsersReadCapacityUnits:
+    Description: Provisioned read throughput
+    Type: Number
+    Default: '1'
+    MinValue: '1'
+    MaxValue: '10000'
+    ConstraintDescription: must be between 5 and 10000
+  ConvUIUsersWriteCapacityUnits:
+    Description: Provisioned write throughput
+    Type: Number
+    Default: '1'
+    MinValue: '1'
+    MaxValue: '10000'
+    ConstraintDescription: must be between 5 and 10000
+  ConvUIUserlogsReadCapacityUnits:
+    Description: Provisioned read throughput
+    Type: Number
+    Default: '1'
+    MinValue: '1'
+    MaxValue: '10000'
+    ConstraintDescription: must be between 5 and 10000
+  ConvUIUserlogsWriteCapacityUnits:
+    Description: Provisioned write throughput
+    Type: Number
+    Default: '1'
+    MinValue: '1'
+    MaxValue: '10000'
+    ConstraintDescription: must be between 5 and 10000
+  CounvUIUserProfilesReadCapacityUnits:
+    Description: Provisioned read throughput
+    Type: Number
+    Default: '3'
+    MinValue: '1'
+    MaxValue: '10000'
+    ConstraintDescription: must be between 5 and 10000
+  CounvUIUserProfilesWriteCapacityUnits:
+    Description: Provisioned write throughput
+    Type: Number
+    Default: '3'
+    MinValue: '1'
+    MaxValue: '10000'
+    ConstraintDescription: must be between 5 and 10000
+  IntentHistoryReadCapacityUnits:
+    Description: Provisioned read throughput
+    Type: Number
+    Default: '5'
+    MinValue: '5'
+    MaxValue: '10000'
+    ConstraintDescription: must be between 5 and 10000
+  IntentHistoryWriteCapacityUnits:
+    Description: Provisioned write throughput
+    Type: Number
+    Default: '5'
+    MinValue: '5'
+    MaxValue: '10000'
+    ConstraintDescription: must be between 5 and 10000
+  TransitionsReadCapacityUnits:
+    Description: Provisioned read throughput
+    Type: Number
+    Default: '5'
+    MinValue: '5'
+    MaxValue: '10000'
+    ConstraintDescription: must be between 5 and 10000
+  TransitionsWriteCapacityUnits:
+    Description: Provisioned write throughput
+    Type: Number
+    Default: '5'
+    MinValue: '5'
+    MaxValue: '10000'
+    ConstraintDescription: must be between 5 and 10000
+  DomainsReadCapacityUnits:
+    Description: Provisioned read throughput
+    Type: Number
+    Default: '5'
+    MinValue: '5'
+    MaxValue: '10000'
+    ConstraintDescription: must be between 5 and 10000
+  DomainsWriteCapacityUnits:
+    Description: Provisioned write throughput
+    Type: Number
+    Default: '5'
+    MinValue: '5'
+    MaxValue: '10000'
+    ConstraintDescription: must be between 5 and 10000
+  ObjectivesReadCapacityUnits:
+    Description: Provisioned read throughput
+    Type: Number
+    Default: '5'
+    MinValue: '5'
+    MaxValue: '10000'
+    ConstraintDescription: must be between 5 and 10000
+  ObjectivesWriteCapacityUnits:
+    Description: Provisioned write throughput
+    Type: Number
+    Default: '5'
+    MinValue: '5'
+    MaxValue: '10000'
+    ConstraintDescription: must be between 5 and 10000
+
+Resources:
+  vpc:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: !Sub "https://s3.amazonaws.com/${CFTemplatesS3BucketName}/vpc-kube-containers.yml"
+      TimeoutInMinutes: '15'
+      Parameters:
+        KeyName:
+          Ref: KeyName
+        InstanceType:
+          Ref: InstanceType
+        DiskSizeGb:
+          Ref: DiskSizeGb
+        BastionInstanceType:
+          Ref: BastionInstanceType
+        AvailabilityZone:
+          Ref: AvailabilityZone
+        AdminIngressLocation:
+          Ref: AdminIngressLocation
+        K8sNodeCapacity:
+          Ref: K8sNodeCapacity
+        CFTemplatesS3BucketName:
+          Ref: CFTemplatesS3BucketName
+        QSS3BucketName:
+          Ref: QSS3BucketName
+        QSS3KeyPrefix:
+          Ref: QSS3KeyPrefix
+        NetworkingProvider:
+          Ref: NetworkingProvider
+        ClusterDNSProvider:
+          Ref: ClusterDNSProvider
+  vpcdynamodbendpoint:
+    DependsOn:
+    - vpc
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: !Sub "https://s3.amazonaws.com/${CFTemplatesS3BucketName}/vpc-endpoint-dynamodb.yml"
+      TimeoutInMinutes: '15'
+      Parameters:
+        VpcId:
+          Fn::GetAtt:
+          - vpc
+          - Outputs.VPCID
+        RouteTableId:
+          Fn::GetAtt:
+          - vpc
+          - Outputs.PrivateSubnetRouteTableId
+  dynamodb:
+    DependsOn:
+    - vpc
+    - vpcdynamodbendpoint
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: !Sub "https://s3.amazonaws.com/${CFTemplatesS3BucketName}/dynamodb.yml"
+      TimeoutInMinutes: '15'
+      Parameters:
+        Stage:
+          Ref: Stage
+        ConvUIUsersReadCapacityUnits:
+          Ref: ConvUIUsersReadCapacityUnits
+        ConvUIUsersWriteCapacityUnits:
+          Ref: ConvUIUsersWriteCapacityUnits
+        CounvUIUserProfilesReadCapacityUnits:
+          Ref: CounvUIUserProfilesReadCapacityUnits
+        CounvUIUserProfilesWriteCapacityUnits:
+          Ref: CounvUIUserProfilesWriteCapacityUnits
+        ConvUIUserlogsReadCapacityUnits:
+          Ref: ConvUIUserlogsReadCapacityUnits
+        ConvUIUserlogsWriteCapacityUnits:
+          Ref: ConvUIUserlogsWriteCapacityUnits
+        IntentHistoryReadCapacityUnits:
+          Ref: IntentHistoryReadCapacityUnits
+        IntentHistoryWriteCapacityUnits:
+          Ref: IntentHistoryWriteCapacityUnits
+        TransitionsReadCapacityUnits:
+          Ref: TransitionsReadCapacityUnits
+        TransitionsWriteCapacityUnits:
+          Ref: TransitionsWriteCapacityUnits
+        DomainsReadCapacityUnits:
+          Ref: DomainsReadCapacityUnits
+        DomainsWriteCapacityUnits:
+          Ref: DomainsWriteCapacityUnits
+        ObjectivesReadCapacityUnits:
+          Ref: ObjectivesReadCapacityUnits
+        ObjectivesWriteCapacityUnits:
+          Ref: ObjectivesWriteCapacityUnits
+Outputs:
+  VpcId:
+    Description: Created VPC Id
+    Value:
+      Fn::GetAtt:
+      - vpc
+      - Outputs.VPCID
+    Export:
+      Name: !Sub "${AWS::StackName}-VpcId"
+  PrivateSubnetId:
+    Description: Private Subnet Created for VPC
+    Value:
+      Fn::GetAtt:
+      - vpc
+      - Outputs.PrivateSubnetId
+    Export:
+      Name: !Sub "${AWS::StackName}-PrivateSubnetId"
+  PrivateSubnetRouteTableId:
+    Description: Private Route Table Created for VPC
+    Value:
+      Fn::GetAtt:
+      - vpc
+      - Outputs.PrivateSubnetRouteTableId
+  ClusterSecGroupId:
+    Description: Security Group Id of the K8s Cluster running in the VIP Private Subnet
+    Value:
+      Fn::GetAtt:
+      - vpc
+      - Outputs.ClusterSecGroupId
+    Export:
+      Name: !Sub "${AWS::StackName}-ClusterSecGroupId"
+  GetKubeConfigCommand:
+    Description: Run locally - SCP command to download the Kubernetes configuration
+      file for accessing the new cluster via kubectl, a Kubernetes command line tool.
+      Creates a "kubeconfig" file in the current directory. Then, you can run
+      "export KUBECONFIG=$(pwd)/kubeconfig" to ensure kubectl uses this configuration file.
+    Value:
+      Fn::GetAtt:
+      - vpc
+      - Outputs.GetKubeConfigCommand

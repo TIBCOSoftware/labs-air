@@ -1,0 +1,50 @@
+[
+  {
+    "ParameterKey": "CFTemplatesS3BucketName",
+    "ParameterValue": "convui-deploy-us-east"
+  },
+  {
+    "ParameterKey": "EC2SSHKeyPairName",
+    "ParameterValue": "aws-key1"
+  },
+  {
+    "ParameterKey": "Env",
+    "ParameterValue": "local"
+  },
+  {
+    "ParameterKey": "DbInstanceType",
+    "ParameterValue": "db.r4.xlarge"
+  },
+  {
+    "ParameterKey": "DBReplicaIdentifierSuffix",
+    "ParameterValue": ""
+  },
+  {
+    "ParameterKey": "EC2ClientInstanceType",
+    "ParameterValue": "r4.2xlarge"
+  },
+  {
+    "ParameterKey": "NeptuneQueryTimeout",
+    "ParameterValue": "20000"
+  },
+  {
+    "ParameterKey": "NeptuneEnableAuditLog",
+    "ParameterValue": "1"
+  },
+  {
+    "ParameterKey": "IamAuthEnabled",
+    "ParameterValue": "false"
+  },
+  {
+    "ParameterKey": "SetupGremlinConsole",
+    "ParameterValue": "true"
+  },
+  {
+    "ParameterKey": "SetupRDF4JConsole",
+    "ParameterValue": "true"
+  },
+  {
+    "ParameterKey": "AttachBulkloadIAMRoleToNeptuneCluster",
+    "ParameterValue": "true"
+  }
+]

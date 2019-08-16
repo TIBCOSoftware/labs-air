@@ -1,0 +1,100 @@
+# There are 4 public services exposed, users can use:
+#       dgraph-zero-public - To load data using Live & Bulk Loaders
+#       dgraph-server-public - To connect clients and for HTTP APIs
+#       dgraph-ratel-public - For Dgraph UI
+#       dgraph-server-x-http-public - Use for debugging & profiling
+apiVersion: v1
+kind: Service
+metadata:
+  name: donors-dgraph-zero-public
+  labels:
+    app: donors-dgraph-zero
+    dataset: donors
+spec:
+  ports:
+  - port: 5080
+    targetPort: 5080
+    name: zero-grpc
+  - port: 6080
+    targetPort: 6080
+    name: zero-http
+  selector:
+    app: donors-dgraph-zero
+---
+# This is a headless service which is neccessary for discovery for a dgraph-zero StatefulSet.
+# https://kubernetes.io/docs/tutorials/stateful-application/basic-stateful-set/#creating-a-statefulset
+apiVersion: v1
+kind: Service
+metadata:
+  name: donors-dgraph-zero
+  labels:
+    app: donors-dgraph-zero
+    dataset: donors
+spec:
+  ports:
+  - port: 5080
+    targetPort: 5080
+    name: zero-grpc
+  clusterIP: None
+  selector:
+    app: donors-dgraph-zero
+---
+# This StatefulSet runs 1 Dgraph Zero.
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: donors-dgraph-zero
+spec:
+  serviceName: "donors-dgraph-zero"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: donors-dgraph-zero
+  template:
+    metadata:
+      labels:
+        app: donors-dgraph-zero
+        dataset: donors
+    spec:
+      containers:
+      - name: zero
+        image: dgraph/dgraph:v1.0.7
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            memory: "6Gi"
+          requests:
+            memory: "4Gi"
+        ports:
+        - containerPort: 5080
+          name: zero-grpc
+        - containerPort: 6080
+          name: zero-http
+        volumeMounts:
+        - name: datadir
+          mountPath: /dgraph
+        command:
+          - bash
+          - "-c"
+          - |
+            set -ex
+            dgraph zero --replicas 1 --my=$(hostname -f):5080
+      terminationGracePeriodSeconds: 60
+      volumes:
+      - name: datadir
+        persistentVolumeClaim:
+          claimName: datadir
+  updateStrategy:
+    type: RollingUpdate
+  volumeClaimTemplates:
+  - metadata:
+      name: datadir
+      annotations:
+        volume.alpha.kubernetes.io/storage-class: anything
+    spec:
+      accessModes:
+        - "ReadWriteOnce"
+      resources:
+        requests:
+          storage: 2Gi
+---

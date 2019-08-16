@@ -1,0 +1,106 @@
+[
+  {
+    "ParameterKey": "CFTemplatesS3BucketName",
+    "ParameterValue": "convui-deploy-us-east"
+  },
+  {
+    "ParameterKey": "EC2SSHKeyPairName",
+    "ParameterValue": "aws-key1"
+  },
+  {
+    "ParameterKey": "Env",
+    "ParameterValue": "local"
+  },
+  {
+    "ParameterKey": "DbInstanceType",
+    "ParameterValue": "db.r4.xlarge"
+  },
+  {
+    "ParameterKey": "DBReplicaIdentifierSuffix",
+    "ParameterValue": ""
+  },
+  {
+    "ParameterKey": "EC2ClientInstanceType",
+    "ParameterValue": "r4.2xlarge"
+  },
+  {
+    "ParameterKey": "NeptuneQueryTimeout",
+    "ParameterValue": "20000"
+  },
+  {
+    "ParameterKey": "NeptuneEnableAuditLog",
+    "ParameterValue": "1"
+  },
+  {
+    "ParameterKey": "IamAuthEnabled",
+    "ParameterValue": "false"
+  },
+  {
+    "ParameterKey": "SetupGremlinConsole",
+    "ParameterValue": "true"
+  },
+  {
+    "ParameterKey": "SetupRDF4JConsole",
+    "ParameterValue": "true"
+  },
+  {
+    "ParameterKey": "AttachBulkloadIAMRoleToNeptuneCluster",
+    "ParameterValue": "true"
+  },
+  {
+    "ParameterKey": "ConvUIUsersReadCapacityUnits",
+    "ParameterValue": "1"
+  },
+  {
+    "ParameterKey": "ConvUIUsersWriteCapacityUnits",
+    "ParameterValue": "1"
+  },
+  {
+    "ParameterKey": "ConvUIUserlogsReadCapacityUnits",
+    "ParameterValue": "1"
+  },
+  {
+    "ParameterKey": "ConvUIUserlogsWriteCapacityUnits",
+    "ParameterValue": "5"
+  },
+  {
+    "ParameterKey": "CounvUIUserProfilesReadCapacityUnits",
+    "ParameterValue": "3"
+  },
+  {
+    "ParameterKey": "CounvUIUserProfilesWriteCapacityUnits",
+    "ParameterValue": "3"
+  },
+  {
+    "ParameterKey": "IntentHistoryReadCapacityUnits",
+    "ParameterValue": "5"
+  },
+  {
+    "ParameterKey": "IntentHistoryWriteCapacityUnits",
+    "ParameterValue": "5"
+  },
+  {
+    "ParameterKey": "TransitionsReadCapacityUnits",
+    "ParameterValue": "5"
+  },
+  {
+    "ParameterKey": "TransitionsWriteCapacityUnits",
+    "ParameterValue": "5"
+  },
+  {
+    "ParameterKey": "DomainsReadCapacityUnits",
+    "ParameterValue": "5"
+  },
+  {
+    "ParameterKey": "DomainsWriteCapacityUnits",
+    "ParameterValue": "5"
+  },
+  {
+    "ParameterKey": "ObjectivesReadCapacityUnits",
+    "ParameterValue": "5"
+  },
+  {
+    "ParameterKey": "ObjectivesWriteCapacityUnits",
+    "ParameterValue": "5"
+  }
+]

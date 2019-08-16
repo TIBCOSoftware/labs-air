@@ -1,0 +1,110 @@
+[
+  {
+    "ParameterKey": "Stage",
+    "ParameterValue": "staging"
+  },
+  {
+    "ParameterKey": "AvailabilityZone",
+    "ParameterValue": "us-east-1a"
+  },
+  {
+    "ParameterKey": "AdminIngressLocation",
+    "ParameterValue": "98.207.79.62/32"
+  },
+  {
+    "ParameterKey": "KeyName",
+    "ParameterValue": "aws-key-staging"
+  },
+  {
+    "ParameterKey": "K8sNodeCapacity",
+    "ParameterValue": "2"
+  },
+  {
+    "ParameterKey": "InstanceType",
+    "ParameterValue": "m4.xlarge"
+  },
+  {
+    "ParameterKey": "ClusterDNSProvider",
+    "ParameterValue": "CoreDNS"
+  },
+  {
+    "ParameterKey": "NetworkingProvider",
+    "ParameterValue": "calico"
+  },
+  {
+    "ParameterKey": "DiskSizeGb",
+    "ParameterValue": "40"
+  },
+  {
+    "ParameterKey": "BastionInstanceType",
+    "ParameterValue": "t2.micro"
+  },
+  {
+    "ParameterKey": "CFTemplatesS3BucketName",
+    "ParameterValue": "convui.deployment.staging"
+  },
+  {
+    "ParameterKey": "QSS3BucketName",
+    "ParameterValue": "aws-quickstart"
+  },
+  {
+    "ParameterKey": "QSS3KeyPrefix",
+    "ParameterValue": "quickstart-heptio/"
+  },
+  {
+    "ParameterKey": "ConvUIUsersReadCapacityUnits",
+    "ParameterValue": "5"
+  },
+  {
+    "ParameterKey": "ConvUIUsersWriteCapacityUnits",
+    "ParameterValue": "5"
+  },
+  {
+    "ParameterKey": "ConvUIUserlogsReadCapacityUnits",
+    "ParameterValue": "1"
+  },
+  {
+    "ParameterKey": "ConvUIUserlogsWriteCapacityUnits",
+    "ParameterValue": "5"
+  },
+  {
+    "ParameterKey": "CounvUIUserProfilesReadCapacityUnits",
+    "ParameterValue": "1"
+  },
+  {
+    "ParameterKey": "CounvUIUserProfilesWriteCapacityUnits",
+    "ParameterValue": "5"
+  },
+  {
+    "ParameterKey": "IntentHistoryReadCapacityUnits",
+    "ParameterValue": "5"
+  },
+  {
+    "ParameterKey": "IntentHistoryWriteCapacityUnits",
+    "ParameterValue": "5"
+  },
+  {
+    "ParameterKey": "TransitionsReadCapacityUnits",
+    "ParameterValue": "5"
+  },
+  {
+    "ParameterKey": "TransitionsWriteCapacityUnits",
+    "ParameterValue": "5"
+  },
+  {
+    "ParameterKey": "DomainsReadCapacityUnits",
+    "ParameterValue": "5"
+  },
+  {
+    "ParameterKey": "DomainsWriteCapacityUnits",
+    "ParameterValue": "5"
+  },
+  {
+    "ParameterKey": "ObjectivesReadCapacityUnits",
+    "ParameterValue": "5"
+  },
+  {
+    "ParameterKey": "ObjectivesWriteCapacityUnits",
+    "ParameterValue": "5"
+  }
+]
