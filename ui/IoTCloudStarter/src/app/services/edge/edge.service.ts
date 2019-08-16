@@ -255,6 +255,7 @@ export class EdgeService {
       "addressable": {
         "origin": subscription.origin,
         "name": subscription.consumer,
+        "publisher": subscription.publisher,
         "protocol": subscription.protocol,
         "method": subscription.method,
         "address": subscription.address,
@@ -305,7 +306,8 @@ export class EdgeService {
     let query = {
       "name": subscription.name,
       "addressable": {
-        "name": subscription.name,
+        "name": subscription.consumer,
+        "publisher": subscription.publisher,
         "protocol": subscription.protocol,
         "method": subscription.method,
         "address": subscription.address,

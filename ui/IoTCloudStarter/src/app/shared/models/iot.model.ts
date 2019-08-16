@@ -101,6 +101,7 @@ export class Subscription {
   modified: number;
   name: string;
   consumer: string;
+  publisher: string;
   destination: string;
   protocol: string;
   method: string;

@@ -127,6 +127,7 @@ export class DgraphService {
           method
           valueDescriptorFilter
           consumer
+          publisher
           destination
           protocol
           compression
@@ -173,6 +174,7 @@ export class DgraphService {
         method
         valueDescriptorFilter
         consumer
+        publisher
         destination
         protocol
         compression
@@ -214,6 +216,7 @@ export class DgraphService {
         _:Subscription <method> "${subscription.method}" .
         _:Subscription <valueDescriptorFilter> "${subscription.valueDescriptorFilter}" .
         _:Subscription <consumer> "${subscription.consumer}" .
+        _:Subscription <publisher> "${subscription.publisher}" .
         _:Subscription <destination> "${subscription.destination}" .
         _:Subscription <protocol> "${subscription.protocol}" .
         _:Subscription <compression> "${subscription.compression}" .
@@ -252,6 +255,7 @@ export class DgraphService {
         <${subscription.uid}> <method> "${subscription.method}" .
         <${subscription.uid}> <valueDescriptorFilter> "${subscription.valueDescriptorFilter}" .
         <${subscription.uid}> <consumer> "${subscription.consumer}" .
+        <${subscription.uid}> <publisher> "${subscription.publisher}" .
         <${subscription.uid}> <destination> "${subscription.destination}" .
         <${subscription.uid}> <protocol> "${subscription.protocol}" .
         <${subscription.uid}> <compression> "${subscription.compression}" .

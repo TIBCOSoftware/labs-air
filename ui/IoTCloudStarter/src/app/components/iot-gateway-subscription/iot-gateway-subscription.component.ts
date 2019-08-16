@@ -92,6 +92,7 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
     this.subscriptionForm = this.formBuilder.group({
       name: [''],
       consumer: [''],
+      publisher: [''],
       destination: [''],
       protocol: [''],
       method: [''],
@@ -164,6 +165,7 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
     this.subscriptionForm.reset({
       name: row.name,
       consumer: row.consumer,
+      publisher: row.publisher,
       destination: row.destination,
       protocol: row.protocol,
       method: row.method,
@@ -204,6 +206,7 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
     let sub = new Subscription();
     sub.name = this.subscriptionForm.controls['name'].value;
     sub.consumer = this.subscriptionForm.controls['consumer'].value;
+    sub.publisher = this.subscriptionForm.controls['publisher'].value;
     sub.destination = this.subscriptionForm.controls['destination'].value;
     sub.protocol = this.subscriptionForm.controls['protocol'].value;
     sub.method = this.subscriptionForm.controls['method'].value;
@@ -243,6 +246,7 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
     let sub = new Subscription();
     sub.name = this.subscriptionForm.controls['name'].value;
     sub.consumer = this.subscriptionForm.controls['consumer'].value;
+    sub.publisher = this.subscriptionForm.controls['publisher'].value;
     sub.destination = this.subscriptionForm.controls['destination'].value;
     sub.protocol = this.subscriptionForm.controls['protocol'].value;
     sub.method = this.subscriptionForm.controls['method'].value;
@@ -290,6 +294,7 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
     let sub = new Subscription();
     sub.name = this.subscriptionForm.controls['name'].value;
     sub.consumer = this.subscriptionForm.controls['consumer'].value;
+    sub.publisher = this.subscriptionForm.controls['publisher'].value;
     sub.destination = this.subscriptionForm.controls['destination'].value;
     sub.protocol = this.subscriptionForm.controls['protocol'].value;
     sub.method = this.subscriptionForm.controls['method'].value;
@@ -336,6 +341,7 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
     let sub = new Subscription();
     sub.name = this.subscriptionForm.controls['name'].value;
     sub.consumer = this.subscriptionForm.controls['consumer'].value;
+    sub.publisher = this.subscriptionForm.controls['publisher'].value;
     sub.destination = this.subscriptionForm.controls['destination'].value;
     sub.protocol = this.subscriptionForm.controls['protocol'].value;
     sub.method = this.subscriptionForm.controls['method'].value;
