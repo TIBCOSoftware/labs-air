@@ -6,22 +6,22 @@
             "key": "id1",
             "description": "User",
             "title": "Welcome to your IoTCloudStarter App",
-            "subtitle": "A highly customizable IoTCloudStarter application to manage Live Apps cases",
+            "subtitle": "A highly customizable IoTCloudStarter application to manage IoT Devices",
             "highlights": [
                 {
                     "title": "Engage",
                     "iconURL": "ic-documentation",
-                    "content": "Handle all case related requests in a single place - e.g. create cases, action cases, approve requests."
+                    "content": "Handle all IoT related requests in a single place - e.g. manage gateways, manage devices, view device data."
                 },
                 {
                     "title": "Collaborate",
                     "iconURL": "ic-community",
-                    "content": "Collaborate on cases using unstructured data such as notes and documents."
+                    "content": "Collaborate on open and interoperable IoT solutions built on open standards"
                 },
                 {
                     "title": "Track",
                     "iconURL": "ic-graph",
-                    "content": "Track and respond to high priority cases using actions; review status using audit trails."
+                    "content": "Track and respond to high priority devices using alerts and actions"
                 }
             ],
             "backgroundURL": "",
