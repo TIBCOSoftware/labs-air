@@ -125,6 +125,14 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
 
   }
 
+  ngAfterViewInit() {
+    this.subscriptionsDataSource.sort = this.sort;
+  }
+
+  applyFilter(filterValue: string) {
+    this.subscriptionsDataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   public getGatewayAndSubscriptions(gatewayId: string) {
     console.log("Getting gateway and subscriptions for: ", gatewayId);
 
@@ -138,20 +146,12 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
       })
   }
 
-  ngAfterViewInit() {
-    this.subscriptionsDataSource.sort = this.sort;
-  }
-
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     // const numSelected = this.subscriptionSelection.selected.length;
     // const numRows = this.subscriptionsDataSource.data.length;
     // return numSelected === numRows;
     return false;
-  }
-
-  applyFilter(filterValue: string) {
-    this.subscriptionsDataSource.filter = filterValue.trim().toLowerCase();
   }
 
   onsubscriptionClicked(row) {

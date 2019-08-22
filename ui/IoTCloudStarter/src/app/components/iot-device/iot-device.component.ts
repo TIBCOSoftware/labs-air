@@ -177,7 +177,11 @@ export class IotDeviceComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.getGateways();
-    // this.getDevices();
+    
+  }
+
+  ngAfterViewInit() {
+    this.devicesDataSource.sort = this.sort;
   }
 
   public getDevices(gateway) {
@@ -276,10 +280,6 @@ export class IotDeviceComponent implements OnInit, AfterViewInit {
 
   }
 
-
-  ngAfterViewInit() {
-    this.devicesDataSource.sort = this.sort;
-  }
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
