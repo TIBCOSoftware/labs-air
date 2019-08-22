@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { LogLevel, LogService } from '@tibco-tcstk/tc-core-lib';
 
-import { Gateway, Subscription } from '../../shared/models/iot.model';
+import { Gateway, Subscription, Rule } from '../../shared/models/iot.model';
 import { TSReading } from '../../shared/models/iot.model';
 
 const httpOptions = {
@@ -293,6 +293,125 @@ export class DgraphService {
       .pipe(
         tap(_ => this.logger.info('deleted subscription')),
         catchError(this.handleError<string>('deleteSubscription'))
+      );
+  }
+
+  getRules(gatewayName): Observable<Rule[]> {
+    const url = `${this.dgraphUrl}/query`;
+    let query = `{
+      var(func: has(gateway)) @filter(eq(uuid, "${gatewayName}")) {
+        rules as gateway_rule {
+        }
+      }
+      resp(func: uid(rules)) {
+        uid
+        name
+        uuid
+        description
+        conditionDevice
+        conditionResource
+        conditionOperation
+        conditionValue
+        actionSendNotification
+        actionNotification
+        actionSendCommand
+        actionDevice
+        actionResource
+        actionValue
+        created
+        modified
+      }
+    }`;
+
+    console.log("getRules service query: ", query)
+
+    return this.http.post<any>(url, query, httpOptions)
+      .pipe(
+        map(response => response.data.resp as Rule[]),
+        tap(_ => this.logger.info('fetched rules')),
+        catchError(this.handleError<Rule[]>('getRules', []))
+      );
+
+  }
+
+  addRule(gatewayUid: number, rule: Rule): Observable<string> {
+    const url = `${this.dgraphUrl}/mutate`;
+    let query = `{
+      set {
+        _:Rule <name> "${rule.name}" .
+        _:Rule <uuid> "${rule.name}" .
+        _:Rule <type> "rule" .
+        _:Rule <rule> "" .
+        _:Rule <description> "${rule.description}" .
+        _:Rule <conditionDevice> "${rule.conditionDevice}" .
+        _:Rule <conditionResource> "${rule.conditionResource}" .
+        _:Rule <conditionOperation> "${rule.conditionOperation}" .
+        _:Rule <conditionValue> "${rule.conditionValue}" .
+        _:Rule <actionSendNotification> "${rule.actionSendNotification}" .
+        _:Rule <actionNotification> "${rule.actionNotification}" .
+        _:Rule <actionSendCommand> "${rule.actionSendCommand}" .
+        _:Rule <actionDevice> "${rule.actionDevice}" .
+        _:Rule <actionResource> "${rule.actionResource}" .
+        _:Rule <actionValue> "${rule.actionValue}" .
+        _:Rule <created> "${rule.created}" .
+        _:Rule <modified> "${rule.modified}" .
+        <${gatewayUid}> <gateway_rule> _:Rule .
+      }
+    }`;
+    console.log('Mutate statement: ', query);
+
+    return this.http.post<any>(url, query, httpMutateOptions)
+      .pipe(
+        tap(_ => this.logger.info('add rule')),
+        catchError(this.handleError<string>('addRule'))
+      );
+
+  }
+
+  updateRule(rule: Rule): Observable<string> {
+    const url = `${this.dgraphUrl}/mutate`;
+    let query = `{
+      set {
+        <${rule.uid}> <name> "${rule.name}" .
+        <${rule.uid}> <uuid> "${rule.uuid}" .
+        <${rule.uid}> <description> "${rule.description}" .
+        <${rule.uid}> <conditionDevice> "${rule.conditionDevice}" .
+        <${rule.uid}> <conditionResource> "${rule.conditionResource}" .
+        <${rule.uid}> <conditionOperation> "${rule.conditionOperation}" .
+        <${rule.uid}> <conditionValue> "${rule.conditionValue}" .
+        <${rule.uid}> <actionSendNotification> "${rule.actionSendNotification}" .
+        <${rule.uid}> <actionNotification> "${rule.actionNotification}" .
+        <${rule.uid}> <actionSendCommand> "${rule.actionSendCommand}" .
+        <${rule.uid}> <actionDevice> "${rule.actionDevice}" .
+        <${rule.uid}> <actionResource> "${rule.actionResource}" .
+        <${rule.uid}> <actionValue> "${rule.actionValue}" .
+        <${rule.uid}> <modified> "${rule.modified}" .
+      }
+    }`;
+    console.log('Mutate statement: ', query);
+
+    return this.http.post<any>(url, query, httpMutateOptions)
+      .pipe(
+        tap(_ => this.logger.info('updated rule')),
+        catchError(this.handleError<string>('updateRule'))
+      );
+
+  }
+
+  deleteRule(gatewayUid: number, ruleUid: number): Observable<string> {
+    const url = `${this.dgraphUrl}/mutate`;
+    let query = `{
+      delete {
+        <${ruleUid}> * * .
+        <${gatewayUid}> <gateway_rule> <${ruleUid}> .
+      }
+    }`;
+    console.log('Delete Rule Mutate statement: ', query);
+
+    return this.http.post<any>(url, query, httpMutateOptions)
+      .pipe(
+        tap(_ => this.logger.info('deleted rule')),
+        catchError(this.handleError<string>('deleteRule'))
       );
   }
 

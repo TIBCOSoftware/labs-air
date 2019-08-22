@@ -162,6 +162,25 @@ export class Reading {
   value: string;
 }
 
+export class Rule {
+  uid: number;
+  created: number;
+  modified: number;
+  uuid: string;
+  name: string;
+  description: string;
+  conditionDevice: string;
+  conditionResource: string;
+  conditionOperation: string;
+  conditionValue: string;
+  actionSendNotification: boolean;
+  actionNotification: string;
+  actionSendCommand: boolean;
+  actionDevice: string;
+  actionResource: string;
+  actionValue: string;
+}
+
 // TSReading - Time series reading.
 export class TSReading {
   value: string;
