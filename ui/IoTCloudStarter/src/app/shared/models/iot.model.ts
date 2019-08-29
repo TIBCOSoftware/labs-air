@@ -171,14 +171,29 @@ export class Rule {
   description: string;
   conditionDevice: string;
   conditionResource: string;
-  conditionOperation: string;
+  conditionCompareToValue: boolean;
+  conditionCompareToValueOperation: string;
   conditionValue: string;
+  conditionCompareToLastValue: boolean;
+  conditionCompareToLastValueOperation: string;
   actionSendNotification: boolean;
   actionNotification: string;
   actionSendCommand: boolean;
   actionDevice: string;
   actionResource: string;
   actionValue: string;
+}
+
+export class Notification {
+  created: number;
+  uuid: string;
+  source: string;
+  gateway: string;
+  device: string;
+  resource: string;
+  value: string;
+  description: string;
+  level: string;
 }
 
 // TSReading - Time series reading.

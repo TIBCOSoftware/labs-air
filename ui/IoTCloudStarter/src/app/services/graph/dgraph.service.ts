@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { LogLevel, LogService } from '@tibco-tcstk/tc-core-lib';
 
-import { Gateway, Subscription, Rule } from '../../shared/models/iot.model';
+import { Gateway, Subscription, Rule, Notification } from '../../shared/models/iot.model';
 import { TSReading } from '../../shared/models/iot.model';
 
 const httpOptions = {
@@ -310,8 +310,11 @@ export class DgraphService {
         description
         conditionDevice
         conditionResource
-        conditionOperation
+        conditionCompareToValue
+        conditionCompareToValueOperation
         conditionValue
+        conditionCompareToLastValue
+        conditionCompareToLastValueOperation
         actionSendNotification
         actionNotification
         actionSendCommand
@@ -345,8 +348,11 @@ export class DgraphService {
         _:Rule <description> "${rule.description}" .
         _:Rule <conditionDevice> "${rule.conditionDevice}" .
         _:Rule <conditionResource> "${rule.conditionResource}" .
-        _:Rule <conditionOperation> "${rule.conditionOperation}" .
+        _:Rule <conditionCompareToValue> "${rule.conditionCompareToValue}" .
+        _:Rule <conditionCompareToValueOperation> "${rule.conditionCompareToValueOperation}" .
         _:Rule <conditionValue> "${rule.conditionValue}" .
+        _:Rule <conditionCompareToLastValue> "${rule.conditionCompareToLastValue}" .
+        _:Rule <conditionCompareToLastValueOperation> "${rule.conditionCompareToLastValueOperation}" .
         _:Rule <actionSendNotification> "${rule.actionSendNotification}" .
         _:Rule <actionNotification> "${rule.actionNotification}" .
         _:Rule <actionSendCommand> "${rule.actionSendCommand}" .
@@ -377,8 +383,11 @@ export class DgraphService {
         <${rule.uid}> <description> "${rule.description}" .
         <${rule.uid}> <conditionDevice> "${rule.conditionDevice}" .
         <${rule.uid}> <conditionResource> "${rule.conditionResource}" .
-        <${rule.uid}> <conditionOperation> "${rule.conditionOperation}" .
+        <${rule.uid}> <conditionCompareToValue> "${rule.conditionCompareToValue}" .
+        <${rule.uid}> <conditionCompareToValueOperation> "${rule.conditionCompareToValueOperation}" .
         <${rule.uid}> <conditionValue> "${rule.conditionValue}" .
+        <${rule.uid}> <conditionCompareToLastValue> "${rule.conditionCompareToLastValue}" .
+        <${rule.uid}> <conditionCompareToLastValueOperation> "${rule.conditionCompareToLastValueOperation}" .
         <${rule.uid}> <actionSendNotification> "${rule.actionSendNotification}" .
         <${rule.uid}> <actionNotification> "${rule.actionNotification}" .
         <${rule.uid}> <actionSendCommand> "${rule.actionSendCommand}" .
@@ -426,11 +435,14 @@ export class DgraphService {
         readings as resource_reading (first:-300) {
         }
       }
-      resp(func: uid(readings)) {
+      resp(func: uid(readings), orderasc:created) {
         created
         value
       }
     }`;
+
+    console.log('Reading query statement: ', query);
+
     return this.http.post<any>(url, query, httpOptions)
       .pipe(
         map(response => response.data.resp as TSReading[]),
@@ -448,7 +460,7 @@ export class DgraphService {
         readings as resource_reading @filter(gt(created, ${fromts})) {
         }
       }
-      resp(func: uid(readings)) {
+      resp(func: uid(readings), orderasc:created) {
         created
         value
       }
@@ -474,7 +486,7 @@ export class DgraphService {
         readings as resource_reading @filter(gt(created, ${fromts}) AND lt(created, ${tots})) (first:-500) {
         }
       }
-      resp(func: uid(readings)) {
+      resp(func: uid(readings), orderasc:created) {
         created
         value
       }
@@ -491,6 +503,22 @@ export class DgraphService {
       );
   }
 
+  getNotifications(): Observable<Notification[]> {
+    console.log("GetNotifications service called")
+    const url = `${this.dgraphUrl}/query`;
+    let query = `{
+      resp(func: has(notification)) {
+        uid uuid source gateway device resource value description level
+      }
+    }`;
+
+    return this.http.post<any>(url, query, httpOptions)
+      .pipe(
+        map(response => response.data.resp as Notification[]),
+        tap(_ => this.logger.info('fetched notifications')),
+        catchError(this.handleError<Notification[]>('getNotifications', []))
+      );
+  }
 
   /*
   * Handle Http operation that failed.

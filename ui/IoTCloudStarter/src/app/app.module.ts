@@ -40,6 +40,7 @@ import { IotGatewayDashboardComponent } from './components/iot-gateway-dashboard
 import { IotDeviceProfileComponent } from './components/iot-device-profile/iot-device-profile.component';
 import { IotDeviceProvisionComponent } from './components/iot-device-provision/iot-device-provision.component';
 import { IotRulesComponent } from './components/iot-rules/iot-rules.component';
+import { IotNotificationsComponent } from './components/iot-notifications/iot-notifications.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { IotRulesComponent } from './components/iot-rules/iot-rules.component';
     IotGatewayDashboardComponent,
     IotDeviceProfileComponent,
     IotDeviceProvisionComponent,
-    IotRulesComponent
+    IotRulesComponent,
+    IotNotificationsComponent
   ],
   imports: [
     AppRoutingModule,

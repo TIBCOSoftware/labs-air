@@ -60,6 +60,10 @@ export class IotHomeCockpitComponent extends LiveAppsHomeCockpitComponent {
             route: '/starterApp/home/rules',
             title: 'Rules',
         }, {
+            icon: 'device_hub',
+            route: '/starterApp/home/notifications',
+            title: 'Notifications',
+        }, {
             icon: 'settings',
             route: 'sales/leads',
             title: 'Settings',

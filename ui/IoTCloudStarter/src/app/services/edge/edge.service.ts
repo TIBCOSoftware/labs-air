@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError, map, tap, timeout } from 'rxjs/operators';
 import { LogLevel, LogService } from '@tibco-tcstk/tc-core-lib';
 
-import { Device, Profile, Service, Subscription, GetCommandResponse, Gateway } from '../../shared/models/iot.model';
+import { Device, Profile, Service, Subscription, GetCommandResponse, Gateway, Rule } from '../../shared/models/iot.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -34,6 +34,7 @@ export class EdgeService {
   private edgeCoreCommandUrl = '/corecommand/api/v1/';
   private edgeExportClientUrl = '/exportclient/api/v1/';
   private edgeExportDistroUrl = '/exportdistro/api/v1/';
+  private edgeFlogoRulesUrl = '/flogorules/api/v1/'
 
   private gatewayCoreMetadataPath = '/edgexgateway/metadata/api/v1';
   private gatewayCoreDataPath = '/edgexgateway/coredata/api/v1';
@@ -349,6 +350,17 @@ export class EdgeService {
       .pipe(
         tap(_ => this.logger.info('registered to receive events')),
         catchError(this.handleError<string>('addRegistration'))
+      );
+  }
+
+  addRule(gateway: Gateway, rule: Rule): Observable<string> {
+
+    const url = `/${gateway.uuid}${this.edgeFlogoRulesUrl}rule`;
+
+    return this.http.post<string>(url, rule, httpTextResponseOptions)
+      .pipe(
+        tap(_ => this.logger.info('added rule')),
+        catchError(this.handleError<string>('addRule'))
       );
   }
 

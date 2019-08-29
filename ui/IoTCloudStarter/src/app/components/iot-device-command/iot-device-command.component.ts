@@ -99,6 +99,9 @@ export class IotDeviceCommandComponent implements OnInit, AfterViewInit {
     this.deviceSelection.select(row);
     this.deviceSelected = row.id;
 
+    // Clear resource selection
+    this.resourceSelection.clear();
+    
     // this.getResourceReadings();
     this.resourcesDataSource.data = row.profile.deviceResources as Resource[];
 

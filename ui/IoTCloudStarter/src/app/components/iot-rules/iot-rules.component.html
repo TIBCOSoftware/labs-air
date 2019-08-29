@@ -113,9 +113,17 @@
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
+                           
+                        </div>
+
+                        <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px" style="padding-top: 10px">
+
+                            <mat-checkbox fxFlex="1 1 18%" formControlName="conditionCompareToValue"> New Metric Value
+                            </mat-checkbox>
+
                             <mat-form-field fxFlex="1 1 18%" appearance="standard">
                                 <mat-label>Select operation</mat-label>
-                                <mat-select formControlName="conditionOperation">
+                                <mat-select formControlName="conditionCompareToValueOperation">
                                     <mat-option *ngFor="let item of operations" [value]="item.value">
                                         {{item.viewValue}}
                                     </mat-option>
@@ -125,6 +133,22 @@
                                 <mat-label>Value</mat-label>
                                 <input matInput [readonly]=false formControlName="conditionValue">
                             </mat-form-field>
+                        </div>
+
+                        <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px" style="padding-top: 10px">
+
+                            <mat-checkbox fxFlex="1 1 18%" formControlName="conditionCompareToLastValue">New Metric Value
+                            </mat-checkbox>
+
+                            <mat-form-field fxFlex="1 1 18%" appearance="standard">
+                                <mat-label>Select operation</mat-label>
+                                <mat-select formControlName="conditionCompareToLastValueOperation">
+                                    <mat-option *ngFor="let item of operations" [value]="item.value">
+                                        {{item.viewValue}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-label class="mat-label">Last Value</mat-label>
                         </div>
 
                         <p class="mat-h3">Actions</p>

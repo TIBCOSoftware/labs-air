@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EdgeService } from '../../services/edge/edge.service';
 import { DgraphService } from '../../services/graph/dgraph.service';
 import { Device, TSReading, Resource, Gateway, Rule } from '../../shared/models/iot.model';
-import { MatPaginator, MatSort, MatTableDataSource, MatDatepickerInputEvent } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 
 export interface SelectItem {
@@ -47,7 +47,8 @@ export class IotRulesComponent implements OnInit, AfterViewInit {
 
   constructor(private edgeService: EdgeService,
     private graphService: DgraphService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private _snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -56,8 +57,11 @@ export class IotRulesComponent implements OnInit, AfterViewInit {
       description: [''],
       conditionDevice: ['', Validators.required],
       conditionResource: ['', Validators.required],
-      conditionOperation: ['', Validators.required],
+      conditionCompareToValue: [true],
+      conditionCompareToValueOperation: ['', Validators.required],
       conditionValue: ['', Validators.required],
+      conditionCompareToLastValue: [false],
+      conditionCompareToLastValueOperation: [''],
       actionSendNotification: [true],
       actionNotification: ['', Validators.required],
       actionSendCommand: [true],
@@ -69,6 +73,8 @@ export class IotRulesComponent implements OnInit, AfterViewInit {
       uid: ['']
     });
 
+    this.setConditionConpareToValueValidators();
+    this.setConditionConpareToLastValueValidators();
     this.setActionSendNotificationValidators();
     this.setActionSendCommandValidators();
 
@@ -148,8 +154,11 @@ export class IotRulesComponent implements OnInit, AfterViewInit {
       description: row.description,
       conditionDevice: row.conditionDevice,
       conditionResource: row.conditionResource,
-      conditionOperation: row.conditionOperation,
+      conditionCompareToValue: row.conditionCompareToValue,
+      conditionCompareToValueOperation: row.conditionCompareToValueOperation,
       conditionValue: row.conditionValue,
+      conditionCompareToLastValue: row.conditionCompareToLastValue,
+      conditionCompareToLastValueOperation: row.conditionCompareToLastValueOperation,
       actionSendNotification: row.actionSendNotification,
       actionNotification: row.actionNotification,
       actionSendCommand: row.actionSendCommand,
@@ -215,8 +224,11 @@ export class IotRulesComponent implements OnInit, AfterViewInit {
     rule.description = this.ruleForm.controls['description'].value;
     rule.conditionDevice = this.ruleForm.controls['conditionDevice'].value;
     rule.conditionResource = this.ruleForm.controls['conditionResource'].value;
-    rule.conditionOperation = this.ruleForm.controls['conditionOperation'].value;
+    rule.conditionCompareToValue = this.ruleForm.controls['conditionCompareToValue'].value;
+    rule.conditionCompareToValueOperation = this.ruleForm.controls['conditionCompareToValueOperation'].value;
     rule.conditionValue = this.ruleForm.controls['conditionValue'].value;
+    rule.conditionCompareToLastValue = this.ruleForm.controls['conditionCompareToLastValue'].value;
+    rule.conditionCompareToLastValueOperation = this.ruleForm.controls['conditionCompareToLastValueOperation'].value;
     rule.actionSendNotification = this.ruleForm.controls['actionSendNotification'].value;
     rule.actionNotification = this.ruleForm.controls['actionNotification'].value;
     rule.actionSendCommand = this.ruleForm.controls['actionSendCommand'].value;
@@ -245,8 +257,11 @@ export class IotRulesComponent implements OnInit, AfterViewInit {
     rule.description = this.ruleForm.controls['description'].value;
     rule.conditionDevice = this.ruleForm.controls['conditionDevice'].value;
     rule.conditionResource = this.ruleForm.controls['conditionResource'].value;
-    rule.conditionOperation = this.ruleForm.controls['conditionOperation'].value;
+    rule.conditionCompareToValue = this.ruleForm.controls['conditionCompareToValue'].value;
+    rule.conditionCompareToValueOperation = this.ruleForm.controls['conditionCompareToValueOperation'].value;
     rule.conditionValue = this.ruleForm.controls['conditionValue'].value;
+    rule.conditionCompareToLastValue = this.ruleForm.controls['conditionCompareToLastValue'].value;
+    rule.conditionCompareToLastValueOperation = this.ruleForm.controls['conditionCompareToLastValueOperation'].value;
     rule.actionSendNotification = this.ruleForm.controls['actionSendNotification'].value;
     rule.actionNotification = this.ruleForm.controls['actionNotification'].value;
     rule.actionSendCommand = this.ruleForm.controls['actionSendCommand'].value;
@@ -302,6 +317,48 @@ export class IotRulesComponent implements OnInit, AfterViewInit {
     });
   }
 
+  setConditionConpareToValueValidators() {
+    const conditionCompareToValueOperationControl = this.ruleForm.get('conditionCompareToValueOperation');
+    const conditionValueControl = this.ruleForm.get('conditionValue');
+
+    this.ruleForm.get('conditionCompareToValue').valueChanges
+      .subscribe(compareToValue => {
+
+        if (compareToValue) {
+          console.log("setting validator for compare to value");
+          conditionCompareToValueOperationControl.setValidators([Validators.required]);
+          conditionValueControl.setValidators([Validators.required]);
+        }
+        else {
+          console.log("clearing validator for action notification");
+          conditionCompareToValueOperationControl.setValidators(null);
+          conditionValueControl.setValidators(null);
+        }
+
+        conditionCompareToValueOperationControl.updateValueAndValidity();
+        conditionValueControl.updateValueAndValidity();
+      });
+  }
+
+  setConditionConpareToLastValueValidators() {
+    const conditionCompareToLastValueOperationControl = this.ruleForm.get('conditionCompareToLastValueOperation');
+
+    this.ruleForm.get('conditionCompareToLastValue').valueChanges
+      .subscribe(compareToLastValue => {
+
+        if (compareToLastValue) {
+          console.log("setting validator for compare to value");
+          conditionCompareToLastValueOperationControl.setValidators([Validators.required]);
+        }
+        else {
+          console.log("clearing validator for action notification");
+          conditionCompareToLastValueOperationControl.setValidators(null);
+        }
+
+        conditionCompareToLastValueOperationControl.updateValueAndValidity();
+      });
+  }
+
   setActionSendNotificationValidators() {
     const actionNotificationControl = this.ruleForm.get('actionNotification');
 
@@ -351,7 +408,43 @@ export class IotRulesComponent implements OnInit, AfterViewInit {
 
   deployRule() {
 
+    let ts = Date.now();
+    let rule = new Rule();
+    rule.name = this.ruleForm.controls['name'].value;
+    rule.uuid = this.ruleForm.controls['name'].value;
+    rule.description = this.ruleForm.controls['description'].value;
+    rule.conditionDevice = this.ruleForm.controls['conditionDevice'].value;
+    rule.conditionResource = this.ruleForm.controls['conditionResource'].value;
+    rule.conditionCompareToValue = this.ruleForm.controls['conditionCompareToValue'].value;
+    rule.conditionCompareToValueOperation = this.ruleForm.controls['conditionCompareToValueOperation'].value;
+    rule.conditionValue = this.ruleForm.controls['conditionValue'].value;
+    rule.conditionCompareToLastValue = this.ruleForm.controls['conditionCompareToLastValue'].value;
+    rule.conditionCompareToLastValueOperation = this.ruleForm.controls['conditionCompareToLastValueOperation'].value;
+    rule.actionSendNotification = this.ruleForm.controls['actionSendNotification'].value;
+    rule.actionNotification = this.ruleForm.controls['actionNotification'].value;
+    rule.actionSendCommand = this.ruleForm.controls['actionSendCommand'].value;
+    rule.actionDevice = this.ruleForm.controls['actionDevice'].value;
+    rule.actionResource = this.ruleForm.controls['actionResource'].value;
+    rule.actionValue = this.ruleForm.controls['actionValue'].value;
+    rule.created = ts;
+    rule.modified = ts;
+
+    this.edgeService.addRule(this.selectedGateway, rule)
+      .subscribe(res => {
+        console.log("Result from adding rule: ", res);
+
+        let message = 'Success'
+        if (res == undefined) {
+          message = 'Failure';
+        }
+
+        this._snackBar.open(message, "Deplooy Rule", {
+          duration: 3000,
+        });
+
+      });
   }
+
 
   undeployRule() {
 

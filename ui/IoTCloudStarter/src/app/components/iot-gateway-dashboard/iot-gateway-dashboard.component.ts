@@ -41,6 +41,29 @@ export class IotGatewayDashboardComponent implements OnInit {
         showToolBar: false,
         showUndoRedo: false
       };
+
+
+      // this.spotfireServer = 'http://ec2-100-26-8-102.compute-1.amazonaws.com';
+      // this.analysisPath = '/spotfire/wp/OpenAnalysis?file=7357c586-df50-4f52-a164-01ab91035c97';
+      // this.activePage = '0';
+      // this.parameters = "Test";
+      // this.configuration = {
+      //   showAbout: false,
+      //   showAnalysisInformationTool: false,
+      //   showAuthor: false,
+      //   showClose: false,
+      //   showCustomizableHeader: false,
+      //   showDodPanel: false,
+      //   showExportFile: false,
+      //   showFilterPanel: true,
+      //   showHelp: false,
+      //   showLogout: false,
+      //   showPageNavigation: true,
+      //   showReloadAnalysis: false,
+      //   showStatusBar: false,
+      //   showToolBar: false,
+      //   showUndoRedo: false
+      // };
   
     }
   

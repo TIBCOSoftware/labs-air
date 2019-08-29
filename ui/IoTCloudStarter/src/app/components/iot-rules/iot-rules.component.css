@@ -4,7 +4,7 @@
     margin: 0px;
     border-top-width: 2px;
     border-top-style: solid;
-  /* /  border-top-color: rgba(0,0,0,.12); */
+    border-top-color: red;
  }
 
  .mat-h3 {
@@ -13,8 +13,13 @@
 
 .mat-checkbox {
     padding-top: 15px;
+    margin-top: 15px;
 }
 
+.mat-label {
+    padding-top: 15px;
+    margin-top: 15px;
+}
 
 
 

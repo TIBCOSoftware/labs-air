@@ -335,5 +335,12 @@
     "changeOrigin": true,
     "logLevel": "info",
     "pathRewrite":{"^/dgraph" : ""}
+  },
+  "/gateway1/flogorules/api/v1/*": {
+    "target": "http://localhost:48095",
+    "secure": "false",
+    "changeOrigin": true,
+    "logLevel": "info",
+    "pathRewrite":{"^/gateway1" : ""}
   }
 }
