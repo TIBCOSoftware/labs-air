@@ -14,25 +14,16 @@ var LoggingClient logger.LoggingClient
 
 // CreateRuleSession - creates a rule session
 func CreateRuleSession(tupleTypesFilename string) (model.RuleSession, error) {
-	rs, _ := ruleapi.GetOrCreateRuleSession("FlogoRulesSession")
 
-	tupleDescFilePath := "./res/" + tupleTypesFilename
-
-	tup, err := ioutil.ReadFile(tupleDescFilePath)
+	err := loadTupleSchema(tupleTypesFilename)
 	if err != nil {
-
 		LoggingClient.Error(fmt.Sprintf("exit msg: %s", err))
-
 		return nil, err
 	}
 
-	err = model.RegisterTupleDescriptors(string(tup))
-	if err != nil {
-		return nil, err
-	}
+	RegisterConditionsAndActions()
 
-	LoggingClient.Info(fmt.Sprintf("Read tuple descriptor: %s", tup))
-	return rs, nil
+	return ruleapi.GetOrCreateRuleSession("FlogoRulesSession")
 }
 
 // CreateAndLoadRuleSession - creates a rule session and loads rules from config file

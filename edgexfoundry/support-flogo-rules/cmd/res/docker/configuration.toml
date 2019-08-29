@@ -39,13 +39,10 @@ EnableRemote = false
 File = '/edgex/logs/support-flogo-rules.log'
 
 # Choose either an HTTP trigger or MessageBus trigger (aka Binding)
-# [Binding]
-#  Type="messagebus"
-#  SubscribeTopic="events"
-#  PublishTopic=""
-
 [Binding]
-Type="http"
+ Type="messagebus"
+ SubscribeTopic="events"
+ PublishTopic=""
 
 [ApplicationSettings]
 ApplicationName = "support-flogo-rules"

@@ -36,7 +36,7 @@ Type = 'zero'
 
 [Logging]
 EnableRemote = false
-File = './logs/support-flogo-rulesengine.log'
+File = './logs/support-flogo-rules.log'
 
 # Choose either an HTTP trigger or MessageBus trigger (aka Binding)
 [Binding]

@@ -1,6 +1,6 @@
 [
     {
-      "name": "Reading",
+      "name": "ReadingEvent",
       "ttl": 0,
       "properties": [
         {
@@ -13,8 +13,28 @@
           "type": "String"
         },
         {
-          "name": "instrument",
+          "name": "resource",
           "type": "String"
+        },
+        {
+          "name": "value",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "ResourceConcept",
+      "ttl": -1,
+      "properties": [
+        {
+          "name": "device",
+          "type": "String",
+          "pk-index": 0
+        },
+        {
+          "name": "resource",
+          "type": "String",
+          "pk-index": 1
         },
         {
           "name": "value",
