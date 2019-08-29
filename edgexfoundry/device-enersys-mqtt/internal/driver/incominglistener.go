@@ -150,6 +150,92 @@ func onIncomingDataReceived(client mqtt.Client, message mqtt.Message) {
 
 }
 
+// Sample function to send messages in one batch
+func onIncomingDataReceivedBatchMessages(client mqtt.Client, message mqtt.Message) {
+
+	driver.Logger.Info(fmt.Sprintf("[Incoming listener] Incoming reading received: topic=%v msg=%v", message.Topic(), string(message.Payload())))
+
+	// var ep EnersysPayload
+
+	// json.Unmarshal(message.Payload(), &ep)
+
+	payload := string(message.Payload())
+	payloadArray := strings.Split(payload, ",")
+
+	// driver.Logger.Info(fmt.Sprintf("[------->MAG-Incoming listener] array length %d:", len(payloadArray)))
+
+	if len(payloadArray) != 111 {
+		return
+	}
+
+	deviceName := strings.TrimSpace(payloadArray[0])
+	dateString := strings.TrimSpace(payloadArray[110])
+	// driver.Logger.Info(fmt.Sprintf("[------->MAG-Incoming listener] dateString:", dateString))
+	t, _ := time.Parse(`01/02/2006 15:04:05.000`, dateString)
+	tms := t.UTC().UnixNano() / 1000000
+
+	var dataArray []string = payloadArray[1:110]
+
+	service := sdk.RunningService()
+
+	commandValues := make([]*sdkModel.CommandValue, len(dataArray))
+
+	for i, v := range dataArray {
+		fmt.Printf("Value[%d] = %s - %s\n", i, v, metrics[i])
+
+		// cmd := data["cmd"].(string)
+		devResource := metrics[i]
+
+		reading := strings.TrimSpace(dataArray[94])
+
+		deviceObject, ok := service.DeviceResource(deviceName, devResource, "get")
+		if !ok {
+			driver.Logger.Warn(fmt.Sprintf("[Incoming listener] Incoming reading ignored. No DeviceObject found : topic=%v msg=%v", message.Topic(), string(message.Payload())))
+			return
+		}
+
+		valueType := ""
+		if deviceObject.Properties.Value.Type == "Float32" {
+			valueType = "String"
+		} else {
+			valueType = deviceObject.Properties.Value.Type
+		}
+
+		// req := sdkModel.CommandRequest{
+		// 	DeviceResourceName: devResource,
+		// 	Type:               sdkModel.ParseValueType(deviceObject.Properties.Value.Type),
+		// }
+
+		req := sdkModel.CommandRequest{
+			DeviceResourceName: devResource,
+			Type:               sdkModel.ParseValueType(valueType),
+		}
+
+		result, err := newResult(req, reading, tms)
+
+		if err != nil {
+			driver.Logger.Warn(fmt.Sprintf("[Incoming listener] Incoming reading ignored.   topic=%v msg=%v error=%v", message.Topic(), string(message.Payload()), err))
+			return
+		}
+
+		commandValues[i] = result
+	}
+
+	// asyncValues := &sdkModel.AsyncValues{
+	// 	DeviceName:    deviceName,
+	// 	CommandValues: []*sdkModel.CommandValue{result},
+	// }
+
+	asyncValues := &sdkModel.AsyncValues{
+		DeviceName:    deviceName,
+		CommandValues: commandValues,
+	}
+
+	driver.AsyncCh <- asyncValues
+
+}
+
+// sample function for handling the json message
 func onIncomingDataReceivedWithJson(client mqtt.Client, message mqtt.Message) {
 
 	driver.Logger.Info(fmt.Sprintf("[Incoming listener] Incoming reading received: topic=%v msg=%v", message.Topic(), string(message.Payload())))
