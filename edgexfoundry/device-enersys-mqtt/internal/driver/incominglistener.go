@@ -75,7 +75,7 @@ func startIncomingListening() error {
 	select {}
 }
 
-func onIncomingDataReceived(client mqtt.Client, message mqtt.Message) {
+func onIncomingDataReceivedSingleMessage(client mqtt.Client, message mqtt.Message) {
 
 	driver.Logger.Info(fmt.Sprintf("[Incoming listener] Incoming reading received: topic=%v msg=%v", message.Topic(), string(message.Payload())))
 
@@ -151,7 +151,8 @@ func onIncomingDataReceived(client mqtt.Client, message mqtt.Message) {
 }
 
 // Sample function to send messages in one batch
-func onIncomingDataReceivedBatchMessages(client mqtt.Client, message mqtt.Message) {
+func onIncomingDataReceived(client mqtt.Client, message mqtt.Message) {
+	// func onIncomingDataReceivedBatchMessages(client mqtt.Client, message mqtt.Message) {
 
 	driver.Logger.Info(fmt.Sprintf("[Incoming listener] Incoming reading received: topic=%v msg=%v", message.Topic(), string(message.Payload())))
 
