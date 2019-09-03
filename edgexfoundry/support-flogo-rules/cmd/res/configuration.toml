@@ -47,5 +47,4 @@ File = './logs/support-flogo-rules.log'
 
 [ApplicationSettings]
 ApplicationName = "support-flogo-rules"
-RulesDefinitions = "ruleDefinitions.json"
 TupleTypes = "tupleTypes.json"

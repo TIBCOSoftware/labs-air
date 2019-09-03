@@ -32,7 +32,6 @@ func main() {
 
 	// Get the application's specific configuration settings.
 	appSettings := edgexSdk.ApplicationSettings()
-	ruleDefsFilename := ""
 	tupleTypesFilename := ""
 	if appSettings != nil {
 		appName, ok := appSettings["ApplicationName"]
@@ -42,10 +41,8 @@ func main() {
 			edgexSdk.LoggingClient.Error("ApplicationName application setting not found")
 			os.Exit(-1)
 		}
-		ruleDefsFilename, _ = appSettings["RulesDefinitions"]
 		tupleTypesFilename, _ = appSettings["TupleTypes"]
 
-		edgexSdk.LoggingClient.Info(fmt.Sprintf("Rule Definitions File: %s", ruleDefsFilename))
 		edgexSdk.LoggingClient.Info(fmt.Sprintf("Tuple Types File: %s", tupleTypesFilename))
 
 	} else {
@@ -64,9 +61,6 @@ func main() {
 
 	// Create Rule Session
 	rs, _ = rules.CreateRuleSession(tupleTypesFilename)
-	// rs, _ = rules.CreateAndLoadRuleSession(tupleTypesFilename, ruleDefsFilename)
-
-	//rules.CreateRules(rs, ruleDefsFilename, edgexSdk.LoggingClient)
 
 	// Start rule session
 	rs.Start(nil)
