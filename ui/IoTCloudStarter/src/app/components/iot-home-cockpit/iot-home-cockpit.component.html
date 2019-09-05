@@ -17,7 +17,8 @@
       <a *ngFor="let item of networkRoutes" mat-list-item (click)="sidenav.close()" routerLinkActive
         #routerLinkActiveInstance="routerLinkActive" [class.list-item-active]="routerLinkActiveInstance.isActive"
         [routerLink]="[item.route]">
-        <mat-icon matListIcon class="app-nav-list-icon"> {{ item.icon }} </mat-icon>
+        <mat-icon matListIcon class="app-nav-list-icon" svgIcon="{{item.icon}}" ></mat-icon>
+        <!-- <mat-icon matListIcon class="app-nav-list-icon" > {{ item.icon }} </mat-icon> -->
         {{item.title}}
       </a>
 
@@ -28,7 +29,8 @@
       <a *ngFor="let item of deviceRoutes" mat-list-item (click)="sidenav.close()" routerLinkActive
         #routerLinkActiveInstance="routerLinkActive" [class.list-item-active]="routerLinkActiveInstance.isActive"
         [routerLink]="[item.route]">
-        <mat-icon matListIcon class="app-nav-list-icon"> {{ item.icon }} </mat-icon>
+        <mat-icon matListIcon class="app-nav-list-icon" svgIcon="{{item.icon}}"></mat-icon>
+        <!-- <mat-icon matListIcon class="app-nav-list-icon"> {{ item.icon }} </mat-icon> -->
         {{item.title}}
       </a>
 
