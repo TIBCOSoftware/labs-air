@@ -20,31 +20,8 @@ export class IotGatewayDashboardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-      this.spotfireServer = 'https://spotfire-next.cloud.tibco.com';
-      this.analysisPath = '/Users/vioijfozulumlardrxcikq7xtczlfcrk/Public/Autoencoder_v5';
-      this.activePage = '0';
-      this.parameters = "Test";
-      this.configuration = {
-        showAbout: false,
-        showAnalysisInformationTool: false,
-        showAuthor: false,
-        showClose: false,
-        showCustomizableHeader: false,
-        showDodPanel: false,
-        showExportFile: false,
-        showFilterPanel: true,
-        showHelp: false,
-        showLogout: false,
-        showPageNavigation: true,
-        showReloadAnalysis: false,
-        showStatusBar: false,
-        showToolBar: false,
-        showUndoRedo: false
-      };
-
-
-      // this.spotfireServer = 'http://ec2-100-26-8-102.compute-1.amazonaws.com';
-      // this.analysisPath = '/spotfire/wp/OpenAnalysis?file=7357c586-df50-4f52-a164-01ab91035c97';
+      // this.spotfireServer = 'https://spotfire-next.cloud.tibco.com';
+      // this.analysisPath = '/Users/vioijfozulumlardrxcikq7xtczlfcrk/Public/Autoencoder_v5';
       // this.activePage = '0';
       // this.parameters = "Test";
       // this.configuration = {
@@ -64,6 +41,33 @@ export class IotGatewayDashboardComponent implements OnInit {
       //   showToolBar: false,
       //   showUndoRedo: false
       // };
+
+      // http://ec2-100-26-8-102.compute-1.amazonaws.com/spotfire/wp/OpenAnalysis?file=/Anonymous/tibcolabs_air_v1.4
+
+      // this.spotfireServer = 'https://spot.bwcedemo.com';
+      // this.analysisPath = '/TIBCO Labs/tibcolabs_air_v1.4';
+
+      this.spotfireServer = 'https://ec2-100-26-8-102.compute-1.amazonaws.com';
+      this.analysisPath = '/Anonymous/tibcolabs_air_v1.4';
+      this.activePage = '0';
+      this.parameters = "Test";
+      this.configuration = {
+        showAbout: false,
+        showAnalysisInformationTool: false,
+        showAuthor: false,
+        showClose: false,
+        showCustomizableHeader: false,
+        showDodPanel: false,
+        showExportFile: false,
+        showFilterPanel: true,
+        showHelp: false,
+        showLogout: false,
+        showPageNavigation: true,
+        showReloadAnalysis: false,
+        showStatusBar: false,
+        showToolBar: false,
+        showUndoRedo: false
+      };
   
     }
   
