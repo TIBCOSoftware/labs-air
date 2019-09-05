@@ -24,3 +24,9 @@ table {
     background-image: url('/assets/img/gateway.png');
     background-size: cover;
 }
+
+
+.gatewaylocation-header-image {
+    background-image: url('/assets/icons/gateway_location.svg');
+    background-size: cover;
+}
