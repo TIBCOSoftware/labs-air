@@ -6,15 +6,6 @@ import {TcLiveappsLibModule} from '@tibco-tcstk/tc-liveapps-lib';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MaterialModule } from './material.module';
-// import {
-//   MatButtonModule, MatButtonToggleModule,
-//   MatCardModule,
-//   MatCheckboxModule, MatDialogModule,
-//   MatExpansionModule,
-//   MatFormFieldModule, MatIconModule, MatInputModule,
-//   MatListModule, MatMenuModule, MatOptionModule, MatSelectModule,
-//   MatTabsModule, MatToolbarModule, MatTooltipModule
-// } from '@angular/material';
 import {LogService, TcCoreLibModule} from '@tibco-tcstk/tc-core-lib';
 import {TcFormsLibModule} from '@tibco-tcstk/tc-forms-lib';
 import {LoginComponent} from './routes/login/login.component';
@@ -41,6 +32,7 @@ import { IotDeviceProfileComponent } from './components/iot-device-profile/iot-d
 import { IotDeviceProvisionComponent } from './components/iot-device-provision/iot-device-provision.component';
 import { IotRulesComponent } from './components/iot-rules/iot-rules.component';
 import { IotNotificationsComponent } from './components/iot-notifications/iot-notifications.component';
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -77,26 +69,9 @@ import { IotNotificationsComponent } from './components/iot-notifications/iot-no
     FormsModule,
     ChartsModule,
     MaterialModule,
-    // MatTabsModule,
-    // MatExpansionModule,
-    // MatButtonModule,
-    // MatCardModule,
-    // MatCheckboxModule,
-    // MatListModule,
-    // MatFormFieldModule,
-    // MatInputModule,
-    // MatToolbarModule,
-    // MatIconModule,
-    // MatSelectModule,
-    // MatOptionModule,
-    // MatDialogModule,
-    // MatMenuModule,
-    // MatCardModule,
-    // MatTooltipModule,
-    // MatTabsModule,
-    // MatButtonToggleModule,
     ReactiveFormsModule,
-    SpotfireViewerModule
+    SpotfireViewerModule,
+    HttpClientModule
   ],
   providers: [
     LogService,
