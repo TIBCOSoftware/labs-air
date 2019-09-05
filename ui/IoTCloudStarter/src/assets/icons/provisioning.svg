@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="22px" viewBox="0 0 20 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 57.1 (101010) - https://sketch.com -->
+    <title>1DC82BC0-D7C7-4792-8192-551A1E9BF560</title>
+    <desc>Created with sketchtool.</desc>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="IoT-Dashboard" transform="translate(-438.000000, -386.000000)" fill="#212121">
+            <g id="icon/device/provisioning" transform="translate(436.000000, 385.000000)">
+                <path d="M12,1 L22,6.5 L22,17.5 L12,23 L2,17.5 L2,6.5 L12,1 Z M12,6 C11.4477153,6 11,6.44771525 11,7 L11,7 L11,11 L7,11 C6.44771525,11 6,11.4477153 6,12 C6,12.5522847 6.44771525,13 7,13 L7,13 L11,13 L11,17 C11,17.5522847 11.4477153,18 12,18 C12.5522847,18 13,17.5522847 13,17 L13,17 L13,13 L17,13 C17.5522847,13 18,12.5522847 18,12 C18,11.4477153 17.5522847,11 17,11 L17,11 L13,11 L13,7 C13,6.44771525 12.5522847,6 12,6 Z" id="Combined-Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>
