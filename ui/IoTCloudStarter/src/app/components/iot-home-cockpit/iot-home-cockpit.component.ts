@@ -20,15 +20,15 @@ export class IotHomeCockpitComponent extends LiveAppsHomeCockpitComponent {
 
     networkRoutes: ROUTE[] = [
         {
-            icon: 'timeline',
+            icon: 'iotdashboard',
             route: '/starterApp/home/iotdashboard',
             title: 'IoT Dashboard',
         }, {
-            icon: 'settings_input_antenna',
+            icon: 'gateway',
             route: '/starterApp/home/gateway',
             title: 'Gateways',
         }, {
-            icon: 'dashboard',
+            icon: 'gatewaydashboard',
             route: '/starterApp/home/gatewaydashboard',
             title: 'Gateways Dashboards',
         }
@@ -36,31 +36,27 @@ export class IotHomeCockpitComponent extends LiveAppsHomeCockpitComponent {
 
     deviceRoutes: ROUTE[] = [
         {
-            icon: 'settings_remote',
+            icon: 'instrumentstreaming',
             route: '/starterApp/home/device',
             title: 'Devices',
         }, {
-            icon: 'settings_remote',
+            icon: 'provisioning',
             route: '/starterApp/home/deviceprovision',
             title: 'Device Provisioning',
         }, {
-            icon: 'timeline',
+            icon: 'command',
             route: '/starterApp/home/devicecommand',
             title: 'Device Commands',
         }, {
-            icon: 'timeline',
-            route: '/starterApp/home/devicestream',
-            title: 'Device Streaming',
-        }, {
-            icon: 'timeline',
+            icon: 'iotdashboard',
             route: '/starterApp/home/devicedashboard',
             title: 'Dashboard',
         }, {
-            icon: 'device_hub',
+            icon: 'rules',
             route: '/starterApp/home/rules',
             title: 'Rules',
         }, {
-            icon: 'device_hub',
+            icon: 'instrumenthistory',
             route: '/starterApp/home/notifications',
             title: 'Notifications',
         }, {
