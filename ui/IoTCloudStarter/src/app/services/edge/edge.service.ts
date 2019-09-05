@@ -262,7 +262,9 @@ export class EdgeService {
         "address": subscription.address,
         "port": subscription.port,
         "topic": subscription.topic,
-        "path": subscription.path
+        "path": subscription.path,
+        "user": subscription.user,
+        "password": subscription.password
       },
       "filter": {
         "deviceIdentifiers": deviceFilter,
@@ -313,7 +315,9 @@ export class EdgeService {
         "method": subscription.method,
         "address": subscription.address,
         "port": subscription.port,
-        "path": subscription.path
+        "path": subscription.path,
+        "user": subscription.user,
+        "password": subscription.password
       },
       "filter": {
         "deviceIdentifiers": deviceFilter,
