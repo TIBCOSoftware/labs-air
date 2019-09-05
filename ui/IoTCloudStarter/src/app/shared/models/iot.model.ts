@@ -134,6 +134,8 @@ export class Addressable {
   path: string;
   baseURL: string;
   url: string;
+  user: string;
+  password: string;
 }
 
 export class Gateway {
