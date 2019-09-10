@@ -23,8 +23,11 @@ export class AppComponent {
       "command",
       this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/icons/command.svg"));
     this.matIconRegistry.addSvgIcon(
-      "dashboard",
+      "devicedashboard",
       this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/icons/dashboard.svg"));
+    this.matIconRegistry.addSvgIcon(
+      "device",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/icons/device.svg"));
     this.matIconRegistry.addSvgIcon(
       "gatewaydashboard",
       this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/icons/gateway_dashboard.svg"));
@@ -49,9 +52,5 @@ export class AppComponent {
     this.matIconRegistry.addSvgIcon(
       "rules",
       this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/icons/rules.svg"));
-    this.matIconRegistry.addSvgIcon(
-      "gatewaydashboard",
-      this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/icons/gateway_dashboard.svg"));
-
   }
 }
