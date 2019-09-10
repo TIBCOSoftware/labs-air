@@ -20,7 +20,8 @@ table {
     font-size: 18px;
 }
 
-.device-header-image {
-    background-image: url('/assets/img/device.png');
-    background-size: cover;
+.device-provisioning-image {
+    background-image: url('/assets/icons/provisioning.svg');
+    background-size: 80%;
+    background-repeat: no-repeat;
 }
