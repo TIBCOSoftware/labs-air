@@ -21,12 +21,22 @@ table {
 }
 
 .gateway-header-image {
-    background-image: url('/assets/img/gateway.png');
-    background-size: cover;
+    background-image: url('/assets/icons/gateway.svg');
+    background-size: 80%;
+    background-repeat: no-repeat;
 }
 
 
-.gatewaylocation-header-image {
+
+
+.gateway-location-image {
     background-image: url('/assets/icons/gateway_location.svg');
-    background-size: cover;
+    background-size: 80%;
+    background-repeat: no-repeat;
+}
+
+.device-header-image {
+    background-image: url('/assets/icons/device.svg');
+    background-size: 80%;
+    background-repeat: no-repeat;
 }

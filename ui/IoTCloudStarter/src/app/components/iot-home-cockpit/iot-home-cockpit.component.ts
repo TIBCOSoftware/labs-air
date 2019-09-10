@@ -36,7 +36,7 @@ export class IotHomeCockpitComponent extends LiveAppsHomeCockpitComponent {
 
     deviceRoutes: ROUTE[] = [
         {
-            icon: 'instrumentstreaming',
+            icon: 'devicedashboard',
             route: '/starterApp/home/device',
             title: 'Devices',
         }, {

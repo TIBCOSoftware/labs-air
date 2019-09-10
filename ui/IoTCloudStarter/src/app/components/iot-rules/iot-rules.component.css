@@ -48,8 +48,9 @@ table {
 }
 
 .rule-header-image {
-    background-image: url('/assets/img/device.png');
-    background-size: cover;
+    background-image: url('/assets/icons/rules.svg');
+    background-size: 60%;
+    background-repeat: no-repeat;
 }
 
 .query-row button {
