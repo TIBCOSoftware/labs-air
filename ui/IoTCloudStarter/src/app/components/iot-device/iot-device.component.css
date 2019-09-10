@@ -21,8 +21,21 @@ table {
 }
 
 .device-header-image {
-    background-image: url('/assets/img/device.png');
-    background-size: cover;
+    background-image: url('/assets/icons/device.svg');
+    background-size: 80%;
+    background-repeat: no-repeat;
+}
+
+.instrument-history-image {
+    background-image: url('/assets/icons/instrument_history.svg');
+    background-size: 80%;
+    background-repeat: no-repeat;
+}
+
+.instrument-streaming-image {
+    background-image: url('/assets/icons/instrument_streaming.svg');
+    background-size: 80%;
+    background-repeat: no-repeat;
 }
 
 .query-row button {
