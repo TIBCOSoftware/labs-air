@@ -67,7 +67,7 @@
           <form [formGroup]="subscriptionForm" class="subscription-form" fxLayout="row wrap" fxLayoutGap="15px">
 
             <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px">
-              <mat-form-field fxFlex="1 1 18%" appearance="fill">
+              <mat-form-field fxFlex="1 1 18%" appearance="outline">
                 <mat-label>Enabled</mat-label>
                 <mat-select formControlName="enabled">
                   <mat-option *ngFor="let item of boolList" [value]="item.value">
@@ -75,19 +75,19 @@
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-              <mat-form-field fxFlex="1 1 18%" appearance="fill">
+              <mat-form-field fxFlex="1 1 18%" appearance="outline">
                 <mat-label>Publisher Name</mat-label>
                 <input matInput [readonly]=false formControlName="publisher">
               </mat-form-field>
-              <mat-form-field fxFlex="1 1 18%" appearance="fill">
+              <mat-form-field fxFlex="1 1 18%" appearance="outline">
                 <mat-label>Subscription Name</mat-label>
                 <input matInput [readonly]=false formControlName="name">
               </mat-form-field>
-              <mat-form-field fxFlex="1 1 18%" appearance="fill">
+              <mat-form-field fxFlex="1 1 18%" appearance="outline">
                 <mat-label>Consumer Name</mat-label>
                 <input matInput [readonly]=false formControlName="consumer">
               </mat-form-field>
-              <mat-form-field fxFlex="1 1 18%" appearance="fill">
+              <mat-form-field fxFlex="1 1 18%" appearance="outline">
                 <mat-label>Destination</mat-label>
                 <mat-select formControlName="destination">
                   <mat-option *ngFor="let item of destinations" [value]="item.value">
@@ -98,7 +98,7 @@
             </div>
 
             <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px">
-              <mat-form-field fxFlex="1 1 18%" appearance="fill">
+              <mat-form-field fxFlex="1 1 18%" appearance="outline">
                 <mat-label>Protocol</mat-label>
                 <mat-select formControlName="protocol">
                   <mat-option *ngFor="let item of protocols" [value]="item.value">
@@ -106,7 +106,7 @@
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-              <mat-form-field fxFlex="1 1 18%" appearance="fill">
+              <mat-form-field fxFlex="1 1 18%" appearance="outline">
                 <mat-label>Method</mat-label>
                 <mat-select formControlName="method">
                   <mat-option *ngFor="let item of methods" [value]="item.value">
@@ -114,26 +114,26 @@
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-              <mat-form-field fxFlex="1 1 18%" appearance="fill">
+              <mat-form-field fxFlex="1 1 18%" appearance="outline">
                 <mat-label>Address</mat-label>
                 <input matInput [readonly]=false formControlName="address">
               </mat-form-field>
-              <mat-form-field fxFlex="1 1 18%" appearance="fill">
+              <mat-form-field fxFlex="1 1 18%" appearance="outline">
                 <mat-label>Port</mat-label>
                 <input matInput [readonly]=false formControlName="port">
               </mat-form-field>
-              <mat-form-field fxFlex="1 1 18%" appearance="fill">
+              <mat-form-field fxFlex="1 1 18%" appearance="outline">
                 <mat-label>Path</mat-label>
                 <input matInput [readonly]=false formControlName="path">
               </mat-form-field>
             </div>
 
             <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px">
-              <mat-form-field fxFlex="1 1 18%" appearance="fill">
+              <mat-form-field fxFlex="1 1 18%" appearance="outline">
                 <mat-label>Topic</mat-label>
                 <input matInput [readonly]=false formControlName="topic">
               </mat-form-field>
-              <mat-form-field fxFlex="1 1 18%" appearance="fill">
+              <mat-form-field fxFlex="1 1 18%" appearance="outline">
                 <mat-label>Format</mat-label>
                 <mat-select formControlName="format">
                   <mat-option *ngFor="let item of formats" [value]="item.value">
@@ -141,7 +141,7 @@
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-              <mat-form-field fxFlex="1 1 18%" appearance="fill">
+              <mat-form-field fxFlex="1 1 18%" appearance="outline">
                 <mat-label>Compression</mat-label>
                 <mat-select formControlName="compression">
                   <mat-option *ngFor="let item of compressions" [value]="item.value">
@@ -152,11 +152,11 @@
             </div>
 
             <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px">
-              <mat-form-field fxFlex="1 1 18%" appearance="fill">
+              <mat-form-field fxFlex="1 1 18%" appearance="outline">
                 <mat-label>User</mat-label>
                 <input matInput [readonly]=false formControlName="user">
               </mat-form-field>
-              <mat-form-field fxFlex="1 1 18%" appearance="fill">
+              <mat-form-field fxFlex="1 1 18%" appearance="outline">
                 <mat-label>Password</mat-label>
                 <input matInput placeholder="Enter your password" [readonly]=false
                   [type]="hidePassword ? 'password' : 'text'" formControlName="password">
@@ -165,7 +165,7 @@
                   <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
               </mat-form-field>
-              <mat-form-field fxFlex="1 1 18%" appearance="fill">
+              <mat-form-field fxFlex="1 1 18%" appearance="outline">
                 <mat-label>Encryption Algorithm</mat-label>
                 <mat-select formControlName="encryptionAlgorithm">
                   <mat-option *ngFor="let item of encryptions" [value]="item.value">
@@ -173,11 +173,11 @@
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-              <mat-form-field fxFlex="1 1 18%" appearance="fill">
+              <mat-form-field fxFlex="1 1 18%" appearance="outline">
                 <mat-label>Encryption Key</mat-label>
                 <input matInput [readonly]=false formControlName="encryptionKey">
               </mat-form-field>
-              <mat-form-field fxFlex="1 1 18%" appearance="fill">
+              <mat-form-field fxFlex="1 1 18%" appearance="outline">
                 <mat-label>Initializing Vector</mat-label>
                 <input matInput [readonly]=false formControlName="initializingVector">
               </mat-form-field>
@@ -186,11 +186,11 @@
 
 
             <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px">
-              <mat-form-field fxFlex="1 1 36%" appearance="fill">
+              <mat-form-field fxFlex="1 1 36%" appearance="outline">
                 <mat-label>Device Filters</mat-label>
                 <input matInput [readonly]=false formControlName="deviceIdentifierFilter">
               </mat-form-field>
-              <mat-form-field fxFlex="1 1 36%" appearance="fill">
+              <mat-form-field fxFlex="1 1 36%" appearance="outline">
                 <mat-label>Value Descriptor Filter</mat-label>
                 <input matInput [readonly]=false formControlName="valueDescriptorFilter">
               </mat-form-field>

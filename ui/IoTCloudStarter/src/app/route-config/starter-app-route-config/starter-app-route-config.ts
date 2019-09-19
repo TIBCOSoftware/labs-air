@@ -2,6 +2,7 @@ import {HomeComponent} from '../../routes/home/home.component';
 import {IotGatewayComponent} from '../../components/iot-gateway/iot-gateway.component';
 import {IotGatewaySubscriptionComponent} from '../../components/iot-gateway-subscription/iot-gateway-subscription.component';
 import {IotDeviceComponent} from '../../components/iot-device/iot-device.component';
+import {IotDeviceProfileComponent} from '../../components/iot-device-profile/iot-device-profile.component';
 import {IotDeviceCommandComponent} from '../../components/iot-device-command/iot-device-command.component';
 import {IotDeviceDashboardComponent} from '../../components/iot-device-dashboard/iot-device-dashboard.component';
 import {IotGatewayDashboardComponent} from '../../components/iot-gateway-dashboard/iot-gateway-dashboard.component';
@@ -104,6 +105,19 @@ export const STARTER_APP_ROUTES =
       {
         path: 'device',
         component: IotDeviceComponent,
+        canActivate: [AuthGuard],
+        resolve: {
+          claims: ClaimsResolver,
+          laConfigHolder: LaConfigResolver,
+          groups: GroupsResolver,
+          roles: RolesResolver,
+          access: AccessResolver,
+          customFormDefs: FormResolver
+        }
+      },
+      {
+        path: 'deviceprofile',
+        component: IotDeviceProfileComponent,
         canActivate: [AuthGuard],
         resolve: {
           claims: ClaimsResolver,

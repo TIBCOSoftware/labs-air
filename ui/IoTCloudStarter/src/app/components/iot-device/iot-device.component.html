@@ -2,7 +2,7 @@
   style="padding-left: 20px; padding-right: 20px; margin-top: 10px;">
 
   <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
-    <mat-form-field fxFlex="1 1 18%" appearance="standard">
+    <mat-form-field fxFlex="1 1 18%" appearance="outline">
       <mat-label>Select a Gateway</mat-label>
       <mat-select [(value)]="gatewayIdSelected" (selectionChange)="onGatewaySelected($event)">
         <mat-option *ngFor="let item of gatewayList; let i = index" [value]="i">
@@ -10,14 +10,15 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field fxFlex="1 1 40%" appearance="standard">
+    <mat-form-field fxFlex="1 1 40%" appearance="outline">
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Devices">
     </mat-form-field>
   </div>
 
   <div fxLayout="column" fxLayoutGap="20px" style="height: 100%;">
-    <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between stretch" style="min-height:300px; max-height: 300px ">
-      <mat-card fxFlex="55%">
+    <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between stretch"
+      style="min-height:300px; max-height: 300px ">
+      <mat-card fxFlex>
         <mat-card-header>
           <div mat-card-avatar class="device-header-image"></div>
           <mat-card-title>Devices</mat-card-title>
@@ -64,14 +65,21 @@
           </div>
         </mat-card-content>
       </mat-card>
-      <mat-card fxFlex="45%">
+     
+    </div>
+
+
+    <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between stretch"
+      style="min-height:300px; max-height: 300px ">
+
+      <mat-card fxFlex>
         <mat-card-header>
           <div mat-card-avatar class="device-header-image"></div>
           <mat-card-title>Instruments</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <div class="table-container mat-elevation-z8" >
-            <table mat-table [dataSource]="resourcesDataSource" matSort >
+          <div class="table-container mat-elevation-z8">
+            <table mat-table [dataSource]="resourcesDataSource" matSort>
 
               <!-- Name Column -->
               <ng-container matColumnDef="name">
@@ -92,6 +100,55 @@
             </table>
           </div>
         </mat-card-content>
+      </mat-card>
+    </div>
+
+    
+    <div fxLayout="row" fxLayoutGap="15px">
+      <mat-card fxFlex>
+        <mat-card-header>
+          <div mat-card-avatar class="device-header-image"></div>
+          <mat-card-title>Instrument Details</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+
+          <form [formGroup]="instrumentForm" class="instrument-form" fxLayout="row wrap" fxLayoutGap="15px">
+            <mat-form-field fxFlex="18%" appearance="outline">
+              <mat-label>Value Type</mat-label>
+              <input matInput [readonly]=true formControlName="valueType">
+            </mat-form-field>
+            <mat-form-field fxFlex="18%" appearance="outline">
+              <mat-label>Minimun Value</mat-label>
+              <input matInput [readonly]=true formControlName="valueMinimum">
+            </mat-form-field>
+            <mat-form-field fxFlex="18%" appearance="outline">
+              <mat-label>Maximun Value</mat-label>
+              <input matInput [readonly]=true formControlName="valueMaximum">
+            </mat-form-field>
+            <mat-form-field fxFlex="18%" appearance="outline">
+              <mat-label>Default Value</mat-label>
+              <input matInput [readonly]=true formControlName="valueDefault">
+            </mat-form-field>
+            <mat-form-field fxFlex="18%" appearance="outline">
+              <mat-label>Unit</mat-label>
+              <input matInput [readonly]=true formControlName="valueUnit">
+            </mat-form-field>
+            <mat-form-field fxFlex="18%" appearance="outline">
+              <mat-label>Interface</mat-label>
+              <input matInput [readonly]=true formControlName="interface">
+            </mat-form-field>
+            <mat-form-field fxFlex="18%" appearance="outline">
+              <mat-label>Pin Number</mat-label>
+              <input matInput [readonly]=true formControlName="interfacePinNumber">
+            </mat-form-field>
+            <mat-form-field fxFlex="18%" appearance="outline">
+              <mat-label>Type</mat-label>
+              <input matInput [readonly]=true formControlName="interfaceType">
+            </mat-form-field>
+          </form>
+
+        </mat-card-content>
+
       </mat-card>
     </div>
     <div fxLayout="row" fxLayoutGap="15px" style="min-height: 300px">
@@ -151,53 +208,7 @@
         </mat-card-content>
       </mat-card>
     </div>
-    <div fxLayout="row" fxLayoutGap="15px" style="min-height: 300px">
-      <mat-card fxFlex>
-        <mat-card-header>
-          <div mat-card-avatar class="device-header-image"></div>
-          <mat-card-title>Instrument Details</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
 
-          <form [formGroup]="instrumentForm" class="instrument-form" fxLayout="row wrap" fxLayoutGap="15px">
-            <mat-form-field fxFlex="18%" appearance="fill">
-              <mat-label>Value Type</mat-label>
-              <input matInput [readonly]=true formControlName="valueType">
-            </mat-form-field>
-            <mat-form-field fxFlex="18%" appearance="fill">
-              <mat-label>Minimun Value</mat-label>
-              <input matInput [readonly]=true formControlName="valueMinimum">
-            </mat-form-field>
-            <mat-form-field fxFlex="18%" appearance="fill">
-              <mat-label>Maximun Value</mat-label>
-              <input matInput [readonly]=true formControlName="valueMaximum">
-            </mat-form-field>
-            <mat-form-field fxFlex="18%" appearance="fill">
-              <mat-label>Default Value</mat-label>
-              <input matInput [readonly]=true formControlName="valueDefault">
-            </mat-form-field>
-            <mat-form-field fxFlex="18%" appearance="fill">
-              <mat-label>Unit</mat-label>
-              <input matInput [readonly]=true formControlName="valueUnit">
-            </mat-form-field>
-            <mat-form-field fxFlex="18%" appearance="fill">
-              <mat-label>Interface</mat-label>
-              <input matInput [readonly]=true formControlName="interface">
-            </mat-form-field>
-            <mat-form-field fxFlex="18%" appearance="fill">
-              <mat-label>Pin Number</mat-label>
-              <input matInput [readonly]=true formControlName="interfacePinNumber">
-            </mat-form-field>
-            <mat-form-field fxFlex="18%" appearance="fill">
-              <mat-label>Type</mat-label>
-              <input matInput [readonly]=true formControlName="interfaceType">
-            </mat-form-field>
-          </form>
-
-        </mat-card-content>
-
-      </mat-card>
-    </div>
 
   </div>
 
