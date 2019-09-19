@@ -47,3 +47,9 @@ File = '/edgex/logs/support-flogo-rules.log'
 [ApplicationSettings]
 ApplicationName = "support-flogo-rules"
 TupleTypes = "tupleTypes.json"
+MqttHost = "localhost"
+MqttPort = "1883"
+MqttPublisher = "FlogoRules"
+MqttUser = "mqtt_admin"
+MqttPassword = "mqtt_admin"
+MqttTopic = "Notification"
