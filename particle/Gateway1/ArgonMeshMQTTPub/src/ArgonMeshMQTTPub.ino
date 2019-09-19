@@ -17,9 +17,11 @@
 
 const unsigned long PUBLISH_INTERVAL_MS = 5000;
 MQTT *mqtt;
+char mqttuser[] = "mqtt_admin";
+char mqttpass[] = "mqtt_admin";
 char clientName[64] = "";
-char deviceName[64] = ""; // obtained from particle/device/name
-byte brokerIP[] = {0, 0, 0, 0};
+char deviceName[64] = "";       // obtained from particle/device/name
+byte brokerIP[] = {0,0,0,0};
 char pubTopic[256] = "";
 char subTopic[256] = "";
 char responseTopic[256] = "";
@@ -38,6 +40,8 @@ void meshReceiver(const char *event, const char *data);
 // setup() runs once, when the device is first turned on.
 void setup()
 {
+    // Serial.begin(9600);
+
     // Put initialization like pinMode and begin functions here.
 
     // Get device name in handler and save it in deviceName
@@ -47,6 +51,7 @@ void setup()
     SetClientName("ParticleDevice");
 
     ConnectToMQTT("192.168.1.92");
+    // ConnectToMQTT("52.45.185.99");
 
     pinMode(LIGHTPIN, INPUT);
     pinMode(BUTTONPIN, INPUT_PULLDOWN);
@@ -59,8 +64,7 @@ void setup()
 }
 
 // loop() runs over and over again, as quickly as it can execute.
-void loop()
-{
+void loop(){
     // The core of your code will likely live here.
 
     if (initialized)
@@ -90,7 +94,6 @@ void loop()
     {
         if (nameReceived && mqttIsInitialized && mqtt->isConnected())
         {
-
             // Subscribe to mqtt command topic
             MQTTSubscribe();
 
@@ -113,10 +116,10 @@ int ConnectToMQTT(String s)
     for (int i = 0; i < 4; i++)
         brokerIP[i] = 0;
     sscanf(buffer, "%u.%u.%u.%u", &brokerIP[0], &brokerIP[1], &brokerIP[2], &brokerIP[3]);
-    //Serial.printf("brokerIP: %u.%u.%u.%u\r\n", brokerIP[0], brokerIP[1], brokerIP[2], brokerIP[3] );
+    // Serial.printf("brokerIP: %u.%u.%u.%u\r\n", brokerIP[0], brokerIP[1], brokerIP[2], brokerIP[3] );
     mqtt = new MQTT(brokerIP, 1883, 15, mqttReceiver);
 
-    mqtt->connect(clientName);
+    mqtt->connect(clientName, mqttuser, mqttpass);
 
     mqttIsInitialized = true;
 
