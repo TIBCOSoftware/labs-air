@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/project-flogo/rules/common/model"
 
@@ -33,6 +34,14 @@ func main() {
 	// Get the application's specific configuration settings.
 	appSettings := edgexSdk.ApplicationSettings()
 	tupleTypesFilename := ""
+	mqttHost := ""
+	mqttPortStr := "1883"
+	mqttPort := 1883
+	mqttPublisher := ""
+	mqttUser := ""
+	mqttPassword := ""
+	mqttTopic := ""
+
 	if appSettings != nil {
 		appName, ok := appSettings["ApplicationName"]
 		if ok {
@@ -42,8 +51,16 @@ func main() {
 			os.Exit(-1)
 		}
 		tupleTypesFilename, _ = appSettings["TupleTypes"]
+		mqttHost, _ = appSettings["MqttHost"]
+		mqttPortStr, _ = appSettings["MqttPort"]
+		mqttPublisher, _ = appSettings["MqttPublisher"]
+		mqttUser, _ = appSettings["MqttUser"]
+		mqttPassword, _ = appSettings["MqttPassword"]
+		mqttTopic, _ = appSettings["MqttTopic"]
+		mqttPort, _ = strconv.Atoi(mqttPortStr)
 
 		edgexSdk.LoggingClient.Info(fmt.Sprintf("Tuple Types File: %s", tupleTypesFilename))
+		edgexSdk.LoggingClient.Info(fmt.Sprintf("Mqtt Connection details - host:%s port:%d publisher:%s user:%s topic:%s", mqttHost, mqttPort, mqttPublisher, mqttUser, mqttTopic))
 
 	} else {
 		edgexSdk.LoggingClient.Error("No application settings found")
@@ -57,7 +74,7 @@ func main() {
 	rules.LoggingClient = edgexSdk.LoggingClient
 
 	// Create the MQTT Sender
-	rules.SetMQTTSender()
+	rules.SetMQTTSender(mqttHost, mqttPort, mqttPublisher, mqttUser, mqttPassword, mqttTopic)
 
 	// Create Rule Session
 	rs, _ = rules.CreateRuleSession(tupleTypesFilename)
