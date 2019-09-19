@@ -17,6 +17,8 @@
 
 const unsigned long PUBLISH_INTERVAL_MS = 5000;
 MQTT* mqtt;
+char mqttuser[] = "mqtt_admin";
+char mqttpass[] = "mqtt_admin";
 char clientName[64] = "";       
 char deviceName[64] = "";       // obtained from particle/device/name
 byte brokerIP[] = {0,0,0,0};    
@@ -108,7 +110,7 @@ int ConnectToMQTT(String s) {
 	mqtt = new MQTT(brokerIP, 1883, 15, mqttReceiver);
 	
     
-    mqtt->connect(clientName);
+    mqtt->connect(clientName, mqttuser, mqttpass);
     
     mqttIsInitialized = true;
     
