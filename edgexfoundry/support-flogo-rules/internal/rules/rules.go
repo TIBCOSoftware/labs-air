@@ -66,7 +66,7 @@ type notificationCtxStruct struct {
 var mqttSender *transforms.MQTTSender
 
 // SetMQTTSender - sets the mqtt sender
-func SetMQTTSender() {
+func SetMQTTSender(hostname string, port int, publisher string, username string, password string, topic string) {
 	addressable := models.Addressable{
 		Address:   "137.117.38.255",
 		Port:      1883,
