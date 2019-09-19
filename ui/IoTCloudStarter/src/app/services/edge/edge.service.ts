@@ -200,6 +200,34 @@ export class EdgeService {
       );
   }
 
+  addProfile(gateway:Gateway, profile:Profile): Observable<string> {
+
+    const url = `/${gateway.uuid}${this.gatewayCoreMetadataPath}/deviceprofile`;
+
+    const authorizedHeaders = httpTextResponseOptions.headers.set('Authorization', 'Bearer ' + gateway.accessToken);
+    httpTextResponseOptions.headers = authorizedHeaders;
+
+    return this.http.post<string>(url, profile, httpTextResponseOptions)
+      .pipe(
+        tap(_ => this.logger.info('added new profile')),
+        catchError(this.handleError<string>('addProfile'))
+      );
+  }
+
+  updateProfile(gateway:Gateway, profile:Profile): Observable<string> {
+
+    const url = `/${gateway.uuid}${this.gatewayCoreMetadataPath}/deviceprofile`;
+
+    const authorizedHeaders = httpTextResponseOptions.headers.set('Authorization', 'Bearer ' + gateway.accessToken);
+    httpTextResponseOptions.headers = authorizedHeaders;
+
+    return this.http.put<string>(url, profile, httpTextResponseOptions)
+      .pipe(
+        tap(_ => this.logger.info('updated profile')),
+        catchError(this.handleError<string>('updateProfile'))
+      );
+  }
+
   getServices(gateway: Gateway): Observable<Service[]> {
     const url = `/${gateway.uuid}${this.gatewayCoreMetadataPath}/deviceservice`;
 

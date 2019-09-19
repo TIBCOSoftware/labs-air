@@ -62,7 +62,8 @@ export class Command {
 }
 
 export class Profile {
-  created: string;
+  created: number;
+  modified: number;
   name: string;
   description: string;
   id: string;
