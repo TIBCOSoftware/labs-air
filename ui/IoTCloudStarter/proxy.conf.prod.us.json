@@ -13,6 +13,10 @@
     },
     "cookiePathRewrite": {
       "*": "/"
+    },
+    "headers": {
+      "Origin": "https://liveapps.cloud.tibco.com",
+      "Cookie": ""
     }
   },
   "/as/token.oauth2": {
