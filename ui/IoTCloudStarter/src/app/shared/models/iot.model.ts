@@ -188,15 +188,16 @@ export class Rule {
 }
 
 export class Notification {
-  created: number;
+  uid: number;
   uuid: string;
-  source: string;
+  created: number;
+  notifySource: string;
+  notifyDevice: string;
+  notifyResource: string;
+  notifyLevel: string;
   gateway: string;
-  device: string;
-  resource: string;
   value: string;
   description: string;
-  level: string;
 }
 
 // TSReading - Time series reading.
