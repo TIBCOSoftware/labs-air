@@ -22,6 +22,9 @@ import { LogLevel, LogService } from '@tibco-tcstk/tc-core-lib';
 })
 export class IotGatewayComponent implements OnInit, AfterViewInit {
 
+  // Map configuration
+  mapConfig = null;
+
   subscriptionDisabled = true;
   selectedGateway = '';
   hideAccessToken = true;
@@ -67,6 +70,7 @@ export class IotGatewayComponent implements OnInit, AfterViewInit {
     //     console.log('Row clicked: ', a.added[0]);
     //   }
     // });
+
   }
 
   public getGateways() {
@@ -78,7 +82,34 @@ export class IotGatewayComponent implements OnInit, AfterViewInit {
       .subscribe(res => {
         this.dataSource.data = res as Gateway[];
         console.log("Received response: ", res);
+        this.buildMaporamaData();
       })
+  }
+
+  buildMaporamaData() {
+
+    let mapData=[];
+
+    this.dataSource.data.forEach(
+      gateway => {
+
+        mapData.push({
+          lat: gateway.latitude,
+          lon: gateway.longitude,
+          label: gateway.uuid,
+          uuid: gateway.uid
+        });
+      }
+    );
+
+    this.mapConfig = {
+      centerLat: 39.0,
+      centerLon: -98.0,
+      zoom: 4,
+      showColorAxis: false,
+      data: mapData
+    };    
+
   }
 
   addGateway() {
