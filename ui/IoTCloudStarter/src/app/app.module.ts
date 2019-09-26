@@ -33,6 +33,7 @@ import { IotDeviceProvisionComponent } from './components/iot-device-provision/i
 import { IotRulesComponent } from './components/iot-rules/iot-rules.component';
 import { IotNotificationsComponent } from './components/iot-notifications/iot-notifications.component';
 import { HttpClientModule } from "@angular/common/http";
+import { MaporamaComponent } from './components/maporama/maporama.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { HttpClientModule } from "@angular/common/http";
     IotDeviceProfileComponent,
     IotDeviceProvisionComponent,
     IotRulesComponent,
-    IotNotificationsComponent
+    IotNotificationsComponent,
+    MaporamaComponent
   ],
   imports: [
     AppRoutingModule,
