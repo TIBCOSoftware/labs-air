@@ -22,10 +22,10 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [
+            "styles": ["src/assets/geoanalytics/GeoAnalytics.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": ["src/assets/geoanalytics/GeoAnalytics.js"]
           },
           "configurations": {
             "production": {
