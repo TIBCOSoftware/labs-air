@@ -387,7 +387,18 @@ export class EdgeService {
 
   addRule(gateway: Gateway, rule: Rule): Observable<string> {
 
-    const url = `/${gateway.uuid}${this.edgeFlogoRulesUrl}rule`;
+    const url = `/${gateway.uuid}${this.edgeFlogoRulesUrl}addRule`;
+
+    return this.http.post<string>(url, rule, httpTextResponseOptions)
+      .pipe(
+        tap(_ => this.logger.info('added rule')),
+        catchError(this.handleError<string>('addRule'))
+      );
+  }
+
+  deleteRule(gateway: Gateway, rule: Rule): Observable<string> {
+
+    const url = `/${gateway.uuid}${this.edgeFlogoRulesUrl}deleteRule`;
 
     return this.http.post<string>(url, rule, httpTextResponseOptions)
       .pipe(

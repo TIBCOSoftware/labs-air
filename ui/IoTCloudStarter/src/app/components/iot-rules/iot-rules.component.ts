@@ -438,7 +438,7 @@ export class IotRulesComponent implements OnInit, AfterViewInit {
           message = 'Failure';
         }
 
-        this._snackBar.open(message, "Deplooy Rule", {
+        this._snackBar.open(message, "Deploy Rule", {
           duration: 3000,
         });
 
@@ -447,6 +447,23 @@ export class IotRulesComponent implements OnInit, AfterViewInit {
 
 
   undeployRule() {
+    let rule = new Rule();
+    rule.name = this.ruleForm.controls['name'].value;
+
+    this.edgeService.deleteRule(this.selectedGateway, rule)
+      .subscribe(res => {
+        console.log("Result from deleting rule: ", res);
+
+        let message = 'Success'
+        if (res == undefined) {
+          message = 'Failure';
+        }
+
+        this._snackBar.open(message, "Undeploy Rule", {
+          duration: 3000,
+        });
+
+      });
 
   }
 
