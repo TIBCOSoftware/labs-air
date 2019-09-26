@@ -14,7 +14,7 @@ export class IotNotificationsComponent implements OnInit, AfterViewInit {
   dateFormat = 'yyyy-MM-dd  HH:mm:ss'
 
   notificationsDataSource = new MatTableDataSource<Notification>();
-  notificationDisplayedColumns: string[] = ['uuid', 'source', 'gateway', 'device', 'resource', 'value', 'description', 'level', 'created'];
+  notificationDisplayedColumns: string[] = ['uuid', 'gateway', 'source', 'device', 'resource', 'value', 'level', 'description', 'created'];
   notificationSelection = new SelectionModel<Notification>(false, []);
 
   @ViewChild(MatSort, { static: false }) sort: MatSort;

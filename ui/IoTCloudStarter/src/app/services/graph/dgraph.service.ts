@@ -507,14 +507,17 @@ export class DgraphService {
     console.log("GetNotifications service called")
     const url = `${this.dgraphUrl}/query`;
     let query = `{
-      resp(func: has(notification)) {
-        uid uuid source gateway device resource value description level
+      resp(func: has(notification)) @normalize {
+        uid uuid:uuid created:created notifySource:notifySource notifyDevice:notifyDevice notifyResource:notifyResource notifyLevel:notifyLevel value:value description:description ~gateway_notification {
+          gateway: uuid
+        }
       }
     }`;
 
     return this.http.post<any>(url, query, httpOptions)
       .pipe(
         map(response => response.data.resp as Notification[]),
+        tap(response => console.log("Response from GetNoti: ", response)),
         tap(_ => this.logger.info('fetched notifications')),
         catchError(this.handleError<Notification[]>('getNotifications', []))
       );
