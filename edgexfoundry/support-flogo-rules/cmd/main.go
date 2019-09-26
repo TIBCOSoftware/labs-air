@@ -68,7 +68,8 @@ func main() {
 	}
 
 	// Add HTTP Route for Rule Engine Dynamic Configuration
-	edgexSdk.AddRoute("/flogorules/api/v1/rule", processRuleConfig, "POST")
+	edgexSdk.AddRoute("/flogorules/api/v1/addRule", processAddRule, "POST")
+	edgexSdk.AddRoute("/flogorules/api/v1/deleteRule", processDeleteRule, "POST")
 
 	// Initialize LoggingClient for package rules
 	rules.LoggingClient = edgexSdk.LoggingClient
@@ -115,11 +116,11 @@ func processEvent(edgexcontext *appcontext.Context, params ...interface{}) (bool
 		return false, nil
 	}
 
-	edgexcontext.LoggingClient.Debug(fmt.Sprintf("Event: %s", params[0].(models.Event)))
+	// edgexcontext.LoggingClient.Debug(fmt.Sprintf("Event: %s", params[0].(models.Event)))
 
 	event := params[0].(models.Event)
 
-	edgexcontext.LoggingClient.Debug(fmt.Sprintf("Top Level: %s", event.Device))
+	// edgexcontext.LoggingClient.Debug(fmt.Sprintf("Processing event for device: %s", event.Device))
 
 	for _, reading := range event.Readings {
 		device := event.Device
@@ -144,14 +145,14 @@ func processEvent(edgexcontext *appcontext.Context, params ...interface{}) (bool
 	return false, nil
 }
 
-func processRuleConfig(writer http.ResponseWriter, req *http.Request) {
+func processAddRule(writer http.ResponseWriter, req *http.Request) {
 	body, err := ioutil.ReadAll(req.Body)
 
 	if err != nil {
-		fmt.Printf("Processing config request ERROR\n")
+		fmt.Printf("Processing addRule request ERROR\n")
 	}
 
-	fmt.Printf("Processing config request: %s\n", body)
+	fmt.Printf("Processing addRule request: %s\n", body)
 
 	ruleDef := rules.RuleDefStruct{}
 
@@ -166,4 +167,24 @@ func processRuleConfig(writer http.ResponseWriter, req *http.Request) {
 
 	writer.Header().Set("Content-Type", "text/plain")
 	writer.Write([]byte("success config"))
+}
+
+func processDeleteRule(writer http.ResponseWriter, req *http.Request) {
+
+	body, err := ioutil.ReadAll(req.Body)
+
+	if err != nil {
+		fmt.Printf("Processing deleteRule request ERROR\n")
+	}
+
+	ruleDef := rules.RuleDefStruct{}
+
+	if err := json.Unmarshal([]byte(body), &ruleDef); err != nil {
+		fmt.Printf("Processing config request ERROR\n")
+	}
+
+	fmt.Printf("Processing deleteRule request: %s\n", ruleDef.Name)
+
+	// Delete a rule
+	rules.DeleteRule(rs, ruleDef.Name)
 }
