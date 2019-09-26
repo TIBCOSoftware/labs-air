@@ -1,5 +1,5 @@
 [Writable]
-LogLevel = 'DEBUG'
+LogLevel = 'INFO'
 
 [Service]
 BootTimeout = 30000
@@ -48,9 +48,9 @@ File = './logs/support-flogo-rules.log'
 [ApplicationSettings]
 ApplicationName = "support-flogo-rules"
 TupleTypes = "tupleTypes.json"
-MqttHost = "localhost"
+MqttHost = "52.45.185.99"
 MqttPort = "1883"
 MqttPublisher = "FlogoRules"
 MqttUser = "mqtt_admin"
 MqttPassword = "mqtt_admin"
-MqttTopic = "Notification"
+MqttTopic = "EdgexGateway1Notification"
