@@ -68,13 +68,13 @@ var mqttSender *transforms.MQTTSender
 // SetMQTTSender - sets the mqtt sender
 func SetMQTTSender(hostname string, port int, publisher string, username string, password string, topic string) {
 	addressable := models.Addressable{
-		Address:   "137.117.38.255",
-		Port:      1883,
+		Address:   hostname,
+		Port:      port,
 		Protocol:  "tcp",
-		Publisher: "FlogoRules",
-		User:      "",
-		Password:  "",
-		Topic:     "EdgexGateway1Notification",
+		Publisher: publisher,
+		User:      username,
+		Password:  password,
+		Topic:     topic,
 	}
 
 	mqttConfig := transforms.NewMqttConfig()
@@ -130,36 +130,14 @@ func AddRule(rs model.RuleSession, ruleDef RuleDefStruct) {
 
 }
 
-// CreateRules - creates rules
-func CreateRules(rs model.RuleSession, rulesDefFilename string) {
+// DeleteRule - remove rule
+func DeleteRule(rs model.RuleSession, ruleName string) {
+	fmt.Printf("Inside DeleteRule\n")
 
-	// Check for Sensor values and call cmds when action is triggered
-	//
-	rule0 := ruleapi.NewRule("Concept Init")
-	rule0.AddCondition("c1", []string{"RotaryAngleSensor", "Led"}, initCond, nil)
-	rule0.SetAction(initAction)
-	rule0.SetContext("This is contex init")
-	rs.AddRule(rule0)
+	rs.DeleteRule(ruleName)
 
-	rule1 := ruleapi.NewRule("Check Machine Abnormalities")
-	rule1.AddCondition("c1", []string{"Reading"}, machineAbnormalCond, nil)
-	rule1.SetAction(machineAbnormalAction)
-	rule1.SetContext("This is contex for machine abnormal value")
-	rs.AddRule(rule1)
-	LoggingClient.Info(fmt.Sprintf("Rule added: [%s]\n", rule1.GetName()))
-
-	rule2 := ruleapi.NewRule("Check Machine Normal")
-	rule2.AddCondition("c1", []string{"Reading"}, machineNormalCond, nil)
-	rule2.SetAction(machineNormalAction)
-	rule2.SetContext("This is contex for machine normal value")
-	rs.AddRule(rule2)
-
-	rule3 := ruleapi.NewRule("Check Light Sensor Changes")
-	rule3.AddCondition("c1", []string{"Reading", "LightSensor"}, lightSensorChangeCond, nil)
-	rule3.SetAction(lightSensorChangeAction)
-	rule3.SetContext("This is contex for light sensor change")
-	rule3.SetPriority(1)
-	rs.AddRule(rule3)
+	updateRuleName := "Update" + ruleName
+	rs.DeleteRule(updateRuleName)
 
 }
 
@@ -168,224 +146,11 @@ func RegisterConditionsAndActions() {
 
 	LoggingClient.Info(fmt.Sprintf("Register Conditions and actions\n"))
 
-	// config.RegisterConditionEvaluator("initCond", initCond)
-	// config.RegisterActionFunction("initAction", initAction)
-
-	// config.RegisterConditionEvaluator("machineAbnormalCond", machineAbnormalCond)
-	// config.RegisterActionFunction("machineAbnormalAction", machineAbnormalAction)
-
-	// config.RegisterConditionEvaluator("machineNormalCond", machineNormalCond)
-	// config.RegisterActionFunction("machineNormalAction", machineNormalAction)
-
-	// config.RegisterConditionEvaluator("lightSensorChangeCond", lightSensorChangeCond)
-	// config.RegisterActionFunction("lightSensorChangeAction", lightSensorChangeAction)
-
 	config.RegisterConditionEvaluator("updateCond", updateCond)
-	config.RegisterActionFunction("initAction", updateAction)
+	config.RegisterActionFunction("updateAction", updateAction)
 
 	config.RegisterConditionEvaluator("compareValuesCond", compareValuesCond)
 	config.RegisterActionFunction("compareValuesAction", compareValuesAction)
-}
-
-func initCond(ruleName string, condName string, tuples map[model.TupleType]model.Tuple, ctx model.RuleContext) bool {
-	LoggingClient.Debug(fmt.Sprintf("Condition Evaluated: [%s]-[%s]\n", ruleName, condName))
-
-	return false
-}
-
-func initAction(ctx context.Context, rs model.RuleSession, ruleName string, tuples map[model.TupleType]model.Tuple, ruleCtx model.RuleContext) {
-	LoggingClient.Info(fmt.Sprintf("Rule fired: [%s]\n", ruleName))
-}
-
-func lightSensorChangeCond(ruleName string, condName string, tuples map[model.TupleType]model.Tuple, ctx model.RuleContext) bool {
-	LoggingClient.Debug(fmt.Sprintf("Condition Evaluated: [%s]-[%s]\n", ruleName, condName))
-
-	condResult := false
-
-	rt := tuples["Reading"]
-	lst := tuples["LightSensor"]
-	if rt == nil || lst == nil {
-		LoggingClient.Error("Should not get a nil tuple in FilterCondition! This is an error")
-		return false
-	}
-
-	rtDevice, _ := rt.GetString("device")
-	rtInstrument, _ := rt.GetString("instrument")
-	lstDevice, _ := lst.GetString("device")
-
-	if rtInstrument == "LightSensor" && rtDevice == lstDevice {
-		rtValue, _ := rt.GetInt("value")
-		lstValue, _ := lst.GetInt("value")
-		if rtValue != lstValue {
-			condResult = true
-		}
-	}
-
-	return condResult
-}
-
-func lightSensorChangeAction(ctx context.Context, rs model.RuleSession, ruleName string, tuples map[model.TupleType]model.Tuple, ruleCtx model.RuleContext) {
-	LoggingClient.Info(fmt.Sprintf("Rule fired: [%s]\n", ruleName))
-
-	rt := tuples["Reading"]
-	lst := tuples["LightSensor"].(model.MutableTuple)
-	if rt == nil || lst == nil {
-		LoggingClient.Error("Should not get a nil tuple in FilterCondition! This is an error")
-		return
-	}
-
-	rtDevice, _ := rt.GetString("device")
-	lstDevice, _ := lst.GetString("device")
-
-	if rtDevice == lstDevice {
-		// Update concept
-		rtValue, _ := rt.GetInt("value")
-		lst.SetInt(nil, "value", rtValue)
-
-		device, _ := lst.GetString("device")
-		LoggingClient.Info(fmt.Sprintf("Light Sensor: Device = [%s], value = [%d] changed\n", device, rtValue))
-	}
-}
-
-func machineAbnormalCond(ruleName string, condName string, tuples map[model.TupleType]model.Tuple, ctx model.RuleContext) bool {
-	LoggingClient.Debug(fmt.Sprintf("Condition Evaluated: [%s]-[%s]\n", ruleName, condName))
-
-	condResult := false
-
-	t1 := tuples["Reading"]
-	if t1 == nil {
-		LoggingClient.Error("Should not get a nil tuple in FilterCondition! This is an error")
-		return false
-	}
-	device, _ := t1.GetString("device")
-	instrument, _ := t1.GetString("instrument")
-
-	if device == "mesh-argon-10" && instrument == "RotaryAngleSensor" {
-		value, _ := t1.GetInt("value")
-
-		// If rotary angle for machine is low, check parts values
-		if value < 500 {
-
-			condResult = true
-		}
-	}
-
-	return condResult
-}
-
-func machineNormalCond(ruleName string, condName string, tuples map[model.TupleType]model.Tuple, ctx model.RuleContext) bool {
-	LoggingClient.Debug(fmt.Sprintf("Condition Evaluated: [%s]-[%s]\n", ruleName, condName))
-
-	condResult := false
-
-	t1 := tuples["Reading"]
-	if t1 == nil {
-		LoggingClient.Error("Should not get a nil tuple in FilterCondition! This is an error")
-		return false
-	}
-	device, _ := t1.GetString("device")
-	instrument, _ := t1.GetString("instrument")
-
-	if device == "mesh-argon-10" && instrument == "RotaryAngleSensor" {
-		value, _ := t1.GetInt("value")
-
-		if value >= 500 {
-			condResult = true
-		}
-	}
-
-	return condResult
-}
-
-func machineAbnormalAction(ctx context.Context, rs model.RuleSession, ruleName string, tuples map[model.TupleType]model.Tuple, ruleCtx model.RuleContext) {
-	LoggingClient.Info(fmt.Sprintf("Rule fired: [%s]\n", ruleName))
-
-	t1 := tuples["Reading"]
-	if t1 == nil {
-		LoggingClient.Error("Should not get a nil tuple in FilterCondition! This is an error")
-		return
-	}
-
-	value, _ := t1.GetInt("value")
-	device, _ := t1.GetString("device")
-	instrument, _ := t1.GetString("instrument")
-
-	// Get rotary angle concept and update value
-	rat := GetTuple(rs, device, instrument)
-	rat.SetInt(nil, "value", value)
-
-	// Get light sensor values
-	ls1 := GetTuple(rs, "mesh-xenon-11", "LightSensor")
-	ls2 := GetTuple(rs, "mesh-xenon-12", "LightSensor")
-
-	alarm := false
-	ls1Value := 0
-	ls2Value := 0
-
-	if ls1 == nil && ls2 == nil {
-		alarm = true
-	} else if ls1 == nil {
-		ls2Value, _ = ls2.GetInt("value")
-		if ls2Value < 100 {
-			alarm = true
-		}
-	} else if ls2 == nil {
-		ls1Value, _ = ls1.GetInt("value")
-		if ls1Value < 100 {
-			alarm = true
-		}
-	} else {
-		ls1Value, _ = ls1.GetInt("value")
-		ls2Value, _ = ls2.GetInt("value")
-		if ls1Value < 100 && ls2Value < 100 {
-			alarm = true
-		}
-	}
-
-	// Get led concept
-	led := GetTuple(rs, device, "Led")
-	ledValue, _ := led.GetBool("value")
-
-	if alarm {
-		LoggingClient.Info(fmt.Sprintf("Machine Alert for: device = [%s], ra_value = [%d] ls1_value = [%d] ls2_value = [%d] \n", device, value, ls1Value, ls2Value))
-
-		if !ledValue {
-			led.SetBool(nil, "value", true)
-			sendDeviceComand("1")
-		}
-
-	} else {
-		LoggingClient.Info(fmt.Sprintf("Machine Warning for: device = [%s], ra_value = [%d] ls1_value = [%d] ls2_value = [%d] \n", device, value, ls1Value, ls2Value))
-
-		if ledValue {
-			led.SetBool(nil, "value", false)
-			sendDeviceComand("0")
-		}
-
-	}
-
-}
-
-func machineNormalAction(ctx context.Context, rs model.RuleSession, ruleName string, tuples map[model.TupleType]model.Tuple, ruleCtx model.RuleContext) {
-	LoggingClient.Info(fmt.Sprintf("Rule fired: [%s]\n", ruleName))
-
-	t1 := tuples["Reading"]
-	if t1 == nil {
-		LoggingClient.Info("Should not get a nil tuple in FilterCondition! This is an error")
-		return
-	}
-
-	value, _ := t1.GetInt("value")
-	device, _ := t1.GetString("device")
-	instrument, _ := t1.GetString("instrument")
-
-	// Get rotary angle concept and update value
-	rat := GetTuple(rs, device, instrument)
-	rat.SetInt(nil, "value", value)
-
-	LoggingClient.Info(fmt.Sprintf("Machine: name = [%s], value = [%d] is normal\n", device, value))
-
-	sendDeviceComand("0")
 }
 
 func sendDeviceComand(value string) {
@@ -470,23 +235,43 @@ func GetOrCreateResourceTuple(rs model.RuleSession, device, resource, value stri
 	LoggingClient.Debug(fmt.Sprintf("In GetOrCreateResourceTuple: [%s]-[%s]\n", device, resource))
 
 	// Check if tuple already asserted
+	key := device + "_" + resource
 	tupleType := model.TupleType("ResourceConcept")
-	tk, err := model.NewTupleKeyWithKeyValues(tupleType, device, resource)
+	tk, err := model.NewTupleKeyWithKeyValues(tupleType, key)
 
 	if err != nil {
 		LoggingClient.Error(fmt.Sprintf("NewTupleKeyWithKeyValues failed for device-resource: [%s]-[%s]\n", device, resource))
 	}
 
+	LoggingClient.Debug(fmt.Sprintf("In GetOrCreateResourceTuple Keys created: [%s]\n", tk.String()))
+
 	conceptOld := rs.GetAssertedTuple(tk)
 
 	if conceptOld == nil {
 		LoggingClient.Debug(fmt.Sprintf("No concept found for: [%s]-[%s]\n", device, resource))
-		concept, _ := model.NewTupleWithKeyValues(tupleType, device, resource)
+		concept, cerr := model.NewTupleWithKeyValues(tupleType, key)
+
+		if cerr != nil {
+			LoggingClient.Error(fmt.Sprintf("Creating failed for device-resource: [%s]-[%s] - %s\n", device, resource, cerr))
+		}
+
+		concept.SetString(nil, "id", key)
+		concept.SetString(nil, "device", device)
+		concept.SetString(nil, "resource", resource)
 		concept.SetString(nil, "value", value)
 		err := rs.Assert(nil, concept)
 
 		if err != nil {
-			LoggingClient.Error(fmt.Sprintf("Assert failed for device-resource: [%s]-[%s]\n", device, resource))
+			LoggingClient.Error(fmt.Sprintf("Assert failed for device-resource: [%s]-[%s] - %s\n", device, resource, err))
+		}
+
+		assertedTuple := rs.GetAssertedTuple(concept.GetKey())
+		if assertedTuple == concept {
+			LoggingClient.Error(fmt.Sprintf("Tuple with key [%s] already asserted", concept.GetKey().String()))
+		} else if assertedTuple != nil {
+			LoggingClient.Error(fmt.Sprintf("Tuple with key [%s] already asserted", concept.GetKey().String()))
+		} else {
+			LoggingClient.Error(fmt.Sprintf("Tuple with key [%s] not asserted", concept.GetKey().String()))
 		}
 
 		return concept
@@ -496,7 +281,7 @@ func GetOrCreateResourceTuple(rs model.RuleSession, device, resource, value stri
 		err := rs.Assert(nil, concept)
 
 		if err != nil {
-			LoggingClient.Error(fmt.Sprintf("Assert failed for device-resource: [%s]-[%s]\n", device, resource))
+			LoggingClient.Error(fmt.Sprintf("Assert failed for device-resource: [%s]-[%s] - %s\n", device, resource, err))
 		}
 
 		return concept
@@ -523,6 +308,7 @@ func GetTuple(rs model.RuleSession, device, resource string) model.MutableTuple 
 
 }
 
+// Check if a concept needs to be updated with the latest reading
 func updateCond(ruleName string, condName string, tuples map[model.TupleType]model.Tuple, ctx model.RuleContext) bool {
 	LoggingClient.Debug(fmt.Sprintf("Condition Evaluated: [%s]-[%s]\n", ruleName, condName))
 
@@ -557,6 +343,7 @@ func updateCond(ruleName string, condName string, tuples map[model.TupleType]mod
 
 }
 
+// Update a concept with the latest reading
 func updateAction(ctx context.Context, rs model.RuleSession, ruleName string, tuples map[model.TupleType]model.Tuple, ruleCtx model.RuleContext) {
 	LoggingClient.Debug(fmt.Sprintf("Rule fired: [%s]\n", ruleName))
 
@@ -572,6 +359,7 @@ func updateAction(ctx context.Context, rs model.RuleSession, ruleName string, tu
 	resourceTuple.SetString(nil, "value", rtValue)
 }
 
+// Condition to compare previous stored in a concept with the new reading value
 func compareValuesCond(ruleName string, condName string, tuples map[model.TupleType]model.Tuple, ctx model.RuleContext) bool {
 	LoggingClient.Debug(fmt.Sprintf("Condition Evaluated: [%s]-[%s]\n", ruleName, condName))
 
@@ -650,6 +438,7 @@ func compareValuesCond(ruleName string, condName string, tuples map[model.TupleT
 	return condResult
 }
 
+// Send notification whenever a compare value condition is true
 func compareValuesAction(ctx context.Context, rs model.RuleSession, ruleName string, tuples map[model.TupleType]model.Tuple, ruleCtx model.RuleContext) {
 	LoggingClient.Debug(fmt.Sprintf("Rule fired: [%s]\n", ruleName))
 
@@ -692,32 +481,4 @@ func compareValuesAction(ctx context.Context, rs model.RuleSession, ruleName str
 
 	// Send Notification
 	mqttSender.MQTTSend(LoggingClient, string(notificationContextJSON))
-}
-
-func readingGreaterThanCurrentCond(ruleName string, condName string, tuples map[model.TupleType]model.Tuple, ctx model.RuleContext) bool {
-	LoggingClient.Debug(fmt.Sprintf("Condition Evaluated: [%s]-[%s]\n", ruleName, condName))
-
-	condResult := false
-
-	readingTuple := tuples["Reading"]
-	resourceTuple := tuples["Resource"]
-	if readingTuple == nil || resourceTuple == nil {
-		LoggingClient.Error("Should not get a nil tuple in FilterCondition! This is an error")
-		return false
-	}
-
-	readingTupleDevice, _ := readingTuple.GetString("device")
-	readingTupleResource, _ := readingTuple.GetString("resource")
-	resourceTupleDevice, _ := resourceTuple.GetString("device")
-	resourceTupleResource, _ := resourceTuple.GetString("resource")
-
-	if readingTupleResource == resourceTupleResource && readingTupleDevice == resourceTupleDevice {
-		readingTupleValue, _ := readingTuple.GetInt("value")
-		resourceTupleValue, _ := resourceTuple.GetInt("value")
-		if readingTupleValue != resourceTupleValue {
-			condResult = true
-		}
-	}
-
-	return condResult
 }
