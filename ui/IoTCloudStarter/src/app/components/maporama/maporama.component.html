@@ -1,0 +1,17 @@
+<div class="tai-container">
+    <div class="tai-maporama" #chart>
+        <div *ngIf="showLegend" class="box legend" #maplegend>
+            <li *ngFor="let lc of legendcolors">
+                <i [style.background]="lc.color"></i> {{lc.value}}
+            </li>
+        </div>
+
+        <div class="box info">
+            <div class="title">Info</div>
+            <div class="description">
+                <div class="geolocation">{{geoname}}</div>
+                <div class="geovalue">{{geovalue}}</div>
+            </div>
+        </div>
+    </div>
+</div>
