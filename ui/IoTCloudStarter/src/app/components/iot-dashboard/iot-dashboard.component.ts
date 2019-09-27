@@ -23,8 +23,31 @@ export class IotDashboardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.spotfireServer = 'https://spotfire-next.cloud.tibco.com';
-    this.analysisPath = '/Samples/Introduction to Spotfire';
+    // this.spotfireServer = 'https://spotfire-next.cloud.tibco.com';
+    // this.analysisPath = '/Samples/Introduction to Spotfire';
+    // this.activePage = '0';
+    // this.parameters = "Test";
+    // this.configuration = {
+    //   showAbout: false,
+    //   showAnalysisInformationTool: false,
+    //   showAuthor: false,
+    //   showClose: false,
+    //   showCustomizableHeader: false,
+    //   showDodPanel: false,
+    //   showExportFile: false,
+    //   showFilterPanel: true,
+    //   showHelp: false,
+    //   showLogout: false,
+    //   showPageNavigation: true,
+    //   showReloadAnalysis: false,
+    //   showStatusBar: false,
+    //   showToolBar: false,
+    //   showUndoRedo: false
+    // };
+
+
+    this.spotfireServer = 'https://ec2-100-26-8-102.compute-1.amazonaws.com';
+    this.analysisPath = '/Anonymous/tibcolabs_air_v1.6';
     this.activePage = '0';
     this.parameters = "Test";
     this.configuration = {
