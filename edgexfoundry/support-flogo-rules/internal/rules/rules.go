@@ -461,7 +461,7 @@ func compareValuesAction(ctx context.Context, rs model.RuleSession, ruleName str
 	notificationContext := notificationCtxStruct{
 		Created:     ts,
 		UUID:        uuid,
-		Source:      ruleName,
+		Source:      "Flogo Rule: " + ruleName,
 		Gateway:     "",
 		Device:      device,
 		Resource:    resource,
