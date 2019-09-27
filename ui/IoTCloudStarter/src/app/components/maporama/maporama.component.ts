@@ -1,5 +1,6 @@
 import { Component, Input, ElementRef, ViewChild, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 // GeoAnalytics
 //import { T } from '../../../GeoAnalytics';
@@ -27,7 +28,9 @@ export class MaporamaComponent implements OnInit, OnChanges {
   public showLegend: boolean;
   private instvectorlayer: any;
 
-  constructor() { }
+  constructor(private router: Router) { 
+
+  }
 
   ngOnInit() {
 
@@ -120,9 +123,6 @@ export class MaporamaComponent implements OnInit, OnChanges {
 
         };
 
-
-
-
         //Add the navigation control
         var navigationControl = new T.NavigationControl({
           offset: [10, 10],
@@ -212,7 +212,9 @@ export class MaporamaComponent implements OnInit, OnChanges {
   }
 
   mapMarkerDrilldown(uuid, label) {
-
+    console.log("In mapMarkerDrilldown for: ", uuid, label);
+    
+    this.router.navigate(['/starterApp/home/gatewaydashboard']);
   }
 
   styleMap(properties) {
