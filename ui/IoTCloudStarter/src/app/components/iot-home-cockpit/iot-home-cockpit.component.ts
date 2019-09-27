@@ -27,10 +27,6 @@ export class IotHomeCockpitComponent extends LiveAppsHomeCockpitComponent {
             icon: 'gateway',
             route: '/starterApp/home/gateway',
             title: 'Gateways',
-        }, {
-            icon: 'gatewaydashboard',
-            route: '/starterApp/home/gatewaydashboard',
-            title: 'Gateways Dashboards',
         }
     ];
 
@@ -52,10 +48,6 @@ export class IotHomeCockpitComponent extends LiveAppsHomeCockpitComponent {
             route: '/starterApp/home/devicecommand',
             title: 'Device Commands',
         }, {
-            icon: 'iotdashboard',
-            route: '/starterApp/home/devicedashboard',
-            title: 'Dashboard',
-        }, {
             icon: 'rules',
             route: '/starterApp/home/rules',
             title: 'Rules',
@@ -64,7 +56,7 @@ export class IotHomeCockpitComponent extends LiveAppsHomeCockpitComponent {
             route: '/starterApp/home/notifications',
             title: 'Notifications',
         }, {
-            icon: 'settings',
+            icon: 'settings_applications',
             route: 'sales/leads',
             title: 'Settings',
         }, {
