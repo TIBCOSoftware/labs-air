@@ -7,16 +7,16 @@
 package main
 
 import (
-	device_mqtt "github.com/TIBCOSoftware/labs-air/edgexfoundry/device-particle-mqtt"
+	device_particle_mqtt "github.com/TIBCOSoftware/labs-air/edgexfoundry/device-particle-mqtt"
 	"github.com/TIBCOSoftware/labs-air/edgexfoundry/device-particle-mqtt/internal/driver"
 	"github.com/edgexfoundry/device-sdk-go/pkg/startup"
 )
 
 const (
-	serviceName string = "edgex-device-mqtt"
+	serviceName string = "edgex-particle-mqtt"
 )
 
 func main() {
 	sd := driver.NewProtocolDriver()
-	startup.Bootstrap(serviceName, device_mqtt.Version, sd)
+	startup.Bootstrap(serviceName, device_particle_mqtt.Version, sd)
 }
