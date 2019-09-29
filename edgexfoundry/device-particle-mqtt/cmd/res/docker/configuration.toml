@@ -1,6 +1,6 @@
 [Service]
 Host = "tibcolabs-device-particle-mqtt"
-Port = 49982
+Port = 48988
 ConnectRetries = 3
 Labels = []
 OpenMsg = "device particle started"
@@ -63,9 +63,9 @@ LogLevel = "INFO"
   [DeviceList.Protocols]
     [DeviceList.Protocols.mqtt]
       Schema = "tcp"
-      Host = "108.217.182.180"
+      Host = "192.168.1.92"
       Port = "1883"
-      ClientId = "CommandPublisher"
+      ClientId = "ParticleCommandPublisher"
       User = "mqtt_admin"
       Password = "mqtt_admin"
       Topic = "CommandTopic_mesh-argon-10"
@@ -78,9 +78,9 @@ LogLevel = "INFO"
   [DeviceList.Protocols]
     [DeviceList.Protocols.mqtt]
       Schema = "tcp"
-      Host = "108.217.182.180"
+      Host = "192.168.1.92"
       Port = "1883"
-      ClientId = "CommandPublisher"
+      ClientId = "ParticleCommandPublisher"
       User = "mqtt_admin"
       Password = "mqtt_admin"
       Topic = "CommandTopic_mesh-xenon-11"
@@ -93,9 +93,9 @@ LogLevel = "INFO"
   [DeviceList.Protocols]
     [DeviceList.Protocols.mqtt]
       Schema = "tcp"
-      Host = "108.217.182.180"
+      Host = "192.168.1.92"
       Port = "1883"
-      ClientId = "CommandPublisher"
+      ClientId = "ParticleCommandPublisher"
       User = "mqtt_admin"
       Password = "mqtt_admin"
       Topic = "CommandTopic_mesh-xenon-12"
@@ -103,7 +103,7 @@ LogLevel = "INFO"
 # Driver configs
 [Driver]
 IncomingSchema = "tcp"
-IncomingHost = "108.217.182.180"
+IncomingHost = "192.168.1.92"
 IncomingPort = "1883"
 IncomingUser = "mqtt_admin"
 IncomingPassword = "mqtt_admin"
@@ -112,7 +112,7 @@ IncomingKeepAlive = "3600"
 IncomingClientId = "IncomingDataSubscriber"
 IncomingTopic = "DataTopic"
 ResponseSchema = "tcp"
-ResponseHost = "108.217.182.180"
+ResponseHost = "192.168.1.92"
 ResponsePort = "1883"
 ResponseUser = "mqtt_admin"
 ResponsePassword = "mqtt_admin"
