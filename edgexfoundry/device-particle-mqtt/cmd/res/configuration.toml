@@ -1,6 +1,6 @@
 [Service]
 Host = "host.docker.internal"
-Port = 49982
+Port = 48988
 ConnectRetries = 20
 Labels = []
 OpenMsg = "device particle started"
@@ -64,11 +64,11 @@ LogLevel = 'INFO'
   [DeviceList.Protocols]
     [DeviceList.Protocols.mqtt]
       Schema = "tcp"
-      Host = "0.0.0.0"
+      Host = "localhost"
       Port = "1883"
-      ClientId = "CommandPublisher"
-      User = "admin"
-      Password = "public"
+      ClientId = "ParticleCommandPublisher"
+      User = "mqtt_admin"
+      Password = "mqtt_admin"
       Topic = "CommandTopic_mesh-argon-10"
 
 [[DeviceList]]
@@ -79,11 +79,11 @@ LogLevel = 'INFO'
   [DeviceList.Protocols]
     [DeviceList.Protocols.mqtt]
       Schema = "tcp"
-      Host = "0.0.0.0"
+      Host = "localhost"
       Port = "1883"
-      ClientId = "CommandPublisher"
-      User = "admin"
-      Password = "public"
+      ClientId = "ParticleCommandPublisher"
+      User = "mqtt_admin"
+      Password = "mqtt_admin"
       Topic = "CommandTopic_mesh-xenon-11"
 
 [[DeviceList]]
@@ -94,30 +94,30 @@ LogLevel = 'INFO'
   [DeviceList.Protocols]
     [DeviceList.Protocols.mqtt]
       Schema = "tcp"
-      Host = "0.0.0.0"
+      Host = "localhost"
       Port = "1883"
-      ClientId = "CommandPublisher"
-      User = "admin"
-      Password = "public"
+      ClientId = "ParticleCommandPublisher"
+      User = "mqtt_admin"
+      Password = "mqtt_admin"
       Topic = "CommandTopic_mesh-xenon-12"
 
 
 # Driver configs
 [Driver]
 IncomingSchema = "tcp"
-IncomingHost = "0.0.0.0"
+IncomingHost = "localhost"
 IncomingPort = "1883"
-IncomingUser = "admin"
-IncomingPassword = "public"
+IncomingUser = "mqtt_admin"
+IncomingPassword = "mqtt_admin"
 IncomingQos = "0"
 IncomingKeepAlive = "3600"
 IncomingClientId = "IncomingDataSubscriber"
 IncomingTopic = "DataTopic"
 ResponseSchema = "tcp"
-ResponseHost = "0.0.0.0"
+ResponseHost = "localhost"
 ResponsePort = "1883"
-ResponseUser = "admin"
-ResponsePassword = "public"
+ResponseUser = "mqtt_admin"
+ResponsePassword = "mqtt_admin"
 ResponseQos = "0"
 ResponseKeepAlive = "3600"
 ResponseClientId = "CommandResponseSubscriber"
