@@ -1,7 +1,7 @@
 module github.com/TIBCOSoftware/labs-air/edgexfoundry/device-enersys-mqtt
 
 require (
-	github.com/eclipse/paho.mqtt.golang v1.1.1
+	github.com/eclipse/paho.mqtt.golang v1.2.0
 	github.com/edgexfoundry/device-sdk-go v1.0.0
 	github.com/edgexfoundry/go-mod-core-contracts v0.1.0
 	github.com/go-stack/stack v1.8.0 // indirect
