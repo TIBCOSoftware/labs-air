@@ -22,7 +22,7 @@ cmd/device-particle-mqtt:
 	$(GO) build $(GOFLAGS) -o $@ ./cmd
 
 test:
-	$(GO) test ./... -coverprofile=coverage.out
+	$(GO) test ./... -cover
 
 clean:
 	rm -f $(MICROSERVICES)
@@ -35,6 +35,5 @@ docker: $(DOCKERS)
 docker_device_particle_mqtt:
 	docker build \
 		--label "git_sha=$(GIT_SHA)" \
-		-t tibcolabs/docker-device-particle-mqtt:$(GIT_SHA) \
-		-t tibcolabs/docker-device-particle-mqtt:$(VERSION)-dev \
+		-t magallardo/docker-device-particle-mqtt:$(VERSION) \
 		.
