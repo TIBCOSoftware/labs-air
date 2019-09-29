@@ -8,6 +8,7 @@ interface ROUTE {
     icon?: string;
     route?: string;
     title?: string;
+    custom?: boolean;
 }
 
 @Component({
@@ -23,10 +24,12 @@ export class IotHomeCockpitComponent extends LiveAppsHomeCockpitComponent {
             icon: 'iotdashboard',
             route: '/starterApp/home/iotdashboard',
             title: 'IoT Dashboard',
+            custom: true
         }, {
             icon: 'gateway',
             route: '/starterApp/home/gateway',
             title: 'Gateways',
+            custom: true
         }
     ];
 
@@ -35,34 +38,42 @@ export class IotHomeCockpitComponent extends LiveAppsHomeCockpitComponent {
             icon: 'device',
             route: '/starterApp/home/device',
             title: 'Devices',
+            custom: true
         }, {
             icon: 'devicedashboard',
             route: '/starterApp/home/deviceprofile',
             title: 'Device Profiles',
+            custom: true
         }, {
             icon: 'provisioning',
             route: '/starterApp/home/deviceprovision',
             title: 'Device Provisioning',
+            custom: true
         }, {
             icon: 'command',
             route: '/starterApp/home/devicecommand',
             title: 'Device Commands',
+            custom: true
         }, {
             icon: 'rules',
             route: '/starterApp/home/rules',
             title: 'Rules',
+            custom: true
         }, {
             icon: 'instrumenthistory',
             route: '/starterApp/home/notifications',
             title: 'Notifications',
+            custom: true
         }, {
-            icon: 'settings_applications',
+            icon: 'settings',
             route: 'sales/leads',
             title: 'Settings',
+            custom: false
         }, {
             icon: 'get_app',
             route: 'sales/opportunities',
             title: 'Software Update',
+            custom: false
         }
     ];
 
