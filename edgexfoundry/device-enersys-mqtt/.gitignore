@@ -1,3 +1,9 @@
+.vscode
+**/debug
+**/debug.test
+*.txt
+*.html
+
 # Binaries for programs and plugins
 *.exe
 *.exe~
