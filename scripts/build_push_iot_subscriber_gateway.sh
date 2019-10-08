@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. tools.sh
+. scripts/tools.sh
 
 image_name=$1
 image_tag=$2
