@@ -1,0 +1,38 @@
+///////////////////////////////////////////////////////////
+// wait-sync                                             //
+///////////////////////////////////////////////////////////
+// a simple synchronous-yet-non-blocking "wait()" module
+//
+// 1. while you "wait()", async operations from the same
+//    execution block still work in the background (so
+//    non-blocking)
+//
+// 2. at the same time, the execution block will pseudo-run
+//    in a serial, linear manner
+///////////////////////////////////////////////////////////
+
+var deasync = require('deasync');
+
+module.exports = (seconds=1) => {
+
+    if (typeof seconds !== 'number') {
+        throw new Error('waitSync :: invalid <seconds> argument' + seconds);
+    }
+
+    var isDone   = false;
+    var start    = new Date().getTime();
+    var msToWait = seconds * 1000;
+
+    var interval = setInterval(() => {
+        var now   = new Date().getTime();
+        var delta = now - start;
+
+        if (delta >= msToWait){
+            clearInterval(interval);
+            isDone = true;
+        }
+    }, 25);
+
+    deasync.loopWhile(() => !isDone);
+    return;
+};

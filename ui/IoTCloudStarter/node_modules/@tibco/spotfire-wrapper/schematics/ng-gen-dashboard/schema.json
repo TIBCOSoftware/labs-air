@@ -1,0 +1,34 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "id": "SchematicsSpotfireModule",
+    "title": "Dashboard Schema",
+    "type": "object",
+    "properties": {
+      "name": {
+        "description": "The name of the service.",
+        "type": "string"
+      },
+      "path": {
+        "type": "string",
+        "format": "path",
+        "description": "The path to create the service.",
+        "visible": false
+      },
+      "source": {
+        "type": "string",
+        "format": "path",
+        "description": "The path to swagger file.",
+        "visible": false
+      },
+      "project": {
+        "type": "string",
+        "description": "The name of the project.",
+        "$default": {
+          "$source": "projectName"
+        }
+      }
+    },
+    "required": [
+      "name"
+    ]
+  }

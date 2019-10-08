@@ -5,8 +5,8 @@
 /tmp
 /out-tsc
 
-# dependencies
-/node_modules
+# dependencies // Add this back once build is done from source
+#/node_modules
 
 # profiling files
 chrome-profiler-events.json

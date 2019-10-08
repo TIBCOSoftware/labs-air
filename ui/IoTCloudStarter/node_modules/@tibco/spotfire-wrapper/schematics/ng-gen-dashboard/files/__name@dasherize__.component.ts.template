@@ -1,0 +1,30 @@
+import { SpotfireViewerComponent, SpotfireCustomization} from '@tibco/spotfire-wrapper';
+import { OnInit, Component } from '@angular/core';
+
+@Component({
+  selector: '<%= dasherize(name) %>',
+  template: `Override spotfire-viewer template:
+  <button *ngFor="let p of ['Sales performance', 'Territory analysis', 'Effect of promotions']" (click)="openPage(p)">{{p}}</button>
+  <div class="mys" #spot></div>`,
+  styles: [`
+  div.mys { width:600px; height:400px; background:#ebebeb; border-radius: 20px}
+  button { padding:10px }
+`]
+})
+export class <%= classify(name) %>ViewerComponent extends SpotfireViewerComponent implements OnInit {
+  // No var please (or set a contructor)
+  ngOnInit(): void {
+      console.log('dans <%= classify(name) %>ViewerComponent ');
+    this.url = 'https://spotfire-next.cloud.tibco.com';
+    this.path = 'Samples/Sales and Marketing';
+    this.customization = { showAuthor: true, showFilterPanel: true, showToolBar: true } as SpotfireCustomization;
+    this.markingOn = '{"SalesAndMarketing": ["*"]}';
+
+    // Show default page:
+    this.display();
+
+    // Subscribe to markingEvent
+    //
+    this.markingEvent.subscribe(e => console.log('MARKING MySpot', e));
+  }
+}
