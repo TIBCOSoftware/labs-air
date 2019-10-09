@@ -48,7 +48,7 @@ File = './logs/support-flogo-rules.log'
 [ApplicationSettings]
 ApplicationName = "support-flogo-rules"
 TupleTypes = "tupleTypes.json"
-MqttHost = "52.45.185.99"
+MqttHost = "a0056dbbadb2f11e99e4c067e42b309c-335014729.us-west-2.elb.amazonaws.com"
 MqttPort = "1883"
 MqttPublisher = "FlogoRules"
 MqttUser = "mqtt_admin"
