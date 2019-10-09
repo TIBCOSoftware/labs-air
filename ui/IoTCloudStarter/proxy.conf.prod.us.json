@@ -263,75 +263,12 @@
     "logLevel": "info",
     "pathRewrite":{"^/gateway1/edgexgateway" : ""}
   },
-  "/gateway1/coredata/api/v1/*": {
-    "target": "http://localhost:48080",
-    "secure": "false",
+  "/gateway2/edgexgateway/*": {
+    "target": "https://52.45.185.99:8443",
+    "secure": false,
     "changeOrigin": true,
     "logLevel": "info",
-    "pathRewrite":{"^/gateway1/coredata" : ""}
-  },
-  "/gateway1/coremeta/api/v1/*": {
-    "target": "http://localhost:48081",
-    "secure": "false",
-    "changeOrigin": true,
-    "logLevel": "info",
-    "pathRewrite":{"^/gateway1/coremeta" : ""}
-  },
-  "/gateway1/corecommand/api/v1/*": {
-    "target": "http://localhost:48082",
-    "secure": "false",
-    "changeOrigin": true,
-    "logLevel": "info",
-    "pathRewrite":{"^/gateway1/corecommand" : ""}
-  },
-  "/gateway1/exportdistro/api/v1/*": {
-    "target": "http://localhost:48070",
-    "secure": "false",
-    "changeOrigin": true,
-    "logLevel": "info",
-    "pathRewrite":{"^/gateway1/exportdistro" : ""}
-  },
-  "/gateway1/exportclient/api/v1/*": {
-    "target": "http://localhost:48071",
-    "secure": "false",
-    "changeOrigin": true,
-    "logLevel": "info",
-    "pathRewrite":{"^/gateway1/exportclient" : ""}
-  },
-  "/gateway2/coredata/api/v1/*": {
-    "target": "http://137.117.38.255:48080",
-    "secure": "false",
-    "changeOrigin": true,
-    "logLevel": "info",
-    "pathRewrite":{"^/gateway2/coredata" : ""}
-  },
-  "/gateway2/coremeta/api/v1/*": {
-    "target": "http://137.117.38.255:48081",
-    "secure": "false",
-    "changeOrigin": true,
-    "logLevel": "info",
-    "pathRewrite":{"^/gateway2/coremeta" : ""}
-  },
-  "/gateway2/corecommand/api/v1/*": {
-    "target": "http://137.117.38.255:48082",
-    "secure": "false",
-    "changeOrigin": true,
-    "logLevel": "info",
-    "pathRewrite":{"^/gateway2/corecommand" : ""}
-  },
-  "/gateway2/exportdistro/api/v1/*": {
-    "target": "http://137.117.38.255:48070",
-    "secure": "false",
-    "changeOrigin": true,
-    "logLevel": "info",
-    "pathRewrite":{"^/gateway2/exportdistro" : ""}
-  },
-  "/gateway2/exportclient/api/v1/*": {
-    "target": "http://137.117.38.255:48071",
-    "secure": "false",
-    "changeOrigin": true,
-    "logLevel": "info",
-    "pathRewrite":{"^/gateway2/exportclient" : ""}
+    "pathRewrite":{"^/gateway2/edgexgateway" : ""}
   },
   "/dgraph/*": {
     "target": "http://a265d2006cb5311e98597022b27b8d6e-131920896.us-west-2.elb.amazonaws.com:8080",
