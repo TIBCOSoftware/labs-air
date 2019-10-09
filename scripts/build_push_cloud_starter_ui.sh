@@ -7,4 +7,4 @@ image_tag=$2
 image_url=$3
 
 pushd ui/IoTCloudStarter > /dev/null
-build_and_push $image_name $image_tag $image_url
+build_and_push $image_name $image_tag $image_url Dockerfile

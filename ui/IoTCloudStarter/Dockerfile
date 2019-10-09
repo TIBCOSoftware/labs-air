@@ -1,5 +1,5 @@
 # base image
-FROM node:12.2.0
+FROM node:12.11.0
 
 # install chrome for protractor tests
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
@@ -13,7 +13,7 @@ WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
 # install and cache app dependencies
-#COPY package.json /app/package.json
+COPY package.json /app/package.json
 #RUN mkdir /libs
 
 #COPY ./libs /libs
@@ -26,4 +26,4 @@ ENV PATH /app/node_modules/.bin:$PATH
 COPY . /app
 
 # start app
-CMD npm run serve_us
+CMD npm run ng-high-memory-serve-us
