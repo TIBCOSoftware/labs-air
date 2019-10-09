@@ -265,24 +265,10 @@ func GetOrCreateResourceTuple(rs model.RuleSession, device, resource, value stri
 			LoggingClient.Error(fmt.Sprintf("Assert failed for device-resource: [%s]-[%s] - %s\n", device, resource, err))
 		}
 
-		assertedTuple := rs.GetAssertedTuple(concept.GetKey())
-		if assertedTuple == concept {
-			LoggingClient.Error(fmt.Sprintf("Tuple with key [%s] already asserted", concept.GetKey().String()))
-		} else if assertedTuple != nil {
-			LoggingClient.Error(fmt.Sprintf("Tuple with key [%s] already asserted", concept.GetKey().String()))
-		} else {
-			LoggingClient.Error(fmt.Sprintf("Tuple with key [%s] not asserted", concept.GetKey().String()))
-		}
-
 		return concept
 	} else {
 		LoggingClient.Debug(fmt.Sprintf("Concept found for: [%s]-[%s]\n", device, resource))
 		concept := conceptOld.(model.MutableTuple)
-		err := rs.Assert(nil, concept)
-
-		if err != nil {
-			LoggingClient.Error(fmt.Sprintf("Assert failed for device-resource: [%s]-[%s] - %s\n", device, resource, err))
-		}
 
 		return concept
 	}
