@@ -8,7 +8,6 @@ MICROSERVICES=cmd/support-flogo-rules
 VERSION=$(shell cat ./VERSION)
 
 GOFLAGS=-ldflags "-X github.com/TIBCOSoftware/labs-air/edgexfoundry/support-flogo-rules.Version=$(VERSION)"
-
 GIT_SHA=$(shell git rev-parse HEAD)
 
 build: $(MICROSERVICES)
@@ -21,6 +20,20 @@ docker:
 	docker build \
 		--label "git_sha=$(GIT_SHA)" \
 		-t magallardo/docker-support-flogo-rules:$(VERSION) \
+		.
+
+
+dockerarm64:
+	docker build \
+		--label "git_sha=$(GIT_SHA)" \
+		-t magallardo/docker-support-flogo-rules-arm64:$(VERSION) --push \
+		.
+
+dockerbuildxarm64:
+	docker buildx build \
+		--platform linux/arm64 \
+		--label "git_sha=$(GIT_SHA)" \
+		-t magallardo/docker-support-flogo-rules-arm64:$(VERSION) --push \
 		.
 
 test:

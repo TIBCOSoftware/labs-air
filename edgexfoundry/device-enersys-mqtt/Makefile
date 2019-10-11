@@ -37,3 +37,16 @@ docker_device_enersys_mqtt:
 		--label "git_sha=$(GIT_SHA)" \
 		-t magallardo/docker-device-enersys-mqtt:$(VERSION) \
 		.
+
+dockerarm64:
+	docker build \
+		--label "git_sha=$(GIT_SHA)" \
+		-t magallardo/docker-device-enersys-mqtt-arm64:$(VERSION) \
+		.
+
+dockerbuildxarm64:
+	docker buildx build \
+		--platform linux/arm64 \
+		--label "git_sha=$(GIT_SHA)" \
+		-t magallardo/docker-device-enersys-mqtt-arm64:$(VERSION) \
+		.

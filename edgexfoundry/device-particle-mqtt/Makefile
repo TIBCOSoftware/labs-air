@@ -3,11 +3,9 @@
 GO = CGO_ENABLED=0 GO111MODULE=on go
 
 MICROSERVICES=cmd/device-particle-mqtt
-
 .PHONY: $(MICROSERVICES)
 
 DOCKERS=docker_device_particle_mqtt
-
 .PHONY: $(DOCKERS)
 
 VERSION=$(shell cat ./VERSION)
@@ -37,3 +35,17 @@ docker_device_particle_mqtt:
 		--label "git_sha=$(GIT_SHA)" \
 		-t magallardo/docker-device-particle-mqtt:$(VERSION) \
 		.
+
+dockerarm64:
+	docker build \
+		--label "git_sha=$(GIT_SHA)" \
+		-t magallardo/docker-device-particle-mqtt-arm64:$(VERSION) \
+		.
+
+dockerbuildxarm64:
+	docker buildx build \
+		--platform linux/arm64 \
+		--label "git_sha=$(GIT_SHA)" \
+		-t magallardo/docker-device-particle-mqtt-arm64:$(VERSION) \
+		.
+
