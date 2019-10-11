@@ -26,7 +26,7 @@ docker:
 dockerarm64:
 	docker build \
 		--label "git_sha=$(GIT_SHA)" \
-		-t magallardo/docker-support-flogo-rules-arm64:$(VERSION) --push \
+		-t magallardo/docker-support-flogo-rules-arm64:$(VERSION) \
 		.
 
 dockerbuildxarm64:
