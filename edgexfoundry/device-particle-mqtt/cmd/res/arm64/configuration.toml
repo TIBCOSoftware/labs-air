@@ -1,5 +1,5 @@
 [Service]
-Host = "tibcolabs-device-particle-mqtt"
+Host = "labsair-device-particle-mqtt"
 Port = 48988
 ConnectRetries = 3
 Labels = []
