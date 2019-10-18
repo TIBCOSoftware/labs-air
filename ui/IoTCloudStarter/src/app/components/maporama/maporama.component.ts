@@ -160,7 +160,7 @@ export class MaporamaComponent implements OnInit, OnChanges {
   }
 
   hooverOver(obj) {
-    console.log("hooverOvber: ", obj);
+    // console.log("hooverOvber: ", obj);
 
     var data = obj.options.geojsonProperties;
 
@@ -174,7 +174,7 @@ export class MaporamaComponent implements OnInit, OnChanges {
 
 
   hooverOut(obj) {
-    console.log("hooverOut: ", obj);
+    // console.log("hooverOut: ", obj);
 
     var data = obj.options.geojsonProperties;
 
@@ -186,14 +186,14 @@ export class MaporamaComponent implements OnInit, OnChanges {
 
 
   hooverOverMarker(obj) {
-    console.log("hooverOverMarker: ", obj);
+    // console.log("hooverOverMarker: ", obj);
 
     this.geoname = obj.options.name;
     this.geovalue = "";
   }
 
   hooverOutMarker(obj) {
-    console.log("hooverOutMarker: ", obj);
+    // console.log("hooverOutMarker: ", obj);
 
     this.geoname = "";
     this.geovalue = "";
@@ -214,7 +214,13 @@ export class MaporamaComponent implements OnInit, OnChanges {
   mapMarkerDrilldown(uuid, label) {
     console.log("In mapMarkerDrilldown for: ", uuid, label);
     
-    this.router.navigate(['/starterApp/home/gatewaydashboard']);
+    if (label == "gateway1") {
+      this.router.navigate(['/starterApp/home/iotdashboard']);
+    }
+    else {
+      this.router.navigate(['/starterApp/home/gatewaydashboard']);
+    }
+    
   }
 
   styleMap(properties) {
