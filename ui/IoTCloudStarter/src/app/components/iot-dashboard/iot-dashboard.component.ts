@@ -45,9 +45,8 @@ export class IotDashboardComponent implements OnInit {
     //   showUndoRedo: false
     // };
 
-
     this.spotfireServer = 'https://ec2-100-26-8-102.compute-1.amazonaws.com';
-    this.analysisPath = '/Anonymous/tibcolabs_air_v1.6';
+    this.analysisPath = '/Anonymous/tibcolabs_air_v1.643';
     this.activePage = '0';
     this.parameters = "Test";
     this.configuration = {
