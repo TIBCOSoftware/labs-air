@@ -121,6 +121,7 @@ export class IotDeviceCommandComponent implements OnInit, AfterViewInit {
 
     console.log("Initializing commands: ", deviceCommands);
 
+    this.commandsDataSource.data = null;
     this.commands = [];
 
     let cnt = 0;
@@ -156,7 +157,7 @@ export class IotDeviceCommandComponent implements OnInit, AfterViewInit {
 
     });
 
-    this.commandsDataSource.data = this.commands;
+    this.commandsDataSource.data = this.commands as CommandEditor[];
 
   }
 
