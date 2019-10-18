@@ -1,6 +1,6 @@
 .table-container {
     overflow: auto;
-    height: 300px;
+    height: 500px;
 }
   
 table {
@@ -20,7 +20,7 @@ table {
     font-size: 18px;
 }
 
-.rule-header-image {
-    background-image: url('/assets/img/device.png');
+.notification-header-image {
+    background-image: url('/assets/img/notifications.png');
     background-size: cover;
 }
