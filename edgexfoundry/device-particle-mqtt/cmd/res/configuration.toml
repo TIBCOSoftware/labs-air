@@ -58,7 +58,7 @@ LogLevel = 'INFO'
 # Pre-define Devices
 [[DeviceList]]
   Name = "mesh-argon-10"
-  Profile = "Particle-Device"
+  Profile = "Mesh-Device"
   Description = "Particle mesh device"
   Labels = [ "industrial", "mqtt" ]
   [DeviceList.Protocols]
@@ -73,7 +73,7 @@ LogLevel = 'INFO'
 
 [[DeviceList]]
   Name = "mesh-xenon-11"
-  Profile = "Particle-Device"
+  Profile = "Mesh-Device"
   Description = "Particle mesh device"
   Labels = [ "industrial", "mqtt" ]
   [DeviceList.Protocols]
@@ -88,7 +88,7 @@ LogLevel = 'INFO'
 
 [[DeviceList]]
   Name = "mesh-xenon-12"
-  Profile = "Particle-Device"
+  Profile = "Mesh-Device"
   Description = "Particle mesh device"
   Labels = [ "industrial", "mqtt" ]
   [DeviceList.Protocols]
@@ -100,6 +100,21 @@ LogLevel = 'INFO'
       User = "mqtt_admin"
       Password = "mqtt_admin"
       Topic = "CommandTopic_mesh-xenon-12"
+
+[[DeviceList]]
+  Name = "photon-iot1"
+  Profile = "Photon-Device"
+  Description = "Particle photon device"
+  Labels = [ "industrial", "mqtt" ]
+  [DeviceList.Protocols]
+    [DeviceList.Protocols.mqtt]
+      Schema = "tcp"
+      Host = "localhost"
+      Port = "1883"
+      ClientId = "ParticleCommandPublisher"
+      User = "mqtt_admin"
+      Password = "mqtt_admin"
+      Topic = "CommandTopic_photon-01"
 
 
 # Driver configs
