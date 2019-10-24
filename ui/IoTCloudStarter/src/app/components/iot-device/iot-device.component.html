@@ -113,35 +113,39 @@
         <mat-card-content>
 
           <form [formGroup]="instrumentForm" class="instrument-form" fxLayout="row wrap" fxLayoutGap="15px">
-            <mat-form-field fxFlex="18%" appearance="outline">
+            <mat-form-field fxFlex="15%" appearance="outline">
               <mat-label>Value Type</mat-label>
               <input matInput [readonly]=true formControlName="valueType">
             </mat-form-field>
-            <mat-form-field fxFlex="18%" appearance="outline">
+            <mat-form-field fxFlex="15%" appearance="outline">
+              <mat-label>Permission</mat-label>
+              <input matInput [readonly]=true formControlName="valueReadWrite">
+            </mat-form-field>
+            <mat-form-field fxFlex="15%" appearance="outline">
               <mat-label>Minimun Value</mat-label>
               <input matInput [readonly]=true formControlName="valueMinimum">
             </mat-form-field>
-            <mat-form-field fxFlex="18%" appearance="outline">
+            <mat-form-field fxFlex="15%" appearance="outline">
               <mat-label>Maximun Value</mat-label>
               <input matInput [readonly]=true formControlName="valueMaximum">
             </mat-form-field>
-            <mat-form-field fxFlex="18%" appearance="outline">
+            <mat-form-field fxFlex="15%" appearance="outline">
               <mat-label>Default Value</mat-label>
               <input matInput [readonly]=true formControlName="valueDefault">
             </mat-form-field>
-            <mat-form-field fxFlex="18%" appearance="outline">
+            <mat-form-field fxFlex="15%" appearance="outline">
               <mat-label>Unit</mat-label>
               <input matInput [readonly]=true formControlName="valueUnit">
             </mat-form-field>
-            <mat-form-field fxFlex="18%" appearance="outline">
+            <mat-form-field fxFlex="15%" appearance="outline">
               <mat-label>Interface</mat-label>
               <input matInput [readonly]=true formControlName="interface">
             </mat-form-field>
-            <mat-form-field fxFlex="18%" appearance="outline">
+            <mat-form-field fxFlex="15%" appearance="outline">
               <mat-label>Pin Number</mat-label>
               <input matInput [readonly]=true formControlName="interfacePinNumber">
             </mat-form-field>
-            <mat-form-field fxFlex="18%" appearance="outline">
+            <mat-form-field fxFlex="15%" appearance="outline">
               <mat-label>Type</mat-label>
               <input matInput [readonly]=true formControlName="interfaceType">
             </mat-form-field>

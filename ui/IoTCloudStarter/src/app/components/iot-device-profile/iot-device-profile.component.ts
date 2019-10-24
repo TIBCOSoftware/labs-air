@@ -61,6 +61,7 @@ export class IotDeviceProfileComponent implements OnInit {
       resourceName: ['', Validators.required],
       resourceDescription: [''],
       valueType: ['', Validators.required],
+      valueReadWrite: [''],
       valueMinimum: [''],
       valueMaximum: [''],
       valueDefault: [''],
@@ -121,6 +122,7 @@ export class IotDeviceProfileComponent implements OnInit {
       resourceName: "NewResourceName",
       resourceDescription: "",
       valueType: "INT16",
+      valueReadWrite: "R",
       valueMinimum: "0",
       valueMaximum: "0",
       valueDefault: "0",
@@ -170,6 +172,7 @@ export class IotDeviceProfileComponent implements OnInit {
       resourceName: "NewResourceName",
       resourceDescription: "",
       valueType: "INT16",
+      valueReadWrite: "R",
       valueMinimum: "0",
       valueMaximum: "0",
       valueDefault: "0",
@@ -227,6 +230,16 @@ export class IotDeviceProfileComponent implements OnInit {
     console.log("Returned profile node: ", profile);
 
     // Update details form
+
+    let attrInterface = '';
+    let attrPinNum = '';
+    let attrType = '';
+    if (resource.attributes != undefined) {
+      attrInterface = resource.attributes.Interface;
+      attrPinNum = resource.attributes.Pin_Num;
+      attrType = resource.attributes.Type;
+    }
+
     this.detailsForm.patchValue({
 
       profileName: profile.name,
@@ -239,13 +252,14 @@ export class IotDeviceProfileComponent implements OnInit {
       resourceName: resource.name,
       resourceDescription: resource.description,
       valueType: resource.properties.value.type,
+      valueReadWrite: resource.properties.value.readWrite,
       valueMinimum: resource.properties.value.minimum,
       valueMaximum: resource.properties.value.maximum,
       valueDefault: resource.properties.value.defaultValue,
       valueUnit: resource.properties.units.defaultValue,
-      interface: resource.attributes.Interface,
-      interfacePinNumber: resource.attributes.Pin_Num,
-      interfaceType: resource.attributes.Type
+      interface: attrInterface,
+      interfacePinNumber: attrPinNum,
+      interfaceType: attrType
     });
 
     this.lastProfileId = node.id;
@@ -343,6 +357,7 @@ export class IotDeviceProfileComponent implements OnInit {
           resource.name = this.detailsForm.controls['resourceName'].value;
           resource.description = this.detailsForm.controls['resourceDescription'].value;
           resource.properties.value.type = this.detailsForm.controls['valueType'].value;
+          resource.properties.value.readWrite = this.detailsForm.controls['valueReadWrite'].value;
           resource.properties.value.minimum = this.detailsForm.controls['valueMinimum'].value;
           resource.properties.value.maximum = this.detailsForm.controls['valueMaximum'].value;
           resource.properties.value.defaultValue = this.detailsForm.controls['valueDefault'].value;
@@ -355,7 +370,7 @@ export class IotDeviceProfileComponent implements OnInit {
         else {
           let value: PropertyValue = {
             type: this.detailsForm.controls['valueType'].value,
-            readWrite: "",
+            readWrite: this.detailsForm.controls['valueReadWrite'].value,
             minimum: this.detailsForm.controls['valueMinimum'].value,
             maximum: this.detailsForm.controls['valueMaximum'].value,
             defaultValue: this.detailsForm.controls['valueDefault'].value,
@@ -429,7 +444,7 @@ export class IotDeviceProfileComponent implements OnInit {
 
       let value: PropertyValue = {
         type: this.detailsForm.controls['valueType'].value,
-        readWrite: "",
+        readWrite: this.detailsForm.controls['valueReadWrite'].value,
         minimum: this.detailsForm.controls['valueMinimum'].value,
         maximum: this.detailsForm.controls['valueMaximum'].value,
         defaultValue: this.detailsForm.controls['valueDefault'].value,

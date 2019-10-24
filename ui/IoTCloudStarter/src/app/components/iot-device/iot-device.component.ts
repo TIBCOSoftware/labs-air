@@ -164,6 +164,7 @@ export class IotDeviceComponent implements OnInit, AfterViewInit {
 
     this.instrumentForm = this.formBuilder.group({
       valueType: [''],
+      valueReadWrite: [''],
       valueMinimum: [''],
       valueMaximum: [''],
       valueDefault: [''],
@@ -346,15 +347,26 @@ export class IotDeviceComponent implements OnInit, AfterViewInit {
     this.chartDatasets[0].label = row.name;
 
     // Update Instrument Form
+    
+    let attrInterface = '';
+    let attrPinNum = '';
+    let attrType = '';
+    if (row.attributes != undefined) {
+      attrInterface = row.attributes.Interface;
+      attrPinNum = row.attributes.Pin_Num;
+      attrType = row.attributes.Type;
+    }
+
     this.instrumentForm.patchValue({
       valueType: row.properties.value.type,
+      valueReadWrite: row.properties.value.readWrite,
       valueMinimum: row.properties.value.minimum,
       valueMaximum: row.properties.value.maximum,
       valueDefault: row.properties.value.defaultValue,
       valueUnit: row.properties.units.defaultValue,
-      interface: row.attributes.Interface,
-      interfacePinNumber: row.attributes.Pin_Num,
-      interfaceType: row.attributes.Type
+      interface: attrInterface,
+      interfacePinNumber: attrPinNum,
+      interfaceType: attrType
     });
 
     this.resourceSelected = row.name;

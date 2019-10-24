@@ -120,23 +120,27 @@
                     </div>
 
                     <div fxLayout="row wrap" fxLayoutGap="15px" *ngIf="showResourceDetail">
-                        <mat-form-field fxFlex="18%" appearance="outline">
+                        <mat-form-field fxFlex="15%" appearance="outline">
                             <mat-label>Value Type</mat-label>
                             <input matInput [readonly]=false formControlName="valueType">
                         </mat-form-field>
-                        <mat-form-field fxFlex="18%" appearance="outline">
+                        <mat-form-field fxFlex="15%" appearance="outline">
+                            <mat-label>Permission</mat-label>
+                            <input matInput [readonly]=false formControlName="valueReadWrite">
+                        </mat-form-field>
+                        <mat-form-field fxFlex="15%" appearance="outline">
                             <mat-label>Minimun Value</mat-label>
                             <input matInput [readonly]=false formControlName="valueMinimum">
                         </mat-form-field>
-                        <mat-form-field fxFlex="18%" appearance="outline">
+                        <mat-form-field fxFlex="15%" appearance="outline">
                             <mat-label>Maximun Value</mat-label>
                             <input matInput [readonly]=false formControlName="valueMaximum">
                         </mat-form-field>
-                        <mat-form-field fxFlex="18%" appearance="outline">
+                        <mat-form-field fxFlex="15%" appearance="outline">
                             <mat-label>Default Value</mat-label>
                             <input matInput [readonly]=false formControlName="valueDefault">
                         </mat-form-field>
-                        <mat-form-field fxFlex="18%" appearance="outline">
+                        <mat-form-field fxFlex="15%" appearance="outline">
                             <mat-label>Unit</mat-label>
                             <input matInput [readonly]=false formControlName="valueUnit">
                         </mat-form-field>
@@ -147,15 +151,15 @@
                     </div>
 
                     <div fxLayout="row wrap" fxLayoutGap="15px" *ngIf="showResourceDetail">
-                        <mat-form-field fxFlex="18%" appearance="outline">
+                        <mat-form-field fxFlex="15%" appearance="outline">
                             <mat-label>Interface</mat-label>
                             <input matInput [readonly]=false formControlName="interface">
                         </mat-form-field>
-                        <mat-form-field fxFlex="18%" appearance="outline">
+                        <mat-form-field fxFlex="15%" appearance="outline">
                             <mat-label>Pin Number</mat-label>
                             <input matInput [readonly]=false formControlName="interfacePinNumber">
                         </mat-form-field>
-                        <mat-form-field fxFlex="18%" appearance="outline">
+                        <mat-form-field fxFlex="15%" appearance="outline">
                             <mat-label>Type</mat-label>
                             <input matInput [readonly]=false formControlName="interfaceType">
                         </mat-form-field>
