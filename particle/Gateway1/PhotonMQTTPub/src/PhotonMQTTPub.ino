@@ -50,14 +50,14 @@ void setup()
 
     SetClientName("PhotonParticleDevice");
 
-    ConnectToMQTT("192.168.1.92");
+    ConnectToMQTT();
 
     pinMode(LIGHTPIN, INPUT);
     pinMode(BUTTONPIN, INPUT_PULLDOWN);
     pinMode(ANGLEPIN, INPUT);
 
-    SetPubTopic("PhotonDataTopic");
-    SetResponseTopic("PhotonResponseTopic");
+    SetPubTopic("DataTopic");
+    SetResponseTopic("ResponseTopic");
 }
 
 // loop() runs over and over again, as quickly as it can execute.
@@ -101,7 +101,7 @@ void loop(){
 
 // --------------------------------------------- Connect to the MQTT Broker via IP address
 // triggered by Particle.function
-int ConnectToMQTT(String s)
+int ConnectToMQTT()
 {
 
     mqttClient.connect(clientName, mqttuser, mqttpass);
