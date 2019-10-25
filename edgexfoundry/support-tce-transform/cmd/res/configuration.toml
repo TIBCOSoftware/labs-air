@@ -1,0 +1,51 @@
+[Writable]
+LogLevel = 'DEBUG'
+
+[Service]
+BootTimeout = 30000
+ClientMonitor = 15000
+CheckInterval = '10s'
+Host = 'localhost'
+Port = 48098
+Protocol = 'http'
+ReadMaxLimit = 100
+StartupMsg = 'This is the TCE Transform Application Service'
+Timeout = 5000
+
+[Registry]
+Host = 'localhost'
+Port = 8500
+Type = 'consul'
+
+[Clients]
+  [Clients.CoreData]
+  Protocol = 'http'
+  Host = 'localhost'
+  Port = 48080
+  
+[MessageBus]
+Type = 'zero'
+    [MessageBus.PublishHost]
+        Host = '*'
+        Port = 5564
+        Protocol = 'tcp'
+    [MessageBus.SubscribeHost]
+        Host = 'localhost'
+        Port = 5563
+        Protocol = 'tcp'
+
+[Logging]
+EnableRemote = false
+File = './logs/support-tce-transform.log'
+
+# Choose either an HTTP trigger or MessageBus trigger (aka Binding)
+[Binding]
+ Type="messagebus"
+ SubscribeTopic="events"
+ PublishTopic=""
+
+
+[ApplicationSettings]
+ApplicationName = "support-tce-transform"
+TCEEndpoint = "https://events.cloud.tibcoapps.com/2877235e-aabe-4f56-a045-8ae590471fec/Channels/HTTP/deviceEventDestination"
+
