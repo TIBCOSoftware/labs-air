@@ -4,9 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	// "github.com/edgexfoundry/app-functions-sdk-go/pkg/transforms"
-	"github.com/TIBCOSoftware/labs-air/edgexfoundry/support-tce-transfrom/internal/transforms"
-
+	"github.com/TIBCOSoftware/labs-air/edgexfoundry/support-tce-transform/internal/transforms"
 	"github.com/edgexfoundry/app-functions-sdk-go/appcontext"
 	"github.com/edgexfoundry/app-functions-sdk-go/appsdk"
 	"github.com/edgexfoundry/go-mod-core-contracts/models"
@@ -86,23 +84,7 @@ func processEvent(edgexcontext *appcontext.Context, params ...interface{}) (bool
 		return false, nil
 	}
 
-	event := params[0].(models.Event)
-
-	// edgexcontext.LoggingClient.Debug(fmt.Sprintf("Processing event for device: %s", event.Device))
-
-	for _, reading := range event.Readings {
-		device := event.Device
-		// eventID := reading.Id
-		name := reading.Name
-		value := reading.Value
-
-		edgexcontext.LoggingClient.Debug(fmt.Sprintf("Received event from device: %s instrument: %s value: %s", device, name, value))
-
-	}
-
-	httpSender.HTTPPost(edgexcontext, params)
-
-	edgexcontext.LoggingClient.Debug(fmt.Sprintf("Payload: %s", event))
+	httpSender.HTTPPost(edgexcontext, params[0])
 
 	return false, nil
 }

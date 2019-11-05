@@ -47,5 +47,5 @@ File = './logs/support-tce-transform.log'
 
 [ApplicationSettings]
 ApplicationName = "support-tce-transform"
-TCEEndpoint = "https://events.cloud.tibcoapps.com/2877235e-aabe-4f56-a045-8ae590471fec/Channels/HTTP/deviceEventDestination"
+TCEEndpoint = "https://events.cloud.tibcoapps.com/fd415477-b854-437c-8fa1-85c7d8fd581b/Channels/HTTP/deviceEventDestination"
 

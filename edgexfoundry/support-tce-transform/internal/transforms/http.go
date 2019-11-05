@@ -27,6 +27,7 @@ import (
 
 	"github.com/edgexfoundry/app-functions-sdk-go/appcontext"
 	"github.com/edgexfoundry/go-mod-core-contracts/clients"
+	"github.com/edgexfoundry/go-mod-core-contracts/models"
 )
 
 // HTTPSender ...
@@ -47,6 +48,9 @@ func NewHTTPSender(url string, mimeType string) HTTPSender {
 // If no previous function exists, then the event that triggered the pipeline will be used.
 // An empty string for the mimetype will default to application/json.
 func (sender HTTPSender) HTTPPost(edgexcontext *appcontext.Context, params ...interface{}) (bool, interface{}) {
+
+	edgexcontext.LoggingClient.Info(fmt.Sprintf("Inside HTTPPost Event: %s", params[0].(models.Event)))
+
 	if len(params) < 1 {
 		// We didn't receive a result
 		return false, errors.New("No Data Received")
@@ -54,12 +58,21 @@ func (sender HTTPSender) HTTPPost(edgexcontext *appcontext.Context, params ...in
 	if sender.MimeType == "" {
 		sender.MimeType = "application/json"
 	}
-	data, err := util.CoerceType(params[0])
+
+	data, _ := util.CoerceType(params[0])
+
+	payloaddata := "{\"payload\": " + string(data) + "}"
+
+	edgexcontext.LoggingClient.Info(fmt.Sprintf("Inside HTTPPost Data with payload: %s", payloaddata))
+
+	data, err := util.CoerceType(payloaddata)
 	if err != nil {
+		edgexcontext.LoggingClient.Info("Inside HTTPPost - Error coercing data")
 		return false, err
 	}
 
-	edgexcontext.LoggingClient.Info("POSTing data")
+	edgexcontext.LoggingClient.Info(fmt.Sprintf("Inside HTTPPost data: %s", data))
+
 	response, err := http.Post(sender.URL, sender.MimeType, bytes.NewReader(data))
 	if err != nil {
 		//LoggingClient.Error(err.Error())
