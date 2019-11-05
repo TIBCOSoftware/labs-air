@@ -1,0 +1,64 @@
+name: "Vehicle-Device"
+manufacturer: "GE Transportation"
+model: "XX320"
+labels:
+- "train"
+description: "Vehicle device profile"
+
+
+deviceResources:
+  -
+    name: "GPS"
+    description: "Vehicle GPS location"
+    properties:
+      value:
+        { type: "String", readWrite: "R", defaultValue: "", minimum: "", maximum: "" }
+      units:
+        { type: "String", readWrite: "R", defaultValue: "Lat/Lon in degrees" }
+  -
+    name: "Speedometer"
+    description: "Measures vehicle speed"
+    properties:
+      value:
+        { type: "Float32", readWrite: "R", minimum: "0", maximum: "100", defaultValue: "0"}
+      units:
+        { type: "String", readWrite: "R", defaultValue: "Milles/Hour" }
+deviceCommands:
+  -
+    name: GPS
+    get:
+      - { index: "1", operation: "get", object: "GPS", parameter: "0.0" }
+  -
+    name: Speedometer
+    get:
+      - { index: "1", operation: "get", object: "Speedometer", parameter: "0.0"}
+ 
+coreCommands:
+  -
+    name: GPS
+    get:
+      path: "/api/v1/device/{deviceId}/GPS"
+      responses:
+        -
+          code: "200"
+          description: "get the vehicle gps coordinates"
+          expectedValues: ["Latitude", "Longitude"]
+        -
+          code: "503"
+          description: "get coordinate service unavailable"
+          expectedValues: []
+  -
+    name: Speedometer
+    get:
+      path: "/api/v1/device/{deviceId}/Speedometer"
+      responses:
+        -
+          code: "200"
+          description: "get the vehicle speed"
+          expectedValues: ["Velocity"]
+        -
+          code: "503"
+          description: "get Speedometer service unavailable"
+          expectedValues: []
+  
+
