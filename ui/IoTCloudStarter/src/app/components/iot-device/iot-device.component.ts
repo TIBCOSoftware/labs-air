@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, Input } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, Input, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 
 import { SelectionModel } from '@angular/cdk/collections';
@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, startWith, tap, delay } from 'rxjs/operators';
 //import { merge } from "rxjs/observable/merge";
 //import { fromEvent } from 'rxjs/observable/fromEvent';
+import { interval, Subscription } from 'rxjs';
 import { MatPaginator, MatSort, MatTableDataSource, MatDatepickerInputEvent } from '@angular/material';
 
 import { BaseChartDirective, defaultColors, Label, MultiDataSet, SingleDataSet } from 'ng2-charts';
@@ -23,7 +24,13 @@ import 'chartjs-plugin-streaming';
   templateUrl: './iot-device.component.html',
   styleUrls: ['./iot-device.component.css']
 })
-export class IotDeviceComponent implements OnInit, AfterViewInit {
+export class IotDeviceComponent implements OnInit, OnDestroy, AfterViewInit {
+  subscription: Subscription;
+  source = interval(5000);
+  subscribed = false;
+  createMapFlag = true;  // Variable indicating if map needs to be created
+
+
   // Form variables
   instrumentForm: FormGroup;
 
@@ -33,11 +40,16 @@ export class IotDeviceComponent implements OnInit, AfterViewInit {
   startDateSelected = false;
   endDateSelected = false;
   queryLastValuesDisabled = true;
+  mapResource = false;
+  timeSeriesResource = false;
   gatewayList: Gateway[] = [];
   gatewayIdSelected: '';
 
-  // Chart variables
+  // Map configuration
+  mapConfig = null;
+  mapMarkerUpdate = null;
 
+  // Chart variables
   public chartDatasets = [
     {
       label: '',
@@ -178,7 +190,13 @@ export class IotDeviceComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.getGateways();
-    
+  }
+
+  ngOnDestroy() {
+    if (this.subscribed) {
+      this.subscription.unsubscribe();
+      this.subscribed = false;
+    }
   }
 
   ngAfterViewInit() {
@@ -203,10 +221,14 @@ export class IotDeviceComponent implements OnInit, AfterViewInit {
         // Reset data for streaming chart dataset
         this.chartStreamingDatasets[0].data = [];
 
-        // Set Data for chart dataset
-        this.setChartDataSet();
+        if (this.mapResource) {
+          this.setMapDataSet(deviceName);
 
-        //this.chartDatasets[0].data = this.dataset;
+        }
+        else {
+          // Set Data for chart dataset
+          this.setChartDataSet();
+        }
       })
   }
 
@@ -220,10 +242,14 @@ export class IotDeviceComponent implements OnInit, AfterViewInit {
         // Reset data for streaming chart dataset
         this.chartStreamingDatasets[0].data = [];
 
-        // Set Data for chart dataset
-        this.setChartDataSet();
+        if (this.mapResource) {
+          this.setMapDataSet(deviceName);
+        }
+        else {
+          // Set Data for chart dataset
+          this.setChartDataSet();
+        }
 
-        //this.chartDatasets[0].data = this.dataset;
       })
   }
 
@@ -245,6 +271,42 @@ export class IotDeviceComponent implements OnInit, AfterViewInit {
     console.log("data transformed: ", this.timeSeriesData);
 
     this.chartDatasets[0].data = this.timeSeriesData;
+  }
+
+  public setMapDataSet(deviceName) {
+    let mapData = [];
+    let idx = this.resourceReadings.length - 1;
+    let coords = this.resourceReadings[idx].value.split("|", 3);
+    console.log("Setting marker for map reading: ", this.resourceReadings[idx].value);
+    console.log("Setting marker for map: ", coords);
+
+    mapData.push({
+      lat: Number(coords[0]),
+      lon: Number(coords[1]),
+      label: coords[2],
+      uuid: deviceName
+    });
+
+    let center = this.graphService.getRouteCenter(deviceName);
+
+    if (this.createMapFlag) {
+      this.mapConfig = {
+        createMap: this.createMapFlag,
+        centerLat: center[0],
+        centerLon: center[1],
+        zoom: 4,
+        showColorAxis: false,
+        data: mapData,
+        polyline: this.graphService.getRoute(deviceName)
+      };
+      this.createMapFlag = false;
+    }
+    else {
+      this.mapConfig = {
+        createMap: this.createMapFlag,
+        data: mapData,
+      }
+    }
   }
 
   public getStreamData(chart: any) {
@@ -320,6 +382,15 @@ export class IotDeviceComponent implements OnInit, AfterViewInit {
   }
 
   onDeviceClicked(row) {
+    if (this.subscribed) {
+      this.subscription.unsubscribe();
+      this.subscribed = false;
+    }
+
+
+    this.mapResource = false;
+    this.timeSeriesResource = false;
+
     // Set variables for query enable/disable
     this.queryLastValuesDisabled = true;
     this.queryByDateDisabled = true;
@@ -336,7 +407,23 @@ export class IotDeviceComponent implements OnInit, AfterViewInit {
   }
 
   onResourceClicked(row) {
+    if (this.subscribed) {
+      this.subscription.unsubscribe();
+      this.subscribed = false;
+    }
+
     console.log('Row clicked: ', row);
+    this.resourceSelected = row.name;
+    this.mapResource = false;
+    this.timeSeriesResource = false;
+
+    if (this.resourceSelected == "GPS") {
+      this.mapResource = true;
+    }
+    else {
+      this.timeSeriesResource = true;
+    }
+
     // Set variables for query enable/disable
     this.queryLastValuesDisabled = false;
     if (this.startDateSelected && this.endDateSelected) {
@@ -347,7 +434,7 @@ export class IotDeviceComponent implements OnInit, AfterViewInit {
     this.chartDatasets[0].label = row.name;
 
     // Update Instrument Form
-    
+
     let attrInterface = '';
     let attrPinNum = '';
     let attrType = '';
@@ -369,8 +456,15 @@ export class IotDeviceComponent implements OnInit, AfterViewInit {
       interfaceType: attrType
     });
 
-    this.resourceSelected = row.name;
+    this.createMapFlag = true;
+
     this.getResourceReadings(this.deviceSelected, this.resourceSelected);
+
+    if (this.mapResource) {
+      this.subscription = this.source.subscribe(val => this.getResourceReadings(this.deviceSelected, this.resourceSelected));
+      this.subscribed = true;
+    }
+
   }
 
   onQueryByDateClicked() {

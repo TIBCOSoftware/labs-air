@@ -16,6 +16,7 @@
   </div>
 
   <div fxLayout="column" fxLayoutGap="20px" style="height: 100%;">
+
     <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between stretch"
       style="min-height:300px; max-height: 300px ">
       <mat-card fxFlex>
@@ -65,9 +66,8 @@
           </div>
         </mat-card-content>
       </mat-card>
-     
-    </div>
 
+    </div>
 
     <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between stretch"
       style="min-height:300px; max-height: 300px ">
@@ -103,7 +103,6 @@
       </mat-card>
     </div>
 
-    
     <div fxLayout="row" fxLayoutGap="15px">
       <mat-card fxFlex>
         <mat-card-header>
@@ -155,7 +154,8 @@
 
       </mat-card>
     </div>
-    <div fxLayout="row" fxLayoutGap="15px" style="min-height: 300px">
+
+    <div *ngIf="timeSeriesResource" fxLayout="row" fxLayoutGap="15px" style="min-height: 300px">
       <mat-card fxFlex>
         <mat-card-header>
           <div mat-card-avatar class="instrument-history-image"></div>
@@ -165,8 +165,6 @@
 
           <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-around center center">
             <form [formGroup]="instrumentForm" class="instrument-form" fxLayout="row wrap" fxLayoutGap="15px">
-
-
 
               <mat-form-field fxFlex="20%" appearance="fill">
                 <input matInput [disabled]="queryLastValuesDisabled" [matDatepicker]="pickerStartDate"
@@ -188,8 +186,6 @@
                 <button mat-raised-button [disabled]="queryLastValuesDisabled" (click)="onQueryLastValuesClicked()"
                   color="primary">Query Last 300 Values</button>
               </div>
-
-
             </form>
           </div>
 
@@ -199,7 +195,8 @@
         </mat-card-content>
       </mat-card>
     </div>
-    <div fxLayout="row" fxLayoutGap="15px" style="min-height: 300px">
+
+    <div *ngIf="timeSeriesResource" fxLayout="row" fxLayoutGap="15px" style="min-height: 300px">
       <mat-card fxFlex>
         <mat-card-header>
           <div mat-card-avatar class="instrument-streaming-image"></div>
@@ -214,6 +211,19 @@
     </div>
 
 
-  </div>
+    <div *ngIf="mapResource" fxLayout="row" fxLayoutGap="15px" style="min-height: 300px">
+      <mat-card fxFlex>
+        <mat-card-header>
+          <div mat-card-avatar class="gateway-location-image"></div>
+          <mat-card-title>Gateway Locations</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <app-maporama [mapConfig]="mapConfig">
+          </app-maporama>
+        </mat-card-content>
+      </mat-card>
+    </div>
 
+
+  </div>
 </div>

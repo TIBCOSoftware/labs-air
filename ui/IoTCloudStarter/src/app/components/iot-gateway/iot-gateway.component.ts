@@ -103,6 +103,7 @@ export class IotGatewayComponent implements OnInit, AfterViewInit {
     );
 
     this.mapConfig = {
+      createMap: true,
       centerLat: 39.0,
       centerLon: -98.0,
       zoom: 4,
