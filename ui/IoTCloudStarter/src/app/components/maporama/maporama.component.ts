@@ -78,7 +78,7 @@ export class MaporamaComponent implements OnInit, OnChanges {
           this.markersLayer = new T.MarkersLayer();
 
           map.addLayer(popupsLayer);
-          map.addLayer(this.markersLayer);
+          
 
           // Add polyline
           if (this.mapConfig.polyline != null) {
@@ -116,6 +116,7 @@ export class MaporamaComponent implements OnInit, OnChanges {
           popupsLayer.addPopup(popup);
 
           // Add markers
+          map.addLayer(this.markersLayer);
           let seriesData = this.mapConfig.data;
           for (let i in seriesData) {
 
@@ -123,7 +124,8 @@ export class MaporamaComponent implements OnInit, OnChanges {
             var marker = new T.ImageMarker(new T.LatLng(item.lat, item.lon),
               "https://geoanalytics.tibco.com/documentation/assets/img/marker.png", {
               name: item.label,
-              id: item.uuid
+              id: item.uuid,
+              offset: new T.Point(0, -10)  
             });
 
             this.markersLayer.addMarker(marker);
