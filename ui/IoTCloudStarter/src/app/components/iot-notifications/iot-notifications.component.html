@@ -16,7 +16,7 @@
                 </mat-card-header>
                 <mat-card-content>
                     <div class="table-container mat-elevation-z8">
-                        <table mat-table [dataSource]="notificationsDataSource" matSort>
+                        <table mat-table [dataSource]="notificationsDataSource" matSort matSortActive="created" matSortStart="desc" matSortDirection="desc">
 
                             <!-- Id Column -->
                             <ng-container matColumnDef="uuid">
