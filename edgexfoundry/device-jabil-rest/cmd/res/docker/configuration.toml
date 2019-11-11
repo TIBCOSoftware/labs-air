@@ -1,0 +1,70 @@
+[Writable]
+LogLevel = 'INFO'
+
+[Service]
+Host = "labsair-device-jabil-rest"
+Port = 59995
+ConnectRetries = 20
+Labels = []
+OpenMsg = "Jabil REST device started"
+Timeout = 5000
+EnableAsyncReadings = true
+AsyncBufferSize = 16
+
+[Registry]
+Host = "edgex-core-consul"
+Port = 8500
+Type = "consul"
+CheckInterval = "10s"
+FailLimit = 3
+FailWaitTime = 10
+
+[Clients]
+  [Clients.Data]
+  Protocol = "http"
+  Host = "edgex-core-data"
+  Port = 48080
+  Timeout = 5000
+
+  [Clients.Metadata]
+  Protocol = "http"
+  Host = "edgex-core-metadata"
+  Port = 48081
+  Timeout = 5000
+
+  [Clients.Logging]
+  Protocol = "http"
+  Host = "edgex-support-logging"
+  Port = 48061
+
+[Device]
+  DataTransform = true
+  InitCmd = ""
+  InitCmdArgs = ""
+  MaxCmdOps = 128
+  MaxCmdValueLen = 256
+  RemoveCmd = ""
+  RemoveCmdArgs = ""
+  ProfilesDir = "/res"
+
+# Driver configs
+[Driver]
+
+[Logging]
+EnableRemote = true
+
+# Pre-define Devices
+[[DeviceList]]
+  Name = "JabilDevice1"
+  Profile = "Jabil-Device"
+  Description = "Jabil RESTful Device that sends JSON data"
+  Labels = [ "rest", "json" ]
+  [DeviceList.Protocols]
+    [DeviceList.Protocols.other]
+[[DeviceList]]
+  Name = "JabilDevice2"
+  Profile = "Jabil-Device"
+  Description = "Jabil RESTful Device that sends JSON data"
+  Labels = [ "rest", "json" ]
+  [DeviceList.Protocols]
+    [DeviceList.Protocols.other]

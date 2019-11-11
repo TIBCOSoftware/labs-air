@@ -1,0 +1,113 @@
+name: "Jabil-Device"
+manufacturer: "Jabil"
+model: "XXXXXX"
+labels:
+ - "rest"
+ - "json"
+description: "Jabil Device that sends Json"
+
+deviceResources:
+  - name: Temperature
+    description: "Measures Temperature of Room"
+    attributes:
+      { Pin_Num: "A0", Interface: "AIO", Type: "IN" }
+    properties:
+      value:
+        { type: "Float32", readWrite: "W" , defaultValue: "0" }
+      units:
+        { type: "String", readWrite: "R", defaultValue: "Farenheit" }
+  - name: Humidity
+    description: "Measures Humidity of Room"
+    attributes:
+      { Pin_Num: "A1", Interface: "AIO", Type: "IN" }
+    properties:
+      value:
+        { type: "Float32", readWrite: "W" , defaultValue: "0" }
+      units:
+        { type: "String", readWrite: "R", defaultValue: "%" }
+  - name: Lux
+    description: "Measures lighting of a Room"
+    attributes:
+      { Pin_Num: "D1", Interface: "AIO", Type: "IN" }
+    properties:
+      value:
+        { type: "INT16", readWrite: "W" , defaultValue: "0" }
+      units:
+        { type: "String", readWrite: "R", defaultValue: "lux" }
+  - name: Motion
+    description: "Measures motion"
+    attributes:
+      { Pin_Num: "D1", Interface: "AIO", Type: "IN" }
+    properties:
+      value:
+        { type: "BOOL", readWrite: "RW", defaultValue: "0", minimum: "0", maximum: "1"}
+      units:
+        { type: "String", readWrite: "R", defaultValue: "OFF" }
+
+deviceCommands:
+  - name: Temperature
+    get:
+      - { operation: "get", deviceResource: "Temperature"}
+  - name: Humidity
+    get:
+      - { operation: "get", deviceResource: "Humidity"}
+  - name: Lux
+    get:
+      - { operation: "get", deviceResource: "Lux"}
+  - name: Motion
+    get:
+      - { operation: "get", deviceResource: "Motion"}
+
+coreCommands:
+  -
+    name: Temperature
+    get:
+      path: "/api/v1/device/{deviceId}/Temperature"
+      responses:
+        -
+          code: "200"
+          description: "get the temperature sensor value"
+          expectedValues: ["Temperature"]
+        -
+          code: "503"
+          description: "get temperature service unavailable"
+          expectedValues: []
+  -
+    name: Humidity
+    get:
+      path: "/api/v1/device/{deviceId}/Humidity"
+      responses:
+        -
+          code: "200"
+          description: "get the humidity sensor value"
+          expectedValues: ["Humidity"]
+        -
+          code: "503"
+          description: "get humidity service unavailable"
+          expectedValues: []
+  -
+    name: Lux
+    get:
+      path: "/api/v1/device/{deviceId}/Lux"
+      responses:
+        -
+          code: "200"
+          description: "get the lux sensor value"
+          expectedValues: ["Lux"]
+        -
+          code: "503"
+          description: "get lux service unavailable"
+          expectedValues: []
+  -
+    name: Motion
+    get:
+      path: "/api/v1/device/{deviceId}/Motion"
+      responses:
+        -
+          code: "200"
+          description: "get the motion sensor value"
+          expectedValues: ["Motion"]
+        -
+          code: "503"
+          description: "get motion service unavailable"
+          expectedValues: []
