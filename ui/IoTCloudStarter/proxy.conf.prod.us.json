@@ -271,7 +271,7 @@
     "pathRewrite":{"^/gateway2/edgexgateway" : ""}
   },
   "/dgraph/*": {
-    "target": "http://a265d2006cb5311e98597022b27b8d6e-131920896.us-west-2.elb.amazonaws.com:8080",
+    "target": "http://a2c0b15e0059c11ea9265064cae82812-1704359995.us-west-2.elb.amazonaws.com:8080",
     "secure": "false",
     "changeOrigin": true,
     "logLevel": "info",
