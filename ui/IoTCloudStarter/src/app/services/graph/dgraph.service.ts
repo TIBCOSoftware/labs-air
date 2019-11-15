@@ -8,12 +8,20 @@ import { LogLevel, LogService } from '@tibco-tcstk/tc-core-lib';
 import { Gateway, Subscription, Rule, Notification } from '../../shared/models/iot.model';
 import { TSReading } from '../../shared/models/iot.model';
 
+// const httpOptions = {
+//   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+// };
+
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/graphql+-' })
 };
 
+// const httpMutateOptions = {
+//   headers: new HttpHeaders({ 'X-Dgraph-CommitNow': 'true' })
+// };
+
 const httpMutateOptions = {
-  headers: new HttpHeaders({ 'X-Dgraph-CommitNow': 'true' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/rdf' })
 };
 
 const route1 = [
@@ -97,7 +105,7 @@ export class DgraphService {
   }
 
   updateGateway(gateway: Gateway): Observable<string> {
-    const url = `${this.dgraphUrl}/mutate`;
+    const url = `${this.dgraphUrl}/mutate?commitNow=true`;
     let query = `{
       set {
         <${gateway.uid}> <address> "${gateway.address}" .
@@ -118,7 +126,7 @@ export class DgraphService {
   }
 
   addGateway(gateway: Gateway): Observable<string> {
-    const url = `${this.dgraphUrl}/mutate`;
+    const url = `${this.dgraphUrl}/mutate?commitNow=true`;
     let query = `{
       set {
         _:Gateway <gateway> "" .
@@ -143,7 +151,7 @@ export class DgraphService {
   }
 
   deleteGateway(gatewayUid: number): Observable<string> {
-    const url = `${this.dgraphUrl}/mutate`;
+    const url = `${this.dgraphUrl}/mutate?commitNow=true`;
     let query = `{
       delete {
         <${gatewayUid}> * * .
@@ -249,7 +257,7 @@ export class DgraphService {
   }
 
   addSubscription(gatewayUid: number, subscription: Subscription): Observable<string> {
-    const url = `${this.dgraphUrl}/mutate`;
+    const url = `${this.dgraphUrl}/mutate?commitNow=true`;
     let query = `{
       set {
         _:Subscription <name> "${subscription.name}" .
@@ -292,7 +300,7 @@ export class DgraphService {
   }
 
   updateSubscription(subscription: Subscription): Observable<string> {
-    const url = `${this.dgraphUrl}/mutate`;
+    const url = `${this.dgraphUrl}/mutate?commitNow=true`;
     let query = `{
       set {
         <${subscription.uid}> <port> "${subscription.port}" .
@@ -328,7 +336,7 @@ export class DgraphService {
   }
 
   deleteSubscription(gatewayUid: number, subscriptionUid: number): Observable<string> {
-    const url = `${this.dgraphUrl}/mutate`;
+    const url = `${this.dgraphUrl}/mutate?commitNow=true`;
     let query = `{
       delete {
         <${subscriptionUid}> * * .
@@ -386,7 +394,7 @@ export class DgraphService {
   }
 
   addRule(gatewayUid: number, rule: Rule): Observable<string> {
-    const url = `${this.dgraphUrl}/mutate`;
+    const url = `${this.dgraphUrl}/mutate?commitNow=true`;
     let query = `{
       set {
         _:Rule <name> "${rule.name}" .
@@ -423,7 +431,7 @@ export class DgraphService {
   }
 
   updateRule(rule: Rule): Observable<string> {
-    const url = `${this.dgraphUrl}/mutate`;
+    const url = `${this.dgraphUrl}/mutate?commitNow=true`;
     let query = `{
       set {
         <${rule.uid}> <name> "${rule.name}" .
@@ -456,7 +464,7 @@ export class DgraphService {
   }
 
   deleteRule(gatewayUid: number, ruleUid: number): Observable<string> {
-    const url = `${this.dgraphUrl}/mutate`;
+    const url = `${this.dgraphUrl}/mutate?commitNow=true`;
     let query = `{
       delete {
         <${ruleUid}> * * .
