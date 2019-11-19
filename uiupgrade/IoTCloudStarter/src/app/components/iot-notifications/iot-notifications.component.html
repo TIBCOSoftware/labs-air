@@ -1,0 +1,89 @@
+<div class="tcs-home-content" fxLayout="column" fxFlex="grow" fxLayoutAlign="start stretch"
+    style="padding-left: 20px; padding-right: 20px; margin-top: 10px;">
+
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
+        <mat-form-field fxFlex="1 1 40%" appearance="standard">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Notifications">
+        </mat-form-field>
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="20px" style="height: 100%;">
+        <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between stretch" style="min-height: 300px">
+            <mat-card fxFlex>
+                <mat-card-header>
+                    <div mat-card-avatar class="notification-header-image"></div>
+                    <mat-card-title>Notifications</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="table-container mat-elevation-z8">
+                        <table mat-table [dataSource]="notificationsDataSource" matSort matSortActive="created" matSortStart="desc" matSortDirection="desc">
+
+                            <!-- Id Column -->
+                            <ng-container matColumnDef="uuid">
+                                <th mat-header-cell *matHeaderCellDef> Id </th>
+                                <td mat-cell *matCellDef="let notification"> {{notification.uuid}} </td>
+                            </ng-container>
+
+                            <!-- Gateway Column -->
+                            <ng-container matColumnDef="gateway">
+                                <th mat-header-cell *matHeaderCellDef> Gateway </th>
+                                <td mat-cell *matCellDef="let notification"> {{notification.gateway}} </td>
+                            </ng-container>
+
+                            <!-- Source Column -->
+                            <ng-container matColumnDef="source">
+                                <th mat-header-cell *matHeaderCellDef> Source </th>
+                                <td mat-cell *matCellDef="let notification"> {{notification.notifySource}} </td>
+                            </ng-container>
+
+                            <!-- Device Column -->
+                            <ng-container matColumnDef="device">
+                                <th mat-header-cell *matHeaderCellDef> Device </th>
+                                <td mat-cell *matCellDef="let notification"> {{notification.notifyDevice}} </td>
+                            </ng-container>
+
+                            <!-- Resource Column -->
+                            <ng-container matColumnDef="resource">
+                                <th mat-header-cell *matHeaderCellDef> Resource </th>
+                                <td mat-cell *matCellDef="let notification"> {{notification.notifyResource}} </td>
+                            </ng-container>
+
+                            <!-- Value Column -->
+                            <ng-container matColumnDef="value">
+                                <th mat-header-cell *matHeaderCellDef> Value </th>
+                                <td mat-cell *matCellDef="let notification"> {{notification.value}} </td>
+                            </ng-container>
+
+                            <!-- Level Column -->
+                            <ng-container matColumnDef="level">
+                                    <th mat-header-cell *matHeaderCellDef> Level </th>
+                                    <td mat-cell *matCellDef="let notification"> {{notification.notifyLevel}} </td>
+                                </ng-container>
+    
+                            <!-- Description Column -->
+                            <ng-container matColumnDef="description">
+                                <th mat-header-cell *matHeaderCellDef> Description </th>
+                                <td mat-cell *matCellDef="let notification"> {{notification.description}} </td>
+                            </ng-container>
+
+                            <!-- Created Column -->
+                            <ng-container matColumnDef="created">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Created </th>
+                                <td mat-cell *matCellDef="let notification"> {{notification.created | date: dateFormat}}
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="notificationDisplayedColumns; sticky: true"></tr>
+                            <tr mat-row *matRowDef="let row; columns: notificationDisplayedColumns;"
+                                (click)="onNotificationClicked(row)"
+                                [ngClass]="{'selected': notificationSelection.isSelected(row) }">
+                            </tr>
+                        </table>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+    </div>
+
+</div>

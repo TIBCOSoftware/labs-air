@@ -1,0 +1,42 @@
+.table-container {
+    overflow: auto;
+    height: 300px;
+}
+  
+table {
+    width: 100%;
+}
+  
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+  
+.mat-row.selected {
+    background: #dddddd;
+}
+
+.mat-header-cell {
+    font-size: 18px;
+}
+
+.gateway-header-image {
+    background-image: url('/assets/icons/gateway.svg');
+    background-size: 80%;
+    background-repeat: no-repeat;
+}
+
+
+
+
+.gateway-location-image {
+    background-image: url('/assets/icons/gateway_location.svg');
+    background-size: 80%;
+    background-repeat: no-repeat;
+}
+
+.device-header-image {
+    background-image: url('/assets/icons/device.svg');
+    background-size: 80%;
+    background-repeat: no-repeat;
+}

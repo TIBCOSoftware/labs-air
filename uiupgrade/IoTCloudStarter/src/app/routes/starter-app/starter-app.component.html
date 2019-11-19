@@ -1,0 +1,8 @@
+<!-- make case screen full height-->
+<div fxFill fxLayout="column" style="overflow: hidden;">
+  <tc-tibco-cloud-navbar class="tcla-cloud-navbar" [appName]="config.applicationTitle" [docUrl]="config.documentationUrl"></tc-tibco-cloud-navbar>
+  <!-- this is now full height '-' size of header -->
+  <div fxFlex class="tcs-starter-app-router-pane" fxLayout="row" fxLayoutAlign="start, stretch">
+    <router-outlet></router-outlet>
+  </div>
+</div>

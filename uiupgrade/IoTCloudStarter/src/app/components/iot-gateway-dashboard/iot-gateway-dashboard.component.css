@@ -1,0 +1,33 @@
+:host ::ng-deep .mat-tab-label .mat-tab-label-content {
+    font-family: Source Sans Pro;
+    font-size: 18px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #0081cb;
+}
+
+.nav-switch-bar{
+    border-radius: 100px;
+    border: solid 1px #b6b6b6;
+    background-color: #ffffff;
+    height: 30px;
+}
+
+.mat-button-toggle-checked{
+    color: #ffffff;
+    border-radius: 100px;
+    background-color: #062e79;
+    border: solid 1px #062e79;
+    padding-left: 11px;
+    padding-right: 11px;
+}
+
+:host ::ng-deep .iot-dashboard-top-level {
+    margin-bottom: 10px;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.33);
+    background-color: #ffffff;
+}

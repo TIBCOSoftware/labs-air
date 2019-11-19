@@ -1,0 +1,179 @@
+<div class="tcs-home-content" fxLayout="column" fxLayoutGap="20px"  fxLayoutAlign="start stretch"
+    style="padding-left: 20px; padding-right: 20px; margin-top: 10px;">
+
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <mat-form-field fxFlex="1 1 18%" appearance="outline" style="margin-top: 20px;">
+            <mat-label>Select a Gateway</mat-label>
+            <mat-select (selectionChange)="onGatewaySelected($event)">
+                <mat-option *ngFor="let item of gatewayList; let i = index" [value]="i">
+                    {{item.uuid}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <mat-card class="scrollable-content" fxFlexOffset="-20px">
+        <mat-card-header>
+            <mat-card-title>Profiles</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content [style.overflow]="'auto'" [style.height.px]="'200'">
+            <mat-tree [dataSource]="deviceProfilesDataSource" [treeControl]="treeControl" class="profile-tree">
+                <!-- This is the tree node template for leaf nodes -->
+                <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle (click)="activeNode = node"
+                    [ngClass]="{ 'background-highlight': activeNode === node }">
+                    <li class="mat-tree-node">
+                        <!-- use a disabled button to provide padding for tree leaf -->
+                        <button mat-icon-button disabled></button>
+                        <button mat-button (click)="instrumentSelected(node)">
+                            {{node.name}}
+                        </button>
+                    </li>
+                </mat-tree-node>
+                <!-- This is the tree node template for expandable nodes -->
+                <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+                    <li>
+                        <div class="mat-tree-node" (click)="activeNode = node"
+                            [ngClass]="{ 'background-highlight': activeNode === node }">
+                            <button mat-icon-button (click)="addNewProfile(node)">
+                                <mat-icon>add</mat-icon>
+                            </button>
+                            <button mat-icon-button (click)="addNewInstrument(node)">
+                                <mat-icon>playlist_add</mat-icon>
+                            </button>
+                            <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
+                                <mat-icon class="mat-icon-rtl-mirror">
+                                    {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                                </mat-icon>
+                            </button>
+
+
+                            <button mat-button (click)="profileSelected(node)">
+                                {{node.name}}
+                            </button>
+
+                        </div>
+                        <ul [class.profile-tree-invisible]="!treeControl.isExpanded(node)">
+                            <ng-container matTreeNodeOutlet></ng-container>
+                        </ul>
+                    </li>
+                </mat-nested-tree-node>
+            </mat-tree>
+        </mat-card-content>
+    </mat-card>
+
+    <div fxLayout="column" fxLayoutGap="20px" style="height: 40%;">
+        <mat-card>
+            <mat-card-content>
+
+                <form [formGroup]="detailsForm" class="instrument-form">
+
+
+                    <div fxLayout="row wrap" fxLayoutGap="15px">
+                        <mat-label class="profile-header">Profile Information</mat-label>
+                    </div>
+
+                    <div fxLayout="row wrap" fxLayoutGap="15px">
+                        <mat-form-field fxFlex="18%" appearance="outline">
+                            <mat-label>Profile Name</mat-label>
+                            <input matInput [readonly]=false formControlName="profileName">
+                        </mat-form-field>
+                        <mat-form-field fxFlex="18%" appearance="outline">
+                            <mat-label>Manufacturer</mat-label>
+                            <input matInput [readonly]=false formControlName="profileManufacturer">
+                        </mat-form-field>
+                        <mat-form-field fxFlex="18%" appearance="outline">
+                            <mat-label>Model</mat-label>
+                            <input matInput [readonly]=false formControlName="profileModel">
+                        </mat-form-field>
+                        <mat-form-field fxFlex="18%" appearance="outline">
+                            <mat-label>Created</mat-label>
+                            <input matInput [readonly]=true formControlName="profileCreated">
+                        </mat-form-field>
+                        <mat-form-field fxFlex="18%" appearance="outline">
+                            <mat-label>Modified</mat-label>
+                            <input matInput [readonly]=true formControlName="profileModified">
+                        </mat-form-field>
+                        <mat-form-field fxFlex="55%" appearance="outline">
+                            <mat-label>Description</mat-label>
+                            <input matInput [readonly]=false formControlName="profileDescription">
+                        </mat-form-field>
+                    </div>
+
+                    <div fxLayout="row wrap" fxLayoutGap="15px" *ngIf="showResourceDetail">
+                        <mat-label class="profile-header">Instrument Information</mat-label>
+                    </div>
+
+                    <div fxLayout="row wrap" fxLayoutGap="15px" *ngIf="showResourceDetail">
+                        <mat-form-field fxFlex="18%" appearance="outline">
+                            <mat-label>Instrument Name</mat-label>
+                            <input matInput [readonly]=false formControlName="resourceName">
+                        </mat-form-field>
+                        <mat-form-field fxFlex="38%" appearance="outline">
+                            <mat-label>Resource Description</mat-label>
+                            <input matInput [readonly]=false formControlName="resourceDescription">
+                        </mat-form-field>
+                    </div>
+
+                    <div fxLayout="row wrap" fxLayoutGap="15px" *ngIf="showResourceDetail">
+                        <mat-label class="profile-header">Value Detail</mat-label>
+                    </div>
+
+                    <div fxLayout="row wrap" fxLayoutGap="15px" *ngIf="showResourceDetail">
+                        <mat-form-field fxFlex="15%" appearance="outline">
+                            <mat-label>Value Type</mat-label>
+                            <input matInput [readonly]=false formControlName="valueType">
+                        </mat-form-field>
+                        <mat-form-field fxFlex="15%" appearance="outline">
+                            <mat-label>Permission</mat-label>
+                            <input matInput [readonly]=false formControlName="valueReadWrite">
+                        </mat-form-field>
+                        <mat-form-field fxFlex="15%" appearance="outline">
+                            <mat-label>Minimun Value</mat-label>
+                            <input matInput [readonly]=false formControlName="valueMinimum">
+                        </mat-form-field>
+                        <mat-form-field fxFlex="15%" appearance="outline">
+                            <mat-label>Maximun Value</mat-label>
+                            <input matInput [readonly]=false formControlName="valueMaximum">
+                        </mat-form-field>
+                        <mat-form-field fxFlex="15%" appearance="outline">
+                            <mat-label>Default Value</mat-label>
+                            <input matInput [readonly]=false formControlName="valueDefault">
+                        </mat-form-field>
+                        <mat-form-field fxFlex="15%" appearance="outline">
+                            <mat-label>Unit</mat-label>
+                            <input matInput [readonly]=false formControlName="valueUnit">
+                        </mat-form-field>
+                    </div>
+
+                    <div fxLayout="row wrap" fxLayoutGap="15px" *ngIf="showResourceDetail">
+                        <mat-label class="profile-header">Properties</mat-label>
+                    </div>
+
+                    <div fxLayout="row wrap" fxLayoutGap="15px" *ngIf="showResourceDetail">
+                        <mat-form-field fxFlex="15%" appearance="outline">
+                            <mat-label>Interface</mat-label>
+                            <input matInput [readonly]=false formControlName="interface">
+                        </mat-form-field>
+                        <mat-form-field fxFlex="15%" appearance="outline">
+                            <mat-label>Pin Number</mat-label>
+                            <input matInput [readonly]=false formControlName="interfacePinNumber">
+                        </mat-form-field>
+                        <mat-form-field fxFlex="15%" appearance="outline">
+                            <mat-label>Type</mat-label>
+                            <input matInput [readonly]=false formControlName="interfaceType">
+                        </mat-form-field>
+                    </div>
+
+                </form>
+
+            </mat-card-content>
+
+            <mat-card-actions>
+                <button mat-raised-button [disabled]="detailsForm.pristine || detailsForm.invalid" (click)="saveProfile()" color="primary">Save Profile</button>
+            </mat-card-actions>
+
+        </mat-card>
+
+    </div>
+</div>

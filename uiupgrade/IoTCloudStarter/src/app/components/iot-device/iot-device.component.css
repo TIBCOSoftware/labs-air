@@ -1,0 +1,45 @@
+.table-container {
+    overflow: auto;
+    height: 300px;
+}
+  
+table {
+    width: 100%;
+}
+  
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+  
+.mat-row.selected {
+    background: #dddddd;
+}
+
+.mat-header-cell {
+    font-size: 18px;
+}
+
+.device-header-image {
+    background-image: url('/assets/icons/device.svg');
+    background-size: 80%;
+    background-repeat: no-repeat;
+}
+
+.instrument-history-image {
+    background-image: url('/assets/icons/instrument_history.svg');
+    background-size: 80%;
+    background-repeat: no-repeat;
+}
+
+.instrument-streaming-image {
+    background-image: url('/assets/icons/instrument_streaming.svg');
+    background-size: 80%;
+    background-repeat: no-repeat;
+}
+
+.query-row button {
+  margin-right: 8px;
+  margin-top: 8px;
+  margin-left: 10px;
+}

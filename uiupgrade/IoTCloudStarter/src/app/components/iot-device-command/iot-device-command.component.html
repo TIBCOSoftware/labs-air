@@ -1,0 +1,171 @@
+<div class="tcs-home-content" fxLayout="column" fxFlex="grow" fxLayoutAlign="start stretch"
+  style="padding-left: 20px; padding-right: 20px; margin-top: 10px;">
+
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
+    <mat-form-field fxFlex="1 1 18%" appearance="standard">
+      <mat-label>Select a Gateway</mat-label>
+      <mat-select [(value)]="gatewayIdSelected" (selectionChange)="onGatewaySelected($event)">
+        <mat-option *ngFor="let item of gatewayList; let i = index" [value]="i">
+          {{item.uuid}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field fxFlex="1 1 40%" appearance="standard">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Devices">
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="column" fxLayoutGap="20px" style="height: 100%;">
+    <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between stretch" style="min-height: 300px">
+      <mat-card fxFlex="55%">
+        <mat-card-header>
+          <div mat-card-avatar class="device-header-image"></div>
+          <mat-card-title>Devices</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="table-container mat-elevation-z8">
+            <table mat-table [dataSource]="devicesDataSource" matSort>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let device"> {{device.name}} </td>
+              </ng-container>
+
+              <!-- Id Column -->
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> Id </th>
+                <td mat-cell *matCellDef="let device"> {{device.id}} </td>
+              </ng-container>
+
+              <!-- Operating State Column -->
+              <ng-container matColumnDef="operatingState">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Operating State </th>
+                <td mat-cell *matCellDef="let device"> {{device.operatingState}} </td>
+              </ng-container>
+
+              <!-- Admin State Column -->
+              <ng-container matColumnDef="adminState">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Admin State </th>
+                <td mat-cell *matCellDef="let device"> {{device.adminState}} </td>
+              </ng-container>
+
+              <!-- Description Column -->
+              <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+                <td mat-cell *matCellDef="let device"> {{device.description}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="deviceDisplayedColumns; sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: deviceDisplayedColumns;" (click)="onDeviceClicked(row)"
+                [ngClass]="{'selected': deviceSelection.isSelected(row) }">
+              </tr>
+            </table>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <mat-card fxFlex="45%">
+        <mat-card-header>
+          <div mat-card-avatar class="device-header-image"></div>
+          <mat-card-title>Instruments</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="table-container mat-elevation-z8">
+            <table mat-table [dataSource]="resourcesDataSource" matSort>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let resource"> {{resource.name}} </td>
+              </ng-container>
+
+              <!-- Description Column -->
+              <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+                <td mat-cell *matCellDef="let resource"> {{resource.description}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="resourceDisplayedColumns; sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: resourceDisplayedColumns;" (click)="onResourceClicked(row)"
+                [ngClass]="{'selected': resourceSelection.isSelected(row) }">
+              </tr>
+            </table>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div fxLayout="row" fxLayoutGap="15px" style="min-height: 300px">
+      <mat-card fxFlex>
+        <mat-card-header>
+          <div mat-card-avatar class="device-command-image"></div>
+          <mat-card-title>Instrument Commands</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+
+          <div class="table-container mat-elevation-z8">
+            <table mat-table [dataSource]="commandsDataSource">
+
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let cmd"> {{cmd.name}} </td>
+              </ng-container>
+
+              <!-- Method Column -->
+              <!-- <ng-container matColumnDef="method">
+                <th mat-header-cell *matHeaderCellDef> Method </th>
+                <td mat-cell *matCellDef="let cmd">
+                  <mat-radio-group aria-label="Select an option" [(ngModel)]="cmd.method">
+                    <mat-radio-button value="get">get</mat-radio-button>
+                    <mat-radio-button value="set">set</mat-radio-button>
+                  </mat-radio-group>
+                </td>
+              </ng-container> -->
+
+              <ng-container matColumnDef="method">
+                <th mat-header-cell *matHeaderCellDef> Method </th>
+                <td mat-cell *matCellDef="let cmd"> {{cmd.method}} </td>
+              </ng-container>
+
+              <!-- ReturnVal Column -->
+              <ng-container matColumnDef="returnVal">
+                <th mat-header-cell *matHeaderCellDef> Return Value </th>
+                <td mat-cell *matCellDef="let cmd">
+                  <mat-form-field appearance="fill" floatLabel="never">
+                    <input matInput [value]="cmd.returnVal" [(ngModel)]="cmd.returnVal">
+                  </mat-form-field>
+                </td>
+              </ng-container>
+
+              <!-- ParamVal Column -->
+              <ng-container matColumnDef="paramVal">
+                <th mat-header-cell *matHeaderCellDef> Param Value </th>
+                <td mat-cell *matCellDef="let cmd">
+                  <mat-form-field appearance="fill" floatLabel="never">
+                    <input matInput [value]="cmd.paramVal" [(ngModel)]="cmd.paramVal">
+                  </mat-form-field>
+                </td>
+              </ng-container>
+
+              <!-- Operation Column -->
+              <ng-container matColumnDef="operation">
+                <th mat-header-cell *matHeaderCellDef> Operation </th>
+                <td mat-cell *matCellDef="let row">
+                  <button mat-raised-button color="primary" (click)="sendCommand(row)">Send</button>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="commandsDisplayedColumns; sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: commandsDisplayedColumns; let i = index;"></tr>
+            </table>
+          </div>
+
+        </mat-card-content>
+
+      </mat-card>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,31 @@
+.tc-home-welcome-text {
+  font-family: Source Sans Pro;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #212121;
+}
+
+.tcs-home-content {
+  overflow: auto;
+}
+
+.mat-sidenav-container {
+  height: 100%;
+}
+
+.toolbar-title {
+  margin: 0 16px 0 16px;
+}
+
+.mat-subheader {
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.app-nav-list-icon {
+  margin: 0 12px 0 12px;
+}

@@ -1,0 +1,15 @@
+.tc-home-welcome-text {
+  font-family: Source Sans Pro;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #212121;
+}
+
+.tcs-home-content {
+  overflow: auto;
+}
+

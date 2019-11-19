@@ -1,0 +1,27 @@
+.table-container {
+    overflow: auto;
+    height: 300px;
+}
+  
+table {
+    width: 100%;
+}
+  
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+  
+.mat-row.selected {
+    background: #dddddd;
+}
+
+.mat-header-cell {
+    font-size: 18px;
+}
+
+.device-provisioning-image {
+    background-image: url('/assets/icons/provisioning.svg');
+    background-size: 80%;
+    background-repeat: no-repeat;
+}
