@@ -1,7 +1,7 @@
 
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { RouteAction } from '@tibco-tcstk/tc-core-lib';
-import { LiveAppsHomeCockpitComponent, Roles, RouteAccessControlConfig } from '@tibco-tcstk/tc-liveapps-lib';
+import { LiveAppsHomeCockpitComponent, Roles, RouteAccessControlConfigurationElement } from '@tibco-tcstk/tc-liveapps-lib';
 import { CustomFormDefs } from '@tibco-tcstk/tc-forms-lib';
 
 interface ROUTE {
@@ -119,9 +119,9 @@ export class IotHomeCockpitComponent extends LiveAppsHomeCockpitComponent {
     @Input() roles: Roles;
 
     /**
-     * RouteAccessControlConfig - basically the config for access control
+     * RouteAccessControlConfigurationElement - basically the config for access control
      */
-    @Input() access: RouteAccessControlConfig;
+    @Input() access: RouteAccessControlConfigurationElement;
 
     /**
      * Custom Form configuration file
