@@ -3,17 +3,13 @@
   "applicationTitle": "IoTCloudStarter (TIBCO LABS™)",
   "welcomeMessage": "Welcome to the IoTCloudStarter",
   "roles": [
-    {
+        {
       "id": "User",
       "group": "System: ALL_USERS",
-      "display": "User"
-    },
-    {
-      "id": "Administrator",
-      "group": "System: ADMINISTRATOR",
-      "display": "Administrator"
-    }
-  ],
+      "display": "User",
+      "priority": 5
+        }
+    ],
   "displayName": true,
   "documentationUrl": "assets/help.html"
 }
