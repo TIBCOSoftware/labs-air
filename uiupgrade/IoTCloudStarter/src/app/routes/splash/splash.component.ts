@@ -3,9 +3,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { LandingPageItemConfig, TcCoreCommonFunctions } from '@tibco-tcstk/tc-core-lib';
 import { Location } from '@angular/common';
 @Component({
-    selector: 'app- splash',
+    selector: 'app-splash',
     templateUrl: './splash.component.html',
-    styleUrls: ['./ splash.component.css']
+    styleUrls: ['./splash.component.css']
 })
 export class SplashComponent implements OnInit {
     public uiAppId: string
