@@ -1,0 +1,49 @@
+version: '3'
+services:
+  air_metadata_service_164:
+    image: "flogo/iotmetadataservice_1_6_4_flogo_app"
+    ports:
+      - "20000:9999"
+      - "30000:7777"
+  air_redis_service:
+    image: "flogo/redis_service"
+    ports:
+      - "20001:9999"
+      - "30001:7777"
+  air_data_service:
+    image: "flogo/iotdataservice_1_0_0_flogo_app"
+    ports:
+      - "20002:9999"
+      - "30002:7777"
+  air_core_service_164:
+    image: "flogo/tibcolabs_air_app_v1.6.4"
+    ports:
+      - "20003:9999"
+      - "20013:9998"
+      - "20023:9997"
+      - "30003:7777"
+  air_metadata_service_120:
+    image: "flogo/iotmetadataservice_1_2_0_flogo_app"
+    ports:
+      - "20004:9999"
+      - "30004:7777"
+#  air_message_spliter:
+#    image: "flogo/kafka_message_spliter_v1.6.3"
+#    ports:
+#      - "30005:7777"
+#  air_mqtt_gateway2:
+#    image: "flogo/mqtt2_kafka_bridge_v1.6.3"
+#    ports:
+#      - "30006:7777"
+#  air_mqtt_gateway3:
+#    image: "flogo/mqtt3_kafka_bridge_v1.6.3"
+#    ports:
+#      - "30007:7777"
+#  air_mqtt_bridge1:
+#    image: "flogo/mqttbridgemarcelo_v1.6.2"
+#    ports:
+#      - "30008:7777"
+#  air_mqtt_bridge2:
+#    image: "flogo/mqttbridgemiguel_v1.6.2"
+#    ports:
+#      - "30009:7777"

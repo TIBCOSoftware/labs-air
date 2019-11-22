@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose-remote.yml
+    kompose.version: 1.19.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: air-data-service
+  name: air-data-service
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose-remote.yml
+        kompose.version: 1.19.0 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: air-data-service
+    spec:
+      containers:
+      - image: ufoalan/iotdataservice_1_0_0_flogo_app
+        name: air-data-service
+        ports:
+        - containerPort: 9999
+        - containerPort: 7777
+        resources: {}
+      restartPolicy: Always
+status: {}
