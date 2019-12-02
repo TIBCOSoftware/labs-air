@@ -57,7 +57,12 @@ export class IotHomeCockpitComponent extends LiveAppsHomeCockpitComponent {
         }, {
             icon: 'rules',
             route: '/starterApp/home/rules',
-            title: 'Rules',
+            title: 'Edge Rules',
+            custom: true
+        }, {
+            icon: 'rules',
+            route: '/starterApp/home/tcerules',
+            title: 'Cloud Rules',
             custom: true
         }, {
             icon: 'instrumenthistory',
