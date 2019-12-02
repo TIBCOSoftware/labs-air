@@ -34,6 +34,7 @@ import { IotRulesComponent } from './components/iot-rules/iot-rules.component';
 import { IotNotificationsComponent } from './components/iot-notifications/iot-notifications.component';
 import { HttpClientModule } from "@angular/common/http";
 import { MaporamaComponent } from './components/maporama/maporama.component';
+import { TceRulesComponent } from './components/tce-rules/tce-rules.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { MaporamaComponent } from './components/maporama/maporama.component';
     IotDeviceProvisionComponent,
     IotRulesComponent,
     IotNotificationsComponent,
-    MaporamaComponent
+    MaporamaComponent,
+    TceRulesComponent
   ],
   imports: [
     AppRoutingModule,
