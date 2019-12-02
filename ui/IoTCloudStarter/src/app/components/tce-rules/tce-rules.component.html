@@ -1,0 +1,15 @@
+<div class="tcs-home-content" fxLayout="column" fxLayoutGap="20px"  fxLayoutAlign="start stretch"
+    style="padding-left: 20px; padding-right: 20px; margin-top: 10px;">
+
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <mat-form-field fxFlex="1 1 18%" appearance="outline" style="margin-top: 20px;">
+            <mat-label>Select a Project</mat-label>
+            <mat-select (selectionChange)="onProjectSelected($event)">
+                <mat-option *ngFor="let item of projectList; let i = index" [value]="i">
+                    {{item.uuid}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+</div>
