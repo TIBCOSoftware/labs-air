@@ -20,7 +20,7 @@ export class BewsService {
 
   // private proxy = 'https://events.tenant-integration.tcie.pro';
   // private  proxyPath = '/tce-proxy';
-  private useProxy = false;
+  private useProxy = true;
   private proxyPath = '/tce-proxy';
   private beProjectName = 'IoTRail';
   private beRulePath = '/BusinessRules/MyRule';
@@ -34,6 +34,7 @@ export class BewsService {
   private genDeployURL = '';
   private publishURL = '';
   private checkoutURL = '';
+  private projectsURL = '';
 
   constructor(private messageService: MessageQueueService, private http: HttpClient) {
     console.log('Deploy Rule Service Created, using proxy: ' + this.useProxy);
@@ -50,6 +51,18 @@ export class BewsService {
   }
 
 
+
+
+  // Function to call the services to get TCE projects
+  public getProjects(): Observable<any> {
+    this.report('Getting Projects...');
+    return concat(
+      this.reAuthorize().pipe(
+        switchMap(data => this.getNewCookie(data)),
+        switchMap(() => this.getToken()),
+        switchMap(() => this.projects()),
+      ));
+  }
 
   // Function to call the services to deploy a new business rulle
   public deployRule(bRule: BusinessRule): Observable<any> {
@@ -69,6 +82,7 @@ export class BewsService {
   // Function to set the url's for the token
   private setTokenURLs() {
     console.log('Setting token URLS: ' + this.globalToken);
+    this.projectsURL = this.proxyPath + '/ws/api/' + this.globalToken + '/projects.json';
     this.saveURL = this.proxyPath + '/ws/api/' + this.globalToken + '/artifact/save.json';
     this.commitURL = this.proxyPath + '/ws/api/' + this.globalToken + '/projects/' + this.beProjectName + '/commit.json';
     this.genDeployURL = this.proxyPath + '/ws/api/' + this.globalToken + '/projects/' + this.beProjectName + '/generateDeployable.json?buildClassesOnly=false';
@@ -305,6 +319,26 @@ export class BewsService {
       })
     );
   }
+
+  // get tce projects
+  private projects() {
+    this.report('Getting WebStudio projects: ');
+    
+    console.log('PROJECT URL: ' + this.projectsURL);
+    return this.callService(this.projectsURL, 'GET', null, 'application/json').pipe(
+      map((projectsRes) => {
+        console.log('projects response: ', projectsRes);
+        if (projectsRes.response.status === '0') {
+          this.report(projectsRes.response.responseMessage + '.');
+          return projectsRes;
+        } else {
+          this.report('ERROR STATUS: ' + projectsRes.response.data);
+          throw new Error('ERROR STATUS: ' + projectsRes.response.data);
+        }
+      })
+    );
+  }
+
 
   // Function to call service and return an observable
   private callService(url, method, postRequest, contentType): Observable<any> {
