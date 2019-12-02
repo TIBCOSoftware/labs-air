@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose-metadata-service-164.yaml
+    kompose.service.type: LoadBalancer
+    kompose.version: 1.19.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: air-core-service-164
+  name: air-core-service-164
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose-metadata-service-164.yaml
+        kompose.service.type: LoadBalancer
+        kompose.version: 1.19.0 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: air-core-service-164
+    spec:
+      containers:
+      - image: ufoalan/tibcolabs_air_app_v1.6.4
+        name: air-core-service-164
+        ports:
+        - containerPort: 9999
+        - containerPort: 9998
+        - containerPort: 9997
+        - containerPort: 7777
+        resources: {}
+      restartPolicy: Always
+status: {}
