@@ -10,6 +10,7 @@ import {IotDeviceStreamComponent} from '../../components/iot-device-stream/iot-d
 import {IotDeviceProvisionComponent} from '../../components/iot-device-provision/iot-device-provision.component';
 import {IotDashboardComponent} from '../../components/iot-dashboard/iot-dashboard.component';
 import {IotRulesComponent} from '../../components/iot-rules/iot-rules.component';
+import {TceRulesComponent} from '../../components/tce-rules/tce-rules.component'
 import {IotNotificationsComponent} from '../../components/iot-notifications/iot-notifications.component';
 import {
   AuthGuard,
@@ -184,6 +185,19 @@ export const STARTER_APP_ROUTES =
       {
         path: 'rules',
         component: IotRulesComponent,
+        canActivate: [AuthGuard],
+        resolve: {
+          claims: ClaimsResolver,
+          laConfigHolder: LaConfigResolver,
+          groups: GroupsResolver,
+          roles: RolesResolver,
+          access: AccessResolver,
+          customFormDefs: FormResolver
+        }
+      },
+      {
+        path: 'tcerules',
+        component: TceRulesComponent,
         canActivate: [AuthGuard],
         resolve: {
           claims: ClaimsResolver,
