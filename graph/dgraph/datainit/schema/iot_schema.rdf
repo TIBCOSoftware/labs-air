@@ -1,0 +1,66 @@
+uuid:string @index(exact, term)  .
+url:string .
+latitude:float .
+longitude:float .
+accessToken: string .
+createdts:dateTime  .
+updatedts:dateTime .
+name:string .
+operatingState: string .
+adminState: string .
+description: string .
+value: string .
+created: int @index(int) .
+origin: int @index(int) .
+modified: int @index(int) .
+consumer:string .
+publisher:string .
+destination:string .
+protocol:string .
+method:string .
+address:string .
+port:int .
+path:string .
+format:string .
+enabled:bool .
+user:string .
+password:string .
+topic:string .
+encryptionAlgorithm:string .
+encryptionKey:string .
+initializingVector:string .
+compression:string .
+deviceIdentifierFilter:string .
+valueDescriptorFilter:string .
+conditionDevice:string .
+conditionResource: string .
+conditionCompareToValue: bool .
+conditionCompareToValueOperation: string .
+conditionValue: string .
+conditionCompareToLastValue: bool .
+conditionCompareToLastValueOperation: string .
+actionSendNotification: bool .
+actionNotification: string .
+actionSendCommand: bool .
+actionDevice: string .
+actionResource: string .
+actionValue: string .
+notifySource:string .
+notifyDevice:string .
+notifyResource:string .
+notifyLevel:string .
+type:string @index(exact, term) .
+gateway:string .
+device:string .
+resource:string .
+reading:string .
+subscription:string .
+profile:string .
+notification:string .
+rule:string .
+gateway_subscription:[uid] @reverse @count .
+gateway_device:[uid]  @reverse @count .
+gateway_notification:[uid] @reverse @count .
+device_resource:[uid] @reverse @count .
+resource_reading:[uid] @reverse @count .
+gateway_rule: [uid] @reverse @count .
