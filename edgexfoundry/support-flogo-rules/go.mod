@@ -8,3 +8,5 @@ require (
 	github.com/edgexfoundry/go-mod-core-contracts v0.1.14
 	github.com/project-flogo/rules v0.1.2
 )
+
+replace github.com/project-flogo/rules v0.1.2 => /Users/gallardo/workspace/go/src/github.com/project-flogo/rules
