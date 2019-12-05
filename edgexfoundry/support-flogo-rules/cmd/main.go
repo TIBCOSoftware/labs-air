@@ -152,7 +152,7 @@ func processAddRule(writer http.ResponseWriter, req *http.Request) {
 		fmt.Printf("Processing addRule request ERROR\n")
 	}
 
-	fmt.Printf("Processing addRule request: %s\n", body)
+	// fmt.Printf("Processing addRule request: %s\n", body)
 
 	ruleDef := rules.RuleDefStruct{}
 
@@ -160,7 +160,7 @@ func processAddRule(writer http.ResponseWriter, req *http.Request) {
 		fmt.Printf("Processing config request ERROR\n")
 	}
 
-	fmt.Printf("Raw Object in main: %+v\n", ruleDef)
+	fmt.Printf("Processing addRule - Raw Object in main: %+v\n", ruleDef)
 
 	// Add a rule
 	rules.AddRule(rs, ruleDef)
