@@ -6,12 +6,12 @@
             "key": "id1",
             "description": "User",
             "title": "Welcome to Project Air",
-            "subtitle": "A highly customizable IoTCloudStarter application to manage IoT Devices",
+            "subtitle": "An application to manage IoT Assets",
             "highlights": [
                 {
                     "title": "Engage",
                     "iconURL": "ic-documentation",
-                    "content": "Handle all IoT related requests in a single place - e.g. manage gateways, manage devices, view device data."
+                    "content": "Handle all IoT related requests in a single place to manage gateways, manage devices, view device data."
                 },
                 {
                     "title": "Collaborate",
