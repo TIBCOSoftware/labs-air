@@ -90,9 +90,9 @@ func SetMQTTSender(hostname string, port int, publisher string, username string,
 // AddRule - add rule
 func AddRule(rs model.RuleSession, ruleDef RuleDefStruct) {
 	fmt.Printf("Inside AddRule\n")
-	fmt.Printf("Raw Object: %+v\n", ruleDef)
-	fmt.Printf("Rule struct request device: %s\n", ruleDef.ConditionDevice)
-	fmt.Printf("Rule struct request resource: %s\n", ruleDef.ConditionResource)
+	//fmt.Printf("Raw Object: %+v\n", ruleDef)
+	//fmt.Printf("Rule struct request device: %s\n", ruleDef.ConditionDevice)
+	//fmt.Printf("Rule struct request resource: %s\n", ruleDef.ConditionResource)
 
 	condContext := conditionCtxStruct{
 		Device:             ruleDef.ConditionDevice,
@@ -111,14 +111,21 @@ func AddRule(rs model.RuleSession, ruleDef RuleDefStruct) {
 		fmt.Printf("Rule request ERROR\n")
 	}
 
-	fmt.Printf("Marshalled condContext: %s\n", string(condContextJSON))
+	//fmt.Printf("Marshalled condContext: %s\n", string(condContextJSON))
 
 	rule := ruleapi.NewRule(ruleDef.Name)
 	rule.AddCondition("compareValuesCond", []string{"ReadingEvent", "ResourceConcept"}, compareValuesCond, string(condContextJSON))
 	rule.SetAction(compareValuesAction)
 	rule.SetContext(ruleDef.ActionNotification)
 	rule.SetPriority(1)
-	rs.AddRule(rule)
+	err = rs.AddRule(rule)
+
+	if err != nil {
+		fmt.Printf("ERROR adding rule: %s\n", rule.GetName())
+	} else {
+		fmt.Printf("Added rule success for: %s\n", rule.GetName())
+	}
+	rs.ReplayTuplesForRule(ruleDef.Name)
 
 	updateRuleName := "Update" + ruleDef.Name
 	rule1 := ruleapi.NewRule(updateRuleName)
@@ -126,7 +133,14 @@ func AddRule(rs model.RuleSession, ruleDef RuleDefStruct) {
 	rule1.SetAction(updateAction)
 	rule1.SetContext("Update")
 	rule1.SetPriority(9)
-	rs.AddRule(rule1)
+	err = rs.AddRule(rule1)
+
+	if err != nil {
+		fmt.Printf("ERROR adding update rule: %s\n", rule1.GetName())
+	} else {
+		fmt.Printf("Added rule success for: %s\n", rule1.GetName())
+	}
+	rs.ReplayTuplesForRule(updateRuleName)
 
 }
 
