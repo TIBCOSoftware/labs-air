@@ -1,0 +1,41 @@
+name: "Siemens-Device"
+manufacturer: "Siemens"
+model: "SG"
+labels:
+- "charger"
+description: "Siemens VersiCharge device profile"
+
+
+deviceResources:
+  -
+    name: "Status"
+    description: "Indicates the device current state"
+    properties:
+      value:
+        { type: "String", readWrite: "R", defaultValue: "Power Available", minimum: "", maximum: "" }
+      units:
+        { type: "String", readWrite: "R", defaultValue: "Description" }
+  
+deviceCommands:
+  -
+    name: Status
+    get:
+      - { index: "1", operation: "get", object: "Status", parameter: "" }
+ 
+coreCommands:
+  -
+    name: Status
+    get:
+      path: "/api/v1/device/{deviceId}/Status"
+      responses:
+        -
+          code: "200"
+          description: "get the VersiCharge status"
+          expectedValues: ["State Value"]
+        -
+          code: "503"
+          description: "get status unavailable"
+          expectedValues: []
+
+  
+
