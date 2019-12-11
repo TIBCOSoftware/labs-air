@@ -205,25 +205,34 @@ func (d *Driver) HandleWriteCommands(deviceName string, protocols map[string]mod
 	return err
 }
 
-// Stop stops device
+// Stop the protocol-specific DS code to shutdown gracefully, or
+// if the force parameter is 'true', immediately. The driver is responsible
+// for closing any in-use channels, including the channel used to send async
+// readings (if supported).
 func (d *Driver) Stop(force bool) error {
-	d.Logger.Warn("Driver's Stop function didn't implement")
+	// Then Logging Client might not be initialized
+	if d.Logger != nil {
+		d.Logger.Debug(fmt.Sprintf("Driver.Stop called: force=%v", force))
+	}
 	return nil
 }
 
-// AddDevice adds device
+// AddDevice is a callback function that is invoked
+// when a new Device associated with this Device Service is added
 func (d *Driver) AddDevice(deviceName string, protocols map[string]models.ProtocolProperties, adminState models.AdminState) error {
 	d.Logger.Debug(fmt.Sprintf("a new Device is added: %s", deviceName))
 	return nil
 }
 
-// UpdateDevice updates device
+// UpdateDevice is a callback function that is invoked
+// when a Device associated with this Device Service is updated
 func (d *Driver) UpdateDevice(deviceName string, protocols map[string]models.ProtocolProperties, adminState models.AdminState) error {
 	d.Logger.Debug(fmt.Sprintf("Device %s is updated", deviceName))
 	return nil
 }
 
-// RemoveDevice removes device
+// RemoveDevice is a callback function that is invoked
+// when a Device associated with this Device Service is removed
 func (d *Driver) RemoveDevice(deviceName string, protocols map[string]models.ProtocolProperties) error {
 	d.Logger.Debug(fmt.Sprintf("Device %s is removed", deviceName))
 	return nil

@@ -1,27 +1,58 @@
 [Writable]
 LogLevel = 'INFO'
+  [Writable.StoreAndForward]
+  Enabled = false
+  RetryInterval = '5m'
+  MaxRetryCount = 10
 
 [Service]
-BootTimeout = 30000
-ClientMonitor = 15000
+BootTimeout = '30s'
+ClientMonitor = '15s'
 CheckInterval = '10s'
 Host = 'localhost'
 Port = 48095
 Protocol = 'http'
 ReadMaxLimit = 100
 StartupMsg = 'This is the Flogo Rules Engine Application Service'
-Timeout = 5000
+Timeout = '5s'
 
 [Registry]
 Host = 'localhost'
 Port = 8500
 Type = 'consul'
 
+[Logging]
+EnableRemote = false
+File = './logs/support-flogo-rules.log'
+
+[Database]
+Type = "mongodb"
+Host = "localhost"
+Port = 27017
+Timeout = "30s"
+Username = ""
+Password = ""
+
+[SecretStore]
+  Host = 'localhost'
+  Port = 8200
+  Path = '/v1/secret/edgex/appservice/'
+  Protocol = 'https'
+
+  [SecretStore.Authentication]
+  AuthType = 'X-Vault-Token'
+  AuthToken = 'edgex'
+
 [Clients]
   [Clients.CoreData]
   Protocol = 'http'
   Host = 'localhost'
   Port = 48080
+
+  [Clients.Logging]
+  Protocol = "http"
+  Host = "localhost"
+  Port = 48061
   
 [MessageBus]
 Type = 'zero'
@@ -34,9 +65,6 @@ Type = 'zero'
         Port = 5563
         Protocol = 'tcp'
 
-[Logging]
-EnableRemote = false
-File = './logs/support-flogo-rules.log'
 
 # Choose either an HTTP trigger or MessageBus trigger (aka Binding)
 [Binding]

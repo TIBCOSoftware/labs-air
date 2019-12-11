@@ -39,8 +39,8 @@ export class EdgeService {
   private gatewayCoreMetadataPath = '/edgexgateway/metadata/api/v1';
   private gatewayCoreDataPath = '/edgexgateway/coredata/api/v1';
   private gatewayCoreCommandPath = '/edgexgateway/command/api/v1';
-  private gatewayExportClientPath = '/edgexgateway/exportclient/api/v1';
-  private gatewayExportDistroPath = '/edgexgateway/exportdistro/api/v1';
+  private gatewayExportClientPath = '/edgexgateway/export/api/v1';
+  private gatewayExportDistroPath = '/edgexgateway/distro/api/v1';
 
   constructor(private http: HttpClient,
     private logger: LogService) {
