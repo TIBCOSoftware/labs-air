@@ -13,6 +13,9 @@ import { debounceTime, distinctUntilChanged, startWith, tap, delay } from 'rxjs/
 import { interval, Subscription } from 'rxjs';
 import { MatPaginator, MatSort, MatTableDataSource, MatDatepickerInputEvent } from '@angular/material';
 
+import { GoogleChartInterface } from 'ng2-google-charts/google-charts-interfaces';
+
+
 import { BaseChartDirective, defaultColors, Label, MultiDataSet, SingleDataSet } from 'ng2-charts';
 import { ChartType } from 'chart.js';
 import { stringToKeyValue } from '@angular/flex-layout/extended/typings/style/style-transforms';
@@ -42,12 +45,33 @@ export class IotDeviceComponent implements OnInit, OnDestroy, AfterViewInit {
   queryLastValuesDisabled = true;
   mapResource = false;
   timeSeriesResource = false;
+  discreteValueResource = false;
+  summaryView = false;
   gatewayList: Gateway[] = [];
   gatewayIdSelected: '';
 
   // Map configuration
   mapConfig = null;
   mapMarkerUpdate = null;
+
+  // Google Chart config
+  // public timelineChartData:GoogleChartInterface =  {
+  //   chartType: 'Timeline',
+  //   dataTable: []
+  // }
+
+  public timelineChartData: GoogleChartInterface = {
+    chartType: 'Timeline',
+    dataTable: [
+      ['Name', 'From', 'To'],
+      ['Washington', new Date(1789, 3, 30), new Date(1797, 2, 4)],
+      ['Adams', new Date(1797, 2, 4), new Date(1801, 2, 4)],
+      ['Jefferson', new Date(1801, 2, 4), new Date(1809, 2, 4)]
+    ],
+    options: {
+      height: 350
+    }
+  }
 
   // Chart variables
   public chartDatasets = [
@@ -157,7 +181,7 @@ export class IotDeviceComponent implements OnInit, OnDestroy, AfterViewInit {
   resourceSelected = "";
   public streamLastQuery = Date.now();
 
-
+  deviceOverview = null;
   devicesDataSource = new MatTableDataSource<Device>();
   deviceDisplayedColumns: string[] = ['name', 'id', 'operatingState', 'adminState', 'description'];
   deviceSelection = new SelectionModel<Device>(false, []);
@@ -211,8 +235,9 @@ export class IotDeviceComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
 
-  public getResourceReadings(deviceName, resourceName) {
-    this.graphService.getReadings(deviceName, resourceName)
+  public getResourceReadings(deviceName, resourceName, numReadings) {
+
+    this.graphService.getReadings(deviceName, resourceName, numReadings)
       .subscribe(res => {
         this.resourceReadings = res as TSReading[];
 
@@ -224,6 +249,10 @@ export class IotDeviceComponent implements OnInit, OnDestroy, AfterViewInit {
         if (this.mapResource) {
           this.setMapDataSet(deviceName);
 
+        }
+        else if (this.discreteValueResource) {
+          console.log("calling setMapDataset");
+          this.setTimelineDataSet(deviceName);
         }
         else {
           // Set Data for chart dataset
@@ -309,6 +338,55 @@ export class IotDeviceComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
+  setTimelineDataSet(deviceName) {
+    console.log("setTimelineDataSet pt1");
+
+
+    let ccComponent = this.timelineChartData.component;
+
+    console.log("setTimelineDataSet pt2");
+
+    this.timelineChartData.dataTable = [];
+    this.timelineChartData.dataTable.push(['Name', 'From', 'To']);
+    let numReadings = this.resourceReadings.length;
+
+    console.log("setTimelineDataSet pt3: ", numReadings);
+
+    if (numReadings > 1) {
+      this.timelineChartData.dataTable.push(["Power Available",
+        new Date(this.resourceReadings[0].created), new Date(this.resourceReadings[0].created)]);
+      this.timelineChartData.dataTable.push(["Ready To Charge",
+        new Date(this.resourceReadings[0].created), new Date(this.resourceReadings[0].created)]);
+      this.timelineChartData.dataTable.push(["Charging",
+        new Date(this.resourceReadings[0].created), new Date(this.resourceReadings[0].created)]);
+      this.timelineChartData.dataTable.push(["Reduced Rate Charge",
+        new Date(this.resourceReadings[0].created), new Date(this.resourceReadings[0].created)]);
+      this.timelineChartData.dataTable.push(["Pause",
+        new Date(this.resourceReadings[0].created), new Date(this.resourceReadings[0].created)]);
+      this.timelineChartData.dataTable.push(["Fault",
+        new Date(this.resourceReadings[0].created), new Date(this.resourceReadings[0].created)]);
+
+      let i = 1;
+      for (; i < numReadings; i++) {
+        this.timelineChartData.dataTable.push([this.resourceReadings[i - 1].value,
+        new Date(this.resourceReadings[i - 1].created), new Date(this.resourceReadings[i].created)]);
+      }
+      this.timelineChartData.dataTable.push([this.resourceReadings[i - 1].value,
+      new Date(this.resourceReadings[i - 1].created), new Date(Date.now())]);
+    }
+
+
+    // this.timelineChartData.dataTable.push(['Name', 'From', 'To']);
+    // this.timelineChartData.dataTable.push([ 'Juan', new Date(1789, 3, 30), new Date(1797, 2, 4) ]);
+    // this.timelineChartData.dataTable.push([ 'Peter',      new Date(1797, 2, 4),  new Date(1801, 2, 4) ]);
+
+    console.log("Timeline table: " + this.timelineChartData.dataTable)
+
+    ccComponent.draw();
+
+  }
+
+
   public getStreamData(chart: any) {
 
     if (this.resourceSelection.hasValue()) {
@@ -390,6 +468,8 @@ export class IotDeviceComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.mapResource = false;
     this.timeSeriesResource = false;
+    this.discreteValueResource = false;
+    this.summaryView = true;
 
     // Set variables for query enable/disable
     this.queryLastValuesDisabled = true;
@@ -402,8 +482,8 @@ export class IotDeviceComponent implements OnInit, OnDestroy, AfterViewInit {
     // Clear resource selection
     this.resourceSelection.clear();
 
-    // this.getResourceReadings();
     this.resourcesDataSource.data = row.profile.deviceResources as Resource[];
+    this.deviceOverview = row;
   }
 
   onResourceClicked(row) {
@@ -416,9 +496,16 @@ export class IotDeviceComponent implements OnInit, OnDestroy, AfterViewInit {
     this.resourceSelected = row.name;
     this.mapResource = false;
     this.timeSeriesResource = false;
+    this.discreteValueResource = false;
+
+    let numReadingsRequired = 300;
 
     if (this.resourceSelected == "GPS") {
       this.mapResource = true;
+    }
+    else if (row.properties.value.type == "String") {
+      this.discreteValueResource = true;
+      numReadingsRequired = 40;
     }
     else {
       this.timeSeriesResource = true;
@@ -458,10 +545,10 @@ export class IotDeviceComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.createMapFlag = true;
 
-    this.getResourceReadings(this.deviceSelected, this.resourceSelected);
+    this.getResourceReadings(this.deviceSelected, this.resourceSelected, numReadingsRequired);
 
     if (this.mapResource) {
-      this.subscription = this.source.subscribe(val => this.getResourceReadings(this.deviceSelected, this.resourceSelected));
+      this.subscription = this.source.subscribe(val => this.getResourceReadings(this.deviceSelected, this.resourceSelected, numReadingsRequired));
       this.subscribed = true;
     }
 
@@ -474,7 +561,7 @@ export class IotDeviceComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onQueryLastValuesClicked() {
     // Query new data
-    this.getResourceReadings(this.deviceSelected, this.resourceSelected);
+    this.getResourceReadings(this.deviceSelected, this.resourceSelected, 300);
   }
 
   startDateEvent(event: MatDatepickerInputEvent<Date>) {

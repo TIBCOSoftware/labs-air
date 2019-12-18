@@ -44,6 +44,7 @@
     "lodash": "^4.17.14",
     "lodash-es": "^4.17.14",
     "ng2-charts": "2.3.0",
+    "ng2-google-charts": "^4.0.0",
     "ngx-color-picker": "^8.0.1",
     "rxjs": "~6.5.2",
     "tslib": "^1.10.0",

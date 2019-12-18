@@ -32,6 +32,7 @@ export class ResourceAttribute {
   Interface: string;
   Pin_Num: string;
   Type: string;
+  Visualization?: string
 }
 
 export class Resource {

@@ -197,7 +197,7 @@ export class IotDeviceStreamComponent implements OnInit, AfterViewInit {
   }
 
   public getResourceReadingsOrig(deviceName, resourceName) {
-    this.graphService.getReadings(deviceName, resourceName)
+    this.graphService.getReadings(deviceName, resourceName, 300)
       .subscribe(res => {
         this.resourceReadings = res as TSReading[];
 

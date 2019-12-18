@@ -480,7 +480,7 @@ export class DgraphService {
       );
   }
 
-  getReadings(deviceName, instrumentName): Observable<TSReading[]> {
+  getReadings(deviceName, instrumentName, numReadings): Observable<TSReading[]> {
     const url = `${this.dgraphUrl}/query`;
 
     // return this.http.post<any>(url, `{resp(func: has(reading)) @cascade {value created ~resource_reading @filter(eq(uuid, "${deviceName}_${instrumentName}")) {~device_resource @filter (eq(uuid, "${deviceName}")) {}}}}`, httpOptions)
@@ -488,7 +488,7 @@ export class DgraphService {
 
     let query = `{
       var(func: has(resource)) @filter(eq(uuid, "${deviceName}_${instrumentName}")) {
-        readings as resource_reading (first:-300) {
+        readings as resource_reading (first:-${numReadings}) {
         }
       }
       resp(func: uid(readings), orderasc:created) {
@@ -529,7 +529,7 @@ export class DgraphService {
       .pipe(
         map(response => response.data.resp as TSReading[]),
         tap(_ => this.logger.info('fetched readings')),
-        catchError(this.handleError<TSReading[]>('getReadings', []))
+        catchError(this.handleError<TSReading[]>('getReadingsStartingAt', []))
       );
   }
 
@@ -555,7 +555,32 @@ export class DgraphService {
       .pipe(
         map(response => response.data.resp as TSReading[]),
         tap(_ => this.logger.info('fetched readings')),
-        catchError(this.handleError<TSReading[]>('getReadings', []))
+        catchError(this.handleError<TSReading[]>('getReadingsBetween', []))
+      );
+  }
+
+  getLastReadingsForDevice(deviceName): Observable<TSReading[]> {
+    const url = `${this.dgraphUrl}/query`;
+
+    let query = `{
+      resp(func: has(device)) @filter(eq(uuid, "${deviceName}")) @normalize {
+        device_resource {
+          name: name
+          resource_reading (first:-1) {
+            created: created
+            value: value
+          }
+        }
+      }
+    }`
+
+    console.log('Reading query statement: ', query);
+
+    return this.http.post<any>(url, query, httpOptions)
+      .pipe(
+        map(response => response.data.resp as TSReading[]),
+        tap(_ => this.logger.info('fetched readings')),
+        catchError(this.handleError<TSReading[]>('getLastReadingsForDevice', []))
       );
   }
 

@@ -34,7 +34,7 @@ export class IotRulesComponent implements OnInit, AfterViewInit {
   actionResourcesDataSource = new MatTableDataSource<Resource>();
 
   operations: SelectItem[] = [
-    { value: '=', viewValue: '=' },
+    { value: '==', viewValue: '==' },
     { value: '>', viewValue: '>' },
     { value: '>=', viewValue: '>=' },
     { value: '<', viewValue: '<' },

@@ -18,6 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { IotHomeCockpitComponent } from './components/iot-home-cockpit/iot-home-cockpit.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ChartsModule } from 'ng2-charts';
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { IotGatewayComponent } from './components/iot-gateway/iot-gateway.component';
 import { IotDeviceComponent } from './components/iot-device/iot-device.component';
 import { IotDeviceStreamComponent } from './components/iot-device-stream/iot-device-stream.component';
@@ -35,6 +36,7 @@ import { IotNotificationsComponent } from './components/iot-notifications/iot-no
 import { HttpClientModule } from "@angular/common/http";
 import { MaporamaComponent } from './components/maporama/maporama.component';
 import { TceRulesComponent } from './components/tce-rules/tce-rules.component';
+import { IotDeviceSummaryComponent } from './components/iot-device-summary/iot-device-summary.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,8 @@ import { TceRulesComponent } from './components/tce-rules/tce-rules.component';
     IotRulesComponent,
     IotNotificationsComponent,
     MaporamaComponent,
-    TceRulesComponent
+    TceRulesComponent,
+    IotDeviceSummaryComponent
   ],
   imports: [
     AppRoutingModule,
@@ -72,6 +75,7 @@ import { TceRulesComponent } from './components/tce-rules/tce-rules.component';
     BrowserModule,
     FormsModule,
     ChartsModule,
+    Ng2GoogleChartsModule,
     MaterialModule,
     ReactiveFormsModule,
     SpotfireViewerModule,
