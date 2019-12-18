@@ -1,0 +1,116 @@
+name: "Siemens-Device"
+manufacturer: "Siemens"
+model: "XXXXXX"
+labels:
+ - "rest"
+ - "json"
+description: "Siemens Device that sends Json"
+
+deviceResources:
+  -
+    name: "Status"
+    description: "Indicates the device current state"
+    attributes:
+      { Pin_Num: "A0", Interface: "AIO", Type: "IN", Visualization: "Custom" }
+    properties:
+      value:
+        { type: "String", readWrite: "R", defaultValue: "Power Available", minimum: "", maximum: "" }
+      units:
+        { type: "String", readWrite: "R", defaultValue: "Description" }
+  -
+    name: "Voltage"
+    description: "Measures device voltage"
+    properties:
+      value:
+        { type: "Float32", readWrite: "R", minimum: "200", maximum: "260", defaultValue: "220"}
+      units:
+        { type: "String", readWrite: "R", defaultValue: "Volts" }
+  -
+    name: "Current"
+    description: "Measures electric current flow"
+    properties:
+      value:
+        { type: "Float32", readWrite: "R", minimum: "0", maximum: "35", defaultValue: "30"}
+      units:
+        { type: "String", readWrite: "R", defaultValue: "Amp" }
+  -
+    name: "Delay"
+    description: "Indicates the timer delay"
+    properties:
+      value:
+        { type: "Int16", readWrite: "R", minimum: "0", maximum: "8", defaultValue: "0"}
+      units:
+        { type: "String", readWrite: "R", defaultValue: "Hour" }
+ 
+deviceCommands:
+  -
+    name: Status
+    get:
+      - { index: "1", operation: "get", object: "Status", parameter: "" }
+  -
+    name: Voltage
+    get:
+      - { index: "1", operation: "get", object: "Voltage", parameter: "" }
+  -
+    name: Current
+    get:
+      - { index: "1", operation: "get", object: "Current", parameter: "" }
+  -
+    name: Delay
+    get:
+      - { index: "1", operation: "get", object: "Delay", parameter: "" }
+
+
+coreCommands:
+  -
+    name: Status
+    get:
+      path: "/api/v1/device/{deviceId}/Status"
+      responses:
+        -
+          code: "200"
+          description: "get the VersiCharge status"
+          expectedValues: ["State Value"]
+        -
+          code: "503"
+          description: "get status unavailable"
+          expectedValues: []
+  -
+    name: Voltage
+    get:
+      path: "/api/v1/device/{deviceId}/Voltage"
+      responses:
+        -
+          code: "200"
+          description: "get the VersiCharge voltage"
+          expectedValues: ["Voltage Value"]
+        -
+          code: "503"
+          description: "get voltage unavailable"
+          expectedValues: []
+  -
+    name: Current
+    get:
+      path: "/api/v1/device/{deviceId}/Current"
+      responses:
+        -
+          code: "200"
+          description: "get the VersiCharge current"
+          expectedValues: ["Current Value"]
+        -
+          code: "503"
+          description: "get current unavailable"
+          expectedValues: []
+  -
+    name: Delay
+    get:
+      path: "/api/v1/device/{deviceId}/Delay"
+      responses:
+        -
+          code: "200"
+          description: "get the VersiCharge delay"
+          expectedValues: ["Current Value"]
+        -
+          code: "503"
+          description: "get delay unavailable"
+          expectedValues: []
