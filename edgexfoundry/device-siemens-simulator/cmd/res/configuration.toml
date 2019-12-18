@@ -53,12 +53,12 @@ File = "./device-siemens.log"
 Level = "DEBUG"
 
 [Writable]
-LogLevel = 'DEBUG'
+LogLevel = 'INFO'
 
 # Pre-define Devices
 [[DeviceList]]
   Name = "versicharge-0001"
-  Profile = "Siemens-Device"
+  Profile = "Siemens-SimDevice"
   Description = "Siemens VersiCharge device simulator"
   Labels = [ "charger", "ev" ]
   [DeviceList.Protocols]
@@ -69,4 +69,12 @@ LogLevel = 'DEBUG'
     Frequency = "5s"
     OnChange = false
     Resource = "Status"
+  [[DeviceList.AutoEvents]]
+    Frequency = "5s"
+    OnChange = false
+    Resource = "Voltage"
+  [[DeviceList.AutoEvents]]
+    Frequency = "5s"
+    OnChange = false
+    Resource = "Current"
 

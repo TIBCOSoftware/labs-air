@@ -19,39 +19,79 @@ import (
 
 var cycle00 = []string{
 	"Power Available",
-	"Ready to Charge",
+	"Ready To Charge",
+	"Charging",
+	"Charging",
+	"Charging",
+	"Charging",
+	"Charging",
+	"Charging",
+	"Charging",
 	"Charging",
 	"Next",
 }
 
 var cycle01 = []string{
 	"Power Available",
-	"Ready to Charge",
+	"Ready To Charge",
 	"Charging",
-	"Pause",
+	"Charging",
+	"Charging",
+	"Charging",
+	"Charging",
+	"Timer Delay",
+	"Charging",
+	"Charging",
+	"Charging",
+	"Charging",
+	"Charging",
 	"Charging",
 	"Next",
 }
 
 var cycle02 = []string{
 	"Power Available",
-	"Ready to Charge",
-	"Reduce Charge",
+	"Ready To Charge",
+	"Timer Delay",
+	"Reduced Rate Charge",
+	"Reduced Rate Charge",
+	"Reduced Rate Charge",
+	"Reduced Rate Charge",
+	"Reduced Rate Charge",
+	"Reduced Rate Charge",
+	"Fault",
 	"Next",
 }
 
 var cycle03 = []string{
 	"Power Available",
-	"Ready to Charge",
-	"Reduce Charge",
-	"Pause",
-	"Reduce Charge",
+	"Ready To Charge",
+	"Reduced Rate Charge",
+	"Reduced Rate Charge",
+	"Reduced Rate Charge",
+	"Reduced Rate Charge",
+	"Reduced Rate Charge",
+	"Timer Delay",
+	"Reduced Rate Charge",
+	"Reduced Rate Charge",
+	"Reduced Rate Charge",
+	"Reduced Rate Charge",
+	"Reduced Rate Charge",
+	"Reduced Rate Charge",
+	"Fault",
 	"Next",
 }
 
 var cycle04 = []string{
 	"Power Available",
-	"Ready to Charge",
+	"Ready To Charge",
+	"Timer Delay",
+	"Charging",
+	"Charging",
+	"Charging",
+	"Charging",
+	"Charging",
+	"Charging",
 	"Charging",
 	"Fault",
 	"Next",
@@ -59,12 +99,29 @@ var cycle04 = []string{
 
 var cycle05 = []string{
 	"Power Available",
-	"Ready to Charge",
+	"Ready To Charge",
 	"Charging",
-	"Pause",
+	"Charging",
+	"Charging",
+	"Charging",
+	"Charging",
+	"Charging",
+	"Timer Delay",
 	"Fault",
 	"Charging",
+	"Charging",
+	"Charging",
+	"Charging",
+	"Charging",
 	"Next",
+}
+
+var voltages = []string{
+	"220.0", "221.0", "225.0", "218.0", "220.5", "219.0", "224.0", "218.0", "223.0", "220.0",
+}
+
+var currents = []string{
+	"30.0", "29.0", "28.0", "30.0", "31.0", "32.0", "27.0", "29.0", "30.0", "31.0",
 }
 
 var currentCycle = cycle00
@@ -102,29 +159,41 @@ func (d *Driver) Initialize(lc logger.LoggingClient, asyncCh chan<- *sdkModel.As
 }
 
 // HandleReadCommands executes a oommand
+// Note:  This simulator assumes there is always only one request (Status). However,
+// with each status, there are other resource values that are also published
 func (d *Driver) HandleReadCommands(deviceName string, protocols map[string]models.ProtocolProperties, reqs []sdkModel.CommandRequest) ([]*sdkModel.CommandValue, error) {
-	d.Logger.Info(fmt.Sprintf("Device %s is handling read command", deviceName))
+	d.Logger.Debug(fmt.Sprintf("Device %s is handling read command", deviceName))
 	var responses = make([]*sdkModel.CommandValue, len(reqs))
 	var resTime = time.Now().UnixNano() / int64(time.Millisecond)
-
+	var cv *sdkModel.CommandValue
+	val := ""
 	for i, req := range reqs {
-		d.Logger.Info(fmt.Sprintf("Request for resource: %s", req.DeviceResourceName))
+		d.Logger.Debug(fmt.Sprintf("Request for resource: %s", req.DeviceResourceName))
 
 		if req.DeviceResourceName == "Status" {
 			// val := "Power Available"
-			val := getReading(deviceName)
+			val = getReading(deviceName)
 
 			d.Logger.Info(fmt.Sprintf("Device %s is sending: %s", deviceName, val))
-			var cv *sdkModel.CommandValue
 
 			cv = sdkModel.NewStringValue(req.DeviceResourceName, resTime, val)
 
+			responses[i] = cv
+		} else if req.DeviceResourceName == "Voltage" {
+			val := voltages[rand.Intn(10)]
+			d.Logger.Info(fmt.Sprintf("Device %s is sending: %s", deviceName, val))
+			cv = sdkModel.NewStringValue("Voltage", resTime, val)
+			responses[i] = cv
+		} else if req.DeviceResourceName == "Current" {
+			val := currents[rand.Intn(10)]
+			d.Logger.Info(fmt.Sprintf("Device %s is sending: %s", deviceName, val))
+			cv = sdkModel.NewStringValue("Current", resTime, val)
 			responses[i] = cv
 		}
 
 	}
 
-	d.Logger.Info(fmt.Sprintf("Device %s is sending response", deviceName))
+	d.Logger.Debug(fmt.Sprintf("Device %s is sending response", deviceName))
 	return responses, nil
 }
 
