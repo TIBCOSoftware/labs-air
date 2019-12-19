@@ -32,13 +32,16 @@ initializingVector:string .
 compression:string .
 deviceIdentifierFilter:string .
 valueDescriptorFilter:string .
-conditionDevice:string .
-conditionResource: string .
-conditionCompareToValue: bool .
-conditionCompareToValueOperation: string .
-conditionValue: string .
-conditionCompareToLastValue: bool .
-conditionCompareToLastValueOperation: string .
+condDevice:string .
+condResource: string .
+condCompareNewMetricToValue: bool .
+condCompareNewMetricToValueOp: string .
+condCompareNewMetricValue: string .
+condCompareNewMetricToLastMetric: bool .
+condCompareNewMetricToLastMetricOp: string .
+condCompareLastMetricToValue: bool .
+condCompareLastMetricToValueOp: string .
+condCompareLastMetricValue: string .
 actionSendNotification: bool .
 actionNotification: string .
 actionSendCommand: bool .
