@@ -82,3 +82,5 @@ MqttPublisher = "FlogoRules"
 MqttUser = "mqtt_admin"
 MqttPassword = "mqtt_admin"
 MqttTopic = "EdgexGateway1Notification"
+CaseManagementHTTPURL = "https://integration.cloud.tibcoapps.com:443/koray3t2vp3khi5cgkoropf23xnebqq4/IoTEvent"
+

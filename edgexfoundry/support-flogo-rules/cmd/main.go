@@ -41,6 +41,7 @@ func main() {
 	mqttUser := ""
 	mqttPassword := ""
 	mqttTopic := ""
+	caseManagementHTTPURL := ""
 
 	if appSettings != nil {
 		appName, ok := appSettings["ApplicationName"]
@@ -58,6 +59,7 @@ func main() {
 		mqttPassword, _ = appSettings["MqttPassword"]
 		mqttTopic, _ = appSettings["MqttTopic"]
 		mqttPort, _ = strconv.Atoi(mqttPortStr)
+		caseManagementHTTPURL, _ = appSettings["CaseManagementHTTPURL"]
 
 		edgexSdk.LoggingClient.Info(fmt.Sprintf("Tuple Types File: %s", tupleTypesFilename))
 		edgexSdk.LoggingClient.Info(fmt.Sprintf("Mqtt Connection details - host:%s port:%d publisher:%s user:%s topic:%s", mqttHost, mqttPort, mqttPublisher, mqttUser, mqttTopic))
@@ -76,6 +78,9 @@ func main() {
 
 	// Create the MQTT Sender
 	rules.SetMQTTSender(mqttHost, mqttPort, mqttPublisher, mqttUser, mqttPassword, mqttTopic)
+
+	// Create the HTTP Sender
+	rules.SetHTTPSender(caseManagementHTTPURL, "application/json", false)
 
 	// Create Rule Session
 	rs, _ = rules.CreateRuleSession(tupleTypesFilename)

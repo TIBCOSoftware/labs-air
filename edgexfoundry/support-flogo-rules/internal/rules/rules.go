@@ -23,32 +23,38 @@ type ledBody struct {
 
 // RuleDefStruct - rule definition data
 type RuleDefStruct struct {
-	Name                                 string `json:"name"`
-	Description                          string `json:"description"`
-	ConditionDevice                      string `json:"conditionDevice"`
-	ConditionResource                    string `json:"conditionResource"`
-	ConditionCompareToValue              bool   `json:"conditionCompareToValue"`
-	ConditionCompareToValueOperation     string `json:"conditionCompareToValueOperation"`
-	ConditionValue                       string `json:"conditionValue"`
-	ConditionCompareToLastValue          bool   `json:"conditionCompareToLastValue"`
-	ConditionCompareToLastValueOperation string `json:"conditionCompareToLastValueOperation"`
-	ActionSendNotification               bool   `json:"actionSendNotification"`
-	ActionNotification                   string `json:"actionNotification"`
-	ActionSendCommand                    bool   `json:"actionSendCommand"`
-	ActionDevice                         string `json:"actionDevice"`
-	ActionResource                       string `json:"actionResource"`
-	ActionValue                          string `json:"actionValue"`
+	Name                               string `json:"name"`
+	Description                        string `json:"description"`
+	CondDevice                         string `json:"condDevice"`
+	CondResource                       string `json:"condResource"`
+	CondCompareNewMetricToValue        bool   `json:"condCompareNewMetricToValue"`
+	CondCompareNewMetricToValueOp      string `json:"condCompareNewMetricToValueOp"`
+	CondCompareNewMetricValue          string `json:"condCompareNewMetricValue"`
+	CondCompareNewMetricToLastMetric   bool   `json:"condCompareNewMetricToLastMetric"`
+	CondCompareNewMetricToLastMetricOp string `json:"condCompareNewMetricToLastMetricOp"`
+	CondCompareLastMetricToValue       bool   `json:"condCompareLastMetricToValue"`
+	CondCompareLastMetricToValueOp     string `json:"condCompareLastMetricToValueOp"`
+	CondCompareLastMetricValue         string `json:"condCompareLastMetricValue"`
+	ActionSendNotification             bool   `json:"actionSendNotification"`
+	ActionNotification                 string `json:"actionNotification"`
+	ActionSendCommand                  bool   `json:"actionSendCommand"`
+	ActionDevice                       string `json:"actionDevice"`
+	ActionResource                     string `json:"actionResource"`
+	ActionValue                        string `json:"actionValue"`
 }
 
 // conditionCtxStruct - structure use to pass context to conditions
 type conditionCtxStruct struct {
-	Device             string
-	Resource           string
-	CompareToValue     bool
-	Operation          string
-	Value              string
-	CompareToLastValue bool
-	LastValueOperation string
+	Device                         string
+	Resource                       string
+	CompareNewMetricToValue        bool
+	CompareNewMetricToValueOp      string
+	CompareNewMetricValue          string
+	CompareNewMetricToLastMetric   bool
+	CompareNewMetricToLastMetricOp string
+	CompareLastMetricToValue       bool
+	CompareLastMetricToValueOp     string
+	CompareLastMetricValue         string
 }
 
 type notificationCtxStruct struct {
@@ -63,7 +69,17 @@ type notificationCtxStruct struct {
 	Level       string `json:"level"`
 }
 
+type caseCtxStruct struct {
+	Description  string `json:"Description"`
+	Level        string `json:"Level"`
+	Notification string `json:"Notification"`
+	Device       string `json:"device"`
+	Origin       int64  `json:"origin"`
+	DeviceId     string `json:"deviceId"`
+}
+
 var mqttSender *transforms.MQTTSender
+var httpSender *transforms.HTTPSender
 
 // SetMQTTSender - sets the mqtt sender
 func SetMQTTSender(hostname string, port int, publisher string, username string, password string, topic string) {
@@ -85,23 +101,34 @@ func SetMQTTSender(hostname string, port int, publisher string, username string,
 	// }
 
 	mqttSender = transforms.NewMQTTSender(LoggingClient, addressable, nil, mqttConfig)
+
+}
+
+// SetHTTPSender - sets the http sender
+func SetHTTPSender(url string, mineType string, persistOnError bool) {
+
+	httpSender = transforms.NewHTTPSender(url, mineType, persistOnError)
+
 }
 
 // AddRule - add rule
 func AddRule(rs model.RuleSession, ruleDef RuleDefStruct) {
 	fmt.Printf("Inside AddRule\n")
 	//fmt.Printf("Raw Object: %+v\n", ruleDef)
-	//fmt.Printf("Rule struct request device: %s\n", ruleDef.ConditionDevice)
-	//fmt.Printf("Rule struct request resource: %s\n", ruleDef.ConditionResource)
+	//fmt.Printf("Rule struct request device: %s\n", ruleDef.CondDevice)
+	//fmt.Printf("Rule struct request resource: %s\n", ruleDef.CondResource)
 
 	condContext := conditionCtxStruct{
-		Device:             ruleDef.ConditionDevice,
-		Resource:           ruleDef.ConditionResource,
-		CompareToValue:     ruleDef.ConditionCompareToValue,
-		Operation:          ruleDef.ConditionCompareToValueOperation,
-		Value:              ruleDef.ConditionValue,
-		CompareToLastValue: ruleDef.ConditionCompareToLastValue,
-		LastValueOperation: ruleDef.ConditionCompareToLastValueOperation,
+		Device:                         ruleDef.CondDevice,
+		Resource:                       ruleDef.CondResource,
+		CompareNewMetricToValue:        ruleDef.CondCompareNewMetricToValue,
+		CompareNewMetricToValueOp:      ruleDef.CondCompareNewMetricToValueOp,
+		CompareNewMetricValue:          ruleDef.CondCompareNewMetricValue,
+		CompareNewMetricToLastMetric:   ruleDef.CondCompareNewMetricToLastMetric,
+		CompareNewMetricToLastMetricOp: ruleDef.CondCompareNewMetricToLastMetricOp,
+		CompareLastMetricToValue:       ruleDef.CondCompareLastMetricToValue,
+		CompareLastMetricToValueOp:     ruleDef.CondCompareLastMetricToValueOp,
+		CompareLastMetricValue:         ruleDef.CondCompareLastMetricValue,
 	}
 
 	var condContextJSON []byte
@@ -318,7 +345,7 @@ func updateCond(ruleName string, condName string, tuples map[model.TupleType]mod
 	resourceTuple := tuples["ResourceConcept"]
 
 	if readingTuple == nil || resourceTuple == nil || ctx == nil {
-		LoggingClient.Error("Should not get a nil Reading tuple or no context in compareValuesCond! This is an error")
+		LoggingClient.Error("Should not get a nil Reading tuple or no context in updateCond! This is an error")
 		return false
 	}
 
@@ -352,7 +379,7 @@ func updateAction(ctx context.Context, rs model.RuleSession, ruleName string, tu
 
 	readingTupleDevice, _ := readingTuple.GetString("device")
 	readingTupleResource, _ := readingTuple.GetString("resource")
-	LoggingClient.Info(fmt.Sprintf("Updating Device: [%s] Resource: [%s]\n", readingTupleDevice, readingTupleResource))
+	LoggingClient.Debug(fmt.Sprintf("Updating Device: [%s] Resource: [%s]\n", readingTupleDevice, readingTupleResource))
 
 	// Update Value
 	rtValue, _ := readingTuple.GetString("value")
@@ -387,48 +414,159 @@ func compareValuesCond(ruleName string, condName string, tuples map[model.TupleT
 
 	if readingTupleResource == condCtx.Resource && readingTupleDevice == condCtx.Device &&
 		resourceTupleResource == condCtx.Resource && resourceTupleDevice == condCtx.Device {
-		readingTupleValue, _ := readingTuple.GetDouble("value")
 
-		if condCtx.CompareToValue {
-			value, _ := strconv.ParseFloat(condCtx.Value, 64)
+		// Determine type
+		readingTupleValueStr, _ := readingTuple.GetString("value")
+		resourceTupleValueStr, _ := resourceTuple.GetString("value")
+		isNumeric := false
 
-			switch condCtx.Operation {
-			case ">=":
-				condResult = readingTupleValue > value
-			case ">":
-				condResult = readingTupleValue >= value
-			case "<=":
-				condResult = readingTupleValue <= value
-			case "<":
-				condResult = readingTupleValue < value
-			case "==":
-				condResult = readingTupleValue == value
-			case "!=":
-				condResult = readingTupleValue != value
-			default:
-				condResult = false
-			}
+		readingTupleValue, err := strconv.ParseFloat(readingTupleValueStr, 64)
+		if err == nil {
+			isNumeric = true
 		}
 
-		if condResult && condCtx.CompareToLastValue {
-			resourceTupleValue, _ := resourceTuple.GetDouble("value")
+		if condCtx.CompareNewMetricToValue {
 
-			switch condCtx.LastValueOperation {
-			case ">=":
-				condResult = readingTupleValue > resourceTupleValue
-			case ">":
-				condResult = readingTupleValue >= resourceTupleValue
-			case "<=":
-				condResult = readingTupleValue <= resourceTupleValue
-			case "<":
-				condResult = readingTupleValue < resourceTupleValue
-			case "==":
-				condResult = readingTupleValue == resourceTupleValue
-			case "!=":
-				condResult = readingTupleValue != resourceTupleValue
-			default:
-				condResult = false
+			if isNumeric {
+				// compare numbers
+
+				value, _ := strconv.ParseFloat(condCtx.CompareNewMetricValue, 64)
+
+				switch condCtx.CompareNewMetricToValueOp {
+				case ">=":
+					condResult = readingTupleValue > value
+				case ">":
+					condResult = readingTupleValue >= value
+				case "<=":
+					condResult = readingTupleValue <= value
+				case "<":
+					condResult = readingTupleValue < value
+				case "==":
+					condResult = readingTupleValue == value
+				case "!=":
+					condResult = readingTupleValue != value
+				default:
+					condResult = false
+				}
+			} else {
+				// Compare string
+
+				switch condCtx.CompareNewMetricToValueOp {
+				case ">=":
+					condResult = readingTupleValueStr > condCtx.CompareNewMetricValue
+				case ">":
+					condResult = readingTupleValueStr >= condCtx.CompareNewMetricValue
+				case "<=":
+					condResult = readingTupleValueStr <= condCtx.CompareNewMetricValue
+				case "<":
+					condResult = readingTupleValueStr < condCtx.CompareNewMetricValue
+				case "==":
+					condResult = readingTupleValueStr == condCtx.CompareNewMetricValue
+				case "!=":
+					condResult = readingTupleValueStr != condCtx.CompareNewMetricValue
+				default:
+					condResult = false
+				}
+
+				// LoggingClient.Info(fmt.Sprintf("Evaluated tuple value operator context value: [%s][%s][%s] = [%t]",
+				// 	readingTupleValueStr, condCtx.CompareNewMetricToValueOp, condCtx.CompareNewMetricValue, condResult))
 			}
+
+		}
+
+		if condResult && condCtx.CompareNewMetricToLastMetric {
+
+			if isNumeric {
+				// compare numbers
+
+				resourceTupleValue, _ := strconv.ParseFloat(resourceTupleValueStr, 64)
+
+				switch condCtx.CompareNewMetricToLastMetricOp {
+				case ">=":
+					condResult = readingTupleValue > resourceTupleValue
+				case ">":
+					condResult = readingTupleValue >= resourceTupleValue
+				case "<=":
+					condResult = readingTupleValue <= resourceTupleValue
+				case "<":
+					condResult = readingTupleValue < resourceTupleValue
+				case "==":
+					condResult = readingTupleValue == resourceTupleValue
+				case "!=":
+					condResult = readingTupleValue != resourceTupleValue
+				default:
+					condResult = false
+				}
+
+			} else {
+				// Compare string
+
+				switch condCtx.CompareNewMetricToLastMetricOp {
+				case ">=":
+					condResult = readingTupleValueStr > resourceTupleValueStr
+				case ">":
+					condResult = readingTupleValueStr >= resourceTupleValueStr
+				case "<=":
+					condResult = readingTupleValueStr <= resourceTupleValueStr
+				case "<":
+					condResult = readingTupleValueStr < resourceTupleValueStr
+				case "==":
+					condResult = readingTupleValueStr == resourceTupleValueStr
+				case "!=":
+					condResult = readingTupleValueStr != resourceTupleValueStr
+				default:
+					condResult = false
+				}
+			}
+
+		}
+
+		if condResult && condCtx.CompareLastMetricToValue {
+
+			if isNumeric {
+				// compare numbers
+
+				resourceTupleValue, _ := strconv.ParseFloat(resourceTupleValueStr, 64)
+				value, _ := strconv.ParseFloat(condCtx.CompareLastMetricValue, 64)
+
+				switch condCtx.CompareLastMetricToValueOp {
+				case ">=":
+					condResult = resourceTupleValue > value
+				case ">":
+					condResult = resourceTupleValue >= value
+				case "<=":
+					condResult = resourceTupleValue <= value
+				case "<":
+					condResult = resourceTupleValue < value
+				case "==":
+					condResult = resourceTupleValue == value
+				case "!=":
+					condResult = resourceTupleValue != value
+				default:
+					condResult = false
+				}
+			} else {
+				// Compare string
+
+				switch condCtx.CompareLastMetricToValueOp {
+				case ">=":
+					condResult = resourceTupleValueStr > condCtx.CompareLastMetricValue
+				case ">":
+					condResult = resourceTupleValueStr >= condCtx.CompareLastMetricValue
+				case "<=":
+					condResult = resourceTupleValueStr <= condCtx.CompareLastMetricValue
+				case "<":
+					condResult = resourceTupleValueStr < condCtx.CompareLastMetricValue
+				case "==":
+					condResult = resourceTupleValueStr == condCtx.CompareLastMetricValue
+				case "!=":
+					condResult = resourceTupleValueStr != condCtx.CompareLastMetricValue
+				default:
+					condResult = false
+				}
+
+			}
+
 		}
 
 	}
@@ -481,4 +619,27 @@ func compareValuesAction(ctx context.Context, rs model.RuleSession, ruleName str
 
 	// Send Notification
 	mqttSender.MQTTSend(LoggingClient, string(notificationContextJSON))
+
+	// Todo: The code below should be removed and the logic to send to the case management tool should be in the Flogo subscriber
+
+	// caseContext := caseCtxStruct{
+	// 	Description:  ruleCtx.(string),
+	// 	Level:        "Info",
+	// 	Notification: "Enabled",
+	// 	Device:       "EV_Charger_9876",
+	// 	Origin:       ts,
+	// 	DeviceId:     "",
+	// }
+
+	// var caseContextJSON []byte
+	// caseContextJSON, err = json.Marshal(caseContext)
+
+	// LoggingClient.Debug(fmt.Sprintf("Marshalled caseContext: %s \n", string(caseContextJSON)))
+
+	// if err != nil {
+	// 	fmt.Printf("Rule Action ERROR\n")
+	// }
+
+	// // Update Case Management
+	// httpSender.HTTPPost(LoggingClient, string(caseContextJSON))
 }
