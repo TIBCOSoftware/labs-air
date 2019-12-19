@@ -55,13 +55,16 @@ export class IotRulesComponent implements OnInit, AfterViewInit {
     this.ruleForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: [''],
-      conditionDevice: ['', Validators.required],
-      conditionResource: ['', Validators.required],
-      conditionCompareToValue: [true],
-      conditionCompareToValueOperation: ['', Validators.required],
-      conditionValue: ['', Validators.required],
-      conditionCompareToLastValue: [false],
-      conditionCompareToLastValueOperation: [''],
+      condDevice: ['', Validators.required],
+      condResource: ['', Validators.required],
+      condCompareNewMetricToValue: [true],
+      condCompareNewMetricToValueOp: ['', Validators.required],
+      condCompareNewMetricValue: ['', Validators.required],
+      condCompareNewMetricToLastMetric: [false],
+      condCompareNewMetricToLastMetricOp: [''],
+      condCompareLastMetricToValue: [false],
+      condCompareLastMetricToValueOp: ['', Validators.required],
+      condCompareLastMetricValue: ['', Validators.required],
       actionSendNotification: [true],
       actionNotification: ['', Validators.required],
       actionSendCommand: [true],
@@ -73,8 +76,9 @@ export class IotRulesComponent implements OnInit, AfterViewInit {
       uid: ['']
     });
 
-    this.setConditionConpareToValueValidators();
-    this.setConditionConpareToLastValueValidators();
+    this.setCondConpareNewMetricToValueValidators();
+    this.setCondConpareNewMetricToLastMetricValidators();
+    this.setCondConpareLastMetricToValueValidators();
     this.setActionSendNotificationValidators();
     this.setActionSendCommandValidators();
 
@@ -142,7 +146,7 @@ export class IotRulesComponent implements OnInit, AfterViewInit {
     this.ruleSelection.select(row);
 
     // Set the resourceDataSource
-    let idx = this.getIndexForDeviceDataSource(row.conditionDevice);
+    let idx = this.getIndexForDeviceDataSource(row.condDevice);
     this.conditionResourcesDataSource.data = this.devicesDataSource.data[idx].profile.deviceResources as Resource[];
 
     idx = this.getIndexForDeviceDataSource(row.actionDevice);
@@ -152,13 +156,16 @@ export class IotRulesComponent implements OnInit, AfterViewInit {
     this.ruleForm.reset({
       name: row.name,
       description: row.description,
-      conditionDevice: row.conditionDevice,
-      conditionResource: row.conditionResource,
-      conditionCompareToValue: row.conditionCompareToValue,
-      conditionCompareToValueOperation: row.conditionCompareToValueOperation,
-      conditionValue: row.conditionValue,
-      conditionCompareToLastValue: row.conditionCompareToLastValue,
-      conditionCompareToLastValueOperation: row.conditionCompareToLastValueOperation,
+      condDevice: row.condDevice,
+      condResource: row.condResource,
+      condCompareNewMetricToValue: row.condCompareNewMetricToValue,
+      condCompareNewMetricToValueOp: row.condCompareNewMetricToValueOp,
+      condCompareNewMetricValue: row.condCompareNewMetricValue,
+      condCompareNewMetricToLastMetric: row.condCompareNewMetricToLastMetric,
+      condCompareNewMetricToLastMetricOp: row.condCompareNewMetricToLastMetricOp,
+      condCompareLastMetricToValue: row.condCompareLastMetricToValue,
+      condCompareLastMetricToValueOp: row.condCompareLastMetricToValueOp,
+      condCompareLastMetricValue: row.condCompareLastMetricValue,
       actionSendNotification: row.actionSendNotification,
       actionNotification: row.actionNotification,
       actionSendCommand: row.actionSendCommand,
@@ -222,13 +229,16 @@ export class IotRulesComponent implements OnInit, AfterViewInit {
     rule.name = this.ruleForm.controls['name'].value;
     rule.uuid = this.ruleForm.controls['name'].value;
     rule.description = this.ruleForm.controls['description'].value;
-    rule.conditionDevice = this.ruleForm.controls['conditionDevice'].value;
-    rule.conditionResource = this.ruleForm.controls['conditionResource'].value;
-    rule.conditionCompareToValue = this.ruleForm.controls['conditionCompareToValue'].value;
-    rule.conditionCompareToValueOperation = this.ruleForm.controls['conditionCompareToValueOperation'].value;
-    rule.conditionValue = this.ruleForm.controls['conditionValue'].value;
-    rule.conditionCompareToLastValue = this.ruleForm.controls['conditionCompareToLastValue'].value;
-    rule.conditionCompareToLastValueOperation = this.ruleForm.controls['conditionCompareToLastValueOperation'].value;
+    rule.condDevice = this.ruleForm.controls['condDevice'].value;
+    rule.condResource = this.ruleForm.controls['condResource'].value;
+    rule.condCompareNewMetricToValue = this.ruleForm.controls['condCompareNewMetricToValue'].value;
+    rule.condCompareNewMetricToValueOp = this.ruleForm.controls['condCompareNewMetricToValueOp'].value;
+    rule.condCompareNewMetricValue = this.ruleForm.controls['condCompareNewMetricValue'].value;
+    rule.condCompareNewMetricToLastMetric = this.ruleForm.controls['condCompareNewMetricToLastMetric'].value;
+    rule.condCompareNewMetricToLastMetricOp = this.ruleForm.controls['condCompareNewMetricToLastMetricOp'].value;
+    rule.condCompareLastMetricToValue = this.ruleForm.controls['condCompareLastMetricToValue'].value;
+    rule.condCompareLastMetricToValueOp = this.ruleForm.controls['condCompareLastMetricToValueOp'].value;
+    rule.condCompareLastMetricValue = this.ruleForm.controls['condCompareLastMetricValue'].value;
     rule.actionSendNotification = this.ruleForm.controls['actionSendNotification'].value;
     rule.actionNotification = this.ruleForm.controls['actionNotification'].value;
     rule.actionSendCommand = this.ruleForm.controls['actionSendCommand'].value;
@@ -255,13 +265,16 @@ export class IotRulesComponent implements OnInit, AfterViewInit {
     rule.name = this.ruleForm.controls['name'].value;
     rule.uuid = this.ruleForm.controls['name'].value;
     rule.description = this.ruleForm.controls['description'].value;
-    rule.conditionDevice = this.ruleForm.controls['conditionDevice'].value;
-    rule.conditionResource = this.ruleForm.controls['conditionResource'].value;
-    rule.conditionCompareToValue = this.ruleForm.controls['conditionCompareToValue'].value;
-    rule.conditionCompareToValueOperation = this.ruleForm.controls['conditionCompareToValueOperation'].value;
-    rule.conditionValue = this.ruleForm.controls['conditionValue'].value;
-    rule.conditionCompareToLastValue = this.ruleForm.controls['conditionCompareToLastValue'].value;
-    rule.conditionCompareToLastValueOperation = this.ruleForm.controls['conditionCompareToLastValueOperation'].value;
+    rule.condDevice = this.ruleForm.controls['condDevice'].value;
+    rule.condResource = this.ruleForm.controls['condResource'].value;
+    rule.condCompareNewMetricToValue = this.ruleForm.controls['condCompareNewMetricToValue'].value;
+    rule.condCompareNewMetricToValueOp = this.ruleForm.controls['condCompareNewMetricToValueOp'].value;
+    rule.condCompareNewMetricValue = this.ruleForm.controls['condCompareNewMetricValue'].value;
+    rule.condCompareNewMetricToLastMetric = this.ruleForm.controls['condCompareNewMetricToLastMetric'].value;
+    rule.condCompareNewMetricToLastMetricOp = this.ruleForm.controls['condCompareNewMetricToLastMetricOp'].value;
+    rule.condCompareLastMetricToValue = this.ruleForm.controls['condCompareLastMetricToValue'].value;
+    rule.condCompareLastMetricToValueOp = this.ruleForm.controls['condCompareLastMetricToValueOp'].value;
+    rule.condCompareLastMetricValue = this.ruleForm.controls['condCompareLastMetricValue'].value;
     rule.actionSendNotification = this.ruleForm.controls['actionSendNotification'].value;
     rule.actionNotification = this.ruleForm.controls['actionNotification'].value;
     rule.actionSendCommand = this.ruleForm.controls['actionSendCommand'].value;
@@ -317,46 +330,71 @@ export class IotRulesComponent implements OnInit, AfterViewInit {
     });
   }
 
-  setConditionConpareToValueValidators() {
-    const conditionCompareToValueOperationControl = this.ruleForm.get('conditionCompareToValueOperation');
-    const conditionValueControl = this.ruleForm.get('conditionValue');
+  setCondConpareNewMetricToValueValidators() {
+    const condCompareNewMetricToValueOpControl = this.ruleForm.get('condCompareNewMetricToValueOp');
+    const condCompareNewMetricValueControl = this.ruleForm.get('condCompareNewMetricValue');
 
-    this.ruleForm.get('conditionCompareToValue').valueChanges
+    this.ruleForm.get('condCompareNewMetricToValue').valueChanges
       .subscribe(compareToValue => {
 
         if (compareToValue) {
           console.log("setting validator for compare to value");
-          conditionCompareToValueOperationControl.setValidators([Validators.required]);
-          conditionValueControl.setValidators([Validators.required]);
+          condCompareNewMetricToValueOpControl.setValidators([Validators.required]);
+          condCompareNewMetricValueControl.setValidators([Validators.required]);
         }
         else {
           console.log("clearing validator for action notification");
-          conditionCompareToValueOperationControl.setValidators(null);
-          conditionValueControl.setValidators(null);
+          condCompareNewMetricToValueOpControl.setValidators(null);
+          condCompareNewMetricValueControl.setValidators(null);
         }
 
-        conditionCompareToValueOperationControl.updateValueAndValidity();
-        conditionValueControl.updateValueAndValidity();
+        condCompareNewMetricToValueOpControl.updateValueAndValidity();
+        condCompareNewMetricValueControl.updateValueAndValidity();
       });
+
   }
 
-  setConditionConpareToLastValueValidators() {
-    const conditionCompareToLastValueOperationControl = this.ruleForm.get('conditionCompareToLastValueOperation');
+  setCondConpareNewMetricToLastMetricValidators() {
+    const condCompareNewMetricToLastMetricOpControl = this.ruleForm.get('condCompareNewMetricToLastMetricOp');
 
-    this.ruleForm.get('conditionCompareToLastValue').valueChanges
+    this.ruleForm.get('condCompareNewMetricToLastMetric').valueChanges
       .subscribe(compareToLastValue => {
 
         if (compareToLastValue) {
           console.log("setting validator for compare to value");
-          conditionCompareToLastValueOperationControl.setValidators([Validators.required]);
+          condCompareNewMetricToLastMetricOpControl.setValidators([Validators.required]);
         }
         else {
           console.log("clearing validator for action notification");
-          conditionCompareToLastValueOperationControl.setValidators(null);
+          condCompareNewMetricToLastMetricOpControl.setValidators(null);
         }
 
-        conditionCompareToLastValueOperationControl.updateValueAndValidity();
+        condCompareNewMetricToLastMetricOpControl.updateValueAndValidity();
       });
+  }
+
+  setCondConpareLastMetricToValueValidators() {
+    const condCompareLastMetricToValueOpControl = this.ruleForm.get('condCompareLastMetricToValueOp');
+    const condCompareLastMetricValueControl = this.ruleForm.get('condCompareLastMetricValue');
+
+    this.ruleForm.get('condCompareLastMetricToValue').valueChanges
+      .subscribe(compareToValue => {
+
+        if (compareToValue) {
+          console.log("setting validator for compare to value");
+          condCompareLastMetricToValueOpControl.setValidators([Validators.required]);
+          condCompareLastMetricValueControl.setValidators([Validators.required]);
+        }
+        else {
+          console.log("clearing validator for action notification");
+          condCompareLastMetricToValueOpControl.setValidators(null);
+          condCompareLastMetricValueControl.setValidators(null);
+        }
+
+        condCompareLastMetricToValueOpControl.updateValueAndValidity();
+        condCompareLastMetricValueControl.updateValueAndValidity();
+      });
+
   }
 
   setActionSendNotificationValidators() {
@@ -413,13 +451,16 @@ export class IotRulesComponent implements OnInit, AfterViewInit {
     rule.name = this.ruleForm.controls['name'].value;
     rule.uuid = this.ruleForm.controls['name'].value;
     rule.description = this.ruleForm.controls['description'].value;
-    rule.conditionDevice = this.ruleForm.controls['conditionDevice'].value;
-    rule.conditionResource = this.ruleForm.controls['conditionResource'].value;
-    rule.conditionCompareToValue = this.ruleForm.controls['conditionCompareToValue'].value;
-    rule.conditionCompareToValueOperation = this.ruleForm.controls['conditionCompareToValueOperation'].value;
-    rule.conditionValue = this.ruleForm.controls['conditionValue'].value;
-    rule.conditionCompareToLastValue = this.ruleForm.controls['conditionCompareToLastValue'].value;
-    rule.conditionCompareToLastValueOperation = this.ruleForm.controls['conditionCompareToLastValueOperation'].value;
+    rule.condDevice = this.ruleForm.controls['condDevice'].value;
+    rule.condResource = this.ruleForm.controls['condResource'].value;
+    rule.condCompareNewMetricToValue = this.ruleForm.controls['condCompareNewMetricToValue'].value;
+    rule.condCompareNewMetricToValueOp = this.ruleForm.controls['condCompareNewMetricToValueOp'].value;
+    rule.condCompareNewMetricValue = this.ruleForm.controls['condCompareNewMetricValue'].value;
+    rule.condCompareNewMetricToLastMetric = this.ruleForm.controls['condCompareNewMetricToLastMetric'].value;
+    rule.condCompareNewMetricToLastMetricOp = this.ruleForm.controls['condCompareNewMetricToLastMetricOp'].value;
+    rule.condCompareLastMetricToValue = this.ruleForm.controls['condCompareLastMetricToValue'].value;
+    rule.condCompareLastMetricToValueOp = this.ruleForm.controls['condCompareLastMetricToValueOp'].value;
+    rule.condCompareLastMetricValue = this.ruleForm.controls['condCompareLastMetricValue'].value;
     rule.actionSendNotification = this.ruleForm.controls['actionSendNotification'].value;
     rule.actionNotification = this.ruleForm.controls['actionNotification'].value;
     rule.actionSendCommand = this.ruleForm.controls['actionSendCommand'].value;

@@ -60,8 +60,7 @@
 
                             <tr mat-header-row *matHeaderRowDef="ruleDisplayedColumns; sticky: true"></tr>
                             <tr mat-row *matRowDef="let row; columns: ruleDisplayedColumns;"
-                                (click)="onRuleClicked(row)"
-                                [ngClass]="{'selected': ruleSelection.isSelected(row) }">
+                                (click)="onRuleClicked(row)" [ngClass]="{'selected': ruleSelection.isSelected(row) }">
                             </tr>
                         </table>
                     </div>
@@ -98,32 +97,35 @@
                         <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px" style="padding-top: 10px">
                             <mat-form-field fxFlex="1 1 18%" appearance="standard">
                                 <mat-label>Select a Device</mat-label>
-                                <mat-select (selectionChange)="onConditionDeviceSelected($event)" formControlName="conditionDevice">
-                                    <mat-option *ngFor="let item of devicesDataSource.data; let i = index" [value]="item.name">
+                                <mat-select (selectionChange)="onConditionDeviceSelected($event)"
+                                    formControlName="condDevice">
+                                    <mat-option *ngFor="let item of devicesDataSource.data; let i = index"
+                                        [value]="item.name">
                                         {{item.name}}
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
                             <mat-form-field fxFlex="1 1 18%" appearance="standard">
                                 <mat-label>Select a Metric</mat-label>
-                                <mat-select formControlName="conditionResource">
+                                <mat-select formControlName="condResource">
                                     <mat-option *ngFor="let item of conditionResourcesDataSource.data"
                                         [value]="item.name">
                                         {{item.name}}
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
-                           
+
                         </div>
 
                         <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px" style="padding-top: 10px">
 
-                            <mat-checkbox fxFlex="1 1 18%" formControlName="conditionCompareToValue"> New Metric Value
+                            <mat-checkbox fxFlex="1 1 18%" formControlName="condCompareNewMetricToValue"> New Metric
+                                Value
                             </mat-checkbox>
 
                             <mat-form-field fxFlex="1 1 18%" appearance="standard">
                                 <mat-label>Select operation</mat-label>
-                                <mat-select formControlName="conditionCompareToValueOperation">
+                                <mat-select formControlName="condCompareNewMetricToValueOp">
                                     <mat-option *ngFor="let item of operations" [value]="item.value">
                                         {{item.viewValue}}
                                     </mat-option>
@@ -131,24 +133,45 @@
                             </mat-form-field>
                             <mat-form-field fxFlex="1 1 18%" appearance="standard">
                                 <mat-label>Value</mat-label>
-                                <input matInput [readonly]=false formControlName="conditionValue">
+                                <input matInput [readonly]=false formControlName="condCompareNewMetricValue">
                             </mat-form-field>
                         </div>
 
                         <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px" style="padding-top: 10px">
 
-                            <mat-checkbox fxFlex="1 1 18%" formControlName="conditionCompareToLastValue">New Metric Value
+                            <mat-checkbox fxFlex="1 1 18%" formControlName="condCompareNewMetricToLastMetric">New Metric
+                                Value
                             </mat-checkbox>
 
                             <mat-form-field fxFlex="1 1 18%" appearance="standard">
                                 <mat-label>Select operation</mat-label>
-                                <mat-select formControlName="conditionCompareToLastValueOperation">
+                                <mat-select formControlName="condCompareNewMetricToLastMetricOp">
                                     <mat-option *ngFor="let item of operations" [value]="item.value">
                                         {{item.viewValue}}
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
-                            <mat-label class="mat-label">Last Value</mat-label>
+                            <mat-label class="mat-label">Last Metric Value</mat-label>
+                        </div>
+
+                        <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px" style="padding-top: 10px">
+
+                            <mat-checkbox fxFlex="1 1 18%" formControlName="condCompareLastMetricToValue"> Last Metric
+                                Value
+                            </mat-checkbox>
+
+                            <mat-form-field fxFlex="1 1 18%" appearance="standard">
+                                <mat-label>Select operation</mat-label>
+                                <mat-select formControlName="condCompareLastMetricToValueOp">
+                                    <mat-option *ngFor="let item of operations" [value]="item.value">
+                                        {{item.viewValue}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field fxFlex="1 1 18%" appearance="standard">
+                                <mat-label>Value</mat-label>
+                                <input matInput [readonly]=false formControlName="condCompareLastMetricValue">
+                            </mat-form-field>
                         </div>
 
                         <p class="mat-h3">Actions</p>
@@ -172,8 +195,10 @@
 
                             <mat-form-field fxFlex="1 1 18%" appearance="standard">
                                 <mat-label>Select a Device</mat-label>
-                                <mat-select (selectionChange)="onActionDeviceSelected($event)" formControlName="actionDevice">
-                                    <mat-option *ngFor="let item of devicesDataSource.data; let i = index" [value]="item.name">
+                                <mat-select (selectionChange)="onActionDeviceSelected($event)"
+                                    formControlName="actionDevice">
+                                    <mat-option *ngFor="let item of devicesDataSource.data; let i = index"
+                                        [value]="item.name">
                                         {{item.name}}
                                     </mat-option>
                                 </mat-select>
@@ -199,16 +224,19 @@
                     </form>
                 </mat-card-content>
                 <mat-card-actions>
-                    <button mat-raised-button [disabled]="ruleForm.pristine || ruleForm.invalid" (click)="addRule()" color="primary">Add
+                    <button mat-raised-button [disabled]="ruleForm.pristine || ruleForm.invalid" (click)="addRule()"
+                        color="primary">Add
                         Rule</button>
-                    <button mat-raised-button [disabled]="ruleForm.pristine || ruleForm.invalid || ruleSelection.isEmpty()" (click)="updateRule()"
-                        color="primary">Update Rule</button>
-                    <button mat-raised-button [disabled]="ruleForm.dirty || ruleForm.invalid || ruleSelection.isEmpty()" (click)="deleteRule()" color="primary">Delete
+                    <button mat-raised-button
+                        [disabled]="ruleForm.pristine || ruleForm.invalid || ruleSelection.isEmpty()"
+                        (click)="updateRule()" color="primary">Update Rule</button>
+                    <button mat-raised-button [disabled]="ruleForm.dirty || ruleForm.invalid || ruleSelection.isEmpty()"
+                        (click)="deleteRule()" color="primary">Delete
                         Rule</button>
-                    <button mat-raised-button [disabled]="ruleForm.dirty || ruleForm.invalid || ruleSelection.isEmpty()" (click)="deployRule()"
-                        color="primary">Deploy Rule</button>
-                    <button mat-raised-button [disabled]="ruleForm.dirty || ruleForm.invalid || ruleSelection.isEmpty()" (click)="undeployRule()"
-                        color="primary">Undeploy Rule</button>
+                    <button mat-raised-button [disabled]="ruleForm.dirty || ruleForm.invalid || ruleSelection.isEmpty()"
+                        (click)="deployRule()" color="primary">Deploy Rule</button>
+                    <button mat-raised-button [disabled]="ruleForm.dirty || ruleForm.invalid || ruleSelection.isEmpty()"
+                        (click)="undeployRule()" color="primary">Undeploy Rule</button>
                 </mat-card-actions>
             </mat-card>
         </div>
