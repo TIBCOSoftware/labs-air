@@ -364,13 +364,16 @@ export class DgraphService {
         name
         uuid
         description
-        conditionDevice
-        conditionResource
-        conditionCompareToValue
-        conditionCompareToValueOperation
-        conditionValue
-        conditionCompareToLastValue
-        conditionCompareToLastValueOperation
+        condDevice
+        condResource
+        condCompareNewMetricToValue
+        condCompareNewMetricToValueOp
+        condCompareNewMetricValue
+        condCompareNewMetricToLastMetric
+        condCompareNewMetricToLastMetricOp
+        condCompareLastMetricToValue
+        condCompareLastMetricToValueOp
+        condCompareLastMetricValue
         actionSendNotification
         actionNotification
         actionSendCommand
@@ -402,13 +405,16 @@ export class DgraphService {
         _:Rule <type> "rule" .
         _:Rule <rule> "" .
         _:Rule <description> "${rule.description}" .
-        _:Rule <conditionDevice> "${rule.conditionDevice}" .
-        _:Rule <conditionResource> "${rule.conditionResource}" .
-        _:Rule <conditionCompareToValue> "${rule.conditionCompareToValue}" .
-        _:Rule <conditionCompareToValueOperation> "${rule.conditionCompareToValueOperation}" .
-        _:Rule <conditionValue> "${rule.conditionValue}" .
-        _:Rule <conditionCompareToLastValue> "${rule.conditionCompareToLastValue}" .
-        _:Rule <conditionCompareToLastValueOperation> "${rule.conditionCompareToLastValueOperation}" .
+        _:Rule <condDevice> "${rule.condDevice}" .
+        _:Rule <condResource> "${rule.condResource}" .
+        _:Rule <condCompareNewMetricToValue> "${rule.condCompareNewMetricToValue}" .
+        _:Rule <condCompareNewMetricToValueOp> "${rule.condCompareNewMetricToValueOp}" .
+        _:Rule <condCompareNewMetricValue> "${rule.condCompareNewMetricValue}" .
+        _:Rule <condCompareNewMetricToLastMetric> "${rule.condCompareNewMetricToLastMetric}" .
+        _:Rule <condCompareNewMetricToLastMetricOp> "${rule.condCompareNewMetricToLastMetricOp}" .
+        _:Rule <condCompareLastMetricToValue> "${rule.condCompareLastMetricToValue}" .
+        _:Rule <condCompareLastMetricToValueOp> "${rule.condCompareLastMetricToValueOp}" .
+        _:Rule <condCompareLastMetricValue> "${rule.condCompareLastMetricValue}" .
         _:Rule <actionSendNotification> "${rule.actionSendNotification}" .
         _:Rule <actionNotification> "${rule.actionNotification}" .
         _:Rule <actionSendCommand> "${rule.actionSendCommand}" .
@@ -437,13 +443,16 @@ export class DgraphService {
         <${rule.uid}> <name> "${rule.name}" .
         <${rule.uid}> <uuid> "${rule.uuid}" .
         <${rule.uid}> <description> "${rule.description}" .
-        <${rule.uid}> <conditionDevice> "${rule.conditionDevice}" .
-        <${rule.uid}> <conditionResource> "${rule.conditionResource}" .
-        <${rule.uid}> <conditionCompareToValue> "${rule.conditionCompareToValue}" .
-        <${rule.uid}> <conditionCompareToValueOperation> "${rule.conditionCompareToValueOperation}" .
-        <${rule.uid}> <conditionValue> "${rule.conditionValue}" .
-        <${rule.uid}> <conditionCompareToLastValue> "${rule.conditionCompareToLastValue}" .
-        <${rule.uid}> <conditionCompareToLastValueOperation> "${rule.conditionCompareToLastValueOperation}" .
+        <${rule.uid}> <condDevice> "${rule.condDevice}" .
+        <${rule.uid}> <condResource> "${rule.condResource}" .
+        <${rule.uid}> <condCompareNewMetricToValue> "${rule.condCompareNewMetricToValue}" .
+        <${rule.uid}> <condCompareNewMetricToValueOp> "${rule.condCompareNewMetricToValueOp}" .
+        <${rule.uid}> <condCompareNewMetricValue> "${rule.condCompareNewMetricValue}" .
+        <${rule.uid}> <condCompareNewMetricToLastMetric> "${rule.condCompareNewMetricToLastMetric}" .
+        <${rule.uid}> <condCompareNewMetricToLastMetricOp> "${rule.condCompareNewMetricToLastMetricOp}" .
+        <${rule.uid}> <condCompareLastMetricToValue> "${rule.condCompareLastMetricToValue}" .
+        <${rule.uid}> <condCompareLastMetricToValueOp> "${rule.condCompareLastMetricToValueOp}" .
+        <${rule.uid}> <condCompareLastMetricValue> "${rule.condCompareLastMetricValue}" .
         <${rule.uid}> <actionSendNotification> "${rule.actionSendNotification}" .
         <${rule.uid}> <actionNotification> "${rule.actionNotification}" .
         <${rule.uid}> <actionSendCommand> "${rule.actionSendCommand}" .
