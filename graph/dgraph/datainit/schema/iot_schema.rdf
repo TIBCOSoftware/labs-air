@@ -3,8 +3,8 @@ url:string .
 latitude:float .
 longitude:float .
 accessToken: string .
-createdts:dateTime  .
-updatedts:dateTime .
+createdts: int @index(int) .
+updatedts: int @index(int) .
 name:string .
 operatingState: string .
 adminState: string .

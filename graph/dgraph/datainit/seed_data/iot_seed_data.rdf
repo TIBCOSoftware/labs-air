@@ -134,8 +134,8 @@ _:gateway_gateway1 <type> "gateway" .
 _:gateway_gateway1 <address> "localhost" .
 _:gateway_gateway1 <latitude> "37.4316" .
 _:gateway_gateway1 <longitude> "-77.6569" .
-_:gateway_gateway1 <createdts> "2019-06-20" .
-_:gateway_gateway1 <updatedts> "2019-06-20" .
+_:gateway_gateway1 <createdts> "1471806386919" .
+_:gateway_gateway1 <updatedts> "1471806386919" .
 _:gateway_gateway1 <gateway_subscription> _:subscription_subscription1 .
 _:gateway_gateway1 <gateway_subscription> _:subscription_subscription2 .
 _:gateway_gateway1 <gateway_subscription> _:subscription_subscription3 .
@@ -146,6 +146,6 @@ _:gateway_gateway2 <type> "gateway" .
 _:gateway_gateway2 <address> "137.117.38.255" .
 _:gateway_gateway2 <latitude> "43.8041" .
 _:gateway_gateway2 <longitude> "-122.5542" .
-_:gateway_gateway2 <createdts> "2019-06-20" .
-_:gateway_gateway2 <updatedts> "2019-06-20" .
+_:gateway_gateway2 <createdts> "1471806386919" .
+_:gateway_gateway2 <updatedts> "1471806386919" .
 _:gateway_gateway2 <gateway_subscription> _:subscription_subscription5 .
