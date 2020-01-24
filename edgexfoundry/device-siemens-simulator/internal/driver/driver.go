@@ -28,6 +28,7 @@ var cycle00 = []string{
 	"Charging",
 	"Charging",
 	"Charging",
+	"Energy Report",
 	"Next",
 }
 
@@ -39,6 +40,7 @@ var cycle01 = []string{
 	"Charging",
 	"Charging",
 	"Charging",
+	"Energy Report",
 	"Timer Delay",
 	"Charging",
 	"Charging",
@@ -46,6 +48,7 @@ var cycle01 = []string{
 	"Charging",
 	"Charging",
 	"Charging",
+	"Energy Report",
 	"Next",
 }
 
@@ -59,6 +62,7 @@ var cycle02 = []string{
 	"Reduced Rate Charge",
 	"Reduced Rate Charge",
 	"Reduced Rate Charge",
+	"Energy Report",
 	"Fault",
 	"Next",
 }
@@ -71,6 +75,7 @@ var cycle03 = []string{
 	"Reduced Rate Charge",
 	"Reduced Rate Charge",
 	"Reduced Rate Charge",
+	"Energy Report",
 	"Timer Delay",
 	"Reduced Rate Charge",
 	"Reduced Rate Charge",
@@ -78,6 +83,7 @@ var cycle03 = []string{
 	"Reduced Rate Charge",
 	"Reduced Rate Charge",
 	"Reduced Rate Charge",
+	"Energy Report",
 	"Fault",
 	"Next",
 }
@@ -93,6 +99,7 @@ var cycle04 = []string{
 	"Charging",
 	"Charging",
 	"Charging",
+	"Energy Report",
 	"Fault",
 	"Next",
 }
@@ -106,6 +113,7 @@ var cycle05 = []string{
 	"Charging",
 	"Charging",
 	"Charging",
+	"Energy Report",
 	"Timer Delay",
 	"Fault",
 	"Charging",
@@ -113,6 +121,7 @@ var cycle05 = []string{
 	"Charging",
 	"Charging",
 	"Charging",
+	"Energy Report",
 	"Next",
 }
 
@@ -124,8 +133,13 @@ var currents = []string{
 	"30.0", "29.0", "28.0", "30.0", "31.0", "32.0", "27.0", "29.0", "30.0", "31.0",
 }
 
+var energy = []string{
+	"5.0", "8.0", "10.0", "2.0", "3.0", "4.0", "5.0", "7.0", "6.0", "5.0",
+}
+
 var currentCycle = cycle00
 var currentIndex = 0
+var reportEnergy = false
 
 var once sync.Once
 var driver *Driver
@@ -180,14 +194,25 @@ func (d *Driver) HandleReadCommands(deviceName string, protocols map[string]mode
 
 			responses[i] = cv
 		} else if req.DeviceResourceName == "Voltage" {
-			val := voltages[rand.Intn(10)]
+			val = voltages[rand.Intn(10)]
 			d.Logger.Info(fmt.Sprintf("Device %s is sending: %s", deviceName, val))
 			cv = sdkModel.NewStringValue("Voltage", resTime, val)
 			responses[i] = cv
 		} else if req.DeviceResourceName == "Current" {
-			val := currents[rand.Intn(10)]
+			val = currents[rand.Intn(10)]
 			d.Logger.Info(fmt.Sprintf("Device %s is sending: %s", deviceName, val))
 			cv = sdkModel.NewStringValue("Current", resTime, val)
+			responses[i] = cv
+		} else if req.DeviceResourceName == "Energy" {
+			if reportEnergy {
+				val = energy[rand.Intn(10)]
+				reportEnergy = false
+			} else {
+				val = "0"
+			}
+
+			d.Logger.Info(fmt.Sprintf("Device %s is sending: %s", deviceName, val))
+			cv = sdkModel.NewStringValue("Energy", resTime, val)
 			responses[i] = cv
 		}
 
@@ -203,6 +228,11 @@ func getReading(deviceName string) string {
 		reading = currentCycle[currentIndex]
 
 		currentIndex++
+
+		if currentCycle[currentIndex] == "Energy Report" {
+			currentIndex++
+			reportEnergy = true
+		}
 
 		if currentCycle[currentIndex] == "Next" {
 			currentIndex = 0
