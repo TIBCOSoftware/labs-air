@@ -77,4 +77,8 @@ LogLevel = 'INFO'
     Frequency = "5s"
     OnChange = false
     Resource = "Current"
+  [[DeviceList.AutoEvents]]
+    Frequency = "5s"
+    OnChange = false
+    Resource = "Energy"
 
