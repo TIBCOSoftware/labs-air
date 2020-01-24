@@ -33,6 +33,14 @@ deviceResources:
         { type: "Float32", readWrite: "R", minimum: "0", maximum: "35", defaultValue: "30"}
       units:
         { type: "String", readWrite: "R", defaultValue: "Amp" }
+  -
+    name: "Energy"
+    description: "Measures energy consumption in kWh per hour"
+    properties:
+      value:
+        { type: "Float32", readWrite: "R", minimum: "0", maximum: "100", defaultValue: "0"}
+      units:
+        { type: "String", readWrite: "R", defaultValue: "kWh" }
 deviceCommands:
   -
     name: Status
@@ -46,6 +54,10 @@ deviceCommands:
     name: Current
     get:
       - { index: "1", operation: "get", object: "Current", parameter: "" }
+  -
+    name: Energy
+    get:
+      - { index: "1", operation: "get", object: "Energy", parameter: "" }
  
 coreCommands:
   -
@@ -86,6 +98,19 @@ coreCommands:
         -
           code: "503"
           description: "get current unavailable"
+          expectedValues: []
+  -
+    name: Energy
+    get:
+      path: "/api/v1/device/{deviceId}/Energy"
+      responses:
+        -
+          code: "200"
+          description: "get the VersiCharge energy consumption"
+          expectedValues: ["Energy Value"]
+        -
+          code: "503"
+          description: "get energy unavailable"
           expectedValues: []
 
   
