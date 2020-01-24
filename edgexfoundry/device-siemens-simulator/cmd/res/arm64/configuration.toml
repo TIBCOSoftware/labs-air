@@ -101,10 +101,18 @@ LogLevel = "INFO"
       Address = "devicesiemens"
       Port = "300"
   [[DeviceList.AutoEvents]]
-    Frequency = "5s"
+    Frequency = "10s"
     OnChange = false
-    Resource = "GPS"
+    Resource = "Status"
   [[DeviceList.AutoEvents]]
-    Frequency = "8s"
+    Frequency = "10s"
     OnChange = false
-    Resource = "Speedometer"
+    Resource = "Voltage"
+  [[DeviceList.AutoEvents]]
+    Frequency = "10s"
+    OnChange = false
+    Resource = "Current"
+  [[DeviceList.AutoEvents]]
+    Frequency = "10s"
+    OnChange = false
+    Resource = "Energy"
