@@ -1,0 +1,23 @@
+{
+  "menu": [
+    {
+      "entry": "General Application",
+      "icon": "tcs-starters-icon",
+      "options": [
+        "Settings",
+        "Roles",
+        "Landing Page",
+        "Access Control"
+      ]
+    },
+    {
+      "entry": "Live Apps",
+      "icon": "tcs-liveapps-sm-icon",
+      "options": [
+        "App Selection",
+        "Recent Cases",
+        "Summary Cards"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "browserTitle": "Tibco Cloud App",
+  "applicationTitle": "Air App (TIBCO LABS™)",
+  "welcomeMessage": "Welcome to the Air App",
+  "roles": [
+    {
+      "id": "User",
+      "group": "System: ALL_USERS",
+      "display": "User"
+    }
+  ],
+  "displayName": true,
+  "documentationUrl": "assets/help.html"
+}
