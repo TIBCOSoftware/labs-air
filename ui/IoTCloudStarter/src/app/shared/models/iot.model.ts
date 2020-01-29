@@ -143,8 +143,8 @@ export class Addressable {
 export class Gateway {
   uid: number;
   description: string;
-  createdts: string;
-  updatedts: string;
+  createdts: number;
+  updatedts: number;
   uuid: string;
   address: string;
   latitude: number;
@@ -219,4 +219,9 @@ export class ChartTSData {
     this.y = y;
   }
 
+}
+
+export class DataStoreMetadata {
+  gateway: Gateway;
+  devices: Device[];
 }
