@@ -37,6 +37,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { MaporamaComponent } from './components/maporama/maporama.component';
 import { TceRulesComponent } from './components/tce-rules/tce-rules.component';
 import { IotDeviceSummaryComponent } from './components/iot-device-summary/iot-device-summary.component';
+import { LiveAppsComponent } from './components/live-apps/live-apps.component';
+import { LiveAppsCockpitComponent } from './components/live-apps-cockpit/live-apps-cockpit.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,9 @@ import { IotDeviceSummaryComponent } from './components/iot-device-summary/iot-d
     IotNotificationsComponent,
     MaporamaComponent,
     TceRulesComponent,
-    IotDeviceSummaryComponent
+    IotDeviceSummaryComponent,
+    LiveAppsComponent,
+    LiveAppsCockpitComponent
   ],
   imports: [
     AppRoutingModule,
