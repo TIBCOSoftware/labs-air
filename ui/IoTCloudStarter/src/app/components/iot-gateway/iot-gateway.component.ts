@@ -4,9 +4,10 @@ import { ActivatedRoute } from "@angular/router";
 
 import { SelectionModel } from '@angular/cdk/collections';
 
-import { Gateway } from '../../shared/models/iot.model';
+import { Gateway, DataStoreMetadata, Device } from '../../shared/models/iot.model';
 import { EdgeService } from '../../services/edge/edge.service';
 import { DgraphService } from '../../services/graph/dgraph.service';
+import { DatastoreService } from '../../services/datastore/datastore.service';
 import { debounceTime, distinctUntilChanged, startWith, tap, delay } from 'rxjs/operators';
 //import { merge } from "rxjs/observable/merge";
 //import { fromEvent } from 'rxjs/observable/fromEvent';
@@ -28,7 +29,9 @@ export class IotGatewayComponent implements OnInit, AfterViewInit {
   subscriptionDisabled = true;
   selectedGateway = '';
   hideAccessToken = true;
-  dateFormat = 'yyyy-MM-dd  HH:mm:ss'
+  dateFormat = 'yyyy-MM-dd  HH:mm:ss';
+
+  dataStoreMetadata: DataStoreMetadata = null;
 
   gatewayForm: FormGroup;
   dataSource = new MatTableDataSource<Gateway>();
@@ -38,6 +41,7 @@ export class IotGatewayComponent implements OnInit, AfterViewInit {
 
   constructor(private graphService: DgraphService,
     private edgeService: EdgeService,
+    private datastoreService: DatastoreService,
     private formBuilder: FormBuilder,
     private logger: LogService,
     private _snackBar: MatSnackBar,
@@ -73,6 +77,10 @@ export class IotGatewayComponent implements OnInit, AfterViewInit {
 
   }
 
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+  }
+
   public getGateways() {
     console.log("Getting Gateways called")
     this.logger.debug("Getting Gateways");
@@ -83,6 +91,9 @@ export class IotGatewayComponent implements OnInit, AfterViewInit {
         this.dataSource.data = res as Gateway[];
         console.log("Received response: ", res);
         this.buildMaporamaData();
+
+        // Move code to update data stores to a button action
+        // this.updateDataStores();
       })
   }
 
@@ -127,14 +138,15 @@ export class IotGatewayComponent implements OnInit, AfterViewInit {
     else {
       let gate = new Gateway();
 
-      let dateNow = this._datePipe.transform(new Date(), 'yyyy-MM-ddTHH:mm:ssZZZZZ');
+      // let dateNow = this._datePipe.transform(new Date(), 'yyyy-MM-ddTHH:mm:ssZZZZZ');
+      let tsms = Date.now();
 
       gate.uuid = this.gatewayForm.controls['uuid'].value;
       gate.address = this.gatewayForm.controls['address'].value;
-      gate.createdts = dateNow;
+      gate.createdts = tsms;
       gate.latitude = this.gatewayForm.controls['latitude'].value;
       gate.longitude = this.gatewayForm.controls['longitude'].value;
-      gate.updatedts = dateNow;
+      gate.updatedts = tsms;
 
       this.graphService.addGateway(gate)
         .subscribe(res => {
@@ -149,7 +161,9 @@ export class IotGatewayComponent implements OnInit, AfterViewInit {
   updateGateway() {
     let gate = new Gateway();
 
-    let dateNow = this._datePipe.transform(new Date(), 'yyyy-MM-ddTHH:mm:ssZZZZZ');
+    // let dateNow = this._datePipe.transform(new Date(), 'yyyy-MM-ddTHH:mm:ssZZZZZ');
+
+    let tsms = Date.now();
 
     gate.uid = this.gatewayForm.controls['uid'].value;
     gate.uuid = this.gatewayForm.controls['uuid'].value;
@@ -158,7 +172,7 @@ export class IotGatewayComponent implements OnInit, AfterViewInit {
     gate.latitude = this.gatewayForm.controls['latitude'].value;
     gate.longitude = this.gatewayForm.controls['longitude'].value;
     gate.accessToken = this.gatewayForm.controls['accessToken'].value;
-    gate.updatedts = dateNow;
+    gate.updatedts = tsms;
 
     this.graphService.updateGateway(gate)
       .subscribe(res => {
@@ -201,9 +215,46 @@ export class IotGatewayComponent implements OnInit, AfterViewInit {
     
   }
 
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
+  updateDataStoreForGateway(gateway: Gateway) {
+
+    this.edgeService.getDevices(gateway)
+      .subscribe(res => {
+
+        this.dataStoreMetadata = {
+          gateway: gateway,
+          devices: res as Device[]
+        }
+
+        console.log("Metadata: ", this.dataStoreMetadata);
+
+        this.datastoreService.updateDataStoreForGateway(this.dataStoreMetadata)
+          .subscribe(restxt => {
+              console.log("Metadata response: ", restxt);
+            }
+          )
+        
+      })
   }
+
+  updateDataStores () {
+
+    this.dataSource.data.forEach(
+      (gateway, index) => {
+
+        if (index == 0) {
+          console.log("Calling save metadata on datastore");
+          
+          this.updateDataStoreForGateway(gateway);
+        }
+        
+      }
+    );
+
+
+  }
+
+
+  
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
