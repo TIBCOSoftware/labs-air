@@ -14,7 +14,9 @@ export class SplashComponent implements OnInit {
     }
     public handleGetStarted = (event: any): void => {
         // get started - navigate to home
-        this.router.navigate([event.context]);
+        
+        // this.router.navigate([event.context]);
+        this.router.navigate(['/starterApp/home/gateway']);
     }
     ngOnInit() {
         this.uiAppId = this.route.snapshot.data.generalConfigHolder.uiAppId;
