@@ -284,6 +284,13 @@
     "logLevel": "info",
     "pathRewrite":{"^/gateway1" : ""}
   },
+  "/datastore/*": {
+    "target": "http://localhost:9999",
+    "secure": "false",
+    "changeOrigin": true,
+    "logLevel": "info",
+    "pathRewrite":{"^/datastore" : ""}
+  },
   "/be/ws/api/": {
     "target": {
       "host": "events.cloud.tibco.com",
