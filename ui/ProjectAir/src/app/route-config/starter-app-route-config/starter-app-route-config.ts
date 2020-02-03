@@ -19,6 +19,8 @@ import {ConfigurationComponent} from '../../routes/configuration/configuration.c
 import {CONFIGURATION_ROUTE_CONFIG, CONFIGURATION_ROUTE_PROVIDERS } from './configuration-route-config/configuration-route-config';
 import {FormResolver} from '@tibco-tcstk/tc-forms-lib';
 import { SplashComponent } from 'src/app/routes/splash/splash.component';
+import { AirCockpitComponent } from 'src/app/routes/air-cockpit/air-cockpit.component';
+import { AIR_ROUTE_PROVIDERS, AIR_ROUTE_CONFIG } from './air-route-config/air-route-config';
 
 export const HOME_ROUTE = 'splash';
 
@@ -67,7 +69,21 @@ export const STARTER_APP_ROUTES =
       path: 'configuration', component: ConfigurationComponent, canActivate: [AuthGuard, RoleGuard],
       resolve: {configurationMenuHolder: ConfigurationMenuConfigResolver},
       children: CONFIGURATION_ROUTE_CONFIG
+    },
+    {
+      path: 'air',
+      component: AirCockpitComponent,
+      resolve: {
+        claims: ClaimsResolver,
+        generalConfigHolder: GeneralConfigResolver,
+        laConfigHolder: LaConfigResolver,
+        rolesHolder: RolesResolver,
+        customFormDefs: FormResolver,
+        formConfig: FormConfigResolver
+      },
+      children: AIR_ROUTE_CONFIG
     }
+
   ];
 
 export const STARTER_APP_PROVIDERS = [
@@ -84,6 +100,7 @@ export const STARTER_APP_PROVIDERS = [
     RoleActiveResolver,
     FormConfigResolver
   ],
-  CONFIGURATION_ROUTE_PROVIDERS
+  CONFIGURATION_ROUTE_PROVIDERS,
+  AIR_ROUTE_PROVIDERS
 ];
 

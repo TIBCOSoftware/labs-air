@@ -44,9 +44,9 @@ export class HomeComponent implements OnInit {
       const caseRoute = new CaseRoute().deserialize(routeAction.context);
       // case clicked - navigate to case - note need to pass appId and caseId
       if (routeAction.context.workitemId) {
-        this.router.navigate(['/starterApp/case/' + caseRoute.appId + '/' + caseRoute.typeId + '/' + caseRoute.caseRef, {workitemId: routeAction.context.workitemId}]);
+        this.router.navigate(['/starterApp/air/case/' + caseRoute.appId + '/' + caseRoute.typeId + '/' + caseRoute.caseRef, {workitemId: routeAction.context.workitemId}]);
       } else {
-        this.router.navigate(['/starterApp/case/' + caseRoute.appId + '/' + caseRoute.typeId + '/' + caseRoute.caseRef]);
+        this.router.navigate(['/starterApp/air/case/' + caseRoute.appId + '/' + caseRoute.typeId + '/' + caseRoute.caseRef]);
       }
     }
     if (routeAction.action === 'configClicked') {

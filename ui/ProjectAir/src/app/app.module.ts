@@ -31,6 +31,7 @@ import { SplashComponent } from './routes/splash/splash.component';
 import { AppRoutingModule } from './app-routing.module';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { AirCockpitComponent } from './routes/air-cockpit/air-cockpit.component';
 
 /** This is the tc core configuration object
  * To use oauth you must also add the OAuthInterceptor to providers
@@ -53,7 +54,8 @@ const tcCoreConfig: TcCoreConfig = {
     HomeComponent,
     CaseComponent,
     ConfigurationComponent,
-    SplashComponent
+    SplashComponent,
+    AirCockpitComponent
   ],
   imports: [
     AppRoutingModule,
