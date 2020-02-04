@@ -1,16 +1,74 @@
-<!-- Use the tc-liveapps-lib home cockpit component for the cockpit
-     Note the component 'emits' the routeActione event that is handled by handleRouteAction() method -->
-<tcla-live-apps-home-cockpit fxFlex [formConfig]="formConfig" [uiAppId]="generalConfig.uiAppId" [legacyCreators]="liveAppsConfig.legacyCreators" [legacyWorkitems]="liveAppsConfig.legacyWorkitems" [sandboxId]="sandboxId" [appIds]="liveAppsConfig.applicationIds" [userId]="userId" [userName]="userName" [email]="email" [title]="welcomeMessage" [roles]="roles" [access]="access" [customFormDefs]="customFormDefs" (routeAction)="handleRouteAction($event)">
-  <!--  You can project buttons into the navbar here (note must use 'customToolbarContent' attribute to tag content to be projected into toolbar) -->
-  <!--mat-button-toggle-group customToolbarContent name="view">
-    <mat-button-toggle
-                       value="Projected Button">'Projected Button2'</mat-button-toggle>
-  <mat-button-toggle
-    value="Projected Button2">'Projected Button2'</mat-button-toggle>
-  </mat-button-toggle-group-->
-</tcla-live-apps-home-cockpit>
+{{sandboxId}}--{{appIds}}--{{uiAppId}}
+<div fxLayout="column" fxFlex *ngIf="cockpitReady">
+{{sandboxId}}--{{appIds}}--{{uiAppId}}
+  <div class="tcs-home-content"
+    style="padding-left: 20px; padding-right: 20px; margin-top: 10px; padding-bottom: 120px; height: calc(100% - 86px); display: block;">
+    <div style="height: 100%;">
+      <div class="searchCasesWidget" style="min-height: 86px;">
+        <tcla-live-apps-search-widget fxFlex [appIds]="appIds" [sandboxId]="sandboxId" [uiAppId]="uiAppId"
+          (caseSelected)="clickCaseAction($event)"></tcla-live-apps-search-widget>
+      </div>
+      <!--div style="background-color: red; height: 600px; width: 100%;">TEST BOX</div-->
 
-<!-- If you want to change the home cockpit you can create a new component <app-my-live-apps-home-cockpit> that extends the <tcla-live-apps-home-cockpit>
-     You can copy the existing template from the original tcla-live-apps-home-cockpit from the source repo (https://github.com/TIBCOSoftware/TCST-Angular)
-     Then modify the template as required and use <app-my-live-apps-home-cockpit> instead of <tcla-live-apps-home-cockpit>
--->
+      <!--div fxFlex="noshrink" style="margin-bottom: 20px; overflow: auto; min-height: 400px" fxLayoutGap="20px" fxLayout="row" fxLayout.lt-md="column"-->
+      <div style="margin-bottom: 20px; overflow: hidden; height: 100%; min-height: 750px; padding-bottom: 10px;"
+        fxLayoutGap="20px" fxLayout="row" fxLayout.lt-md="column">
+        <div fxFlex.gt-sm="grow" fxLayout="row" style="" [ngStyle.lt-md]="'min-height: 400px;'">
+          <mat-tab-group fxFlex>
+            <mat-tab label="Recent Cases">
+              <ng-template matTabContent>
+                <div class="recentCasesWidget" fxFill>
+                  <tcla-live-apps-recent-cases class="padded-widget" [showHeader]="true" [sandboxId]="sandboxId"
+                    [uiAppId]="uiAppId" (clickCase)="clickCaseAction($event)"></tcla-live-apps-recent-cases>
+                </div>
+              </ng-template>
+            </mat-tab>
+            <mat-tab label="Favorite Cases">
+              <ng-template matTabContent>
+                <div class="favoriteCasesWidget" fxFill>
+                  <tcla-live-apps-favorite-cases class="padded-widget" [showHeader]="true" [sandboxId]="sandboxId"
+                    [uiAppId]="uiAppId" (clickCase)="clickCaseAction($event)"></tcla-live-apps-favorite-cases>
+                </div>
+              </ng-template>
+            </mat-tab>
+            <mat-tab *ngIf="legacyWorkitems" label="Workitems">
+              <ng-template matTabContent>
+                <div class="favoriteCasesWidget" fxFill>
+                  <tcla-live-apps-workitems #componentDiv class="padded-widget" [showHeader]="true"
+                    [sandboxId]="sandboxId" [uiAppId]="uiAppId" [appIds]="appIds" (clickCase)="clickCaseAction($event)">
+                  </tcla-live-apps-workitems>
+                </div>
+              </ng-template>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+
+        <div fxFlex.gt-sm="40" fxLayout="column" [ngStyle.lt-md]="'min-height: 400px'">
+          <div style="padding-top: 48px; height: 350px;">
+            <tcla-live-apps-active-cases-widget [sandboxId]="sandboxId" [appIds]="appIds" [showHeader]="true"
+              [showPercentages]="true" [uiAppId]="uiAppId"
+              (selectedCaseTypeState)="handleReportCaseTypeStateSelection($event)"
+              (selectedCaseType)="handleReportCaseTypeSelection($event)"></tcla-live-apps-active-cases-widget>
+          </div>
+          <div fxFlex="noshrink" style="height: 350px;">
+            <mat-tab-group fxFlex>
+              <mat-tab label="Collaboration">
+                <div fxFill class="collaborationWidget">
+                  <tcla-live-apps-notes [userId]="userId" [showHeader]="true" [relatedItemId]="uiAppId"
+                    [relatedItemType]="'CASE_APP'"></tcla-live-apps-notes>
+                </div>
+              </mat-tab>
+              <mat-tab label="Documents">
+                <div fxFill class="documentWidget">
+                  <tcla-live-apps-documents [showHeader]="true" [sandboxId]="sandboxId" [folderId]="uiAppId + '_Docs'"
+                    [folderType]="'orgFolders'" [folderDescription]="'Document Library'"></tcla-live-apps-documents>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
