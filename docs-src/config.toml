@@ -1,5 +1,5 @@
-baseURL = "https://tibcosoftware.github.io/Augmented-Reality/"
-title = "Project ART"
+baseURL = "https://tibcosoftware.github.io/labs-air/"
+title = "Project Air"
 
 enableRobotsTXT = true
 
@@ -55,8 +55,8 @@ id = "UA-218413-1"
 
 [languages]
 [languages.en]
-title = "Project ART"
-description = "Making the virtual world real"
+title = "Project Air"
+description = "Intelligent insights from device to boardroom"
 languageName ="English"
 # Weight used for sorting.
 weight = 1
@@ -81,9 +81,9 @@ privacy_policy = "https://www.tibco.com/company/privacy"
 version_menu = "Releases"
 
 # Repository configuration (URLs for in-page links to opening issues and suggesting changes)
-github_repo = "https://github.com/TIBCOSoftware/Augmented-Reality/"
+github_repo = "https://github.com/TIBCOSoftware/labs-air/"
 # An optional link to a related project repo. For example, the sibling repository where your product code lives.
-github_project_repo = "https://github.com/TIBCOSoftware/Augmented-Reality/"
+github_project_repo = "https://github.com/TIBCOSoftware/labs-air/"
 
 # Specify a value here if your content directory is not in your repo's root directory
 github_subdir = "docs-src"
@@ -117,8 +117,8 @@ footer_about_disable = false
 [params.ui.feedback]
 enable = true
 # The responses that the user sees after clicking "yes" (the page was helpful) or "no" (the page was not helpful).
-yes = 'Glad to hear it! Please <a href="https://github.com/TIBCOSoftware/Augmented-Reality/issues/new">tell us how we can improve</a>.'
-no = 'Sorry to hear that. Please <a href="https://github.com/TIBCOSoftware/Augmented-Reality/issues/new">tell us how we can improve</a>.'
+yes = 'Glad to hear it! Please <a href="https://github.com/TIBCOSoftware/labs-air/issues/new">tell us how we can improve</a>.'
+no = 'Sorry to hear that. Please <a href="https://github.com/TIBCOSoftware/labs-air/issues/new">tell us how we can improve</a>.'
 
 [params.links]
 # End user relevant links. These will show up on left side of footer and in the community page if you have one.
@@ -140,12 +140,12 @@ no = 'Sorry to hear that. Please <a href="https://github.com/TIBCOSoftware/Augme
 # Developer relevant links. These will show up on right side of footer and in the community page if you have one.
 [[params.links.developer]]
 	name = "GitHub"
-	url = "https://github.com/TIBCOSoftware/Augmented-Reality/"
+	url = "https://github.com/TIBCOSoftware/labs-air/"
 	icon = "fab fa-github"
         desc = "Development takes place here!"
 [[params.links.developer]]
 	name = "TIBCO Community"
-	url = "https://community.tibco.com/wiki/tibco-labstm-augmented-reality"
+	url = "https://community.tibco.com/wiki/"
 	icon = "fa fa-comment-alt"
         desc = "Connect with other project developers"
 [[params.links.developer]]

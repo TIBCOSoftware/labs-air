@@ -1,15 +1,18 @@
 ---
 title: "Initial Release"
 linkTitle: "first public Release"
-date: 2019-12-13
+date: 2020-02-26
 description: >
   First **public** Release.
 ---
 
-first public Implementation Packages for Unity of the TIBCO LABS™ Project ART, containing:
+first public Implementation of the TIBCO LABS™ Project Air, containing:
 
-- TIBCO Logo Package.
-- 3D Charts, that can be used in AR Implementations for Hololens and ARCore.
-- TIBCO Cloud™ Messaging - Unity3D Package and Samples
+- used EdgeX Foundry Assets
+- TIBCO Flogo Services
+- DGraph configurations
+- ComputeDB Datastore configuration
+- IoT UI as Cloud Starter Implementation
+- Spotfire Dashboard
 
 > please have a look back soon here.
