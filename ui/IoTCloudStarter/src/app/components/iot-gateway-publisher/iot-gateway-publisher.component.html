@@ -1,0 +1,120 @@
+<div class="tcs-home-content" fxLayout="column" fxFlex="grow" fxLayoutAlign="start stretch"
+    style="padding-left: 20px; padding-right: 20px; margin-top: 10px;">
+
+    <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-form-field fxFlex="40%">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Data Publishers">
+        </mat-form-field>
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="20px" style="height: 100%;">
+        <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between stretch"
+            style="min-height: 300px;">
+            <mat-card fxFlex>
+                <mat-card-header>
+                    <div mat-card-avatar class="device-header-image"></div>
+                    <mat-card-title>Data Publishers</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="table-container mat-elevation-z8">
+                        <table mat-table [dataSource]="publishersDataSource" matSort>
+
+                            <!-- Id Column -->
+                            <ng-container matColumnDef="id">
+                                <th mat-header-cell *matHeaderCellDef> Id </th>
+                                <td mat-cell *matCellDef="let publisher"> {{publisher.uid}} </td>
+                            </ng-container>
+
+                            <!-- Name Column -->
+                            <ng-container matColumnDef="name">
+                                <th mat-header-cell *matHeaderCellDef> Name </th>
+                                <td mat-cell *matCellDef="let publisher"> {{publisher.name}} </td>
+                            </ng-container>
+
+                            <!-- Protocol Column -->
+                            <ng-container matColumnDef="protocol">
+                                <th mat-header-cell *matHeaderCellDef> Protocol </th>
+                                <td mat-cell *matCellDef="let publisher"> {{publisher.protocol}} </td>
+                            </ng-container>
+
+                            <!-- Created -->
+                            <ng-container matColumnDef="created">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Created </th>
+                                <td mat-cell *matCellDef="let publisher"> {{publisher.created | date: dateFormat}} </td>
+                            </ng-container>
+
+                            <!-- Updated -->
+                            <ng-container matColumnDef="modified">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Modified </th>
+                                <td mat-cell *matCellDef="let publisher"> {{publisher.modified | date: dateFormat}}
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="publisherDisplayedColumns; sticky: true"></tr>
+                            <tr mat-row *matRowDef="let row; columns: publisherDisplayedColumns;"
+                                (click)="onPublisherClicked(row)"
+                                [ngClass]="{'selected': publisherSelection.isSelected(row) }">
+                            </tr>
+                        </table>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px" style="min-height: 300px">
+            <mat-card fxFlex>
+                <mat-card-header>
+                    <div mat-card-avatar class="device-header-image"></div>
+                    <mat-card-title>Publisher Details</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <form [formGroup]="publisherForm" class="publisher-form" fxLayout="row wrap" fxLayoutGap="15px">
+
+                        <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px">
+
+                            <mat-form-field fxFlex="1 1 18%" appearance="outline">
+                                <mat-label>Publisher Name</mat-label>
+                                <input matInput [readonly]=false formControlName="name">
+                            </mat-form-field>
+
+                            <mat-form-field fxFlex="1 1 18%" appearance="outline">
+                                <mat-label>Protocol</mat-label>
+                                <mat-select formControlName="protocol">
+                                    <mat-option *ngFor="let item of protocols" [value]="item.value">
+                                        {{item.viewValue}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field fxFlex="1 1 18%" appearance="outline">
+                                <mat-label>Hostname</mat-label>
+                                <input matInput [readonly]=false formControlName="hostname">
+                            </mat-form-field>
+
+                            <mat-form-field fxFlex="1 1 18%" appearance="outline">
+                                <mat-label>Port</mat-label>
+                                <input matInput [readonly]=false formControlName="port">
+                            </mat-form-field>
+
+                            <mat-form-field fxFlex="1 1 18%" appearance="outline">
+                                <mat-label>Topic</mat-label>
+                                <input matInput [readonly]=false formControlName="topic">
+                            </mat-form-field>
+
+                        </div>
+
+                    </form>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-raised-button [disabled]="graphOpsDisabled" (click)="addPublisher()" color="primary">Add
+                        Publisher</button>
+                    <button mat-raised-button [disabled]="graphOpsDisabled" (click)="updatePublisher()"
+                        color="primary">Update Publisher</button>
+                    <button mat-raised-button [disabled]="graphDeleteOpsDisabled" (click)="deletePublisher()"
+                        color="primary">Remove Publisher</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,206 @@
+<div id="transport-details" [formGroup]="transportForm">
+
+    <div fxLayout="column" style="height: 100%;">
+
+        <div fxLayout="row" fxFlex="100%" fxFlexOffset="20px" fxLayoutGap="15px">
+            <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                <mat-label>Protocol Type</mat-label>
+                <input matInput [readonly]=true formControlName="protocol" required>
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="center start" *ngIf="mqttProtocol" formGroupName="mqtt"
+            style="height: 100%;">
+
+            <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px" style="width: 100%;">
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Hostname</mat-label>
+                    <input matInput [readonly]=true formControlName="hostname" required>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Port</mat-label>
+                    <input matInput [readonly]=true formControlName="port" required>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Topic</mat-label>
+                    <input matInput [readonly]=true formControlName="topic" required>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Maximum QOS</mat-label>
+                    <input matInput [readonly]=true formControlName="maximumQOS" required>
+                </mat-form-field>
+
+            </div>
+
+            <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px" style="width: 100%;">
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Encryption Mode</mat-label>
+                    <mat-select formControlName="encryptionMode" (selectionChange)="onMQTTEncryptionModeSelected($event)">
+                        <mat-option *ngFor="let item of mqttEncriptionModes" [value]="item.value">
+                            {{item.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Username</mat-label>
+                    <input matInput [readonly]=true formControlName="username" required>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput placeholder="Enter your password" [readonly]=true
+                        [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
+                    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword"
+                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Client Certificate</mat-label>
+                    <input matInput [readonly]=true formControlName="clientCertificate">
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Client Key</mat-label>
+                    <input matInput [readonly]=true formControlName="clientKey">
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>CA Certificate</mat-label>
+                    <input matInput [readonly]=true formControlName="caCertificate">
+                </mat-form-field>
+
+            </div>
+
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="center start" *ngIf="kafkaProtocol" formGroupName="kafka"
+            style="height: 100%;">
+
+            <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px" style="width: 100%;">
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Hostname</mat-label>
+                    <input matInput [readonly]=true formControlName="hostname" required>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Port</mat-label>
+                    <input matInput [readonly]=true formControlName="port" required>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Topic</mat-label>
+                    <input matInput [readonly]=true formControlName="topic" required>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Consumer Group Id</mat-label>
+                    <input matInput [readonly]=true formControlName="consumerGroupId" required>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Connection Timeout</mat-label>
+                    <input matInput [readonly]=true formControlName="connectionTimeout">
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Session Timeout</mat-label>
+                    <input matInput [readonly]=true formControlName="sessionTimeout">
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Initial Offset</mat-label>
+                    <mat-select formControlName="initialOffset">
+                        <mat-option *ngFor="let item of kafkaInitialOffsets" [value]="item.value">
+                            {{item.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            </div>
+
+            <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px" style="width: 100%;">
+
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Retry Backoff</mat-label>
+                    <input matInput [readonly]=true formControlName="retryBackoff">
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Fetch Min Bytes</mat-label>
+                    <input matInput [readonly]=true formControlName="fetchMinBytes">
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Fetch Max Wait</mat-label>
+                    <input matInput [readonly]=true formControlName="fetchMaxWait">
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Commit Interval</mat-label>
+                    <input matInput [readonly]=true formControlName="commitInterval">
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Heartbeat Interval</mat-label>
+                    <input matInput [readonly]=true formControlName="heartbeatInterval">
+                </mat-form-field>
+
+            </div>
+
+            <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px" style="width: 100%;">
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Authentication Mode</mat-label>
+                    <mat-select formControlName="authMode" (selectionChange)="onKafkaAuthModeSelected($event)">
+                        <mat-option *ngFor="let item of kafkaAuthModes" [value]="item.value">
+                            {{item.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Username</mat-label>
+                    <input matInput [readonly]=true formControlName="username" required>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput placeholder="Enter your password" [readonly]=true
+                        [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
+                    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword"
+                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Client Certificate</mat-label>
+                    <input matInput [readonly]=true formControlName="clientCertificate">
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Client Key</mat-label>
+                    <input matInput [readonly]=true formControlName="clientKey">
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Server Certificate</mat-label>
+                    <input matInput [readonly]=true formControlName="serverCertificate">
+                </mat-form-field>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
