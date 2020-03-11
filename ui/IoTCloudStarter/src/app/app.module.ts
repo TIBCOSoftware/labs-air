@@ -39,6 +39,16 @@ import { TceRulesComponent } from './components/tce-rules/tce-rules.component';
 import { IotDeviceSummaryComponent } from './components/iot-device-summary/iot-device-summary.component';
 import { LiveAppsComponent } from './components/live-apps/live-apps.component';
 import { LiveAppsCockpitComponent } from './components/live-apps-cockpit/live-apps-cockpit.component';
+import { IotDataPipelineComponent } from './components/iot-data-pipeline/iot-data-pipeline.component';
+import { ProtocolsComponent } from './components/iot-data-pipeline/protocols/protocols.component';
+import { DataStoresComponent } from './components/iot-data-pipeline/data-stores/data-stores.component';
+import { DataFilteringComponent } from './components/iot-data-pipeline/data-filtering/data-filtering.component';
+import { DataStreamingComponent } from './components/iot-data-pipeline/data-streaming/data-streaming.component';
+import { IotGatewayPublisherComponent } from './components/iot-gateway-publisher/iot-gateway-publisher.component';
+import { DataFilteringViewComponent } from './components/iot-data-pipeline/data-filtering-view/data-filtering-view.component';
+import { DataStoresViewComponent } from './components/iot-data-pipeline/data-stores-view/data-stores-view.component';
+import { DataStreamingViewComponent } from './components/iot-data-pipeline/data-streaming-view/data-streaming-view.component';
+import { ProtocolsViewComponent } from './components/iot-data-pipeline/protocols-view/protocols-view.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +78,17 @@ import { LiveAppsCockpitComponent } from './components/live-apps-cockpit/live-ap
     TceRulesComponent,
     IotDeviceSummaryComponent,
     LiveAppsComponent,
-    LiveAppsCockpitComponent
+    LiveAppsCockpitComponent,
+    IotDataPipelineComponent,
+    ProtocolsComponent,
+    DataStoresComponent,
+    DataFilteringComponent,
+    DataStreamingComponent,
+    IotGatewayPublisherComponent,
+    DataFilteringViewComponent,
+    DataStoresViewComponent,
+    DataStreamingViewComponent,
+    ProtocolsViewComponent
   ],
   imports: [
     AppRoutingModule,
