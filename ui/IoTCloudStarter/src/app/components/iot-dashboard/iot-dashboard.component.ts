@@ -45,8 +45,11 @@ export class IotDashboardComponent implements OnInit {
     //   showUndoRedo: false
     // };
 
-    this.spotfireServer = 'https://ec2-100-26-8-102.compute-1.amazonaws.com';
-    this.analysisPath = '/Anonymous/tibcolabs_air_v1.643';
+    // https://spotfire-next.cloud.tibco.com/spotfire/wp/analysis?file=/Users/b5zl5zgs2jshn2xyyess4gzqufcuue6q/Public/Product%20Registration%2006
+
+
+    this.spotfireServer = 'https://spotfire-next.cloud.tibco.com';
+    this.analysisPath = '/Users/b5zl5zgs2jshn2xyyess4gzqufcuue6q/Public/Product Registration 06';
     this.activePage = '0';
     this.parameters = "Test";
     this.configuration = {
@@ -66,7 +69,6 @@ export class IotDashboardComponent implements OnInit {
       showToolBar: false,
       showUndoRedo: false
     };
-
   }
 
   public marking(data) {
