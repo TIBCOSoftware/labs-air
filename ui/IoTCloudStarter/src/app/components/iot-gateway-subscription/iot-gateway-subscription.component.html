@@ -50,7 +50,7 @@
 
               <tr mat-header-row *matHeaderRowDef="subscriptionDisplayedColumns; sticky: true"></tr>
               <tr mat-row *matRowDef="let row; columns: subscriptionDisplayedColumns;"
-                (click)="onsubscriptionClicked(row)" [ngClass]="{'selected': subscriptionSelection.isSelected(row) }">
+                (click)="onSubscriptionClicked(row)" [ngClass]="{'selected': subscriptionSelection.isSelected(row) }">
               </tr>
             </table>
           </div>
