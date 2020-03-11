@@ -14,7 +14,7 @@ deviceResources:
       { Pin_Num: "A0", Interface: "AIO", Type: "IN" }
     properties:
       value:
-        { type: "INT16", readWrite: "RW", minimum: "0", maximum: "", defaultValue: "0"}
+        { type: "INT16", readWrite: "RW", minimum: "0", maximum: "3000", defaultValue: "0"}
       units:
         { type: "String", readWrite: "R", defaultValue: "lunen" }
   -
@@ -24,7 +24,7 @@ deviceResources:
       { Pin_Num: "A4", Interface: "AIO", Type: "IN", normalize: "false" }
     properties:
       value:
-        { type: "INT16", readWrite: "RW", minimum: "0", maximum: "300", scale: "1", defaultValue: "0"}
+        { type: "INT16", readWrite: "RW", minimum: "0", maximum: "5000", scale: "1", defaultValue: "0"}
       units:
         { type: "String", readWrite: "R", defaultValue: "Degree" }
   -
