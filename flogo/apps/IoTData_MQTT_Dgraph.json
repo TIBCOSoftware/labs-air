@@ -1,0 +1,1310 @@
+{
+    "imports": [
+        "github.com/project-flogo/flow",
+        "github.com/project-flogo/contrib/activity/log",
+        "github.com/TIBCOSoftware/GraphBuilder_Tools/activity/accumulator",
+        "github.com/TIBCOSoftware/GraphBuilder/activity/builder",
+        "github.com/TIBCOSoftware/GraphBuilder_dgraph/activity/dgraphupsert",
+        "github.com/project-flogo/contrib/activity/actreturn",
+        "git.tibco.com/git/product/ipaas/wi-mqtt.git/Mqtt/trigger/subscribe",
+        "github.com/project-flogo/contrib/function/string",
+        "github.com/project-flogo/contrib/function/array"
+    ],
+    "name": "IoTData_MQTT_Dgraph",
+    "description": " ",
+    "version": "1.1.0",
+    "type": "flogo:app",
+    "appModel": "1.1.1",
+    "feVersion": "2.8.1",
+    "triggers": [
+        {
+            "ref": "#subscribe",
+            "name": "mqtt-trigger",
+            "description": "Subscribe to an MQTT topic",
+            "settings": {
+                "mqttConnection": {
+                    "type": "flogo:connector",
+                    "version": "1.0.0",
+                    "name": "connection",
+                    "hashTags": [],
+                    "inputMappings": {},
+                    "outputMappings": {},
+                    "iteratorMappings": {},
+                    "title": "MQTT Connector",
+                    "description": "MQTT Connector",
+                    "ref": "git.tibco.com/git/product/ipaas/wi-mqtt.git/Mqtt/connector/connection",
+                    "settings": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "required": true,
+                            "display": {
+                                "name": "Connection Name",
+                                "visible": true
+                            },
+                            "value": "IoTMQTT"
+                        },
+                        {
+                            "name": "description",
+                            "type": "string",
+                            "display": {
+                                "name": "Description",
+                                "visible": true
+                            },
+                            "value": ""
+                        },
+                        {
+                            "name": "broker",
+                            "type": "string",
+                            "required": true,
+                            "display": {
+                                "name": "Broker URL",
+                                "visible": true,
+                                "Description": "Enter a broker URL in the form '<protocol>://<host>:<port>'",
+                                "appPropertySupport": true
+                            },
+                            "value": "=$property[\"Mqtt.IoTMQTT.Broker_URL\"]"
+                        },
+                        {
+                            "name": "user",
+                            "type": "string",
+                            "required": false,
+                            "display": {
+                                "name": "Username",
+                                "visible": true,
+                                "Description": "Enter a username if this connection requires one",
+                                "appPropertySupport": true
+                            },
+                            "value": "=$property[\"Mqtt.IoTMQTT.Username\"]"
+                        },
+                        {
+                            "name": "password",
+                            "type": "string",
+                            "required": false,
+                            "display": {
+                                "name": "Password",
+                                "visible": true,
+                                "type": "password",
+                                "encryptable": true,
+                                "Description": "Enter a password if this connection requires one",
+                                "appPropertySupport": true
+                            },
+                            "value": "=$property[\"Mqtt.IoTMQTT.Password\"]"
+                        },
+                        {
+                            "name": "encryptionMode",
+                            "type": "string",
+                            "display": {
+                                "name": "Encryption Mode",
+                                "description": "Choose the type of authentication to use"
+                            },
+                            "allowed": [
+                                "None",
+                                "TLS-Cert",
+                                "TLS-ClientAuth"
+                            ],
+                            "value": "None"
+                        },
+                        {
+                            "name": "cacert",
+                            "type": "string",
+                            "required": false,
+                            "display": {
+                                "name": "Cacert",
+                                "description": "Select the CA certificate file used to sign the broker's certificate",
+                                "visible": false,
+                                "type": "fileselector",
+                                "fileExtensions": [
+                                    ".crt",
+                                    ".cert",
+                                    ".pem"
+                                ],
+                                "readonly": false,
+                                "valid": true
+                            },
+                            "value": ""
+                        },
+                        {
+                            "name": "clientcert",
+                            "type": "string",
+                            "required": false,
+                            "display": {
+                                "name": "Client Cert",
+                                "description": "Select the client certificate file for connections requiring client auth",
+                                "visible": false,
+                                "type": "fileselector",
+                                "fileExtensions": [
+                                    ".crt",
+                                    ".cert",
+                                    ".pem"
+                                ],
+                                "readonly": false,
+                                "valid": true
+                            },
+                            "value": ""
+                        },
+                        {
+                            "name": "clientkey",
+                            "type": "string",
+                            "required": false,
+                            "display": {
+                                "name": "Client Key",
+                                "description": "Select the client key file used for connections requiring client auth",
+                                "visible": false,
+                                "type": "fileselector",
+                                "fileExtensions": [
+                                    ".key",
+                                    ".pem"
+                                ],
+                                "readonly": false,
+                                "valid": true
+                            },
+                            "value": ""
+                        }
+                    ],
+                    "outputs": [],
+                    "inputs": [],
+                    "handler": {
+                        "settings": []
+                    },
+                    "reply": [],
+                    "s3Prefix": "Tibco",
+                    "key": "Tibco/Mqtt/connector/connection/connector.json",
+                    "display": {
+                        "description": "MQTT Connector",
+                        "category": "Mqtt",
+                        "smallIcon": "icons/mqtt.png",
+                        "largeIcon": "icons/mqtt.png",
+                        "visible": true
+                    },
+                    "actions": [
+                        {
+                            "name": "Save"
+                        }
+                    ],
+                    "feature": {},
+                    "loopType": "none",
+                    "loopSettings": [],
+                    "retrySettings": [],
+                    "propertyMap": {},
+                    "keyfield": "name",
+                    "iteratorAccumulate": false,
+                    "isValid": true,
+                    "lastUpdatedTime": 1582218974582,
+                    "createdTime": 1582218974582,
+                    "user": "flogo",
+                    "subscriptionId": "flogo_sbsc",
+                    "id": "b2e07bc0-5404-11ea-8f02-2d62b9893e37",
+                    "connectorName": "IoTMQTT",
+                    "connectorDescription": " "
+                }
+            },
+            "id": "MQTTSubscriber",
+            "handlers": [
+                {
+                    "description": "",
+                    "settings": {
+                        "topic": "=$property[\"MQTTTrigger.Topic\"]",
+                        "qos": "=$property[\"MQTTTrigger.MaximumQOS\"]",
+                        "valueType": "JSON",
+                        "showwill": false,
+                        "will": "",
+                        "willtopic": "",
+                        "willqos": 0,
+                        "willretain": false
+                    },
+                    "action": {
+                        "ref": "github.com/project-flogo/flow",
+                        "settings": {
+                            "flowURI": "res://flow:ProcessSensorReadingsGateway"
+                        },
+                        "input": {
+                            "body": "=$.jsonValue"
+                        }
+                    },
+                    "schemas": {
+                        "output": {
+                            "jsonValue": {
+                                "type": "json",
+                                "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"pushed\":{\"type\":\"number\"},\"device\":{\"type\":\"string\"},\"created\":{\"type\":\"number\"},\"modified\":{\"type\":\"number\"},\"origin\":{\"type\":\"number\"},\"schedule\":{\"type\":\"null\"},\"event\":{\"type\":\"null\"},\"gateway\":{\"type\":\"string\"},\"readings\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"pushed\":{\"type\":\"number\"},\"created\":{\"type\":\"number\"},\"origin\":{\"type\":\"number\"},\"modified\":{\"type\":\"number\"},\"device\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}}}}}}",
+                                "fe_metadata": "{\n   \"id\":\"5c5f4beb0e3608000114b459\",\n   \"pushed\":0,\n   \"device\":\"ArgonParticle01\",\n   \"created\":1549749227499,\n   \"modified\":0,\n   \"origin\":0,\n   \"schedule\":null,\n   \"event\":null,\n   \"gateway\":\"gtwyname\",\n   \"readings\":[\n      {\n         \"id\":\"5c5f4beb0e3608000114b45a\",\n         \"pushed\":0,\n         \"created\":1549749227499,\n         \"origin\":1549749227486,\n         \"modified\":0,\n         \"device\":\"ArgonParticle01\",\n         \"name\":\"LightSensor\",\n         \"value\":\"1080\"\n      }\n   ]\n}"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "resources": [
+        {
+            "id": "flow:ProcessSensorReadingsGateway",
+            "data": {
+                "name": "ProcessSensorReadingsGateway",
+                "description": "",
+                "links": [
+                    {
+                        "id": 1,
+                        "from": "Log",
+                        "to": "Accumulator",
+                        "type": "expression",
+                        "label": "LogtoAccumulator",
+                        "value": "array.count($flow.body.readings) > 1"
+                    },
+                    {
+                        "id": 2,
+                        "from": "Accumulator",
+                        "to": "BuildGraph",
+                        "type": "default"
+                    },
+                    {
+                        "id": 3,
+                        "from": "BuildGraph",
+                        "to": "DgraphUpsert",
+                        "type": "default"
+                    },
+                    {
+                        "id": 4,
+                        "from": "DgraphUpsert",
+                        "to": "Return",
+                        "type": "default"
+                    },
+                    {
+                        "id": 5,
+                        "from": "Log",
+                        "to": "AccumulatorSimple",
+                        "type": "expression",
+                        "label": "LogtoAccumulatorSimple",
+                        "value": "array.count($flow.body.readings) == 1"
+                    },
+                    {
+                        "id": 6,
+                        "from": "AccumulatorSimple",
+                        "to": "BuildGraphSimple",
+                        "type": "default"
+                    },
+                    {
+                        "id": 7,
+                        "from": "BuildGraphSimple",
+                        "to": "DgraphUpsertSimple",
+                        "type": "default"
+                    },
+                    {
+                        "id": 8,
+                        "from": "DgraphUpsertSimple",
+                        "to": "ReturnSimple",
+                        "type": "default"
+                    }
+                ],
+                "tasks": [
+                    {
+                        "id": "Log",
+                        "name": "Log",
+                        "description": "",
+                        "activity": {
+                            "ref": "#log",
+                            "input": {
+                                "message": "=string.tostring($flow.body)",
+                                "addDetails": false
+                            }
+                        }
+                    },
+                    {
+                        "id": "Accumulator",
+                        "name": "Accumulator",
+                        "description": "Accumulate tuple then release them as a batch",
+                        "type": "iterator",
+                        "settings": {
+                            "iterate": "=$flow.body.readings",
+                            "accumulate": false
+                        },
+                        "activity": {
+                            "ref": "#accumulator",
+                            "settings": {
+                                "ArrayMode": false,
+                                "WindowSize": 40,
+                                "DataFields": "[{\"Name\":\"id\",\"Type\":\"String\"},{\"Name\":\"device\",\"Type\":\"String\"},{\"Name\":\"origin\",\"Type\":\"Long\"},{\"Name\":\"name\",\"Type\":\"String\"},{\"Name\":\"value\",\"Type\":\"String\"}]"
+                            },
+                            "schemas": {
+                                "input": {
+                                    "Input": {
+                                        "type": "json",
+                                        "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"device\":{\"type\":\"string\"},\"origin\":{\"type\":\"number\"},\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}}}",
+                                        "fe_metadata": "{\"id\":\"2\",\"device\":\"2\",\"origin\":2,\"name\":\"2\",\"value\":\"2\"}"
+                                    }
+                                },
+                                "output": {
+                                    "Output": {
+                                        "type": "json",
+                                        "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"device\":{\"type\":\"string\"},\"origin\":{\"type\":\"number\"},\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"},\"LastElement\":{\"type\":\"boolean\"}}}}",
+                                        "fe_metadata": "[{\"id\":\"2\",\"device\":\"2\",\"origin\":2,\"name\":\"2\",\"value\":\"2\",\"LastElement\":true}]"
+                                    }
+                                },
+                                "settings": {
+                                    "DataFields": {
+                                        "type": "json",
+                                        "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"Name\":{\"type\":\"string\"},\"Type\":{\"type\":\"string\"}},\"required\":[\"Name\",\"Type\"]}}",
+                                        "fe_metadata": "[{\"Name\":\"id\",\"Type\":\"String\"},{\"Name\":\"device\",\"Type\":\"String\"},{\"Name\":\"origin\",\"Type\":\"Long\"},{\"Name\":\"name\",\"Type\":\"String\"},{\"Name\":\"value\",\"Type\":\"String\"}]"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "id": "BuildGraph",
+                        "name": "BuildGraph",
+                        "description": "This activity build graph from incoming data",
+                        "type": "iterator",
+                        "settings": {
+                            "iterate": "=$activity[Accumulator].Output",
+                            "accumulate": false
+                        },
+                        "activity": {
+                            "ref": "#builder",
+                            "settings": {
+                                "GraphModel": {
+                                    "id": "40adabf0-37c5-11ea-8564-ff83002a1240",
+                                    "type": "flogo:connector",
+                                    "version": "1.0.0",
+                                    "name": "tibco-graph",
+                                    "hashTags": [],
+                                    "inputMappings": {},
+                                    "outputMappings": {},
+                                    "iteratorMappings": {},
+                                    "title": "Graph",
+                                    "description": "This is URL file reader",
+                                    "ref": "github.com/TIBCOSoftware/GraphBuilder/connector/graph",
+                                    "settings": [
+                                        {
+                                            "name": "name",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Graph Name",
+                                                "description": "Name of the graph"
+                                            },
+                                            "value": "IoTGraph"
+                                        },
+                                        {
+                                            "name": "description",
+                                            "type": "string",
+                                            "display": {
+                                                "name": "Description",
+                                                "description": "Graph description"
+                                            },
+                                            "value": ""
+                                        },
+                                        {
+                                            "name": "modelSource",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Model Source",
+                                                "description": "Where the model stored",
+                                                "type": "string"
+                                            },
+                                            "allowed": [
+                                                "Local File",
+                                                "TGDB"
+                                            ],
+                                            "value": "Local File"
+                                        },
+                                        {
+                                            "name": "url",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Model Server URL",
+                                                "description": "URL to the model server, ex. http://localhost:9999/tgdb/metadata",
+                                                "type": "string",
+                                                "readonly": false,
+                                                "valid": true,
+                                                "visible": false
+                                            },
+                                            "value": ""
+                                        },
+                                        {
+                                            "name": "model",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Graph Model",
+                                                "description": "Define nodes and entities for a graph",
+                                                "type": "fileselector",
+                                                "fileExtensions": [
+                                                    ".tgbm",
+                                                    ".json"
+                                                ],
+                                                "readonly": false,
+                                                "valid": true,
+                                                "visible": true
+                                            },
+                                            "value": {
+                                                "filename": "IotModel.json",
+                                                "content": "data:application/json;base64,ewoJIm5vZGVzIjogWwoJCXsKCQkJIm5hbWUiOiAicmVhZGluZyIsCgkJCSJrZXkiOiBbCgkJCQkidXVpZCIKCQkJXSwKCQkJImF0dHJpYnV0ZXMiOiBbCgkJCQl7CgkJCQkJIm5hbWUiOiAidXVpZCIsCgkJCQkJInR5cGUiOiAiU3RyaW5nIgoJCQkJfSwKCQkJCXsKCQkJCQkibmFtZSI6ICJyZWFkaW5nIiwKCQkJCQkidHlwZSI6ICJTdHJpbmciCgkJCQl9LAoJCQkJewoJCQkJCSJuYW1lIjogInZhbHVlIiwKCQkJCQkidHlwZSI6ICJTdHJpbmciCgkJCQl9LAoJCQkJewoJCQkJCSJuYW1lIjogImNyZWF0ZWQiLAoJCQkJCSJ0eXBlIjogIkxvbmciCgkJCQl9LAoJCQkJewoJCQkJCSJuYW1lIjogInR5cGUiLAoJCQkJCSJ0eXBlIjogIlN0cmluZyIKCQkJCX0KCQkJXQoJCX0sCgkJewoJCQkibmFtZSI6ICJyZXNvdXJjZSIsCgkJCSJrZXkiOiBbCgkJCQkidXVpZCIKCQkJXSwKCQkJImF0dHJpYnV0ZXMiOiBbCgkJCQl7CgkJCQkJIm5hbWUiOiAidXVpZCIsCgkJCQkJInR5cGUiOiAiU3RyaW5nIgoJCQkJfSwKCQkJCXsKCQkJCQkibmFtZSI6ICJyZXNvdXJjZSIsCgkJCQkJInR5cGUiOiAiU3RyaW5nIgoJCQkJfSwKCQkJCXsKCQkJCQkibmFtZSI6ICJuYW1lIiwKCQkJCQkidHlwZSI6ICJTdHJpbmciCgkJCQl9LAoJCQkJewoJCQkJCSJuYW1lIjogInR5cGUiLAoJCQkJCSJ0eXBlIjogIlN0cmluZyIKCQkJCX0KCQkJXQoJCX0sCgkJewoJCQkibmFtZSI6ICJkZXZpY2UiLAoJCQkia2V5IjogWwoJCQkJInV1aWQiCgkJCV0sCgkJCSJhdHRyaWJ1dGVzIjogWwoJCQkJewoJCQkJCSJuYW1lIjogInV1aWQiLAoJCQkJCSJ0eXBlIjogIlN0cmluZyIKCQkJCX0sCgkJCQl7CgkJCQkJIm5hbWUiOiAiZGV2aWNlIiwKCQkJCQkidHlwZSI6ICJTdHJpbmciCgkJCQl9LAoJCQkJewoJCQkJCSJuYW1lIjogIm5hbWUiLAoJCQkJCSJ0eXBlIjogIlN0cmluZyIKCQkJCX0sCgkJCQl7CgkJCQkJIm5hbWUiOiAib3BlcmF0aW5nU3RhdGUiLAoJCQkJCSJ0eXBlIjogIlN0cmluZyIKCQkJCX0sCgkJCQl7CgkJCQkJIm5hbWUiOiAiYWRtaW5TdGF0ZSIsCgkJCQkJInR5cGUiOiAiU3RyaW5nIgoJCQkJfSwKCQkJCXsKCQkJCQkibmFtZSI6ICJkZXNjcmlwdGlvbiIsCgkJCQkJInR5cGUiOiAiU3RyaW5nIgoJCQkJfSwKCQkJCXsKCQkJCQkibmFtZSI6ICJ0eXBlIiwKCQkJCQkidHlwZSI6ICJTdHJpbmciCgkJCQl9CgkJCV0KCQl9LAoJCXsKCQkJIm5hbWUiOiAiZ2F0ZXdheSIsCgkJCSJrZXkiOiBbCgkJCQkidXVpZCIKCQkJXSwKCQkJImF0dHJpYnV0ZXMiOiBbCgkJCQl7CgkJCQkJIm5hbWUiOiAiZ2F0ZXdheSIsCgkJCQkJInR5cGUiOiAiU3RyaW5nIgoJCQkJfSwKCQkJCXsKCQkJCQkibmFtZSI6ICJ1cmwiLAoJCQkJCSJ0eXBlIjogIlN0cmluZyIKCQkJCX0sCgkJCQl7CgkJCQkJIm5hbWUiOiAidXVpZCIsCgkJCQkJInR5cGUiOiAiU3RyaW5nIgoJCQkJfSwKCQkJCXsKCQkJCQkibmFtZSI6ICJsYXRpdHVkZSIsCgkJCQkJInR5cGUiOiAiRG91YmxlIgoJCQkJfSwKCQkJCXsKCQkJCQkibmFtZSI6ICJsb25naXR1ZGUiLAoJCQkJCSJ0eXBlIjogIkRvdWJsZSIKCQkJCX0sCgkJCQl7CgkJCQkJIm5hbWUiOiAiY3JlYXRlZHRzIiwKCQkJCQkidHlwZSI6ICJTdHJpbmciCgkJCQl9LAoJCQkJewoJCQkJCSJuYW1lIjogInVwZGF0ZWR0cyIsCgkJCQkJInR5cGUiOiAiU3RyaW5nIgoJCQkJfSwKCQkJCXsKCQkJCQkibmFtZSI6ICJ0eXBlIiwKCQkJCQkidHlwZSI6ICJTdHJpbmciCgkJCQl9CgkJCV0KCQl9CgldLAoJImVkZ2VzIjogWwoJCXsKCQkJInRvIjogImRldmljZSIsCgkJCSJuYW1lIjogImdhdGV3YXlfZGV2aWNlIiwKCQkJImZyb20iOiAiZ2F0ZXdheSIsCgkJCSJkaXJlY3Rpb24iOiAyCgkJfSwKCQl7CgkJCSJ0byI6ICJyZXNvdXJjZSIsCgkJCSJuYW1lIjogImRldmljZV9yZXNvdXJjZSIsCgkJCSJmcm9tIjogImRldmljZSIsCgkJCSJkaXJlY3Rpb24iOiAyCgkJfSwKCQl7CgkJCSJ0byI6ICJyZWFkaW5nIiwKCQkJIm5hbWUiOiAicmVzb3VyY2VfcmVhZGluZyIsCgkJCSJmcm9tIjogInJlc291cmNlIiwKCQkJImRpcmVjdGlvbiI6IDIKCQl9CgldCn0="
+                                            }
+                                        }
+                                    ],
+                                    "outputs": [],
+                                    "inputs": [],
+                                    "handler": {
+                                        "settings": []
+                                    },
+                                    "reply": [],
+                                    "s3Prefix": "flogo",
+                                    "key": "flogo/GraphBuilder/connector/graph/connector.json",
+                                    "display": {
+                                        "description": "This is URL file reader",
+                                        "category": "GraphBuilder",
+                                        "visible": true,
+                                        "smallIcon": "graph.png"
+                                    },
+                                    "actions": [
+                                        {
+                                            "name": "Connect",
+                                            "display": {
+                                                "readonly": false,
+                                                "valid": true,
+                                                "visible": true
+                                            }
+                                        }
+                                    ],
+                                    "feature": {},
+                                    "loopType": "none",
+                                    "loopSettings": [],
+                                    "retrySettings": [],
+                                    "propertyMap": {},
+                                    "keyfield": "name",
+                                    "iteratorAccumulate": false,
+                                    "isValid": true,
+                                    "lastUpdatedTime": 1579113177543,
+                                    "user": "flogo",
+                                    "connectorName": "IoTGraph",
+                                    "connectorDescription": " "
+                                },
+                                "BatchMode": true,
+                                "Multiinstances": ""
+                            },
+                            "input": {
+                                "BatchEnd": "=$iteration[value].LastElement",
+                                "Nodes": {
+                                    "mapping": [
+                                        {
+                                            "reading": [
+                                                {
+                                                    "uuid": "=$iteration[value].id",
+                                                    "reading": "reading",
+                                                    "value": "=$iteration[value].value",
+                                                    "created": "=$iteration[value].origin",
+                                                    "type": "reading"
+                                                }
+                                            ],
+                                            "resource": [
+                                                {
+                                                    "resource": "resource",
+                                                    "name": "=$iteration[value].name",
+                                                    "type": "resource",
+                                                    "uuid": "=string.concat($iteration[value].device, '_', $iteration[value].name)"
+                                                }
+                                            ],
+                                            "device": [
+                                                {
+                                                    "uuid": "=$iteration[value].device",
+                                                    "device": "device",
+                                                    "name": "=$iteration[value].device",
+                                                    "type": "device"
+                                                }
+                                            ],
+                                            "gateway": [
+                                                {
+                                                    "gateway": "gateway",
+                                                    "uuid": "=$flow.body.gateway",
+                                                    "type": "gateway"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                "Edges": {
+                                    "mapping": [
+                                        {
+                                            "gateway_device": [],
+                                            "device_resource": [],
+                                            "resource_reading": []
+                                        }
+                                    ]
+                                }
+                            },
+                            "schemas": {
+                                "input": {
+                                    "Nodes": {
+                                        "type": "json",
+                                        "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"reading\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"_skipCondition\":{\"type\":\"boolean\"},\"uuid\":{\"type\":\"string\"},\"reading\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"},\"created\":{\"type\":\"number\"},\"type\":{\"type\":\"string\"}}}},\"resource\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"_skipCondition\":{\"type\":\"boolean\"},\"uuid\":{\"type\":\"string\"},\"resource\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"type\":{\"type\":\"string\"}}}},\"device\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"_skipCondition\":{\"type\":\"boolean\"},\"uuid\":{\"type\":\"string\"},\"device\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"operatingState\":{\"type\":\"string\"},\"adminState\":{\"type\":\"string\"},\"description\":{\"type\":\"string\"},\"type\":{\"type\":\"string\"}}}},\"gateway\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"_skipCondition\":{\"type\":\"boolean\"},\"gateway\":{\"type\":\"string\"},\"url\":{\"type\":\"string\"},\"uuid\":{\"type\":\"string\"},\"latitude\":{\"type\":\"number\"},\"longitude\":{\"type\":\"number\"},\"createdts\":{\"type\":\"string\"},\"updatedts\":{\"type\":\"string\"},\"type\":{\"type\":\"string\"}}}}}}}",
+                                        "fe_metadata": "[{\"reading\":[{\"_skipCondition\":false,\"uuid\":\"2\",\"reading\":\"2\",\"value\":\"2\",\"created\":2,\"type\":\"2\"}],\"resource\":[{\"_skipCondition\":false,\"uuid\":\"2\",\"resource\":\"2\",\"name\":\"2\",\"type\":\"2\"}],\"device\":[{\"_skipCondition\":false,\"uuid\":\"2\",\"device\":\"2\",\"name\":\"2\",\"operatingState\":\"2\",\"adminState\":\"2\",\"description\":\"2\",\"type\":\"2\"}],\"gateway\":[{\"_skipCondition\":false,\"gateway\":\"2\",\"url\":\"2\",\"uuid\":\"2\",\"latitude\":2,\"longitude\":2,\"createdts\":\"2\",\"updatedts\":\"2\",\"type\":\"2\"}]}]"
+                                    },
+                                    "Edges": {
+                                        "type": "json",
+                                        "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"gateway_device\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"_skipCondition\":{\"type\":\"boolean\"},\"vertices\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"from\":{\"type\":\"string\"},\"to\":{\"type\":\"string\"}}}}}}},\"device_resource\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"_skipCondition\":{\"type\":\"boolean\"},\"vertices\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"from\":{\"type\":\"string\"},\"to\":{\"type\":\"string\"}}}}}}},\"resource_reading\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"_skipCondition\":{\"type\":\"boolean\"},\"vertices\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"from\":{\"type\":\"string\"},\"to\":{\"type\":\"string\"}}}}}}}}}}",
+                                        "fe_metadata": "[{\"gateway_device\":[{\"_skipCondition\":false,\"vertices\":[{\"from\":\"string\",\"to\":\"string\"}]}],\"device_resource\":[{\"_skipCondition\":false,\"vertices\":[{\"from\":\"string\",\"to\":\"string\"}]}],\"resource_reading\":[{\"_skipCondition\":false,\"vertices\":[{\"from\":\"string\",\"to\":\"string\"}]}]}]"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "id": "DgraphUpsert",
+                        "name": "DgraphUpsert",
+                        "description": "This activity upsert to Dgraph",
+                        "activity": {
+                            "ref": "#dgraphupsert",
+                            "settings": {
+                                "dgraphConnection": {
+                                    "id": "1be74d80-5403-11ea-a293-73298142a997",
+                                    "type": "flogo:connector",
+                                    "version": "1.0.0",
+                                    "name": "tibco-dgraph",
+                                    "hashTags": [],
+                                    "inputMappings": {},
+                                    "outputMappings": {},
+                                    "iteratorMappings": {},
+                                    "title": "Dgraph Connector",
+                                    "description": "This is Dgraph connector",
+                                    "ref": "github.com/TIBCOSoftware/GraphBuilder_dgraph/connector/dgraph",
+                                    "settings": [
+                                        {
+                                            "name": "name",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Connection Name",
+                                                "description": "Name of the connection"
+                                            },
+                                            "value": "IoTDgraph"
+                                        },
+                                        {
+                                            "name": "description",
+                                            "type": "string",
+                                            "display": {
+                                                "name": "Description",
+                                                "description": "Connection description"
+                                            },
+                                            "value": ""
+                                        },
+                                        {
+                                            "name": "apiVersion",
+                                            "type": "string",
+                                            "required": true,
+                                            "allowed": [
+                                                "v1",
+                                                "v2"
+                                            ],
+                                            "display": {
+                                                "name": "API Version",
+                                                "description": "Dgraph dgo API Version",
+                                                "type": "string"
+                                            },
+                                            "value": "v2"
+                                        },
+                                        {
+                                            "name": "url",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Dgraph Server URL",
+                                                "description": "Dgraph server URL ex. localhost:9080",
+                                                "type": "string",
+                                                "appPropertySupport": true
+                                            },
+                                            "value": "=$property[\"GraphBuilder_dgraph.IoTDgraph.Dgraph_Server_URL\"]"
+                                        },
+                                        {
+                                            "name": "tlsEnabled",
+                                            "type": "boolean",
+                                            "display": {
+                                                "name": "TLS Enabled",
+                                                "description": "Will use tls connection"
+                                            },
+                                            "value": false,
+                                            "required": true
+                                        },
+                                        {
+                                            "name": "user",
+                                            "type": "string",
+                                            "display": {
+                                                "name": "Username",
+                                                "description": "Username for login to Dgraph server",
+                                                "type": "string",
+                                                "appPropertySupport": true,
+                                                "readonly": false,
+                                                "valid": true,
+                                                "visible": true
+                                            },
+                                            "value": "=$property[\"GraphBuilder_dgraph.IoTDgraph.Username\"]"
+                                        },
+                                        {
+                                            "name": "password",
+                                            "type": "string",
+                                            "required": false,
+                                            "display": {
+                                                "name": "Password",
+                                                "description": "Password for login to Dgraph server",
+                                                "type": "password",
+                                                "appPropertySupport": true,
+                                                "readonly": false,
+                                                "valid": true,
+                                                "visible": true
+                                            },
+                                            "value": "=$property[\"GraphBuilder_dgraph.IoTDgraph.Password\"]"
+                                        },
+                                        {
+                                            "name": "tls",
+                                            "type": "string",
+                                            "required": false,
+                                            "display": {
+                                                "name": "TLS Configuration",
+                                                "description": "Configuration file for TLS",
+                                                "type": "fileselector",
+                                                "fileExtensions": [
+                                                    ".json"
+                                                ],
+                                                "readonly": false,
+                                                "valid": true,
+                                                "visible": false
+                                            },
+                                            "value": ""
+                                        },
+                                        {
+                                            "name": "schemaGen",
+                                            "type": "string",
+                                            "display": {
+                                                "name": "Schema Generation",
+                                                "description": "How to generate schema"
+                                            },
+                                            "value": "no",
+                                            "allowed": [
+                                                "default",
+                                                "file",
+                                                "no"
+                                            ],
+                                            "required": true
+                                        },
+                                        {
+                                            "name": "schema",
+                                            "type": "string",
+                                            "required": false,
+                                            "display": {
+                                                "name": "Graph Schema",
+                                                "description": "Define schema for queries",
+                                                "type": "fileselector",
+                                                "fileExtensions": [
+                                                    ".dschema"
+                                                ],
+                                                "readonly": false,
+                                                "valid": true,
+                                                "visible": false
+                                            },
+                                            "value": {
+                                                "filename": "IotSchema.dschema",
+                                                "content": "data:application/octet-stream;base64,ewogICAidXVpZCIgOiB7CiAgICAgICAidHlwZSIgIDogInN0cmluZyIgICwKICAgICAgICJpbmRleCIgOiBbImV4YWN0IiwgInRlcm0iXQogICB9LAogICAidXJsIiA6IHsKICAgICAgICJ0eXBlIiAgOiAic3RyaW5nIgogICB9LAogICAibGF0aXR1ZGUiIDogewogICAgICAgInR5cGUiICA6ICJmbG9hdCIKICAgfSwKICAgImxvbmdpdHVkZSIgOiB7CiAgICAgICAidHlwZSIgIDogImZsb2F0IgogICB9LAogICAiY3JlYXRlZHRzIiA6IHsKICAgICAgICJ0eXBlIiAgOiAiZGF0ZVRpbWUiCiAgIH0sCiAgICJ1cGRhdGVkdHMiIDogewogICAgICAgInR5cGUiICA6ICJkYXRlVGltZSIKICAgfSwKICAgIm5hbWUiIDogewogICAgICAgInR5cGUiICA6ICJzdHJpbmciCiAgIH0sCiAgICJvcGVydGluZ1N0YXRlIiA6IHsKICAgICAgICJ0eXBlIiAgOiAic3RyaW5nIgogICB9LAogICAiYWRtaW5TdGF0ZSIgOiB7CiAgICAgICAidHlwZSIgIDogInN0cmluZyIKICAgfSwKICAgImRlc2NyaXB0aW9uIiA6IHsKICAgICAgICJ0eXBlIiAgOiAic3RyaW5nIgogICB9LAogICAidmFsdWUiIDogewogICAgICAgInR5cGUiICA6ICJzdHJpbmciCiAgIH0sCiAgICJjcmVhdGVkIiA6IHsKICAgICAgICJ0eXBlIiAgOiAiaW50IiwKICAgICAgICJpbmRleCIgOiBbImludCJdCiAgIH0sCiAgICJnYXRld2F5IiA6IHsKICAgICAgICJ0eXBlIiAgOiAic3RyaW5nIgogICB9LAogICAiZGV2aWNlIiA6IHsKICAgICAgICJ0eXBlIiAgOiAic3RyaW5nIgogICB9LAogICAicmVzb3VyY2UiIDogewogICAgICAgInR5cGUiICA6ICJzdHJpbmciCiAgIH0sCiAgICJyZWFkaW5nIiA6IHsKICAgICAgICJ0eXBlIiAgOiAic3RyaW5nIgogICB9LAogICAiZ2F0ZXdheV9kZXZpY2UiIDogewogICAgICAgInR5cGUiICA6ICJ1aWQiICwKICAgICAgICJleHRyYUZsYWdzIiA6IFsicmV2ZXJzZSIsICJjb3VudCJdCiAgIH0sCiAgICJkZXZpY2VfcmVzb3VyY2UiIDogewogICAgICAgInR5cGUiICA6ICJ1aWQiICwKICAgICAgICJleHRyYUZsYWdzIiA6IFsicmV2ZXJzZSIsICJjb3VudCJdCiAgIH0sCiAgICJyZXNvdXJjZV9yZWFkaW5nIiA6IHsKICAgICAgICJ0eXBlIiAgOiAidWlkIiAsCiAgICAgICAiZXh0cmFGbGFncyIgOiBbInJldmVyc2UiLCAiY291bnQiXQogICB9LAogICAiZ2F0ZXdheV9ydWxlIiA6IHsKICAgICAgICJ0eXBlIiAgOiAidWlkIiAsCiAgICAgICAiZXh0cmFGbGFncyIgOiBbInJldmVyc2UiLCAiY291bnQiXQogICB9Cn0="
+                                            }
+                                        }
+                                    ],
+                                    "outputs": [],
+                                    "inputs": [],
+                                    "handler": {
+                                        "settings": []
+                                    },
+                                    "reply": [],
+                                    "s3Prefix": "flogo",
+                                    "key": "flogo/GraphBuilder_dgraph/connector/dgraph/connector.json",
+                                    "display": {
+                                        "description": "This is Dgraph connector",
+                                        "category": "GraphBuilder_dgraph",
+                                        "visible": true,
+                                        "smallIcon": "dgraph.png"
+                                    },
+                                    "actions": [
+                                        {
+                                            "name": "Connect",
+                                            "display": {
+                                                "readonly": false,
+                                                "valid": true,
+                                                "visible": true
+                                            }
+                                        }
+                                    ],
+                                    "feature": {},
+                                    "loopType": "none",
+                                    "loopSettings": [],
+                                    "retrySettings": [],
+                                    "propertyMap": {},
+                                    "keyfield": "name",
+                                    "iteratorAccumulate": false,
+                                    "isValid": true,
+                                    "lastUpdatedTime": 1583852319243,
+                                    "user": "flogo",
+                                    "connectorName": "IoTDgraph",
+                                    "connectorDescription": " "
+                                },
+                                "cacheSize": 200,
+                                "readableExternalId": true,
+                                "explicitType": true,
+                                "typeTag": "type",
+                                "attrWithPrefix": false
+                            },
+                            "input": {
+                                "Graph": "=$activity[BuildGraph].Graph"
+                            }
+                        }
+                    },
+                    {
+                        "id": "Return",
+                        "name": "Return",
+                        "description": "",
+                        "activity": {
+                            "ref": "#actreturn"
+                        }
+                    },
+                    {
+                        "id": "AccumulatorSimple",
+                        "name": "AccumulatorSimple",
+                        "description": "Accumulate tuple then release them as a batch",
+                        "type": "iterator",
+                        "settings": {
+                            "iterate": "=$flow.body.readings",
+                            "accumulate": false
+                        },
+                        "activity": {
+                            "ref": "#accumulator",
+                            "settings": {
+                                "ArrayMode": false,
+                                "WindowSize": 1,
+                                "DataFields": "[{\"Name\":\"id\",\"Type\":\"String\"},{\"Name\":\"device\",\"Type\":\"String\"},{\"Name\":\"origin\",\"Type\":\"Long\"},{\"Name\":\"name\",\"Type\":\"String\"},{\"Name\":\"value\",\"Type\":\"String\"}]"
+                            },
+                            "input": {
+                                "Input": {
+                                    "mapping": {
+                                        "id": "=$iteration[value].id",
+                                        "device": "=$iteration[value].device",
+                                        "origin": "=$iteration[value].origin",
+                                        "name": "=$iteration[value].name",
+                                        "value": "=$iteration[value].value"
+                                    }
+                                }
+                            },
+                            "schemas": {
+                                "input": {
+                                    "Input": {
+                                        "type": "json",
+                                        "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"device\":{\"type\":\"string\"},\"origin\":{\"type\":\"number\"},\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}}}",
+                                        "fe_metadata": "{\"id\":\"2\",\"device\":\"2\",\"origin\":2,\"name\":\"2\",\"value\":\"2\"}"
+                                    }
+                                },
+                                "output": {
+                                    "Output": {
+                                        "type": "json",
+                                        "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"device\":{\"type\":\"string\"},\"origin\":{\"type\":\"number\"},\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"},\"LastElement\":{\"type\":\"boolean\"}}}}",
+                                        "fe_metadata": "[{\"id\":\"2\",\"device\":\"2\",\"origin\":2,\"name\":\"2\",\"value\":\"2\",\"LastElement\":true}]"
+                                    }
+                                },
+                                "settings": {
+                                    "DataFields": {
+                                        "type": "json",
+                                        "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"Name\":{\"type\":\"string\"},\"Type\":{\"type\":\"string\"}},\"required\":[\"Name\",\"Type\"]}}",
+                                        "fe_metadata": "[{\"Name\":\"id\",\"Type\":\"String\"},{\"Name\":\"device\",\"Type\":\"String\"},{\"Name\":\"origin\",\"Type\":\"Long\"},{\"Name\":\"name\",\"Type\":\"String\"},{\"Name\":\"value\",\"Type\":\"String\"}]"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "id": "BuildGraphSimple",
+                        "name": "BuildGraphSimple",
+                        "description": "This activity build graph from incoming data",
+                        "type": "iterator",
+                        "settings": {
+                            "iterate": "=$activity[AccumulatorSimple].Output",
+                            "accumulate": false
+                        },
+                        "activity": {
+                            "ref": "#builder",
+                            "settings": {
+                                "GraphModel": {
+                                    "id": "40adabf0-37c5-11ea-8564-ff83002a1240",
+                                    "type": "flogo:connector",
+                                    "version": "1.0.0",
+                                    "name": "tibco-graph",
+                                    "hashTags": [],
+                                    "inputMappings": {},
+                                    "outputMappings": {},
+                                    "iteratorMappings": {},
+                                    "title": "Graph",
+                                    "description": "This is URL file reader",
+                                    "ref": "github.com/TIBCOSoftware/GraphBuilder/connector/graph",
+                                    "settings": [
+                                        {
+                                            "name": "name",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Graph Name",
+                                                "description": "Name of the graph"
+                                            },
+                                            "value": "IoTGraph"
+                                        },
+                                        {
+                                            "name": "description",
+                                            "type": "string",
+                                            "display": {
+                                                "name": "Description",
+                                                "description": "Graph description"
+                                            },
+                                            "value": ""
+                                        },
+                                        {
+                                            "name": "modelSource",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Model Source",
+                                                "description": "Where the model stored",
+                                                "type": "string"
+                                            },
+                                            "allowed": [
+                                                "Local File",
+                                                "TGDB"
+                                            ],
+                                            "value": "Local File"
+                                        },
+                                        {
+                                            "name": "url",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Model Server URL",
+                                                "description": "URL to the model server, ex. http://localhost:9999/tgdb/metadata",
+                                                "type": "string",
+                                                "readonly": false,
+                                                "valid": true,
+                                                "visible": false
+                                            },
+                                            "value": ""
+                                        },
+                                        {
+                                            "name": "model",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Graph Model",
+                                                "description": "Define nodes and entities for a graph",
+                                                "type": "fileselector",
+                                                "fileExtensions": [
+                                                    ".tgbm",
+                                                    ".json"
+                                                ],
+                                                "readonly": false,
+                                                "valid": true,
+                                                "visible": true
+                                            },
+                                            "value": {
+                                                "filename": "IotModel.json",
+                                                "content": "data:application/json;base64,ewoJIm5vZGVzIjogWwoJCXsKCQkJIm5hbWUiOiAicmVhZGluZyIsCgkJCSJrZXkiOiBbCgkJCQkidXVpZCIKCQkJXSwKCQkJImF0dHJpYnV0ZXMiOiBbCgkJCQl7CgkJCQkJIm5hbWUiOiAidXVpZCIsCgkJCQkJInR5cGUiOiAiU3RyaW5nIgoJCQkJfSwKCQkJCXsKCQkJCQkibmFtZSI6ICJyZWFkaW5nIiwKCQkJCQkidHlwZSI6ICJTdHJpbmciCgkJCQl9LAoJCQkJewoJCQkJCSJuYW1lIjogInZhbHVlIiwKCQkJCQkidHlwZSI6ICJTdHJpbmciCgkJCQl9LAoJCQkJewoJCQkJCSJuYW1lIjogImNyZWF0ZWQiLAoJCQkJCSJ0eXBlIjogIkxvbmciCgkJCQl9LAoJCQkJewoJCQkJCSJuYW1lIjogInR5cGUiLAoJCQkJCSJ0eXBlIjogIlN0cmluZyIKCQkJCX0KCQkJXQoJCX0sCgkJewoJCQkibmFtZSI6ICJyZXNvdXJjZSIsCgkJCSJrZXkiOiBbCgkJCQkidXVpZCIKCQkJXSwKCQkJImF0dHJpYnV0ZXMiOiBbCgkJCQl7CgkJCQkJIm5hbWUiOiAidXVpZCIsCgkJCQkJInR5cGUiOiAiU3RyaW5nIgoJCQkJfSwKCQkJCXsKCQkJCQkibmFtZSI6ICJyZXNvdXJjZSIsCgkJCQkJInR5cGUiOiAiU3RyaW5nIgoJCQkJfSwKCQkJCXsKCQkJCQkibmFtZSI6ICJuYW1lIiwKCQkJCQkidHlwZSI6ICJTdHJpbmciCgkJCQl9LAoJCQkJewoJCQkJCSJuYW1lIjogInR5cGUiLAoJCQkJCSJ0eXBlIjogIlN0cmluZyIKCQkJCX0KCQkJXQoJCX0sCgkJewoJCQkibmFtZSI6ICJkZXZpY2UiLAoJCQkia2V5IjogWwoJCQkJInV1aWQiCgkJCV0sCgkJCSJhdHRyaWJ1dGVzIjogWwoJCQkJewoJCQkJCSJuYW1lIjogInV1aWQiLAoJCQkJCSJ0eXBlIjogIlN0cmluZyIKCQkJCX0sCgkJCQl7CgkJCQkJIm5hbWUiOiAiZGV2aWNlIiwKCQkJCQkidHlwZSI6ICJTdHJpbmciCgkJCQl9LAoJCQkJewoJCQkJCSJuYW1lIjogIm5hbWUiLAoJCQkJCSJ0eXBlIjogIlN0cmluZyIKCQkJCX0sCgkJCQl7CgkJCQkJIm5hbWUiOiAib3BlcmF0aW5nU3RhdGUiLAoJCQkJCSJ0eXBlIjogIlN0cmluZyIKCQkJCX0sCgkJCQl7CgkJCQkJIm5hbWUiOiAiYWRtaW5TdGF0ZSIsCgkJCQkJInR5cGUiOiAiU3RyaW5nIgoJCQkJfSwKCQkJCXsKCQkJCQkibmFtZSI6ICJkZXNjcmlwdGlvbiIsCgkJCQkJInR5cGUiOiAiU3RyaW5nIgoJCQkJfSwKCQkJCXsKCQkJCQkibmFtZSI6ICJ0eXBlIiwKCQkJCQkidHlwZSI6ICJTdHJpbmciCgkJCQl9CgkJCV0KCQl9LAoJCXsKCQkJIm5hbWUiOiAiZ2F0ZXdheSIsCgkJCSJrZXkiOiBbCgkJCQkidXVpZCIKCQkJXSwKCQkJImF0dHJpYnV0ZXMiOiBbCgkJCQl7CgkJCQkJIm5hbWUiOiAiZ2F0ZXdheSIsCgkJCQkJInR5cGUiOiAiU3RyaW5nIgoJCQkJfSwKCQkJCXsKCQkJCQkibmFtZSI6ICJ1cmwiLAoJCQkJCSJ0eXBlIjogIlN0cmluZyIKCQkJCX0sCgkJCQl7CgkJCQkJIm5hbWUiOiAidXVpZCIsCgkJCQkJInR5cGUiOiAiU3RyaW5nIgoJCQkJfSwKCQkJCXsKCQkJCQkibmFtZSI6ICJsYXRpdHVkZSIsCgkJCQkJInR5cGUiOiAiRG91YmxlIgoJCQkJfSwKCQkJCXsKCQkJCQkibmFtZSI6ICJsb25naXR1ZGUiLAoJCQkJCSJ0eXBlIjogIkRvdWJsZSIKCQkJCX0sCgkJCQl7CgkJCQkJIm5hbWUiOiAiY3JlYXRlZHRzIiwKCQkJCQkidHlwZSI6ICJTdHJpbmciCgkJCQl9LAoJCQkJewoJCQkJCSJuYW1lIjogInVwZGF0ZWR0cyIsCgkJCQkJInR5cGUiOiAiU3RyaW5nIgoJCQkJfSwKCQkJCXsKCQkJCQkibmFtZSI6ICJ0eXBlIiwKCQkJCQkidHlwZSI6ICJTdHJpbmciCgkJCQl9CgkJCV0KCQl9CgldLAoJImVkZ2VzIjogWwoJCXsKCQkJInRvIjogImRldmljZSIsCgkJCSJuYW1lIjogImdhdGV3YXlfZGV2aWNlIiwKCQkJImZyb20iOiAiZ2F0ZXdheSIsCgkJCSJkaXJlY3Rpb24iOiAyCgkJfSwKCQl7CgkJCSJ0byI6ICJyZXNvdXJjZSIsCgkJCSJuYW1lIjogImRldmljZV9yZXNvdXJjZSIsCgkJCSJmcm9tIjogImRldmljZSIsCgkJCSJkaXJlY3Rpb24iOiAyCgkJfSwKCQl7CgkJCSJ0byI6ICJyZWFkaW5nIiwKCQkJIm5hbWUiOiAicmVzb3VyY2VfcmVhZGluZyIsCgkJCSJmcm9tIjogInJlc291cmNlIiwKCQkJImRpcmVjdGlvbiI6IDIKCQl9CgldCn0="
+                                            }
+                                        }
+                                    ],
+                                    "outputs": [],
+                                    "inputs": [],
+                                    "handler": {
+                                        "settings": []
+                                    },
+                                    "reply": [],
+                                    "s3Prefix": "flogo",
+                                    "key": "flogo/GraphBuilder/connector/graph/connector.json",
+                                    "display": {
+                                        "description": "This is URL file reader",
+                                        "category": "GraphBuilder",
+                                        "visible": true,
+                                        "smallIcon": "graph.png"
+                                    },
+                                    "actions": [
+                                        {
+                                            "name": "Connect",
+                                            "display": {
+                                                "readonly": false,
+                                                "valid": true,
+                                                "visible": true
+                                            }
+                                        }
+                                    ],
+                                    "feature": {},
+                                    "loopType": "none",
+                                    "loopSettings": [],
+                                    "retrySettings": [],
+                                    "propertyMap": {},
+                                    "keyfield": "name",
+                                    "iteratorAccumulate": false,
+                                    "isValid": true,
+                                    "lastUpdatedTime": 1579113177543,
+                                    "user": "flogo",
+                                    "connectorName": "IoTGraph",
+                                    "connectorDescription": " "
+                                },
+                                "BatchMode": true
+                            },
+                            "input": {
+                                "BatchEnd": "=$iteration[value].LastElement",
+                                "Nodes": {
+                                    "mapping": [
+                                        {
+                                            "reading": [
+                                                {
+                                                    "reading": "reading",
+                                                    "type": "reading",
+                                                    "uuid": "=$iteration[value].id",
+                                                    "value": "=$iteration[value].value",
+                                                    "created": "=$iteration[value].origin"
+                                                }
+                                            ],
+                                            "resource": [
+                                                {
+                                                    "resource": "resource",
+                                                    "type": "resource",
+                                                    "uuid": "=string.concat($iteration[value].device, '_', $iteration[value].name)",
+                                                    "name": "=$iteration[value].name"
+                                                }
+                                            ],
+                                            "device": [
+                                                {
+                                                    "device": "device",
+                                                    "type": "device",
+                                                    "uuid": "=$iteration[value].device",
+                                                    "name": "=$iteration[value].device"
+                                                }
+                                            ],
+                                            "gateway": [
+                                                {
+                                                    "gateway": "gateway",
+                                                    "type": "gateway",
+                                                    "uuid": "gateway1"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                "Edges": {
+                                    "mapping": [
+                                        {
+                                            "gateway_device": [],
+                                            "device_resource": [],
+                                            "resource_reading": []
+                                        }
+                                    ]
+                                }
+                            },
+                            "schemas": {
+                                "input": {
+                                    "Nodes": {
+                                        "type": "json",
+                                        "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"reading\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"_skipCondition\":{\"type\":\"boolean\"},\"uuid\":{\"type\":\"string\"},\"reading\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"},\"created\":{\"type\":\"number\"},\"type\":{\"type\":\"string\"}}}},\"resource\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"_skipCondition\":{\"type\":\"boolean\"},\"uuid\":{\"type\":\"string\"},\"resource\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"type\":{\"type\":\"string\"}}}},\"device\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"_skipCondition\":{\"type\":\"boolean\"},\"uuid\":{\"type\":\"string\"},\"device\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"operatingState\":{\"type\":\"string\"},\"adminState\":{\"type\":\"string\"},\"description\":{\"type\":\"string\"},\"type\":{\"type\":\"string\"}}}},\"gateway\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"_skipCondition\":{\"type\":\"boolean\"},\"gateway\":{\"type\":\"string\"},\"url\":{\"type\":\"string\"},\"uuid\":{\"type\":\"string\"},\"latitude\":{\"type\":\"number\"},\"longitude\":{\"type\":\"number\"},\"createdts\":{\"type\":\"string\"},\"updatedts\":{\"type\":\"string\"},\"type\":{\"type\":\"string\"}}}}}}}",
+                                        "fe_metadata": "[{\"reading\":[{\"_skipCondition\":false,\"uuid\":\"2\",\"reading\":\"2\",\"value\":\"2\",\"created\":2,\"type\":\"2\"}],\"resource\":[{\"_skipCondition\":false,\"uuid\":\"2\",\"resource\":\"2\",\"name\":\"2\",\"type\":\"2\"}],\"device\":[{\"_skipCondition\":false,\"uuid\":\"2\",\"device\":\"2\",\"name\":\"2\",\"operatingState\":\"2\",\"adminState\":\"2\",\"description\":\"2\",\"type\":\"2\"}],\"gateway\":[{\"_skipCondition\":false,\"gateway\":\"2\",\"url\":\"2\",\"uuid\":\"2\",\"latitude\":2,\"longitude\":2,\"createdts\":\"2\",\"updatedts\":\"2\",\"type\":\"2\"}]}]"
+                                    },
+                                    "Edges": {
+                                        "type": "json",
+                                        "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"gateway_device\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"_skipCondition\":{\"type\":\"boolean\"},\"vertices\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"from\":{\"type\":\"string\"},\"to\":{\"type\":\"string\"}}}}}}},\"device_resource\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"_skipCondition\":{\"type\":\"boolean\"},\"vertices\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"from\":{\"type\":\"string\"},\"to\":{\"type\":\"string\"}}}}}}},\"resource_reading\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"_skipCondition\":{\"type\":\"boolean\"},\"vertices\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"from\":{\"type\":\"string\"},\"to\":{\"type\":\"string\"}}}}}}}}}}",
+                                        "fe_metadata": "[{\"gateway_device\":[{\"_skipCondition\":false,\"vertices\":[{\"from\":\"string\",\"to\":\"string\"}]}],\"device_resource\":[{\"_skipCondition\":false,\"vertices\":[{\"from\":\"string\",\"to\":\"string\"}]}],\"resource_reading\":[{\"_skipCondition\":false,\"vertices\":[{\"from\":\"string\",\"to\":\"string\"}]}]}]"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "id": "DgraphUpsertSimple",
+                        "name": "DgraphUpsertSimple",
+                        "description": "This activity upsert to Dgraph",
+                        "activity": {
+                            "ref": "#dgraphupsert",
+                            "settings": {
+                                "dgraphConnection": {
+                                    "id": "1be74d80-5403-11ea-a293-73298142a997",
+                                    "type": "flogo:connector",
+                                    "version": "1.0.0",
+                                    "name": "tibco-dgraph",
+                                    "hashTags": [],
+                                    "inputMappings": {},
+                                    "outputMappings": {},
+                                    "iteratorMappings": {},
+                                    "title": "Dgraph Connector",
+                                    "description": "This is Dgraph connector",
+                                    "ref": "github.com/TIBCOSoftware/GraphBuilder_dgraph/connector/dgraph",
+                                    "settings": [
+                                        {
+                                            "name": "name",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Connection Name",
+                                                "description": "Name of the connection"
+                                            },
+                                            "value": "IoTDgraph"
+                                        },
+                                        {
+                                            "name": "description",
+                                            "type": "string",
+                                            "display": {
+                                                "name": "Description",
+                                                "description": "Connection description"
+                                            },
+                                            "value": ""
+                                        },
+                                        {
+                                            "name": "apiVersion",
+                                            "type": "string",
+                                            "required": true,
+                                            "allowed": [
+                                                "v1",
+                                                "v2"
+                                            ],
+                                            "display": {
+                                                "name": "API Version",
+                                                "description": "Dgraph dgo API Version",
+                                                "type": "string"
+                                            },
+                                            "value": "v2"
+                                        },
+                                        {
+                                            "name": "url",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Dgraph Server URL",
+                                                "description": "Dgraph server URL ex. localhost:9080",
+                                                "type": "string",
+                                                "appPropertySupport": true
+                                            },
+                                            "value": "=$property[\"GraphBuilder_dgraph.IoTDgraph.Dgraph_Server_URL\"]"
+                                        },
+                                        {
+                                            "name": "tlsEnabled",
+                                            "type": "boolean",
+                                            "display": {
+                                                "name": "TLS Enabled",
+                                                "description": "Will use tls connection"
+                                            },
+                                            "value": false,
+                                            "required": true
+                                        },
+                                        {
+                                            "name": "user",
+                                            "type": "string",
+                                            "display": {
+                                                "name": "Username",
+                                                "description": "Username for login to Dgraph server",
+                                                "type": "string",
+                                                "appPropertySupport": true,
+                                                "readonly": false,
+                                                "valid": true,
+                                                "visible": true
+                                            },
+                                            "value": "=$property[\"GraphBuilder_dgraph.IoTDgraph.Username\"]"
+                                        },
+                                        {
+                                            "name": "password",
+                                            "type": "string",
+                                            "required": false,
+                                            "display": {
+                                                "name": "Password",
+                                                "description": "Password for login to Dgraph server",
+                                                "type": "password",
+                                                "appPropertySupport": true,
+                                                "readonly": false,
+                                                "valid": true,
+                                                "visible": true
+                                            },
+                                            "value": "=$property[\"GraphBuilder_dgraph.IoTDgraph.Password\"]"
+                                        },
+                                        {
+                                            "name": "tls",
+                                            "type": "string",
+                                            "required": false,
+                                            "display": {
+                                                "name": "TLS Configuration",
+                                                "description": "Configuration file for TLS",
+                                                "type": "fileselector",
+                                                "fileExtensions": [
+                                                    ".json"
+                                                ],
+                                                "readonly": false,
+                                                "valid": true,
+                                                "visible": false
+                                            },
+                                            "value": ""
+                                        },
+                                        {
+                                            "name": "schemaGen",
+                                            "type": "string",
+                                            "display": {
+                                                "name": "Schema Generation",
+                                                "description": "How to generate schema"
+                                            },
+                                            "value": "no",
+                                            "allowed": [
+                                                "default",
+                                                "file",
+                                                "no"
+                                            ],
+                                            "required": true
+                                        },
+                                        {
+                                            "name": "schema",
+                                            "type": "string",
+                                            "required": false,
+                                            "display": {
+                                                "name": "Graph Schema",
+                                                "description": "Define schema for queries",
+                                                "type": "fileselector",
+                                                "fileExtensions": [
+                                                    ".dschema"
+                                                ],
+                                                "readonly": false,
+                                                "valid": true,
+                                                "visible": false
+                                            },
+                                            "value": {
+                                                "filename": "IotSchema.dschema",
+                                                "content": "data:application/octet-stream;base64,ewogICAidXVpZCIgOiB7CiAgICAgICAidHlwZSIgIDogInN0cmluZyIgICwKICAgICAgICJpbmRleCIgOiBbImV4YWN0IiwgInRlcm0iXQogICB9LAogICAidXJsIiA6IHsKICAgICAgICJ0eXBlIiAgOiAic3RyaW5nIgogICB9LAogICAibGF0aXR1ZGUiIDogewogICAgICAgInR5cGUiICA6ICJmbG9hdCIKICAgfSwKICAgImxvbmdpdHVkZSIgOiB7CiAgICAgICAidHlwZSIgIDogImZsb2F0IgogICB9LAogICAiY3JlYXRlZHRzIiA6IHsKICAgICAgICJ0eXBlIiAgOiAiZGF0ZVRpbWUiCiAgIH0sCiAgICJ1cGRhdGVkdHMiIDogewogICAgICAgInR5cGUiICA6ICJkYXRlVGltZSIKICAgfSwKICAgIm5hbWUiIDogewogICAgICAgInR5cGUiICA6ICJzdHJpbmciCiAgIH0sCiAgICJvcGVydGluZ1N0YXRlIiA6IHsKICAgICAgICJ0eXBlIiAgOiAic3RyaW5nIgogICB9LAogICAiYWRtaW5TdGF0ZSIgOiB7CiAgICAgICAidHlwZSIgIDogInN0cmluZyIKICAgfSwKICAgImRlc2NyaXB0aW9uIiA6IHsKICAgICAgICJ0eXBlIiAgOiAic3RyaW5nIgogICB9LAogICAidmFsdWUiIDogewogICAgICAgInR5cGUiICA6ICJzdHJpbmciCiAgIH0sCiAgICJjcmVhdGVkIiA6IHsKICAgICAgICJ0eXBlIiAgOiAiaW50IiwKICAgICAgICJpbmRleCIgOiBbImludCJdCiAgIH0sCiAgICJnYXRld2F5IiA6IHsKICAgICAgICJ0eXBlIiAgOiAic3RyaW5nIgogICB9LAogICAiZGV2aWNlIiA6IHsKICAgICAgICJ0eXBlIiAgOiAic3RyaW5nIgogICB9LAogICAicmVzb3VyY2UiIDogewogICAgICAgInR5cGUiICA6ICJzdHJpbmciCiAgIH0sCiAgICJyZWFkaW5nIiA6IHsKICAgICAgICJ0eXBlIiAgOiAic3RyaW5nIgogICB9LAogICAiZ2F0ZXdheV9kZXZpY2UiIDogewogICAgICAgInR5cGUiICA6ICJ1aWQiICwKICAgICAgICJleHRyYUZsYWdzIiA6IFsicmV2ZXJzZSIsICJjb3VudCJdCiAgIH0sCiAgICJkZXZpY2VfcmVzb3VyY2UiIDogewogICAgICAgInR5cGUiICA6ICJ1aWQiICwKICAgICAgICJleHRyYUZsYWdzIiA6IFsicmV2ZXJzZSIsICJjb3VudCJdCiAgIH0sCiAgICJyZXNvdXJjZV9yZWFkaW5nIiA6IHsKICAgICAgICJ0eXBlIiAgOiAidWlkIiAsCiAgICAgICAiZXh0cmFGbGFncyIgOiBbInJldmVyc2UiLCAiY291bnQiXQogICB9LAogICAiZ2F0ZXdheV9ydWxlIiA6IHsKICAgICAgICJ0eXBlIiAgOiAidWlkIiAsCiAgICAgICAiZXh0cmFGbGFncyIgOiBbInJldmVyc2UiLCAiY291bnQiXQogICB9Cn0="
+                                            }
+                                        }
+                                    ],
+                                    "outputs": [],
+                                    "inputs": [],
+                                    "handler": {
+                                        "settings": []
+                                    },
+                                    "reply": [],
+                                    "s3Prefix": "flogo",
+                                    "key": "flogo/GraphBuilder_dgraph/connector/dgraph/connector.json",
+                                    "display": {
+                                        "description": "This is Dgraph connector",
+                                        "category": "GraphBuilder_dgraph",
+                                        "visible": true,
+                                        "smallIcon": "dgraph.png"
+                                    },
+                                    "actions": [
+                                        {
+                                            "name": "Connect",
+                                            "display": {
+                                                "readonly": false,
+                                                "valid": true,
+                                                "visible": true
+                                            }
+                                        }
+                                    ],
+                                    "feature": {},
+                                    "loopType": "none",
+                                    "loopSettings": [],
+                                    "retrySettings": [],
+                                    "propertyMap": {},
+                                    "keyfield": "name",
+                                    "iteratorAccumulate": false,
+                                    "isValid": true,
+                                    "lastUpdatedTime": 1583852319243,
+                                    "user": "flogo",
+                                    "connectorName": "IoTDgraph",
+                                    "connectorDescription": " "
+                                },
+                                "cacheSize": 200,
+                                "readableExternalId": true,
+                                "explicitType": true,
+                                "typeTag": "type",
+                                "attrWithPrefix": false
+                            },
+                            "input": {
+                                "Graph": "=$activity[BuildGraphSimple].Graph"
+                            }
+                        }
+                    },
+                    {
+                        "id": "ReturnSimple",
+                        "name": "ReturnSimple",
+                        "description": "",
+                        "activity": {
+                            "ref": "#actreturn"
+                        }
+                    }
+                ],
+                "metadata": {
+                    "input": [
+                        {
+                            "name": "topic",
+                            "type": "string"
+                        },
+                        {
+                            "name": "retained",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "qos",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "body",
+                            "type": "object",
+                            "schema": {
+                                "type": "json",
+                                "value": "{\"id\":{\"type\":\"string\"},\"pushed\":{\"type\":\"number\"},\"device\":{\"type\":\"string\"},\"created\":{\"type\":\"number\"},\"modified\":{\"type\":\"number\"},\"origin\":{\"type\":\"number\"},\"schedule\":{\"type\":\"null\"},\"event\":{\"type\":\"null\"},\"gateway\":{\"type\":\"string\"},\"readings\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"pushed\":{\"type\":\"number\"},\"created\":{\"type\":\"number\"},\"origin\":{\"type\":\"number\"},\"modified\":{\"type\":\"number\"},\"device\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}}}}}"
+                            }
+                        }
+                    ],
+                    "output": [],
+                    "fe_metadata": {
+                        "input": "{\"type\":\"object\",\"title\":\"MQTTSubscriber\",\"properties\":{\"topic\":{\"type\":\"string\",\"required\":false},\"retained\":{\"type\":\"boolean\",\"required\":false},\"qos\":{\"type\":\"integer\",\"required\":false},\"body\":{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"pushed\":{\"type\":\"number\"},\"device\":{\"type\":\"string\"},\"created\":{\"type\":\"number\"},\"modified\":{\"type\":\"number\"},\"origin\":{\"type\":\"number\"},\"schedule\":{\"type\":\"null\"},\"event\":{\"type\":\"null\"},\"gateway\":{\"type\":\"string\"},\"readings\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"pushed\":{\"type\":\"number\"},\"created\":{\"type\":\"number\"},\"origin\":{\"type\":\"number\"},\"modified\":{\"type\":\"number\"},\"device\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}}}}}}}}"
+                    }
+                }
+            }
+        }
+    ],
+    "properties": [
+        {
+            "name": "MQTTTrigger.Topic",
+            "type": "string",
+            "value": "EdgexGatewayData"
+        },
+        {
+            "name": "MQTTTrigger.MaximumQOS",
+            "type": "float64",
+            "value": 2
+        },
+        {
+            "name": "GraphBuilder_dgraph.IoTDgraph.Dgraph_Server_URL",
+            "type": "string",
+            "value": "a2c0b15e0059c11ea9265064cae82812-1704359995.us-west-2.elb.amazonaws.com:9080"
+        },
+        {
+            "name": "GraphBuilder_dgraph.IoTDgraph.Username",
+            "type": "string",
+            "value": "admin"
+        },
+        {
+            "name": "GraphBuilder_dgraph.IoTDgraph.Password",
+            "type": "string",
+            "value": "SECRET:idjwvNNJa3V9tgVgf9jYTtXHZKGH"
+        },
+        {
+            "name": "Mqtt.IoTMQTT.Broker_URL",
+            "type": "string",
+            "value": "tcp://a0056dbbadb2f11e99e4c067e42b309c-335014729.us-west-2.elb.amazonaws.com:1883"
+        },
+        {
+            "name": "Mqtt.IoTMQTT.Username",
+            "type": "string",
+            "value": "mqtt_admin"
+        },
+        {
+            "name": "Mqtt.IoTMQTT.Password",
+            "type": "string",
+            "value": "SECRET:VkR1c1KNlYxTqP8IhmDOxzpwJUfP9U1rKoM="
+        }
+    ],
+    "connections": {},
+    "contrib": "W3sicmVmIjoiZ2l0aHViLmNvbS9wcm9qZWN0LWZsb2dvL2NvbnRyaWIvYWN0aXZpdHkvbG9nIiwiczNsb2NhdGlvbiI6IntVU0VSSUR9L0RlZmF1bHQvYWN0aXZpdHkvbG9nIn0seyJyZWYiOiJnaXRodWIuY29tL1RJQkNPU29mdHdhcmUvR3JhcGhCdWlsZGVyX1Rvb2xzIiwiczNsb2NhdGlvbiI6IntVU0VSSUR9L0dyYXBoQnVpbGRlcl9Ub29scyJ9LHsicmVmIjoiZ2l0aHViLmNvbS9USUJDT1NvZnR3YXJlL0dyYXBoQnVpbGRlciIsInMzbG9jYXRpb24iOiJ7VVNFUklEfS9HcmFwaEJ1aWxkZXIifSx7InJlZiI6ImdpdGh1Yi5jb20vVElCQ09Tb2Z0d2FyZS9HcmFwaEJ1aWxkZXJfZGdyYXBoIiwiczNsb2NhdGlvbiI6IntVU0VSSUR9L0dyYXBoQnVpbGRlcl9kZ3JhcGgifSx7InJlZiI6ImdpdC50aWJjby5jb20vZ2l0L3Byb2R1Y3QvaXBhYXMvd2ktbXF0dC5naXQvTXF0dCIsInMzbG9jYXRpb24iOiJUaWJjby9NcXR0In1d",
+    "fe_metadata": "UEsDBAoAAAAIAEOXa1CrqSRGFQAAABMAAAAIAAAAYXBwLmpzb26rViopykxPTy1yy8kvL1ayio6tBQBQSwECFAAKAAAACABDl2tQq6kkRhUAAAATAAAACAAAAAAAAAAAAAAAAAAAAAAAYXBwLmpzb25QSwUGAAAAAAEAAQA2AAAAOwAAAAAA"
+}
