@@ -1,6 +1,8 @@
 import {HomeComponent} from '../../routes/home/home.component';
 import {IotGatewayComponent} from '../../components/iot-gateway/iot-gateway.component';
 import {IotGatewaySubscriptionComponent} from '../../components/iot-gateway-subscription/iot-gateway-subscription.component';
+import {IotGatewayPublisherComponent} from '../../components/iot-gateway-publisher/iot-gateway-publisher.component';
+import {IotDataPipelineComponent} from '../../components/iot-data-pipeline/iot-data-pipeline.component';
 import {IotDeviceComponent} from '../../components/iot-device/iot-device.component';
 import {IotDeviceProfileComponent} from '../../components/iot-device-profile/iot-device-profile.component';
 import {IotDeviceCommandComponent} from '../../components/iot-device-command/iot-device-command.component';
@@ -95,6 +97,32 @@ export const STARTER_APP_ROUTES =
       {
         path: 'gatewaysubscription/:gatewayId',
         component: IotGatewaySubscriptionComponent,
+        canActivate: [AuthGuard],
+        resolve: {
+          claims: ClaimsResolver,
+          laConfigHolder: LaConfigResolver,
+          groups: GroupsResolver,
+          roles: RolesResolver,
+          access: AccessResolver,
+          customFormDefs: FormResolver
+        }
+      },
+      {
+        path: 'datapipeline/:gatewayId',
+        component: IotDataPipelineComponent,
+        canActivate: [AuthGuard],
+        resolve: {
+          claims: ClaimsResolver,
+          laConfigHolder: LaConfigResolver,
+          groups: GroupsResolver,
+          roles: RolesResolver,
+          access: AccessResolver,
+          customFormDefs: FormResolver
+        }
+      },
+      {
+        path: 'gatewaypublisher/:gatewayId',
+        component: IotGatewayPublisherComponent,
         canActivate: [AuthGuard],
         resolve: {
           claims: ClaimsResolver,
