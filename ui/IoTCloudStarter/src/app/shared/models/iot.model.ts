@@ -1,3 +1,4 @@
+
 export class PropertyValue {
   type: string;
   readWrite: string;
@@ -123,6 +124,74 @@ export class Subscription {
   valueDescriptorFilter: string;
 }
 
+export class Publisher {
+  uid: number;
+  created: number;
+  modified: number;
+  name: string;
+  protocol: string;
+  hostname: string;
+  port: string;
+  topic: string;
+}
+export class Protocol {
+  uid: number;
+}
+
+export class MQTTProtocol extends Protocol{
+  uid: number;
+  brokerURL: string;
+  topic: string;
+  consumerGroupId: string;
+  connectionTimeout: string;
+  sessionTimeout: string;
+  initialOffset: string;
+  retryBackoff: string;
+  fetchMinBytes: string;
+  fetchMaxWait: string;
+  commitInterval: string;
+  heartbeatInterval: string;
+  authenticationMode: string;
+  username: string;
+  password: string;
+  clientCertificate: string;
+  serverCertificate: string;
+  clientKey: string;
+}
+
+export class DataStore {
+  uid: number;
+}
+
+export class PostgresDataStore extends DataStore {
+  host: string;
+  port: string;
+  databaseName: string;
+  username: string;
+  password: string;
+}
+
+export class Pipeline {
+  uid: number;
+  created: number;
+  modified: number;
+  name: string;
+  protocolType: string;
+  protocol: any;
+  dataStoreType: string;
+  dataStore: any;
+  status: string;
+}
+
+export class NVPair {
+  name: string;
+  value: string;
+}
+
+export class ObjectProperties {
+  properties: NVPair[];
+}
+
 export class Addressable {
   created: number;
   modified: number;
@@ -151,7 +220,10 @@ export class Gateway {
   longitude: number;
   accessToken: string;
   subscriptions: Subscription[];
+  publishers: Publisher[];
+  pipelines: Pipeline[];
 }
+
 
 export class GetCommandResponse {
   device: string;
