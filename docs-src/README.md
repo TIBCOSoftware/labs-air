@@ -23,6 +23,6 @@ set HUGO_ENV=production
 hugo -D
 ```
 
-Push  new generated 'docs' folder and update 'docs-src' folder to GitHub.
+Push new generated 'docs' folder and update 'docs-src' folder to GitHub.
 
 > remember the GH pages Site will just contain everything under the 'docs' folder.
