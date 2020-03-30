@@ -1,0 +1,55 @@
+[Writable]
+LogLevel = 'INFO'
+
+[Service]
+BootTimeout = 30000
+ClientMonitor = 15000
+CheckInterval = '10s'
+Host = 'labsair-app-service-flogo-rules'
+Port = 48095
+Protocol = 'http'
+ReadMaxLimit = 100
+StartupMsg = 'This is the Flogo Rules Engine Application Service'
+Timeout = 5000
+
+[Registry]
+Host = 'edgex-core-consul'
+Port = 8500
+Type = 'consul'
+
+[Clients]
+  [Clients.CoreData]
+  Protocol = 'http'
+  Host = 'edgex-core-data'
+  Port = 48080
+  
+[MessageBus]
+Type = 'zero'
+    [MessageBus.PublishHost]
+        Host = '*'
+        Port = 5564
+        Protocol = 'tcp'
+    [MessageBus.SubscribeHost]
+        Host = 'edgex-core-data'
+        Port = 5563
+        Protocol = 'tcp'
+
+[Logging]
+EnableRemote = false
+File = '/edgex/logs/app-service-flogo-rules.log'
+
+# Choose either an HTTP trigger or MessageBus trigger (aka Binding)
+[Binding]
+ Type="messagebus"
+ SubscribeTopic="events"
+ PublishTopic=""
+
+[ApplicationSettings]
+ApplicationName = "app-service-flogo-rules"
+TupleTypes = "tupleTypes.json"
+MqttHost = "a0056dbbadb2f11e99e4c067e42b309c-335014729.us-west-2.elb.amazonaws.com"
+MqttPort = "1883"
+MqttPublisher = "FlogoRules"
+MqttUser = "mqtt_admin"
+MqttPassword = "mqtt_admin"
+MqttTopic = "EdgexGateway1Notification"

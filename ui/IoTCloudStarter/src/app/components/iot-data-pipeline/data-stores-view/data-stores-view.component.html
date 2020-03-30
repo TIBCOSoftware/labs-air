@@ -1,0 +1,198 @@
+<div id="data-store-details" [formGroup]="dataStoreForm">
+
+    <div fxLayout="column" style="height: 100%;">
+
+        <div fxLayout="row" fxFlex="100%" fxFlexOffset="20px" fxLayoutGap="15px">
+            <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                <mat-label>Data Store</mat-label>
+                <input matInput [readonly]=true formControlName="dataStore">
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="center start" *ngIf="postgresDataStore" formGroupName="postgres"
+            style="height: 100%;">
+
+            <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px" style="width: 100%;">
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Hostname</mat-label>
+                    <input matInput [readonly]=true formControlName="host">
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Port</mat-label>
+                    <input matInput [readonly]=true formControlName="port">
+                </mat-form-field>
+
+            </div>
+
+            <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px" style="width: 100%;">
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Database Name</mat-label>
+                    <input matInput [readonly]=true formControlName="databaseName">
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>User</mat-label>
+                    <input matInput [readonly]=true formControlName="user">
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput placeholder="Enter your password" [readonly]=true
+                        [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+                    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword"
+                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+
+            </div>
+
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="center start" *ngIf="snowflakeDataStore" formGroupName="snowflake"
+            style="height: 100%;">
+
+            <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px" style="width: 100%;">
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Account Name</mat-label>
+                    <input matInput [readonly]=true formControlName="accountName">
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Warehouse</mat-label>
+                    <input matInput [readonly]=true formControlName="warehouse">
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Database</mat-label>
+                    <input matInput [readonly]=true formControlName="database">
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Schema</mat-label>
+                    <input matInput [readonly]=true formControlName="schema">
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Login Timeout</mat-label>
+                    <input matInput [readonly]=true formControlName="loginTimeout">
+                </mat-form-field>
+
+            </div>
+
+            <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px" style="width: 100%;">
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Authentication Type</mat-label>
+                    <input matInput [readonly]=true formControlName="authType">
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Username</mat-label>
+                    <input matInput [readonly]=true formControlName="username">
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput placeholder="Enter your password" [readonly]=true
+                        [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+                    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword"
+                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Role</mat-label>
+                    <input matInput [readonly]=true formControlName="role">
+                </mat-form-field>
+
+            </div>
+
+            <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px" style="width: 100%;">
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Client Id</mat-label>
+                    <input matInput [readonly]=true formControlName="clientId">
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Client Secret</mat-label>
+                    <input matInput [readonly]=true formControlName="clientSecret">
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Authorization Code</mat-label>
+                    <input matInput [readonly]=true formControlName="authorizationCode">
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Redirectt URI</mat-label>
+                    <input matInput [readonly]=true formControlName="redirectURI">
+                </mat-form-field>
+
+            </div>
+
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="center start" *ngIf="tgdbDataStore" formGroupName="tgdb"
+            style="height: 100%;">
+
+            <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px" style="width: 100%;">
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Server URL</mat-label>
+                    <input matInput [readonly]=true formControlName="url">
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Username</mat-label>
+                    <input matInput [readonly]=true formControlName="username">
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput placeholder="Enter your password" [readonly]=true
+                        [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+                    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword"
+                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+
+            </div>
+
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="center start" *ngIf="dgraphDataStore" formGroupName="dgraph"
+            style="height: 100%;">
+
+            <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px" style="width: 100%;">
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Server URL</mat-label>
+                    <input matInput [readonly]=true formControlName="url">
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Username</mat-label>
+                    <input matInput [readonly]=true formControlName="username">
+                </mat-form-field>
+
+                <mat-form-field fxFlex="1 1 15%" appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput placeholder="Enter your password" [readonly]=true
+                        [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+                    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword"
+                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,194 @@
+<div class="tcs-home-content" fxLayout="column" fxFlex="grow" fxLayoutAlign="start stretch"
+    style="padding-left: 20px; padding-right: 20px; margin-top: 10px;">
+
+    <div fxLayout="column" fxLayoutGap="20px" style="height: 100%;">
+
+        <div fxLayout="row" fxLayoutGap="15px" style="min-height: 300px">
+            <mat-card fxFlex="100%">
+                <mat-card-header>
+                    <div mat-card-avatar class="device-header-image"></div>
+                    <mat-card-title>Add Pipeline</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+
+                    <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px">
+                        <mat-horizontal-stepper [linear]=true #stepper style="width: 100%;" labelPosition="bottom">
+
+                            <mat-step [stepControl]="transportForm">
+                                <form [formGroup]="transportForm">
+                                    <ng-template matStepLabel>Select Protocol</ng-template>
+                                    <app-protocols [transportForm]="transportForm"></app-protocols>
+                                </form>
+                            </mat-step>
+
+                            <!-- <mat-step [stepControl]="transportForm">
+                                <form [formGroup]="transportForm">
+                                    <ng-template matStepLabel>Select Protocol</ng-template>
+                                    <mat-form-field>
+                                        <mat-label>Protocol</mat-label>
+                                        <input matInput placeholder="Select Protocol" formControlName="protocol"
+                                            required>
+                                    </mat-form-field>
+                                    <div>
+                                        <button mat-button matStepperNext>Next</button>
+                                    </div>
+                                </form>
+                            </mat-step> -->
+
+                            <!-- <mat-step label="Transport Protocol" completed=true>
+                                Step 1 content
+
+                                <div>
+                                    <button mat-button matStepperNext>Next</button>
+                                </div>
+                            </mat-step> -->
+
+                            <mat-step [stepControl]="filteringForm" optional>
+                                <form [formGroup]="filteringForm">
+                                    <ng-template matStepLabel>Data Filtering</ng-template>
+                                    <app-data-filtering [filteringForm]="filteringForm"></app-data-filtering>
+                                </form>
+                            </mat-step>
+
+                            <mat-step [stepControl]="streamingForm" optional>
+                                <form [formGroup]="streamingForm">
+                                    <ng-template matStepLabel>Data Streaming</ng-template>
+                                    <app-data-streaming [streamingForm]="streamingForm"></app-data-streaming>
+                                </form>
+                            </mat-step>
+
+                            <mat-step [stepControl]="dataStoreForm">
+                                <form [formGroup]="dataStoreForm">
+                                    <ng-template matStepLabel>Select Data Store</ng-template>
+                                    <app-data-stores [dataStoreForm]="dataStoreForm"></app-data-stores>
+                                </form>
+                            </mat-step>
+
+                            <!-- <mat-step label="Select Data Store" completed=true>
+                                Step 2 content
+
+                                <div>
+                                    <button mat-button matStepperPrevious>Back</button>
+                                    <button mat-button matStepperNext>Next</button>
+                                </div>
+                            </mat-step> -->
+
+                            <mat-step label="Deploy">
+
+                                <div fxLayout="column" fxLayoutGap="15px" style="height: 100%;">
+
+                                    <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px">
+                                        Configuration is complete
+                                    </div>
+
+                                    <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px">
+                                        <button type="button" matStepperPrevious>Back</button>
+                                        <button type="button" (click)="stepper.reset()">Reset</button>
+                                        <button type="button" (click)="deployDataPipeline()">Deploy Data
+                                            Pipeline</button>
+                                    </div>
+                                </div>
+
+                            </mat-step>
+
+                        </mat-horizontal-stepper>
+                    </div>
+
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between stretch" style="min-height: 300px;">
+            <mat-card fxFlex>
+                <mat-card-header>
+                    <div mat-card-avatar class="device-header-image"></div>
+                    <mat-card-title>Pipelines</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="table-container mat-elevation-z8">
+                        <table mat-table [dataSource]="pipelinesDataSource" matSort>
+
+                            <!-- Id Column -->
+                            <ng-container matColumnDef="id">
+                                <th mat-header-cell *matHeaderCellDef> Id </th>
+                                <td mat-cell *matCellDef="let pipeline"> {{pipeline.uid}} </td>
+                            </ng-container>
+
+                            <!-- Name Column -->
+                            <ng-container matColumnDef="name">
+                                <th mat-header-cell *matHeaderCellDef> Name </th>
+                                <td mat-cell *matCellDef="let pipeline"> {{pipeline.name}} </td>
+                            </ng-container>
+
+                            <!-- ProtocolType Column -->
+                            <ng-container matColumnDef="protocolType">
+                                <th mat-header-cell *matHeaderCellDef> Protocol Type </th>
+                                <td mat-cell *matCellDef="let pipeline"> {{pipeline.protocolType}} </td>
+                            </ng-container>
+
+                            <!-- DataStoreType Column -->
+                            <ng-container matColumnDef="dataStoreType">
+                                <th mat-header-cell *matHeaderCellDef> Data Store Type </th>
+                                <td mat-cell *matCellDef="let pipeline"> {{pipeline.dataStoreType}} </td>
+                            </ng-container>
+
+                            <!-- Status Column -->
+                            <ng-container matColumnDef="status">
+                                <th mat-header-cell *matHeaderCellDef> Status </th>
+                                <td mat-cell *matCellDef="let pipeline"> {{pipeline.status}} </td>
+                            </ng-container>
+
+                            <!-- Created -->
+                            <ng-container matColumnDef="created">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Created </th>
+                                <td mat-cell *matCellDef="let pipeline"> {{pipeline.created | date: dateFormat}}
+                                </td>
+                            </ng-container>
+
+                            <!-- Updated -->
+                            <ng-container matColumnDef="modified">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Modified </th>
+                                <td mat-cell *matCellDef="let pipeline">
+                                    {{pipeline.modified | date: dateFormat}} </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="pipelineDisplayedColumns; sticky: true"></tr>
+                            <tr mat-row *matRowDef="let row; columns: pipelineDisplayedColumns;"
+                                (click)="onPipelineClicked(row)"
+                                [ngClass]="{'selected': pipelineSelection.isSelected(row) }">
+                            </tr>
+                        </table>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between stretch" 
+            style="min-height: 300px; width: 100%">
+
+            <mat-tab-group style="width: 100%">
+                <mat-tab label="Subscriber Details">
+                    <app-protocols-view [transportForm]="transportViewForm"></app-protocols-view>
+                </mat-tab>
+                <mat-tab label="Data Filtering">
+                    <app-data-filtering-view [filteringForm]="filteringViewForm"></app-data-filtering-view>
+                </mat-tab>
+                <mat-tab label="Data Streaming">
+                    <app-data-streaming-view [streamingForm]="streamingViewForm"></app-data-streaming-view>
+                </mat-tab>
+                <mat-tab label="Data Store">
+                    <app-data-stores-view [dataStoreForm]="dataStoreViewForm"></app-data-stores-view>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="15px"  *ngIf="pipelineSelected" style="width: 100%">
+
+            <button mat-raised-button [disabled]="undeployDisabled" (click)="undeployDataPipeline(true)" color="primary">Undeploy Pipeline</button>
+            <button mat-raised-button [disabled]="deployDisabled" (click)="redeployDataPipeline()" color="primary">Redeploy Pipeline</button>
+            <button mat-raised-button (click)="deleteDataPipeline()" color="primary">Undeploy/Delete Pipeline</button>
+
+        </div>
+    </div>
+
+</div>

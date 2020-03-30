@@ -3,7 +3,7 @@
 
   <div fxLayout="row" fxLayoutAlign="center center">
     <mat-form-field fxFlex="40%">
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Gateways">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Device Groups">
     </mat-form-field>
   </div>
 
@@ -12,7 +12,7 @@
       <mat-card fxFlex="40%">
         <mat-card-header>
           <div mat-card-avatar class="gateway-header-image"></div>
-          <mat-card-title>Gateways Summary</mat-card-title>
+          <mat-card-title>Device Groups</mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <div class="table-container mat-elevation-z8">
@@ -47,7 +47,7 @@
       <mat-card fxFlex>
         <mat-card-header>
           <div mat-card-avatar class="gateway-location-image"></div>
-          <mat-card-title>Gateway Locations</mat-card-title>
+          <mat-card-title>Device Group Locations</mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <app-maporama [mapConfig]="mapConfig">
@@ -59,37 +59,38 @@
       <mat-card fxFlex>
         <mat-card-header>
           <div mat-card-avatar class="gateway-header-image"></div>
-          <mat-card-title>Gateway Details</mat-card-title>
+          <mat-card-title>Device Group Details</mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <form [formGroup]="gatewayForm" class="gateway-form" fxLayout="row wrap" fxLayoutGap="15px">
 
             <div fxLayout="column" fxFlex="40%" fxFlexFill>
-              <mat-form-field  appearance="outline">
-                <mat-label>Gateway Id</mat-label>
-                <input matInput formControlName="uuid" placeholder="Enter gateway's id">
+              <mat-form-field appearance="outline">
+                <mat-label>Device Group Id</mat-label>
+                <input matInput formControlName="uuid" placeholder="Enter group's id">
               </mat-form-field>
-              <mat-form-field  appearance="outline" >
+              <mat-form-field appearance="outline">
                 <mat-label>Description</mat-label>
-                <textarea matInput formControlName="description" placeholder="Enter gateway's description" style="height: 100px;"></textarea>
+                <textarea matInput formControlName="description" placeholder="Enter group's description"
+                  style="height: 100px;"></textarea>
               </mat-form-field>
             </div>
-            <div fxLayout="column" fxFlex="40%" >
+            <div fxLayout="column" fxFlex="40%">
               <mat-form-field fxFlex="30%" appearance="outline">
                 <mat-label>Address</mat-label>
-                <input matInput formControlName="address" placeholder="Enter gateway's IP Address">
+                <input matInput formControlName="address" placeholder="Enter group's connection IP Address">
               </mat-form-field>
               <mat-form-field fxFlex="30%" appearance="outline">
                 <mat-label>Latitude</mat-label>
-                <input matInput formControlName="latitude" placeholder="Enter gateway's latitude">
+                <input matInput formControlName="latitude" placeholder="Enter device group's latitude">
               </mat-form-field>
               <mat-form-field fxFlex="30%" appearance="outline">
                 <mat-label>Longitude</mat-label>
-                <input matInput formControlName="longitude" placeholder="Enter gateway's longitude">
+                <input matInput formControlName="longitude" placeholder="Enter device group's longitude">
               </mat-form-field>
               <mat-form-field fxFlex="60%" appearance="outline">
                 <mat-label>Access Token</mat-label>
-                <input matInput placeholder="Enter gateway's access token" [readonly]=false
+                <input matInput placeholder="Enter device group's access token" [readonly]=false
                   [type]="hideAccessToken ? 'password' : 'text'" formControlName="accessToken">
                 <button mat-icon-button matSuffix (click)="hideAccessToken = !hideAccessToken"
                   [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideAccessToken">
@@ -97,9 +98,9 @@
                 </button>
               </mat-form-field>
             </div>
-           
 
-<!-- 
+
+            <!-- 
             <div fxLayout="row" fxFlex="100%" fxLayoutGap="15px">
               <mat-form-field fxFlex="30%" appearance="outline">
                 <mat-label>Gateway Id</mat-label>
@@ -150,6 +151,10 @@
           <button mat-raised-button [disabled]="subscriptionDisabled"
             [routerLink]="['/starterApp/home/gatewaysubscription', selectedGateway]"
             color="primary">Subscriptions</button>
+          <button mat-raised-button [disabled]="publisherDisabled"
+            [routerLink]="['/starterApp/home/gatewaypublisher', selectedGateway]" color="primary">Data Publishers</button>
+          <button mat-raised-button [disabled]="dataPipelineDisabled"
+            [routerLink]="['/starterApp/home/datapipeline', selectedGateway]" color="primary">Data Pipeline</button>
         </mat-card-actions>
       </mat-card>
     </div>

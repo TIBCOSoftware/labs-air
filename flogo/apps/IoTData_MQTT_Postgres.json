@@ -1,0 +1,1279 @@
+{
+    "imports": [
+        "github.com/project-flogo/flow",
+        "git.tibco.com/git/product/ipaas/wi-contrib.git/contributions/General/activity/log",
+        "git.tibco.com/git/product/ipaas/wi-postgres.git/src/app/PostgreSQL/activity/insert",
+        "github.com/project-flogo/flow/activity/subflow",
+        "github.com/project-flogo/contrib/activity/actreturn",
+        "git.tibco.com/git/product/ipaas/wi-mqtt.git/Mqtt/trigger/subscribe",
+        "github.com/project-flogo/contrib/function/string",
+        "github.com/project-flogo/contrib/function/array",
+        "github.com/project-flogo/contrib/function/datetime",
+        "git.tibco.com/git/product/ipaas/wi-contrib.git/function/float"
+    ],
+    "name": "IoTData_MQTT_Postgres",
+    "description": " ",
+    "version": "1.1.0",
+    "type": "flogo:app",
+    "appModel": "1.1.1",
+    "feVersion": "2.8.1",
+    "triggers": [
+        {
+            "ref": "#subscribe",
+            "name": "mqtt-trigger",
+            "description": "Subscribe to an MQTT topic",
+            "settings": {
+                "mqttConnection": {
+                    "type": "flogo:connector",
+                    "version": "1.0.0",
+                    "name": "connection",
+                    "hashTags": [],
+                    "inputMappings": {},
+                    "outputMappings": {},
+                    "iteratorMappings": {},
+                    "title": "MQTT Connector",
+                    "description": "MQTT Connector",
+                    "ref": "git.tibco.com/git/product/ipaas/wi-mqtt.git/Mqtt/connector/connection",
+                    "settings": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "required": true,
+                            "display": {
+                                "name": "Connection Name",
+                                "visible": true
+                            },
+                            "value": "IoTMQTT"
+                        },
+                        {
+                            "name": "description",
+                            "type": "string",
+                            "display": {
+                                "name": "Description",
+                                "visible": true
+                            },
+                            "value": ""
+                        },
+                        {
+                            "name": "broker",
+                            "type": "string",
+                            "required": true,
+                            "display": {
+                                "name": "Broker URL",
+                                "visible": true,
+                                "Description": "Enter a broker URL in the form '<protocol>://<host>:<port>'",
+                                "appPropertySupport": true
+                            },
+                            "value": "=$property[\"Mqtt.IoTMQTT.Broker_URL\"]"
+                        },
+                        {
+                            "name": "user",
+                            "type": "string",
+                            "required": false,
+                            "display": {
+                                "name": "Username",
+                                "visible": true,
+                                "Description": "Enter a username if this connection requires one",
+                                "appPropertySupport": true
+                            },
+                            "value": "=$property[\"Mqtt.IoTMQTT.Username\"]"
+                        },
+                        {
+                            "name": "password",
+                            "type": "string",
+                            "required": false,
+                            "display": {
+                                "name": "Password",
+                                "visible": true,
+                                "type": "password",
+                                "encryptable": true,
+                                "Description": "Enter a password if this connection requires one",
+                                "appPropertySupport": true
+                            },
+                            "value": "=$property[\"Mqtt.IoTMQTT.Password\"]"
+                        },
+                        {
+                            "name": "encryptionMode",
+                            "type": "string",
+                            "display": {
+                                "name": "Encryption Mode",
+                                "description": "Choose the type of authentication to use"
+                            },
+                            "allowed": [
+                                "None",
+                                "TLS-Cert",
+                                "TLS-ClientAuth"
+                            ],
+                            "value": "None"
+                        },
+                        {
+                            "name": "cacert",
+                            "type": "string",
+                            "required": false,
+                            "display": {
+                                "name": "Cacert",
+                                "description": "Select the CA certificate file used to sign the broker's certificate",
+                                "visible": false,
+                                "type": "fileselector",
+                                "fileExtensions": [
+                                    ".crt",
+                                    ".cert",
+                                    ".pem"
+                                ],
+                                "readonly": false,
+                                "valid": true
+                            },
+                            "value": ""
+                        },
+                        {
+                            "name": "clientcert",
+                            "type": "string",
+                            "required": false,
+                            "display": {
+                                "name": "Client Cert",
+                                "description": "Select the client certificate file for connections requiring client auth",
+                                "visible": false,
+                                "type": "fileselector",
+                                "fileExtensions": [
+                                    ".crt",
+                                    ".cert",
+                                    ".pem"
+                                ],
+                                "readonly": false,
+                                "valid": true
+                            },
+                            "value": ""
+                        },
+                        {
+                            "name": "clientkey",
+                            "type": "string",
+                            "required": false,
+                            "display": {
+                                "name": "Client Key",
+                                "description": "Select the client key file used for connections requiring client auth",
+                                "visible": false,
+                                "type": "fileselector",
+                                "fileExtensions": [
+                                    ".key",
+                                    ".pem"
+                                ],
+                                "readonly": false,
+                                "valid": true
+                            },
+                            "value": ""
+                        }
+                    ],
+                    "outputs": [],
+                    "inputs": [],
+                    "handler": {
+                        "settings": []
+                    },
+                    "reply": [],
+                    "s3Prefix": "Tibco",
+                    "key": "Tibco/Mqtt/connector/connection/connector.json",
+                    "display": {
+                        "description": "MQTT Connector",
+                        "category": "Mqtt",
+                        "smallIcon": "icons/mqtt.png",
+                        "largeIcon": "icons/mqtt.png",
+                        "visible": true
+                    },
+                    "actions": [
+                        {
+                            "name": "Save"
+                        }
+                    ],
+                    "feature": {},
+                    "loopType": "none",
+                    "loopSettings": [],
+                    "retrySettings": [],
+                    "propertyMap": {},
+                    "keyfield": "name",
+                    "iteratorAccumulate": false,
+                    "isValid": true,
+                    "lastUpdatedTime": 1582218974582,
+                    "createdTime": 1582218974582,
+                    "user": "flogo",
+                    "subscriptionId": "flogo_sbsc",
+                    "id": "b2e07bc0-5404-11ea-8f02-2d62b9893e37",
+                    "connectorName": "IoTMQTT",
+                    "connectorDescription": " "
+                }
+            },
+            "id": "MQTTSubscriber",
+            "handlers": [
+                {
+                    "description": "",
+                    "settings": {
+                        "topic": "=$property[\"MQTTTrigger.Topic\"]",
+                        "qos": "=$property[\"MQTTTrigger.MaximumQOS\"]",
+                        "valueType": "JSON",
+                        "showwill": false,
+                        "will": "",
+                        "willtopic": "",
+                        "willqos": 0,
+                        "willretain": false
+                    },
+                    "action": {
+                        "ref": "github.com/project-flogo/flow",
+                        "settings": {
+                            "flowURI": "res://flow:IoTDataSubPublishToPostgres"
+                        },
+                        "input": {
+                            "jsonValue": "=$.jsonValue"
+                        }
+                    },
+                    "schemas": {
+                        "output": {
+                            "jsonValue": {
+                                "type": "json",
+                                "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"pushed\":{\"type\":\"number\"},\"device\":{\"type\":\"string\"},\"created\":{\"type\":\"number\"},\"modified\":{\"type\":\"number\"},\"origin\":{\"type\":\"number\"},\"schedule\":{\"type\":\"null\"},\"event\":{\"type\":\"null\"},\"gateway\":{\"type\":\"string\"},\"readings\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"pushed\":{\"type\":\"number\"},\"created\":{\"type\":\"number\"},\"origin\":{\"type\":\"number\"},\"modified\":{\"type\":\"number\"},\"device\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}}}}}}",
+                                "fe_metadata": "{\n   \"id\":\"5c5f4beb0e3608000114b459\",\n   \"pushed\":0,\n   \"device\":\"ArgonParticle01\",\n   \"created\":1549749227499,\n   \"modified\":0,\n   \"origin\":0,\n   \"schedule\":null,\n   \"event\":null,\n   \"gateway\":\"gtwyname\",\n   \"readings\":[\n      {\n         \"id\":\"5c5f4beb0e3608000114b45a\",\n         \"pushed\":0,\n         \"created\":1549749227499,\n         \"origin\":1549749227486,\n         \"modified\":0,\n         \"device\":\"ArgonParticle01\",\n         \"name\":\"LightSensor\",\n         \"value\":\"1080\"\n      }\n   ]\n}"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "resources": [
+        {
+            "id": "flow:IoTDataSubPublishToPostgres",
+            "data": {
+                "name": "IoTDataSubPublishToPostgres",
+                "description": "",
+                "links": [
+                    {
+                        "id": 1,
+                        "from": "LogMessage",
+                        "to": "PostgreSQLInsert",
+                        "type": "default"
+                    },
+                    {
+                        "id": 2,
+                        "from": "PostgreSQLInsert",
+                        "to": "LogMessage1",
+                        "type": "default"
+                    },
+                    {
+                        "id": 3,
+                        "from": "LogMessage1",
+                        "to": "SaveInstrument",
+                        "type": "default"
+                    },
+                    {
+                        "id": 4,
+                        "from": "SaveInstrument",
+                        "to": "Return",
+                        "type": "default"
+                    }
+                ],
+                "tasks": [
+                    {
+                        "id": "LogMessage",
+                        "name": "LogMessage",
+                        "description": "Simple Log Message Activity",
+                        "activity": {
+                            "ref": "#log",
+                            "input": {
+                                "Log Level": "INFO",
+                                "flowInfo": false,
+                                "message": "=string.tostring($flow.jsonValue)"
+                            }
+                        }
+                    },
+                    {
+                        "id": "PostgreSQLInsert",
+                        "name": "PostgreSQLInsert",
+                        "description": "This activity executes insert on a PostgreSQL database",
+                        "type": "iterator",
+                        "settings": {
+                            "iterate": "=$flow.jsonValue.readings",
+                            "accumulate": false
+                        },
+                        "activity": {
+                            "ref": "#insert",
+                            "input": {
+                                "Connection": {
+                                    "id": "ab65ac00-3977-11ea-815e-f1dc5fe42c50",
+                                    "type": "flogo:connector",
+                                    "version": "2.1.0",
+                                    "name": "postgresql-connector",
+                                    "hashTags": [],
+                                    "inputMappings": {},
+                                    "outputMappings": {},
+                                    "iteratorMappings": {},
+                                    "title": "PostgreSQL Connector",
+                                    "description": "Connector to connect to a PostgreSQL database server",
+                                    "ref": "git.tibco.com/git/product/ipaas/wi-postgres.git/src/app/PostgreSQL/connector/connection",
+                                    "settings": [
+                                        {
+                                            "name": "name",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Connection Name",
+                                                "visible": true
+                                            },
+                                            "value": "IoTPostgres"
+                                        },
+                                        {
+                                            "name": "description",
+                                            "type": "string",
+                                            "display": {
+                                                "name": "Description",
+                                                "visible": true
+                                            },
+                                            "value": ""
+                                        },
+                                        {
+                                            "name": "host",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Host",
+                                                "description": "PostgreSQL Database Host name",
+                                                "type": "string",
+                                                "visible": true,
+                                                "appPropertySupport": true
+                                            },
+                                            "value": "=$property[\"PostgreSQL.IoTPostgres.Host\"]"
+                                        },
+                                        {
+                                            "name": "port",
+                                            "type": "integer",
+                                            "required": true,
+                                            "value": "=$property[\"PostgreSQL.IoTPostgres.Port\"]",
+                                            "display": {
+                                                "name": "Port",
+                                                "description": "PostgreSQL Database Port",
+                                                "type": "integer",
+                                                "visible": true,
+                                                "appPropertySupport": true
+                                            }
+                                        },
+                                        {
+                                            "name": "databaseName",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Database Name",
+                                                "description": "Name of the Database",
+                                                "type": "string",
+                                                "visible": true,
+                                                "appPropertySupport": true
+                                            },
+                                            "value": "=$property[\"PostgreSQL.IoTPostgres.Database_Name\"]"
+                                        },
+                                        {
+                                            "name": "user",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "User",
+                                                "description": "Name of the Database User",
+                                                "visible": true,
+                                                "appPropertySupport": true
+                                            },
+                                            "value": "=$property[\"PostgreSQL.IoTPostgres.User\"]"
+                                        },
+                                        {
+                                            "name": "password",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Password",
+                                                "description": "PostgreSQL Database Port",
+                                                "type": "password",
+                                                "visible": true,
+                                                "appPropertySupport": true
+                                            },
+                                            "value": "=$property[\"PostgreSQL.IoTPostgres.Password\"]"
+                                        },
+                                        {
+                                            "name": "onprem",
+                                            "type": "boolean",
+                                            "required": true,
+                                            "value": false,
+                                            "display": {
+                                                "name": "On Premise DBService",
+                                                "description": "Flag to indicate that the dbsevice is accessed via a tibtunnel",
+                                                "visible": false,
+                                                "readonly": false,
+                                                "valid": true
+                                            }
+                                        }
+                                    ],
+                                    "outputs": [],
+                                    "inputs": [],
+                                    "handler": {
+                                        "settings": []
+                                    },
+                                    "reply": [],
+                                    "s3Prefix": "Tibco",
+                                    "key": "Tibco/PostgreSQL/connector/connection/connector.json",
+                                    "display": {
+                                        "description": "Connector to connect to a PostgreSQL database server",
+                                        "category": "PostgreSQL",
+                                        "visible": true,
+                                        "smallIcon": "icons/ic-postgres-connection@2x.png",
+                                        "largeIcon": "icons/ic-postgres-connection@3x.png"
+                                    },
+                                    "actions": [
+                                        {
+                                            "name": "Connect"
+                                        }
+                                    ],
+                                    "feature": {},
+                                    "loopType": "none",
+                                    "loopSettings": [],
+                                    "retrySettings": [],
+                                    "propertyMap": {},
+                                    "keyfield": "name",
+                                    "iteratorAccumulate": false,
+                                    "isValid": true,
+                                    "lastUpdatedTime": 1583340119215,
+                                    "user": "flogo",
+                                    "connectorName": "IoTPostgres",
+                                    "connectorDescription": " "
+                                },
+                                "QueryName": "",
+                                "Query": "INSERT INTO READINGS (ID, CREATED, GATEWAYID, DEVICEID, RESOURCEID, VALUE) VALUES (?id, ?created, ?gatewayid, ?deviceid, ?resourceid, ?value);",
+                                "Fields": [
+                                    {
+                                        "FieldName": "id",
+                                        "Type": "VARCHAR",
+                                        "Selected": false,
+                                        "Parameter": true,
+                                        "isEditable": false,
+                                        "Value": true
+                                    },
+                                    {
+                                        "FieldName": "created",
+                                        "Type": "TIMESTAMP",
+                                        "Selected": false,
+                                        "Parameter": true,
+                                        "isEditable": false,
+                                        "Value": true
+                                    },
+                                    {
+                                        "FieldName": "gatewayid",
+                                        "Type": "VARCHAR",
+                                        "Selected": false,
+                                        "Parameter": true,
+                                        "isEditable": false,
+                                        "Value": true
+                                    },
+                                    {
+                                        "FieldName": "deviceid",
+                                        "Type": "VARCHAR",
+                                        "Selected": false,
+                                        "Parameter": true,
+                                        "isEditable": false,
+                                        "Value": true
+                                    },
+                                    {
+                                        "FieldName": "resourceid",
+                                        "Type": "VARCHAR",
+                                        "Selected": false,
+                                        "Parameter": true,
+                                        "isEditable": false,
+                                        "Value": true
+                                    },
+                                    {
+                                        "FieldName": "value",
+                                        "Type": "VARCHAR",
+                                        "Selected": false,
+                                        "Parameter": true,
+                                        "isEditable": false,
+                                        "Value": true
+                                    }
+                                ],
+                                "State": "92584c8a-0100-4d2b-ac36-0d2602f46451INSERT INTO READINGS (ID, CREATED, GATEWAYID, DEVICEID, RESOURCEID, VALUE) VALUES (?id, ?created, ?gatewayid, ?deviceid, ?resourceid, ?value);",
+                                "input": {
+                                    "mapping": {
+                                        "values": [
+                                            {
+                                                "value": "=$iteration[value].value",
+                                                "id": "=$iteration[value].id",
+                                                "created": "=datetime.formatDatetime(string.tostring($iteration[value].created), \"YYYY-MM-DD HH:mm:ss\")",
+                                                "gatewayid": "=$flow.jsonValue.gateway",
+                                                "deviceid": "=$iteration[value].device",
+                                                "resourceid": "=$iteration[value].name"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "schemas": {
+                                "input": {
+                                    "input": {
+                                        "type": "json",
+                                        "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"definitions\":{},\"properties\":{\"values\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"created\":{\"type\":\"string\",\"format\":\"time\"},\"gatewayid\":{\"type\":\"string\"},\"deviceid\":{\"type\":\"string\"},\"resourceid\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}}}},\"parameters\":{\"type\":\"object\",\"properties\":{}}}}",
+                                        "fe_metadata": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"definitions\":{},\"properties\":{\"values\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"created\":{\"type\":\"string\",\"format\":\"time\"},\"gatewayid\":{\"type\":\"string\"},\"deviceid\":{\"type\":\"string\"},\"resourceid\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}}}},\"parameters\":{\"type\":\"object\",\"properties\":{}}}}"
+                                    }
+                                },
+                                "output": {
+                                    "Output": {
+                                        "type": "json",
+                                        "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"definitions\":{},\"properties\":{\"records\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{}}}}}",
+                                        "fe_metadata": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"definitions\":{},\"properties\":{\"records\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{}}}}}"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "id": "LogMessage1",
+                        "name": "LogMessage1",
+                        "description": "Simple Log Message Activity",
+                        "activity": {
+                            "ref": "#log",
+                            "input": {
+                                "Log Level": "INFO",
+                                "flowInfo": false,
+                                "message": "=\"Insert result: \" + $activity[PostgreSQLInsert].Output"
+                            }
+                        }
+                    },
+                    {
+                        "id": "SaveInstrument",
+                        "name": "SaveInstrument",
+                        "description": "Simple SubFlow Activity",
+                        "type": "iterator",
+                        "settings": {
+                            "iterate": "=$flow.jsonValue.readings",
+                            "accumulate": false
+                        },
+                        "activity": {
+                            "ref": "#subflow",
+                            "settings": {
+                                "flowURI": "res://flow:SaveInstrument"
+                            },
+                            "input": {
+                                "reading": {
+                                    "mapping": {
+                                        "id": "=$iteration[value].id",
+                                        "pushed": "=$iteration[value].pushed",
+                                        "created": "=$iteration[value].created",
+                                        "origin": "=$iteration[value].origin",
+                                        "modified": "=$iteration[value].modified",
+                                        "device": "=$iteration[value].device",
+                                        "name": "=$iteration[value].name",
+                                        "value": "=$iteration[value].value"
+                                    }
+                                },
+                                "gateway": "=$flow.jsonValue.gateway"
+                            },
+                            "schemas": {
+                                "input": {
+                                    "input": {
+                                        "type": "json",
+                                        "value": "{\"type\":\"object\",\"title\":\"ReceiveReading\",\"properties\":{\"gateway\":{\"type\":\"string\"},\"reading\":{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"pushed\":{\"type\":\"number\"},\"created\":{\"type\":\"number\"},\"origin\":{\"type\":\"number\"},\"modified\":{\"type\":\"number\"},\"device\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}}}}}",
+                                        "fe_metadata": "{\"type\":\"object\",\"title\":\"ReceiveReading\",\"properties\":{\"gateway\":{\"type\":\"string\"},\"reading\":{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"pushed\":{\"type\":\"number\"},\"created\":{\"type\":\"number\"},\"origin\":{\"type\":\"number\"},\"modified\":{\"type\":\"number\"},\"device\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}}}}}"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "id": "Return",
+                        "name": "Return",
+                        "description": "Simple Return Activity",
+                        "activity": {
+                            "ref": "#actreturn"
+                        }
+                    }
+                ],
+                "metadata": {
+                    "input": [
+                        {
+                            "name": "topic",
+                            "type": "string"
+                        },
+                        {
+                            "name": "retained",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "qos",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "duplicate",
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "messageID",
+                            "type": "integer"
+                        },
+                        {
+                            "name": "jsonValue",
+                            "type": "object",
+                            "schema": {
+                                "type": "json",
+                                "value": "{\"id\":{\"type\":\"string\"},\"pushed\":{\"type\":\"number\"},\"device\":{\"type\":\"string\"},\"created\":{\"type\":\"number\"},\"modified\":{\"type\":\"number\"},\"origin\":{\"type\":\"number\"},\"schedule\":{\"type\":\"null\"},\"event\":{\"type\":\"null\"},\"gateway\":{\"type\":\"string\"},\"readings\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"pushed\":{\"type\":\"number\"},\"created\":{\"type\":\"number\"},\"origin\":{\"type\":\"number\"},\"modified\":{\"type\":\"number\"},\"device\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}}}}}"
+                            }
+                        }
+                    ],
+                    "output": [],
+                    "fe_metadata": {
+                        "input": "{\"type\":\"object\",\"title\":\"MQTTSubscriber\",\"properties\":{\"topic\":{\"type\":\"string\",\"required\":false},\"retained\":{\"type\":\"boolean\",\"required\":false},\"qos\":{\"type\":\"integer\",\"required\":false},\"duplicate\":{\"type\":\"boolean\",\"required\":false},\"messageID\":{\"type\":\"integer\",\"required\":false},\"jsonValue\":{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"pushed\":{\"type\":\"number\"},\"device\":{\"type\":\"string\"},\"created\":{\"type\":\"number\"},\"modified\":{\"type\":\"number\"},\"origin\":{\"type\":\"number\"},\"schedule\":{\"type\":\"null\"},\"event\":{\"type\":\"null\"},\"gateway\":{\"type\":\"string\"},\"readings\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"pushed\":{\"type\":\"number\"},\"created\":{\"type\":\"number\"},\"origin\":{\"type\":\"number\"},\"modified\":{\"type\":\"number\"},\"device\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}}}}}}}}"
+                    }
+                }
+            }
+        },
+        {
+            "id": "flow:SaveInstrument",
+            "data": {
+                "name": "SaveInstrument",
+                "description": "",
+                "links": [
+                    {
+                        "id": 1,
+                        "from": "LogMessage",
+                        "to": "LogMessageNumber",
+                        "type": "expression",
+                        "label": "LogMessageto",
+                        "value": "string.matchRegEx(\"^(-?\\d+\\.\\d+)$|^(-?\\d+)$\", $flow.reading.value)"
+                    },
+                    {
+                        "id": 2,
+                        "from": "LogMessageNumber",
+                        "to": "InsertReadingNumeric",
+                        "type": "default"
+                    },
+                    {
+                        "id": 3,
+                        "from": "InsertReadingNumeric",
+                        "to": "Return",
+                        "type": "default"
+                    },
+                    {
+                        "id": 4,
+                        "from": "LogMessage",
+                        "to": "LogMessageString",
+                        "type": "exprOtherwise",
+                        "label": "LogMessage to LogMessageString"
+                    },
+                    {
+                        "id": 5,
+                        "from": "LogMessageString",
+                        "to": "InsertReadingString",
+                        "type": "default"
+                    },
+                    {
+                        "id": 6,
+                        "from": "InsertReadingString",
+                        "to": "Return1",
+                        "type": "default"
+                    }
+                ],
+                "tasks": [
+                    {
+                        "id": "LogMessage",
+                        "name": "LogMessage",
+                        "description": "Simple Log Message Activity",
+                        "activity": {
+                            "ref": "#log",
+                            "input": {
+                                "Log Level": "INFO",
+                                "flowInfo": false,
+                                "message": "Saving Reading"
+                            }
+                        }
+                    },
+                    {
+                        "id": "LogMessageNumber",
+                        "name": "LogMessageNumber",
+                        "description": "Simple Log Message Activity",
+                        "activity": {
+                            "ref": "#log",
+                            "input": {
+                                "Log Level": "INFO",
+                                "flowInfo": false,
+                                "message": "Saving Reading Number"
+                            }
+                        }
+                    },
+                    {
+                        "id": "InsertReadingNumeric",
+                        "name": "InsertReadingNumeric",
+                        "description": "This activity executes insert on a PostgreSQL database",
+                        "activity": {
+                            "ref": "#insert",
+                            "input": {
+                                "Connection": {
+                                    "id": "ab65ac00-3977-11ea-815e-f1dc5fe42c50",
+                                    "type": "flogo:connector",
+                                    "version": "2.1.0",
+                                    "name": "postgresql-connector",
+                                    "hashTags": [],
+                                    "inputMappings": {},
+                                    "outputMappings": {},
+                                    "iteratorMappings": {},
+                                    "title": "PostgreSQL Connector",
+                                    "description": "Connector to connect to a PostgreSQL database server",
+                                    "ref": "git.tibco.com/git/product/ipaas/wi-postgres.git/src/app/PostgreSQL/connector/connection",
+                                    "settings": [
+                                        {
+                                            "name": "name",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Connection Name",
+                                                "visible": true
+                                            },
+                                            "value": "IoTPostgres"
+                                        },
+                                        {
+                                            "name": "description",
+                                            "type": "string",
+                                            "display": {
+                                                "name": "Description",
+                                                "visible": true
+                                            },
+                                            "value": ""
+                                        },
+                                        {
+                                            "name": "host",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Host",
+                                                "description": "PostgreSQL Database Host name",
+                                                "type": "string",
+                                                "visible": true,
+                                                "appPropertySupport": true
+                                            },
+                                            "value": "=$property[\"PostgreSQL.IoTPostgres.Host\"]"
+                                        },
+                                        {
+                                            "name": "port",
+                                            "type": "integer",
+                                            "required": true,
+                                            "value": "=$property[\"PostgreSQL.IoTPostgres.Port\"]",
+                                            "display": {
+                                                "name": "Port",
+                                                "description": "PostgreSQL Database Port",
+                                                "type": "integer",
+                                                "visible": true,
+                                                "appPropertySupport": true
+                                            }
+                                        },
+                                        {
+                                            "name": "databaseName",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Database Name",
+                                                "description": "Name of the Database",
+                                                "type": "string",
+                                                "visible": true,
+                                                "appPropertySupport": true
+                                            },
+                                            "value": "=$property[\"PostgreSQL.IoTPostgres.Database_Name\"]"
+                                        },
+                                        {
+                                            "name": "user",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "User",
+                                                "description": "Name of the Database User",
+                                                "visible": true,
+                                                "appPropertySupport": true
+                                            },
+                                            "value": "=$property[\"PostgreSQL.IoTPostgres.User\"]"
+                                        },
+                                        {
+                                            "name": "password",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Password",
+                                                "description": "PostgreSQL Database Port",
+                                                "type": "password",
+                                                "visible": true,
+                                                "appPropertySupport": true
+                                            },
+                                            "value": "=$property[\"PostgreSQL.IoTPostgres.Password\"]"
+                                        },
+                                        {
+                                            "name": "onprem",
+                                            "type": "boolean",
+                                            "required": true,
+                                            "value": false,
+                                            "display": {
+                                                "name": "On Premise DBService",
+                                                "description": "Flag to indicate that the dbsevice is accessed via a tibtunnel",
+                                                "visible": false,
+                                                "readonly": false,
+                                                "valid": true
+                                            }
+                                        }
+                                    ],
+                                    "outputs": [],
+                                    "inputs": [],
+                                    "handler": {
+                                        "settings": []
+                                    },
+                                    "reply": [],
+                                    "s3Prefix": "Tibco",
+                                    "key": "Tibco/PostgreSQL/connector/connection/connector.json",
+                                    "display": {
+                                        "description": "Connector to connect to a PostgreSQL database server",
+                                        "category": "PostgreSQL",
+                                        "visible": true,
+                                        "smallIcon": "icons/ic-postgres-connection@2x.png",
+                                        "largeIcon": "icons/ic-postgres-connection@3x.png"
+                                    },
+                                    "actions": [
+                                        {
+                                            "name": "Connect"
+                                        }
+                                    ],
+                                    "feature": {},
+                                    "loopType": "none",
+                                    "loopSettings": [],
+                                    "retrySettings": [],
+                                    "propertyMap": {},
+                                    "keyfield": "name",
+                                    "iteratorAccumulate": false,
+                                    "isValid": true,
+                                    "lastUpdatedTime": 1583340119215,
+                                    "user": "flogo",
+                                    "connectorName": "IoTPostgres",
+                                    "connectorDescription": " "
+                                },
+                                "QueryName": "",
+                                "Query": "INSERT INTO READINGS_NUMERIC (ID, CREATED, GATEWAYID, DEVICEID, RESOURCEID, VALUE) VALUES (?id, ?created, ?gatewayid, ?deviceid, ?resourceid, ?value);",
+                                "Fields": [
+                                    {
+                                        "FieldName": "gatewayid",
+                                        "Type": "VARCHAR",
+                                        "Selected": false,
+                                        "Parameter": true,
+                                        "isEditable": false,
+                                        "Value": true
+                                    },
+                                    {
+                                        "FieldName": "deviceid",
+                                        "Type": "VARCHAR",
+                                        "Selected": false,
+                                        "Parameter": true,
+                                        "isEditable": false,
+                                        "Value": true
+                                    },
+                                    {
+                                        "FieldName": "resourceid",
+                                        "Type": "VARCHAR",
+                                        "Selected": false,
+                                        "Parameter": true,
+                                        "isEditable": false,
+                                        "Value": true
+                                    },
+                                    {
+                                        "FieldName": "value",
+                                        "Type": "NUMERIC",
+                                        "Selected": false,
+                                        "Parameter": true,
+                                        "isEditable": false,
+                                        "Value": true
+                                    },
+                                    {
+                                        "FieldName": "id",
+                                        "Type": "VARCHAR",
+                                        "Selected": false,
+                                        "Parameter": true,
+                                        "isEditable": false,
+                                        "Value": true
+                                    },
+                                    {
+                                        "FieldName": "created",
+                                        "Type": "TIMESTAMP",
+                                        "Selected": false,
+                                        "Parameter": true,
+                                        "isEditable": false,
+                                        "Value": true
+                                    }
+                                ],
+                                "State": "b85f4de2-2d39-4003-84dc-d0fee6505f9cINSERT INTO READINGS_NUMERIC (ID, CREATED, GATEWAYID, DEVICEID, RESOURCEID, VALUE) VALUES (?id, ?created, ?gatewayid, ?deviceid, ?resourceid, ?value);",
+                                "input": {
+                                    "mapping": {
+                                        "values": [
+                                            {
+                                                "gatewayid": "=$flow.gateway",
+                                                "deviceid": "=$flow.reading.device",
+                                                "resourceid": "=$flow.reading.name",
+                                                "value": "=float.float64($flow.reading.value, 2)",
+                                                "id": "=$flow.reading.id",
+                                                "created": "=datetime.formatDatetime(string.tostring($flow.reading.created), \"YYYY-MM-DD HH:mm:ss\")"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "schemas": {
+                                "input": {
+                                    "input": {
+                                        "type": "json",
+                                        "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"definitions\":{},\"properties\":{\"values\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"gatewayid\":{\"type\":\"string\"},\"deviceid\":{\"type\":\"string\"},\"resourceid\":{\"type\":\"string\"},\"value\":{\"type\":\"number\"},\"id\":{\"type\":\"string\"},\"created\":{\"type\":\"string\",\"format\":\"time\"}}}},\"parameters\":{\"type\":\"object\",\"properties\":{}}}}",
+                                        "fe_metadata": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"definitions\":{},\"properties\":{\"values\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"gatewayid\":{\"type\":\"string\"},\"deviceid\":{\"type\":\"string\"},\"resourceid\":{\"type\":\"string\"},\"value\":{\"type\":\"number\"},\"id\":{\"type\":\"string\"},\"created\":{\"type\":\"string\",\"format\":\"time\"}}}},\"parameters\":{\"type\":\"object\",\"properties\":{}}}}"
+                                    }
+                                },
+                                "output": {
+                                    "Output": {
+                                        "type": "json",
+                                        "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"definitions\":{},\"properties\":{\"records\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{}}}}}",
+                                        "fe_metadata": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"definitions\":{},\"properties\":{\"records\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{}}}}}"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "id": "Return",
+                        "name": "Return",
+                        "description": "Simple Return Activity",
+                        "activity": {
+                            "ref": "#actreturn"
+                        }
+                    },
+                    {
+                        "id": "LogMessageString",
+                        "name": "LogMessageString",
+                        "description": "Simple Log Message Activity",
+                        "activity": {
+                            "ref": "#log",
+                            "input": {
+                                "Log Level": "INFO",
+                                "flowInfo": false,
+                                "message": "Saving Reading String"
+                            }
+                        }
+                    },
+                    {
+                        "id": "InsertReadingString",
+                        "name": "InsertReadingString",
+                        "description": "This activity executes insert on a PostgreSQL database",
+                        "activity": {
+                            "ref": "#insert",
+                            "input": {
+                                "Connection": {
+                                    "id": "ab65ac00-3977-11ea-815e-f1dc5fe42c50",
+                                    "type": "flogo:connector",
+                                    "version": "2.1.0",
+                                    "name": "postgresql-connector",
+                                    "hashTags": [],
+                                    "inputMappings": {},
+                                    "outputMappings": {},
+                                    "iteratorMappings": {},
+                                    "title": "PostgreSQL Connector",
+                                    "description": "Connector to connect to a PostgreSQL database server",
+                                    "ref": "git.tibco.com/git/product/ipaas/wi-postgres.git/src/app/PostgreSQL/connector/connection",
+                                    "settings": [
+                                        {
+                                            "name": "name",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Connection Name",
+                                                "visible": true
+                                            },
+                                            "value": "IoTPostgres"
+                                        },
+                                        {
+                                            "name": "description",
+                                            "type": "string",
+                                            "display": {
+                                                "name": "Description",
+                                                "visible": true
+                                            },
+                                            "value": ""
+                                        },
+                                        {
+                                            "name": "host",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Host",
+                                                "description": "PostgreSQL Database Host name",
+                                                "type": "string",
+                                                "visible": true,
+                                                "appPropertySupport": true
+                                            },
+                                            "value": "=$property[\"PostgreSQL.IoTPostgres.Host\"]"
+                                        },
+                                        {
+                                            "name": "port",
+                                            "type": "integer",
+                                            "required": true,
+                                            "value": "=$property[\"PostgreSQL.IoTPostgres.Port\"]",
+                                            "display": {
+                                                "name": "Port",
+                                                "description": "PostgreSQL Database Port",
+                                                "type": "integer",
+                                                "visible": true,
+                                                "appPropertySupport": true
+                                            }
+                                        },
+                                        {
+                                            "name": "databaseName",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Database Name",
+                                                "description": "Name of the Database",
+                                                "type": "string",
+                                                "visible": true,
+                                                "appPropertySupport": true
+                                            },
+                                            "value": "=$property[\"PostgreSQL.IoTPostgres.Database_Name\"]"
+                                        },
+                                        {
+                                            "name": "user",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "User",
+                                                "description": "Name of the Database User",
+                                                "visible": true,
+                                                "appPropertySupport": true
+                                            },
+                                            "value": "=$property[\"PostgreSQL.IoTPostgres.User\"]"
+                                        },
+                                        {
+                                            "name": "password",
+                                            "type": "string",
+                                            "required": true,
+                                            "display": {
+                                                "name": "Password",
+                                                "description": "PostgreSQL Database Port",
+                                                "type": "password",
+                                                "visible": true,
+                                                "appPropertySupport": true
+                                            },
+                                            "value": "=$property[\"PostgreSQL.IoTPostgres.Password\"]"
+                                        },
+                                        {
+                                            "name": "onprem",
+                                            "type": "boolean",
+                                            "required": true,
+                                            "value": false,
+                                            "display": {
+                                                "name": "On Premise DBService",
+                                                "description": "Flag to indicate that the dbsevice is accessed via a tibtunnel",
+                                                "visible": false,
+                                                "readonly": false,
+                                                "valid": true
+                                            }
+                                        }
+                                    ],
+                                    "outputs": [],
+                                    "inputs": [],
+                                    "handler": {
+                                        "settings": []
+                                    },
+                                    "reply": [],
+                                    "s3Prefix": "Tibco",
+                                    "key": "Tibco/PostgreSQL/connector/connection/connector.json",
+                                    "display": {
+                                        "description": "Connector to connect to a PostgreSQL database server",
+                                        "category": "PostgreSQL",
+                                        "visible": true,
+                                        "smallIcon": "icons/ic-postgres-connection@2x.png",
+                                        "largeIcon": "icons/ic-postgres-connection@3x.png"
+                                    },
+                                    "actions": [
+                                        {
+                                            "name": "Connect"
+                                        }
+                                    ],
+                                    "feature": {},
+                                    "loopType": "none",
+                                    "loopSettings": [],
+                                    "retrySettings": [],
+                                    "propertyMap": {},
+                                    "keyfield": "name",
+                                    "iteratorAccumulate": false,
+                                    "isValid": true,
+                                    "lastUpdatedTime": 1583340119215,
+                                    "user": "flogo",
+                                    "connectorName": "IoTPostgres",
+                                    "connectorDescription": " "
+                                },
+                                "QueryName": "",
+                                "Query": "INSERT INTO READINGS_STRING (ID, CREATED, GATEWAYID, DEVICEID, RESOURCEID, VALUE) VALUES (?id, ?created, ?gatewayid, ?deviceid, ?resourceid, ?value);",
+                                "Fields": [
+                                    {
+                                        "FieldName": "gatewayid",
+                                        "Type": "VARCHAR",
+                                        "Selected": false,
+                                        "Parameter": true,
+                                        "isEditable": false,
+                                        "Value": true
+                                    },
+                                    {
+                                        "FieldName": "deviceid",
+                                        "Type": "VARCHAR",
+                                        "Selected": false,
+                                        "Parameter": true,
+                                        "isEditable": false,
+                                        "Value": true
+                                    },
+                                    {
+                                        "FieldName": "resourceid",
+                                        "Type": "VARCHAR",
+                                        "Selected": false,
+                                        "Parameter": true,
+                                        "isEditable": false,
+                                        "Value": true
+                                    },
+                                    {
+                                        "FieldName": "value",
+                                        "Type": "VARCHAR",
+                                        "Selected": false,
+                                        "Parameter": true,
+                                        "isEditable": false,
+                                        "Value": true
+                                    },
+                                    {
+                                        "FieldName": "id",
+                                        "Type": "VARCHAR",
+                                        "Selected": false,
+                                        "Parameter": true,
+                                        "isEditable": false,
+                                        "Value": true
+                                    },
+                                    {
+                                        "FieldName": "created",
+                                        "Type": "TIMESTAMP",
+                                        "Selected": false,
+                                        "Parameter": true,
+                                        "isEditable": false,
+                                        "Value": true
+                                    }
+                                ],
+                                "State": "951f2855-183d-4c51-8f82-ba481a1e2708INSERT INTO READINGS_STRING (ID, CREATED, GATEWAYID, DEVICEID, RESOURCEID, VALUE) VALUES (?id, ?created, ?gatewayid, ?deviceid, ?resourceid, ?value);",
+                                "input": {
+                                    "mapping": {
+                                        "values": [
+                                            {
+                                                "gatewayid": "=$flow.gateway",
+                                                "deviceid": "=$flow.reading.device",
+                                                "resourceid": "=$flow.reading.name",
+                                                "value": "=$flow.reading.value",
+                                                "id": "=$flow.reading.id",
+                                                "created": "=datetime.formatDatetime(string.tostring($flow.reading.created), \"YYYY-MM-DD HH:mm:ss\")"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "schemas": {
+                                "input": {
+                                    "input": {
+                                        "type": "json",
+                                        "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"definitions\":{},\"properties\":{\"values\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"gatewayid\":{\"type\":\"string\"},\"deviceid\":{\"type\":\"string\"},\"resourceid\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"},\"id\":{\"type\":\"string\"},\"created\":{\"type\":\"string\",\"format\":\"time\"}}}},\"parameters\":{\"type\":\"object\",\"properties\":{}}}}",
+                                        "fe_metadata": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"definitions\":{},\"properties\":{\"values\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"gatewayid\":{\"type\":\"string\"},\"deviceid\":{\"type\":\"string\"},\"resourceid\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"},\"id\":{\"type\":\"string\"},\"created\":{\"type\":\"string\",\"format\":\"time\"}}}},\"parameters\":{\"type\":\"object\",\"properties\":{}}}}"
+                                    }
+                                },
+                                "output": {
+                                    "Output": {
+                                        "type": "json",
+                                        "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"definitions\":{},\"properties\":{\"records\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{}}}}}",
+                                        "fe_metadata": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"definitions\":{},\"properties\":{\"records\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{}}}}}"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "id": "Return1",
+                        "name": "Return1",
+                        "description": "Simple Return Activity",
+                        "activity": {
+                            "ref": "#actreturn"
+                        }
+                    }
+                ],
+                "metadata": {
+                    "input": [
+                        {
+                            "name": "gateway",
+                            "type": "string"
+                        },
+                        {
+                            "name": "reading",
+                            "type": "object",
+                            "schema": {
+                                "type": "json",
+                                "value": "{\"id\":{\"type\":\"string\"},\"pushed\":{\"type\":\"number\"},\"created\":{\"type\":\"number\"},\"origin\":{\"type\":\"number\"},\"modified\":{\"type\":\"number\"},\"device\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}}"
+                            }
+                        }
+                    ],
+                    "output": [],
+                    "fe_metadata": {
+                        "input": "{\"type\":\"object\",\"title\":\"ReceiveReading\",\"properties\":{\"gateway\":{\"type\":\"string\"},\"reading\":{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"pushed\":{\"type\":\"number\"},\"created\":{\"type\":\"number\"},\"origin\":{\"type\":\"number\"},\"modified\":{\"type\":\"number\"},\"device\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}}}}}"
+                    }
+                }
+            }
+        }
+    ],
+    "properties": [
+        {
+            "name": "MQTTTrigger.Topic",
+            "type": "string",
+            "value": "EdgexGatewayData"
+        },
+        {
+            "name": "MQTTTrigger.MaximumQOS",
+            "type": "float64",
+            "value": 2
+        },
+        {
+            "name": "Mqtt.IoTMQTT.Broker_URL",
+            "type": "string",
+            "value": "tcp://a0056dbbadb2f11e99e4c067e42b309c-335014729.us-west-2.elb.amazonaws.com:1883"
+        },
+        {
+            "name": "Mqtt.IoTMQTT.Username",
+            "type": "string",
+            "value": "mqtt_admin"
+        },
+        {
+            "name": "Mqtt.IoTMQTT.Password",
+            "type": "string",
+            "value": "SECRET:d4y8IeUz6ZqJjndyzFeHrXVfzFyA7hGPbmY="
+        },
+        {
+            "name": "PostgreSQL.IoTPostgres.Host",
+            "type": "string",
+            "value": "database-iot.cuop7paojpqq.us-east-1.rds.amazonaws.com"
+        },
+        {
+            "name": "PostgreSQL.IoTPostgres.Port",
+            "type": "float64",
+            "value": 5432
+        },
+        {
+            "name": "PostgreSQL.IoTPostgres.Database_Name",
+            "type": "string",
+            "value": "postgres"
+        },
+        {
+            "name": "PostgreSQL.IoTPostgres.User",
+            "type": "string",
+            "value": "postgres"
+        },
+        {
+            "name": "PostgreSQL.IoTPostgres.Password",
+            "type": "string",
+            "value": "SECRET:5b+LmI3F7XHarwuiKnfScIZExfQWYyaa9dk="
+        }
+    ],
+    "connections": {},
+    "contrib": "W3sicmVmIjoiZ2l0LnRpYmNvLmNvbS9naXQvcHJvZHVjdC9pcGFhcy93aS1jb250cmliLmdpdC9jb250cmlidXRpb25zL0dlbmVyYWwiLCJzM2xvY2F0aW9uIjoiVGliY28vR2VuZXJhbCJ9LHsicmVmIjoiZ2l0LnRpYmNvLmNvbS9naXQvcHJvZHVjdC9pcGFhcy93aS1wb3N0Z3Jlcy5naXQvc3JjL2FwcC9Qb3N0Z3JlU1FMIiwiczNsb2NhdGlvbiI6IlRpYmNvL1Bvc3RncmVTUUwifSx7InJlZiI6ImdpdC50aWJjby5jb20vZ2l0L3Byb2R1Y3QvaXBhYXMvd2ktbXF0dC5naXQvTXF0dCIsInMzbG9jYXRpb24iOiJUaWJjby9NcXR0In1d",
+    "fe_metadata": "UEsDBAoAAAAIAG+Xa1CrqSRGFQAAABMAAAAIAAAAYXBwLmpzb26rViopykxPTy1yy8kvL1ayio6tBQBQSwECFAAKAAAACABvl2tQq6kkRhUAAAATAAAACAAAAAAAAAAAAAAAAAAAAAAAYXBwLmpzb25QSwUGAAAAAAEAAQA2AAAAOwAAAAAA"
+}

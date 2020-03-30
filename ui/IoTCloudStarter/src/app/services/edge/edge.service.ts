@@ -266,6 +266,8 @@ export class EdgeService {
   addRegisteration(gateway: Gateway, subscription: Subscription): Observable<String> {
     const url = `/${gateway.uuid}${this.gatewayExportClientPath}/registration`;
 
+    // const url = `https://localhost:8443/export/api/v1/registration`;
+
     let deviceFilter = [];
     if (subscription.deviceIdentifierFilter.length > 0) {
       let dfilter = subscription.deviceIdentifierFilter.replace(/\s+/g, '');
@@ -310,6 +312,7 @@ export class EdgeService {
     };
 
     const authorizedHeaders = httpTextResponseOptions.headers.set('Authorization', 'Bearer ' + gateway.accessToken);
+    
     httpTextResponseOptions.headers = authorizedHeaders;
 
     return this.http.post<string>(url, query, httpTextResponseOptions)

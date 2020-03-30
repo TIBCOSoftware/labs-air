@@ -154,7 +154,7 @@ export class IotGatewaySubscriptionComponent implements OnInit, AfterViewInit {
     return false;
   }
 
-  onsubscriptionClicked(row) {
+  onSubscriptionClicked(row) {
 
     console.log('Row clicked: ', row);
 

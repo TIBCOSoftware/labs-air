@@ -27,6 +27,8 @@ export class IotGatewayComponent implements OnInit, AfterViewInit {
   mapConfig = null;
 
   subscriptionDisabled = true;
+  publisherDisabled = true;
+  dataPipelineDisabled = true;
   selectedGateway = '';
   hideAccessToken = true;
   dateFormat = 'yyyy-MM-dd  HH:mm:ss';
@@ -273,6 +275,8 @@ export class IotGatewayComponent implements OnInit, AfterViewInit {
 
     // Enable/Disable variables
     this.subscriptionDisabled = false;
+    this.publisherDisabled = false;
+    this.dataPipelineDisabled = false;
     this.selection.select(row);
     this.selectedGateway = row.uuid;
     
@@ -309,5 +313,8 @@ export class IotGatewayComponent implements OnInit, AfterViewInit {
     this.gatewayForm.reset();
 
     this.subscriptionDisabled = true;
+    this.publisherDisabled = true;
+    this.dataPipelineDisabled = true;
+    
   }
 }

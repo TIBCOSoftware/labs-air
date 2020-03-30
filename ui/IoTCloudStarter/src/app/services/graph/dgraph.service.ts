@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 
-import { Observable, of } from 'rxjs';
+import { Observable, of, pipe } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { LogLevel, LogService } from '@tibco-tcstk/tc-core-lib';
 
-import { Gateway, Subscription, Rule, Notification } from '../../shared/models/iot.model';
+import { Gateway, Subscription, Publisher, Pipeline, Rule, Notification } from '../../shared/models/iot.model';
 import { TSReading } from '../../shared/models/iot.model';
 
 // const httpOptions = {
@@ -26,49 +26,49 @@ const httpMutateOptions = {
 
 const route1 = [
   [25.771088, -80.163483],
-	[27.439775, -80.32299],
-	[28.349469, -80.731105],
-	[30.401564, -81.571033],
-	[32.116716, -81.144147],
-	[32.866511, -79.995399],
-	[34.191224, -77.952419],
-	[36.850172, -76.319269],
-	[36.915037, -76.320643],
-	[39.262025, -76.549294],
-	[39.900933, -75.143453],
-	[40.690263, -74.152375],
+  [27.439775, -80.32299],
+  [28.349469, -80.731105],
+  [30.401564, -81.571033],
+  [32.116716, -81.144147],
+  [32.866511, -79.995399],
+  [34.191224, -77.952419],
+  [36.850172, -76.319269],
+  [36.915037, -76.320643],
+  [39.262025, -76.549294],
+  [39.900933, -75.143453],
+  [40.690263, -74.152375],
   [42.259951, -71.789244]
-];  
+];
 
 const route2 = [
   [47.492471, -122.26888],
-	[45.552207, -122.722648],
-	[39.53246, -119.751524],
-	[37.803528, -122.312138],
-	[37.899332, -121.169307],
-	[36.273183, -115.070534],
-	[33.77032, -118.273289],
-	[34.106012, -117.320254],
-	[33.515564, -112.160564],
+  [45.552207, -122.722648],
+  [39.53246, -119.751524],
+  [37.803528, -122.312138],
+  [37.899332, -121.169307],
+  [36.273183, -115.070534],
+  [33.77032, -118.273289],
+  [34.106012, -117.320254],
+  [33.515564, -112.160564],
   [32.126437, -110.848336],
   [31.752085, -106.488887],
-	[35.04758, -106.653344],
+  [35.04758, -106.653344],
   [39.796963, -104.995374]
 ];
 
 const route3 = [
   [29.302729, -98.638744],
-	[29.638421, -95.292245],
-	[32.615525, -96.693485],
-	[29.917836, -90.205272],
-	[32.256403, -90.151546],
-	[35.044849, -90.153006],
-	[38.524627, -90.209535],
-	[39.870851, -88.912284],
-	[41.705694, -87.577341],
-	[41.902382, -89.101932],
-	[44.251243, -91.509663],
-	[44.970069, -93.174527],
+  [29.638421, -95.292245],
+  [32.615525, -96.693485],
+  [29.917836, -90.205272],
+  [32.256403, -90.151546],
+  [35.044849, -90.153006],
+  [38.524627, -90.209535],
+  [39.870851, -88.912284],
+  [41.705694, -87.577341],
+  [41.902382, -89.101932],
+  [44.251243, -91.509663],
+  [44.970069, -93.174527],
   [46.758181, -92.098748]
 ];
 
@@ -352,6 +352,330 @@ export class DgraphService {
       );
   }
 
+
+  getGatewayAndPublishers(gatewayName): Observable<Gateway[]> {
+    const url = `${this.dgraphUrl}/query`;
+    let query = `{
+      resp(func: has(gateway)) @filter(eq(uuid, "${gatewayName}")) {
+        uid uuid
+        publishers: gateway_publisher {
+          uid
+          name
+          port
+          uuid
+          protocol
+          created
+          modified
+          topic
+          hostname
+        }
+      }
+    }`;
+    console.log('Get Gateway and Publishers query statement: ', query);
+
+    return this.http.post<any>(url, query, httpOptions)
+      .pipe(
+        map(response => response.data.resp as Gateway[]),
+        tap(_ => this.logger.info('fetched Gateway')),
+        catchError(this.handleError<Gateway[]>('getGatewayWithPublishers', []))
+      );
+
+  }
+
+  getPublishers(gatewayName): Observable<Publisher[]> {
+    const url = `${this.dgraphUrl}/query`;
+    let query = `{
+      var(func: has(gateway)) @filter(eq(uuid, "${gatewayName}")) {
+        publishers as gateway_publisher {
+        }
+      }
+      resp(func: uid(publishers)) {
+        uid
+        name
+        port
+        uuid
+        protocol
+        created
+        modified
+        topic
+        hostname
+      }
+    }`;
+
+    return this.http.post<any>(url, query, httpOptions)
+      .pipe(
+        map(response => response.data.resp as Publisher[]),
+        tap(_ => this.logger.info('fetched publishers')),
+        catchError(this.handleError<Publisher[]>('getPublishers', []))
+      );
+
+  }
+
+  addPublisher(gatewayUid: number, publisher: Publisher): Observable<string> {
+    const url = `${this.dgraphUrl}/mutate?commitNow=true`;
+    let query = `{
+      set {
+        _:Publisher <name> "${publisher.name}" .
+        _:Publisher <uuid> "${publisher.name}" .
+        _:Publisher <type> "publisher" .
+        _:Publisher <publisher> "" .
+        _:Publisher <port> "${publisher.port}" .
+        _:Publisher <protocol> "${publisher.protocol}" .
+        _:Publisher <created> "${publisher.created}" .
+        _:Publisher <modified> "${publisher.modified}" .
+        _:Publisher <topic> "${publisher.topic}" .
+        _:Publisher <hostname> "${publisher.hostname}" .
+        <${gatewayUid}> <gateway_publisher> _:Publisher .
+      }
+    }`;
+    console.log('Mutate statement: ', query);
+
+    return this.http.post<any>(url, query, httpMutateOptions)
+      .pipe(
+        tap(_ => this.logger.info('add publishers')),
+        catchError(this.handleError<string>('addPublishers'))
+      );
+
+  }
+
+  updatePublisher(publisher: Publisher): Observable<string> {
+    const url = `${this.dgraphUrl}/mutate?commitNow=true`;
+    let query = `{
+      set {
+        <${publisher.uid}> <port> "${publisher.port}" .
+        <${publisher.uid}> <protocol> "${publisher.protocol}" .
+        <${publisher.uid}> <modified> "${publisher.modified}" .
+        <${publisher.uid}> <topic> "${publisher.topic}" .
+        <${publisher.uid}> <hostname> "${publisher.hostname}" .
+      }
+    }`;
+    console.log('Mutate statement: ', query);
+
+    return this.http.post<any>(url, query, httpMutateOptions)
+      .pipe(
+        tap(_ => this.logger.info('updated publishers')),
+        catchError(this.handleError<string>('updatePublishers'))
+      );
+
+  }
+
+  deletePublisher(gatewayUid: number, publisherUid: number): Observable<string> {
+    const url = `${this.dgraphUrl}/mutate?commitNow=true`;
+    let query = `{
+      delete {
+        <${publisherUid}> * * .
+        <${gatewayUid}> <gateway_publisher> <${publisherUid}> .
+      }
+    }`;
+    console.log('Delete Publisher Mutate statement: ', query);
+
+    return this.http.post<any>(url, query, httpMutateOptions)
+      .pipe(
+        tap(_ => this.logger.info('deleted publisher')),
+        catchError(this.handleError<string>('deletePublisher'))
+      );
+  }
+
+  getGatewayAndPipelines(gatewayName): Observable<Gateway[]> {
+    const url = `${this.dgraphUrl}/query`;
+
+    let pipeline_protocol = `protocol: pipeline_protocol {uid brokerURL topic maximumQOS username password encryptionMode caCertificate clientCertificate clientKey authMode serverCerticate consumerGroupId connectionTimeout sessionTimeout retryBackoff commitInterval initialOffset fetchMinBytes fetchMaxWait heartbeatInterval}`;
+    let pipeline_datastore = `dataStore: pipeline_datastore {uid host port databaseName user password accountName warehouse database schema authType username clientId clientSecret authorizationCode redirectURI loginTimeout url}`;
+    
+    let query = `{
+      resp(func: has(gateway)) @filter(eq(uuid, "${gatewayName}")) {
+        uid uuid
+        pipelines: gateway_pipeline {
+          uid
+          name
+          uuid
+          protocolType
+          protocolId
+          dataStoreType
+          dataStoreId
+          created
+          modified
+          status
+          ${pipeline_protocol}
+          ${pipeline_datastore}
+        }
+      }
+    }`;
+    console.log('Get Gateway and Pipelines query statement: ', query);
+
+    return this.http.post<any>(url, query, httpOptions)
+      .pipe(
+        map(response => response.data.resp as Gateway[]),
+        tap(_ => this.logger.info('fetched Gateway')),
+        catchError(this.handleError<Gateway[]>('getGatewayWithPipelines', []))
+      );
+
+  }
+
+  getPipelines(gatewayName): Observable<Pipeline[]> {
+    const url = `${this.dgraphUrl}/query`;
+
+    let pipeline_protocol = `protocol: pipeline_protocol {uid brokerURL topic maximumQOS username password encryptionMode caCertificate clientCertificate clientKey authMode serverCerticate consumerGroupId connectionTimeout sessionTimeout retryBackoff commitInterval initialOffset fetchMinBytes fetchMaxWait heartbeatInterval}`;
+    let pipeline_datastore = `datastore: pipeline_datastore {uid host port databaseName user password accountName warehouse database schema authType username clientId clientSecret authorizationCode redirectURI loginTimeout url}`;
+    
+    let query = `{
+      var(func: has(gateway)) @filter(eq(uuid, "${gatewayName}")) {
+        pipelines as gateway_pipeline {
+        }
+      }
+      resp(func: uid(pipelines)) {
+        uid
+        name
+        uuid
+        protocolType
+        protocolId
+        dataStoreType
+        dataStoreId
+        created
+        modified
+        status
+        ${pipeline_protocol}
+        ${pipeline_datastore}
+      }
+    }`;
+
+    return this.http.post<any>(url, query, httpOptions)
+      .pipe(
+        map(response => response.data.resp as Pipeline[]),
+        tap(_ => this.logger.info('fetched pipelines')),
+        catchError(this.handleError<Pipeline[]>('getPipelines', []))
+      );
+
+  }
+
+  addPipeline(gatewayUid: number, pipeline: Pipeline, transportObj: any, dataStoreObj: any): Observable<string> {
+    const url = `${this.dgraphUrl}/mutate?commitNow=true`;
+
+    let query = '';
+    console.log("direct from transport name: ", transportObj.Name);
+
+
+
+    console.log("TranpostObje prop0: ", transportObj.Properties[0].Value);
+    let transportVar = '';
+    let dataStoreVar = '';
+    let i = 0;
+    let len = transportObj.Properties.length;
+
+    console.log("Looping start for properties: ", len);
+
+
+    // Create Protocol entries
+    for (; i < len; i++) {
+      transportVar = transportVar +
+        `_:Protocol <${transportObj.Properties[i].UIName}> "${transportObj.Properties[i].Value}" .
+      `;
+    }
+
+    transportVar = transportVar +
+      `_:Protocol <protocol> "" .
+      `;
+    transportVar = transportVar +
+      `_:Protocol <type> "protocol" .
+      `;
+    transportVar = transportVar +
+      `_:Pipeline <pipeline_protocol> _:Protocol .
+      `;
+
+    console.log("Build Transport dgraph var: " + transportVar);
+
+
+    // Create DataStore entries
+    i = 0;
+    len = dataStoreObj.Properties.length;
+    
+    for (; i < len; i++) {
+      dataStoreVar = dataStoreVar +
+        `_:Datastore <${dataStoreObj.Properties[i].UIName}> "${dataStoreObj.Properties[i].Value}" .
+      `;
+    }
+
+    dataStoreVar = dataStoreVar +
+      `_:Datastore <datastore> "" .
+      `;
+      dataStoreVar = dataStoreVar +
+      `_:Datastore <type> "datastore" .
+      `;
+      dataStoreVar = dataStoreVar +
+      `_:Pipeline <pipeline_datastore> _:Datastore .
+      `;
+
+    console.log("DataStore dgraph var: " + dataStoreVar);
+
+
+    query = `{
+      set {
+        _:Pipeline <name> "${pipeline.name}" .
+        _:Pipeline <uuid> "${pipeline.name}" .
+        _:Pipeline <type> "pipeline" .
+        _:Pipeline <pipeline> "" .
+        _:Pipeline <protocolType> "${pipeline.protocolType}" .
+        _:Pipeline <dataStoreType> "${pipeline.dataStoreType}" .
+        _:Pipeline <created> "${pipeline.created}" .
+        _:Pipeline <modified> "${pipeline.modified}" .
+        _:Pipeline <status> "${pipeline.status}" .
+        <${gatewayUid}> <gateway_pipeline> _:Pipeline .
+        ${transportVar}
+        ${dataStoreVar}
+      }
+    }`;
+    console.log('Mutate statement: ', query);
+
+    return this.http.post<any>(url, query, httpMutateOptions)
+      .pipe(
+        tap(_ => this.logger.info('add pipeline')),
+        catchError(this.handleError<string>('addPipelines'))
+      );
+
+  }
+
+  updatePipeline(pipeline: Pipeline): Observable<string> {
+    const url = `${this.dgraphUrl}/mutate?commitNow=true`;
+    let query = `{
+      set {
+        <${pipeline.uid}> <status> "${pipeline.status}" .
+        <${pipeline.uid}> <modified> "${pipeline.modified}" .
+      }
+    }`;
+    console.log('Mutate statement: ', query);
+
+    return this.http.post<any>(url, query, httpMutateOptions)
+      .pipe(
+        tap(_ => this.logger.info('updated pipelines')),
+        catchError(this.handleError<string>('updatePipelines'))
+      );
+
+  }
+
+  deletePipeline(gatewayUid: number, pipeline: Pipeline): Observable<string> {
+    const url = `${this.dgraphUrl}/mutate?commitNow=true`;
+    let protocol = pipeline.protocol;
+    let dataStore = pipeline.dataStore;
+
+    let query = `{
+      delete {
+        <${protocol.uid}> * * .
+        <${dataStore.uid}> * * .
+        <${pipeline.uid}> <pipeline_protocol> <${protocol.uid}> .
+        <${pipeline.uid}> <pipeline_datastore> <${dataStore.uid}> .
+        <${pipeline.uid}> * * .
+        <${gatewayUid}> <gateway_pipeline> <${pipeline.uid}> .
+      }
+    }`;
+    console.log('Delete Pipeline Mutate statement: ', query);
+
+    return this.http.post<any>(url, query, httpMutateOptions)
+      .pipe(
+        tap(_ => this.logger.info('deleted pipeline')),
+        catchError(this.handleError<string>('deletePipeline'))
+      );
+  }
+
   getRules(gatewayName): Observable<Rule[]> {
     const url = `${this.dgraphUrl}/query`;
     let query = `{
@@ -613,7 +937,7 @@ export class DgraphService {
       );
   }
 
-  getRoute(deviceName) :any {
+  getRoute(deviceName): any {
 
     let route = null;
 
@@ -630,21 +954,21 @@ export class DgraphService {
     return route;
   }
 
-  getRouteCenter(deviceName) :any {
+  getRouteCenter(deviceName): any {
     let center = null;
 
-        // 39.0 -98.0 zoom 4
+    // 39.0 -98.0 zoom 4
     // East 34.765589   -78.709488
     // West 40.487432 -122.803116
 
     if (deviceName == "train-0001") {
-      center = [34.0,-98.0];
+      center = [34.0, -98.0];
     }
     else if (deviceName == "train-0002") {
-      center = [40.0,-98.0];
+      center = [40.0, -98.0];
     }
     else if (deviceName == "train-0003") {
-      center = [39.0,-98.0] ;
+      center = [39.0, -98.0];
     }
 
     return center;

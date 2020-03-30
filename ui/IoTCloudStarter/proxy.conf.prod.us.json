@@ -277,6 +277,13 @@
     "logLevel": "info",
     "pathRewrite":{"^/dgraph" : ""}
   },
+  "/deployment/*": {
+    "target": "http://localhost:9999/air",
+    "secure": "false",
+    "changeOrigin": true,
+    "logLevel": "info",
+    "pathRewrite":{"^/deployment" : ""}
+  },
   "/gateway1/flogorules/api/v1/*": {
     "target": "http://localhost:48095",
     "secure": "false",

@@ -1,0 +1,88 @@
+[Writable]
+LogLevel = 'INFO'
+    [Writable.StoreAndForward]
+    Enabled = false
+    RetryInterval = '5m'
+    MaxRetryCount = 10
+
+[Service]
+BootTimeout = '30s'
+ClientMonitor = '15s'
+CheckInterval = '10s'
+Host = 'air-app-service-export-mqtt'
+Port = 48500
+Protocol = 'http'
+ReadMaxLimit = 100
+StartupMsg = 'This is a MQTT Export Application Service'
+Timeout = '30s'
+
+[Registry]
+Host = 'edgex-core-consul'
+Port = 8500
+Type = 'consul'
+
+[Logging]
+EnableRemote = false
+File = './logs/app-service-export-mqtt.log'
+
+[Database]
+Type = "mongodb"
+Host = "edgex-mongo"
+Port = 27017
+Timeout = "30s"
+Username = ""
+Password = ""
+
+[SecretStore]
+  Host = 'edgex-vault'
+  Port = 8200
+  Path = '/v1/secret/edgex/appservice/'
+  Protocol = 'https'
+
+  [SecretStore.Authentication]
+  AuthType = 'X-Vault-Token'
+  AuthToken = 'edgex'
+
+[Clients]
+  [Clients.CoreData]
+  Protocol = 'http'
+  Host = 'edgex-core-data'
+  Port = 48080
+
+  [Clients.Logging]
+  Protocol = "http"
+  Host = "edgex-support-logging"
+  Port = 48061
+
+[MessageBus]
+Type = 'zero'
+    [MessageBus.PublishHost]
+        Host = '*'
+        Port = 5564
+        Protocol = 'tcp'
+    [MessageBus.SubscribeHost]
+        Host = 'edgex-core-data'
+        Port = 5563
+        Protocol = 'tcp'
+
+# Choose either an HTTP trigger or MessageBus trigger (aka Binding)
+
+#[Binding]
+#Type="http"
+
+[Binding]
+Type="messagebus"
+SubscribeTopic="events"
+PublishTopic="somewhere"
+
+[ApplicationSettings]
+GatewayId = "gateway1"
+DeviceNames = "versicharge-0001"
+MqttProtocol = "tcp"
+MqttHostname = "a0056dbbadb2f11e99e4c067e42b309c-335014729.us-west-2.elb.amazonaws.com"
+MqttPort = "1883"
+MqttPublisher = "EdgexExport"
+MqttUser = "mqtt_admin"
+MqttPassword = "mqtt_admin"
+MqttTrustStore = ""
+MqttTopic = "EdgexGatewayData"
