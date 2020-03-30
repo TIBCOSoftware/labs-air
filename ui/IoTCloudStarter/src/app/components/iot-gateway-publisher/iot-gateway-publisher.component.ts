@@ -119,7 +119,7 @@ export class IotGatewayPublisherComponent implements OnInit, AfterViewInit {
     this.publisherForm.reset({
       name: row.name,
       protocol: row.protocol,
-      hostname: row.address,
+      hostname: row.hostname,
       port: row.port,
       topic: row.topic,
       created: row.created,
