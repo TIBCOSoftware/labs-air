@@ -62,8 +62,12 @@ profile:string .
 notification:string .
 rule:string .
 gateway_subscription:[uid] @reverse @count .
+gateway_publisher:[uid] @reverse @count .
+gateway_pipeline:[uid] @reverse @count .
 gateway_device:[uid]  @reverse @count .
 gateway_notification:[uid] @reverse @count .
+gateway_rule: [uid] @reverse @count .
 device_resource:[uid] @reverse @count .
 resource_reading:[uid] @reverse @count .
-gateway_rule: [uid] @reverse @count .
+pipeline_protocol:[uid] @reverse @count .
+pipeline_datastore:[uid] @reverse @count .
