@@ -1,4 +1,6 @@
-module github.com/TIBCOSoftware/labs-air/edgexfoundry/device-stm32l449-ble
+module github.com/TIBCOSoftware/labs-air/edgexfoundry/device-stm32l4r9-ble
+
+go 1.12
 
 require (
 	github.com/eclipse/paho.mqtt.golang v1.2.0
@@ -7,7 +9,6 @@ require (
 	github.com/google/uuid v1.1.1 // indirect
 	github.com/gorilla/mux v1.7.0 // indirect
 	github.com/kr/pretty v0.1.0 // indirect
-	// github.com/raff/goble v0.0.0-20190909174656-72afc67d6a99
 	github.com/raff/goble v0.0.0-20200327175727-d63360dcfd80
 	github.com/spf13/cast v1.3.0
 	golang.org/x/net v0.0.0-20190213061140-3a22650c66bd // indirect
@@ -15,5 +16,4 @@ require (
 	gopkg.in/mgo.v2 v2.0.0-20180705113604-9856a29383ce
 )
 
-// replace github.com/raff/goble v0.0.0-20190909174656-72afc67d6a99 => /Users/gallardo/workspace/go/src/github.com/raff/goble
 replace github.com/raff/goble v0.0.0-20200327175727-d63360dcfd80 => /Users/gallardo/workspace/go/src/github.com/raff/goble
