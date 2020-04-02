@@ -1,0 +1,203 @@
+name: "STM32L4R9-Device"
+manufacturer: "ST"
+model: "STEVAL-STWINKIT1"
+labels:
+- "ble"
+description: "STM32L4R9 device profile"
+
+
+deviceResources:
+  -
+    name: "Humidity"
+    description: "Measures relative humidity. 0 to 100% relative humidity range"
+    attributes:
+      { Pin_Num: "A0", Interface: "AIO", Type: "IN" }
+    properties:
+      value:
+        { type: "Float32", readWrite: "R", minimum: "0", maximum: "100", defaultValue: "0"}
+      units:
+        { type: "String", readWrite: "R", defaultValue: "lunen" }
+  -
+    name: "Temperature"
+    description: "Measures temperature. The temperature accuraty is +/- 0.5 celsius degrees"
+    attributes:
+      { Pin_Num: "A4", Interface: "AIO", Type: "IN", normalize: "false" }
+    properties:
+      value:
+        { type: "Float32", readWrite: "R", minimum: "15", maximum: "40", scale: "1", defaultValue: "15"}
+      units:
+        { type: "String", readWrite: "R", defaultValue: "Celsius" }
+  -
+    name: "Pressure"
+    description: "Measures absolute pressure. It functions as an digital output barometer"
+    attributes:
+      { Pin_Num: "A2", Interface: "GPIO", Type: "IN" }
+    properties:
+      value:
+        { type: "Float32", readWrite: "RW", minimum: "260", maximum: "1260", defaultValue: "260"}
+      units:
+        { type: "String", readWrite: "R", defaultValue: "hPa" }
+  -
+    name: "Magnetometer"
+    description: "Three-axis Magnetic Sensor. Generates interrupt signals for magnetic field detection"
+    attributes:
+      { Pin_Num: "D2", Interface: "GPIO", Type: "OUT", Visualization: "Custom" }
+    properties:
+      value:
+        { type: "String", readWrite: "RW", minimum: "0", maximum: "1", defaultValue: "0"}
+      units:
+        { type: "String", readWrite: "R", defaultValue: "gauss" }
+  -
+    name: "Gyroscope"
+    description: "Provides motion tracking and contextual awareness"
+    attributes:
+      { Pin_Num: "D2", Interface: "GPIO", Type: "OUT", Visualization: "Custom" }
+    properties:
+      value:
+        { type: "String", readWrite: "RW", minimum: "-125", maximum: "2000", defaultValue: "0"}
+      units:
+        { type: "String", readWrite: "R", defaultValue: "dps" }
+  -
+    name: "Accelerometer"
+    description: "Provides motion tracking and contextual awareness"
+    attributes:
+      { Pin_Num: "D2", Interface: "GPIO", Type: "OUT", Visualization: "Custom" }
+    properties:
+      value:
+        { type: "String", readWrite: "RW", minimum: "-2", maximum: "16", defaultValue: "0"}
+      units:
+        { type: "String", readWrite: "R", defaultValue: "g" }
+  -
+    name: "Proximity"
+    description: "Providwes accurate distance measurement whatever the target reflectance"
+    attributes:
+      { Pin_Num: "D2", Interface: "GPIO", Type: "OUT" }
+    properties:
+      value:
+        { type: "Int16", readWrite: "RW", minimum: "0", maximum: "8190", defaultValue: "0"}
+      units:
+        { type: "String", readWrite: "R", defaultValue: "mm" }
+
+deviceCommands:
+  -
+    name: Humidity
+    get:
+      - { index: "1", operation: "get", object: "Humidity", parameter: "Humidity", property: "value" }
+  -
+    name: Temperature
+    get:
+      - { index: "1", operation: "get", object: "Temperature", parameter: "Temperature", property: "value" }
+  -
+    name: Pressure
+    get:
+      - { index: "1", operation: "get", object: "Pressure", parameter: "Pressure", property: "value" }
+  -
+    name: Magnetometer
+    get:
+      - { index: "1", operation: "get", object: "Magnetometer", parameter: "Magnetometer", property: "value" }
+  -
+    name: Gyroscope
+    get:
+      - { index: "1", operation: "get", object: "Gyroscope", parameter: "Gyroscope", property: "value" }
+  -
+    name: Accelerometer
+    get:
+      - { index: "1", operation: "get", object: "Accelerometer", parameter: "Accelerometer", property: "value" }
+  -
+    name: Proximity
+    get:
+      - { index: "1", operation: "get", object: "Proximity", parameter: "Proximity", property: "value" }
+
+coreCommands:
+  -
+    name: Humidity
+    get:
+      path: "/api/v1/device/{deviceId}/Humidity"
+      responses:
+        -
+          code: "200"
+          description: "get the light sensor value"
+          expectedValues: ["Humidity"]
+        -
+          code: "503"
+          description: "get Humidity service unavailable"
+          expectedValues: []
+  -
+    name: Temperature
+    get:
+      path: "/api/v1/device/{deviceId}/Temperature"
+      responses:
+        -
+          code: "200"
+          description: "get the rotary angle sensor value"
+          expectedValues: ["Temperature"]
+        -
+          code: "503"
+          description: "get Temperature service unavailable"
+          expectedValues: []
+  -
+    name: Pressure
+    get:
+      path: "/api/v1/device/{deviceId}/Pressure"
+      responses:
+        -
+          code: "200"
+          description: "get the Pressure value"
+          expectedValues: ["Pressure"]
+        -
+          code: "503"
+          description: "get Pressure service unavailable"
+          expectedValues: []
+  -
+    name: Magnetometer
+    get:
+      path: "/api/v1/device/{deviceId}/Magnetometer"
+      responses:
+        -
+          code: "200"
+          description: "get the Magnetometer value"
+          expectedValues: ["Magnetometer"]
+        -
+          code: "503"
+          description: "get Magnetometer service unavailable"
+          expectedValues: []
+  -
+    name: Gyroscope
+    get:
+      path: "/api/v1/device/{deviceId}/Gyroscope"
+      responses:
+        -
+          code: "200"
+          description: "get the Gyroscope value"
+          expectedValues: ["Gyroscope"]
+        -
+          code: "503"
+          description: "get Gyroscope service unavailable"
+          expectedValues: []
+  -
+    name: Accelerometer
+    get:
+      path: "/api/v1/device/{deviceId}/Accelerometer"
+      responses:
+        -
+          code: "200"
+          description: "get the Accelerometer value"
+          expectedValues: ["Accelerometer"]
+        -
+          code: "503"
+          description: "get Accelerometer service unavailable"
+          expectedValues: []
+  -
+    name: Proximity
+    get:
+      path: "/api/v1/device/{deviceId}/Proximity"
+      responses:
+        -
+          code: "200"
+          description: "get the Proximity value"
+          expectedValues: ["Proximity"]
+        -
+          code: "503"
+          description: "get Proximity service unavailable"
+          expectedValues: []
+    
