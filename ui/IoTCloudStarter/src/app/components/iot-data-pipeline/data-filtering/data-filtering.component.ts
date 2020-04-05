@@ -21,10 +21,7 @@ export class DataFilteringComponent implements OnInit {
   }
 
   stepSubmitted() {
-    // this.transportForm.get('transport').markAsTouched();
-    // this.transportForm.get('transport').updateValueAndValidity();
-    // this.transportForm.get('personalDetails').get('lastname').markAsTouched();
-    // this.transportForm.get('personalDetails').get('lastname').updateValueAndValidity();
+    
   }
 
 }
