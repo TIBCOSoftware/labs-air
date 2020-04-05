@@ -1,11 +1,11 @@
 {
     "imports": [
         "github.com/project-flogo/flow",
-        "github.com/project-flogo/contrib/activity/log",
+        "git.tibco.com/git/product/ipaas/wi-contrib.git/contributions/General/activity/log",
+        "github.com/project-flogo/contrib/activity/actreturn",
         "github.com/TIBCOSoftware/GraphBuilder_Tools/activity/accumulator",
         "github.com/TIBCOSoftware/GraphBuilder/activity/builder",
         "github.com/TIBCOSoftware/GraphBuilder_TGDB/activity/tgdbupsert",
-        "github.com/project-flogo/contrib/activity/actreturn",
         "git.tibco.com/git/product/ipaas/wi-mqtt.git/Mqtt/trigger/subscribe",
         "github.com/project-flogo/contrib/function/string",
         "github.com/project-flogo/contrib/function/array"
@@ -244,52 +244,73 @@
                 "links": [
                     {
                         "id": 1,
-                        "from": "Log",
-                        "to": "Accumulator",
+                        "from": "LogMessage",
+                        "to": "LogFiltered",
                         "type": "expression",
-                        "label": "LogtoAccumulator",
-                        "value": "array.count($flow.body.readings) > 1"
+                        "label": "LogMessageto",
+                        "value": "string.len($property[\"Filtering.DeviceNames\"]) > 0 && string.contains($property[\"Filtering.DeviceNames\"], $flow.body.device)"
                     },
                     {
                         "id": 2,
+                        "from": "LogFiltered",
+                        "to": "ReturnFiltered",
+                        "type": "default"
+                    },
+                    {
+                        "id": 3,
+                        "from": "LogMessage",
+                        "to": "LogNonFiltered",
+                        "type": "exprOtherwise",
+                        "label": "LogMessage to "
+                    },
+                    {
+                        "id": 4,
+                        "from": "LogNonFiltered",
+                        "to": "Accumulator",
+                        "type": "expression",
+                        "label": "LogNonFiltered to ",
+                        "value": "array.count($flow.body.readings) > 1"
+                    },
+                    {
+                        "id": 5,
                         "from": "Accumulator",
                         "to": "BuildGraph",
                         "type": "default"
                     },
                     {
-                        "id": 3,
+                        "id": 6,
                         "from": "BuildGraph",
                         "to": "TGDBUpsert",
                         "type": "default"
                     },
                     {
-                        "id": 4,
+                        "id": 7,
                         "from": "TGDBUpsert",
                         "to": "Return",
                         "type": "default"
                     },
                     {
-                        "id": 5,
-                        "from": "Log",
+                        "id": 8,
+                        "from": "LogNonFiltered",
                         "to": "AccumulatorSimple",
                         "type": "expression",
-                        "label": "LogtoAccumulatorSimple",
+                        "label": "LogNonFiltered to ",
                         "value": "array.count($flow.body.readings) == 1"
                     },
                     {
-                        "id": 6,
+                        "id": 9,
                         "from": "AccumulatorSimple",
                         "to": "BuildGraphSimple",
                         "type": "default"
                     },
                     {
-                        "id": 7,
+                        "id": 10,
                         "from": "BuildGraphSimple",
                         "to": "TGDBUpsert1",
                         "type": "default"
                     },
                     {
-                        "id": 8,
+                        "id": 11,
                         "from": "TGDBUpsert1",
                         "to": "ReturnSimple",
                         "type": "default"
@@ -297,14 +318,49 @@
                 ],
                 "tasks": [
                     {
-                        "id": "Log",
-                        "name": "Log",
-                        "description": "",
+                        "id": "LogMessage",
+                        "name": "LogMessage",
+                        "description": "Simple Log Message Activity",
                         "activity": {
                             "ref": "#log",
                             "input": {
-                                "message": "=string.tostring($flow.body)",
-                                "addDetails": false
+                                "Log Level": "=$property[\"Logging.LogLevel\"]",
+                                "flowInfo": false,
+                                "message": "=string.tostring($flow.body)"
+                            }
+                        }
+                    },
+                    {
+                        "id": "LogFiltered",
+                        "name": "LogFiltered",
+                        "description": "Simple Log Message Activity",
+                        "activity": {
+                            "ref": "#log",
+                            "input": {
+                                "Log Level": "=$property[\"Logging.LogLevel\"]",
+                                "flowInfo": false,
+                                "message": "Message Filtered"
+                            }
+                        }
+                    },
+                    {
+                        "id": "ReturnFiltered",
+                        "name": "ReturnFiltered",
+                        "description": "Simple Return Activity",
+                        "activity": {
+                            "ref": "#actreturn"
+                        }
+                    },
+                    {
+                        "id": "LogNonFiltered",
+                        "name": "LogNonFiltered",
+                        "description": "Simple Log Message Activity",
+                        "activity": {
+                            "ref": "#log",
+                            "input": {
+                                "Log Level": "=$property[\"Logging.LogLevel\"]",
+                                "flowInfo": false,
+                                "message": "Message Non Filtered"
                             }
                         }
                     },
@@ -1128,7 +1184,7 @@
         {
             "name": "Mqtt.IoTMQTT.Password",
             "type": "string",
-            "value": "SECRET:lk29mnmteACtyRMuuBvhg8dvtXn2R8UuFLY="
+            "value": "SECRET:fSWOUNMzkkiIxJpFSXY4ljDQCwxYJMho01Y="
         },
         {
             "name": "GraphBuilder_TGDB.IoTTGDB.TGDB_Server_URL",
@@ -1143,10 +1199,20 @@
         {
             "name": "GraphBuilder_TGDB.IoTTGDB.Password",
             "type": "string",
-            "value": "SECRET:l31aDTqAu15CHNlvXOAMQ02yUSXc"
+            "value": "SECRET:w1n9ZG+duJjddQ8dP8mqeJ33gzyw"
+        },
+        {
+            "name": "Filtering.DeviceNames",
+            "type": "string",
+            "value": " "
+        },
+        {
+            "name": "Logging.LogLevel",
+            "type": "string",
+            "value": "DEBUG"
         }
     ],
     "connections": {},
-    "contrib": "W3sicmVmIjoiZ2l0LnRpYmNvLmNvbS9naXQvcHJvZHVjdC9pcGFhcy93aS1tcXR0LmdpdC9NcXR0IiwiczNsb2NhdGlvbiI6IlRpYmNvL01xdHQifSx7InJlZiI6ImdpdGh1Yi5jb20vcHJvamVjdC1mbG9nby9jb250cmliL2FjdGl2aXR5L2xvZyIsInMzbG9jYXRpb24iOiJ7VVNFUklEfS9EZWZhdWx0L2FjdGl2aXR5L2xvZyJ9LHsicmVmIjoiZ2l0aHViLmNvbS9USUJDT1NvZnR3YXJlL0dyYXBoQnVpbGRlcl9Ub29scyIsInMzbG9jYXRpb24iOiJ7VVNFUklEfS9HcmFwaEJ1aWxkZXJfVG9vbHMifSx7InJlZiI6ImdpdGh1Yi5jb20vVElCQ09Tb2Z0d2FyZS9HcmFwaEJ1aWxkZXIiLCJzM2xvY2F0aW9uIjoie1VTRVJJRH0vR3JhcGhCdWlsZGVyIn0seyJyZWYiOiJnaXRodWIuY29tL1RJQkNPU29mdHdhcmUvR3JhcGhCdWlsZGVyX1RHREIiLCJzM2xvY2F0aW9uIjoie1VTRVJJRH0vR3JhcGhCdWlsZGVyX1RHREIifV0=",
-    "fe_metadata": "UEsDBAoAAAAIAHGWa1CrqSRGFQAAABMAAAAIAAAAYXBwLmpzb26rViopykxPTy1yy8kvL1ayio6tBQBQSwECFAAKAAAACABxlmtQq6kkRhUAAAATAAAACAAAAAAAAAAAAAAAAAAAAAAAYXBwLmpzb25QSwUGAAAAAAEAAQA2AAAAOwAAAAAA"
+    "contrib": "W3sicmVmIjoiZ2l0LnRpYmNvLmNvbS9naXQvcHJvZHVjdC9pcGFhcy93aS1tcXR0LmdpdC9NcXR0IiwiczNsb2NhdGlvbiI6IlRpYmNvL01xdHQifSx7InJlZiI6ImdpdGh1Yi5jb20vVElCQ09Tb2Z0d2FyZS9HcmFwaEJ1aWxkZXJfVG9vbHMiLCJzM2xvY2F0aW9uIjoie1VTRVJJRH0vR3JhcGhCdWlsZGVyX1Rvb2xzIn0seyJyZWYiOiJnaXRodWIuY29tL1RJQkNPU29mdHdhcmUvR3JhcGhCdWlsZGVyIiwiczNsb2NhdGlvbiI6IntVU0VSSUR9L0dyYXBoQnVpbGRlciJ9LHsicmVmIjoiZ2l0aHViLmNvbS9USUJDT1NvZnR3YXJlL0dyYXBoQnVpbGRlcl9UR0RCIiwiczNsb2NhdGlvbiI6IntVU0VSSUR9L0dyYXBoQnVpbGRlcl9UR0RCIn0seyJyZWYiOiJnaXQudGliY28uY29tL2dpdC9wcm9kdWN0L2lwYWFzL3dpLWNvbnRyaWIuZ2l0L2NvbnRyaWJ1dGlvbnMvR2VuZXJhbCIsInMzbG9jYXRpb24iOiJUaWJjby9HZW5lcmFsIn1d",
+    "fe_metadata": "UEsDBAoAAAAIAE6rhVCrqSRGFQAAABMAAAAIAAAAYXBwLmpzb26rViopykxPTy1yy8kvL1ayio6tBQBQSwECFAAKAAAACABOq4VQq6kkRhUAAAATAAAACAAAAAAAAAAAAAAAAAAAAAAAYXBwLmpzb25QSwUGAAAAAAEAAQA2AAAAOwAAAAAA"
 }

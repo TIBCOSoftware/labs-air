@@ -2,12 +2,12 @@
     "imports": [
         "github.com/project-flogo/flow",
         "git.tibco.com/git/product/ipaas/wi-contrib.git/contributions/General/activity/log",
+        "github.com/project-flogo/contrib/activity/actreturn",
         "git.tibco.com/git/product/ipaas/wi-postgres.git/src/app/PostgreSQL/activity/insert",
         "github.com/project-flogo/flow/activity/subflow",
-        "github.com/project-flogo/contrib/activity/actreturn",
         "git.tibco.com/git/product/ipaas/wi-plugins.git/contributions/kafka/src/app/Kafka/trigger/consumer",
-        "github.com/project-flogo/contrib/function/array",
         "github.com/project-flogo/contrib/function/string",
+        "github.com/project-flogo/contrib/function/array",
         "github.com/project-flogo/contrib/function/datetime",
         "git.tibco.com/git/product/ipaas/wi-contrib.git/function/float"
     ],
@@ -107,7 +107,7 @@
                                 "readonly": false,
                                 "valid": true
                             },
-                            "value": "SECRET:oeV3a+MFXNqT03op7nLIkw=="
+                            "value": "SECRET:n5gJhLkBc/xRTWrbu1oMHg=="
                         },
                         {
                             "name": "clientCert",
@@ -290,17 +290,26 @@
                     {
                         "id": 1,
                         "from": "LogMessage",
-                        "to": "PostgreSQLInsert",
-                        "type": "default"
+                        "to": "ReturnFiltered",
+                        "type": "expression",
+                        "label": "LogMessage to Return1",
+                        "value": "string.len($property[\"Filtering.DeviceNames\"]) > 0 && string.contains($property[\"Filtering.DeviceNames\"], $flow.jsonValue.device)"
                     },
                     {
                         "id": 2,
+                        "from": "LogMessage",
+                        "to": "PostgreSQLInsert",
+                        "type": "exprOtherwise",
+                        "label": "LogMessageto"
+                    },
+                    {
+                        "id": 3,
                         "from": "PostgreSQLInsert",
                         "to": "SaveInstrument",
                         "type": "default"
                     },
                     {
-                        "id": 3,
+                        "id": 4,
                         "from": "SaveInstrument",
                         "to": "Return",
                         "type": "default"
@@ -314,10 +323,18 @@
                         "activity": {
                             "ref": "#log",
                             "input": {
-                                "Log Level": "INFO",
+                                "Log Level": "=$property[\"Logging.LogLevel\"]",
                                 "flowInfo": false,
                                 "message": "=\"Received Msg: \" + $flow.jsonValue"
                             }
+                        }
+                    },
+                    {
+                        "id": "ReturnFiltered",
+                        "name": "ReturnFiltered",
+                        "description": "Simple Return Activity",
+                        "activity": {
+                            "ref": "#actreturn"
                         }
                     },
                     {
@@ -676,7 +693,7 @@
                         "from": "LogMessage",
                         "to": "LogMessageString",
                         "type": "exprOtherwise",
-                        "label": "LogMessage to "
+                        "label": "LogMessage to LogMessageString"
                     },
                     {
                         "id": 5,
@@ -699,7 +716,7 @@
                         "activity": {
                             "ref": "#log",
                             "input": {
-                                "Log Level": "INFO",
+                                "Log Level": "=$property[\"Logging.LogLevel\"]",
                                 "flowInfo": false,
                                 "message": "Saving Reading"
                             }
@@ -712,7 +729,7 @@
                         "activity": {
                             "ref": "#log",
                             "input": {
-                                "Log Level": "INFO",
+                                "Log Level": "=$property[\"Logging.LogLevel\"]",
                                 "flowInfo": false,
                                 "message": "Saving Reading Number"
                             }
@@ -969,7 +986,7 @@
                         "activity": {
                             "ref": "#log",
                             "input": {
-                                "Log Level": "INFO",
+                                "Log Level": "=$property[\"Logging.LogLevel\"]",
                                 "flowInfo": false,
                                 "message": "Saving Reading String"
                             }
@@ -1322,10 +1339,20 @@
         {
             "name": "PostgreSQL.IoTPostgres.Password",
             "type": "string",
-            "value": "SECRET:Z1DgjY7WTpiTFOIkaD36J6ONTWtMkqtdObs="
+            "value": "SECRET:TpImparRQ1z8cm3G5GGSjGi9TbTjqo8D5Rw="
+        },
+        {
+            "name": "Filtering.DeviceNames",
+            "type": "string",
+            "value": " "
+        },
+        {
+            "name": "Logging.LogLevel",
+            "type": "string",
+            "value": "DEBUG"
         }
     ],
     "connections": {},
     "contrib": "W3sicmVmIjoiZ2l0LnRpYmNvLmNvbS9naXQvcHJvZHVjdC9pcGFhcy93aS1jb250cmliLmdpdC9jb250cmlidXRpb25zL0dlbmVyYWwiLCJzM2xvY2F0aW9uIjoiVGliY28vR2VuZXJhbCJ9LHsicmVmIjoiZ2l0LnRpYmNvLmNvbS9naXQvcHJvZHVjdC9pcGFhcy93aS1wb3N0Z3Jlcy5naXQvc3JjL2FwcC9Qb3N0Z3JlU1FMIiwiczNsb2NhdGlvbiI6IlRpYmNvL1Bvc3RncmVTUUwifSx7InJlZiI6ImdpdC50aWJjby5jb20vZ2l0L3Byb2R1Y3QvaXBhYXMvd2ktcGx1Z2lucy5naXQvY29udHJpYnV0aW9ucy9rYWZrYS9zcmMvYXBwL0thZmthIiwiczNsb2NhdGlvbiI6IlRpYmNvL0thZmthIn1d",
-    "fe_metadata": "UEsDBAoAAAAIACCXa1CrqSRGFQAAABMAAAAIAAAAYXBwLmpzb26rViopykxPTy1yy8kvL1ayio6tBQBQSwECFAAKAAAACAAgl2tQq6kkRhUAAAATAAAACAAAAAAAAAAAAAAAAAAAAAAAYXBwLmpzb25QSwUGAAAAAAEAAQA2AAAAOwAAAAAA"
+    "fe_metadata": "UEsDBAoAAAAIAIKrhVCrqSRGFQAAABMAAAAIAAAAYXBwLmpzb26rViopykxPTy1yy8kvL1ayio6tBQBQSwECFAAKAAAACACCq4VQq6kkRhUAAAATAAAACAAAAAAAAAAAAAAAAAAAAAAAYXBwLmpzb25QSwUGAAAAAAEAAQA2AAAAOwAAAAAA"
 }

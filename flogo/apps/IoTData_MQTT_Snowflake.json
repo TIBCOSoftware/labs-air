@@ -2,9 +2,9 @@
     "imports": [
         "github.com/project-flogo/flow",
         "git.tibco.com/git/product/ipaas/wi-contrib.git/contributions/General/activity/log",
+        "github.com/project-flogo/contrib/activity/actreturn",
         "git.tibco.com/git/product/ipaas/wi-snowflake.git/src/app/Snowflake/activity/insert",
         "github.com/project-flogo/flow/activity/subflow",
-        "github.com/project-flogo/contrib/activity/actreturn",
         "git.tibco.com/git/product/ipaas/wi-mqtt.git/Mqtt/trigger/subscribe",
         "github.com/project-flogo/contrib/function/string",
         "github.com/project-flogo/contrib/function/datetime",
@@ -245,23 +245,32 @@
                     {
                         "id": 1,
                         "from": "LogMessage",
-                        "to": "SnowflakeInsert",
-                        "type": "default"
+                        "to": "ReturnFiltered",
+                        "type": "expression",
+                        "label": "LogMessage to Return1",
+                        "value": "string.len($property[\"Filtering.DeviceNames\"]) > 0 && string.contains($property[\"Filtering.DeviceNames\"], $flow.jsonValue.device)"
                     },
                     {
                         "id": 2,
+                        "from": "LogMessage",
+                        "to": "SnowflakeInsert",
+                        "type": "exprOtherwise",
+                        "label": "LogMessage to "
+                    },
+                    {
+                        "id": 3,
                         "from": "SnowflakeInsert",
                         "to": "LogMessage1",
                         "type": "default"
                     },
                     {
-                        "id": 3,
+                        "id": 4,
                         "from": "LogMessage1",
                         "to": "StartaSubFlow",
                         "type": "default"
                     },
                     {
-                        "id": 4,
+                        "id": 5,
                         "from": "StartaSubFlow",
                         "to": "Return",
                         "type": "default"
@@ -275,10 +284,18 @@
                         "activity": {
                             "ref": "#log",
                             "input": {
-                                "Log Level": "INFO",
+                                "Log Level": "=$property[\"Logging.LogLevel\"]",
                                 "flowInfo": false,
                                 "message": "=string.tostring($flow.jsonValue)"
                             }
+                        }
+                    },
+                    {
+                        "id": "ReturnFiltered",
+                        "name": "ReturnFiltered",
+                        "description": "Simple Return Activity",
+                        "activity": {
+                            "ref": "#actreturn"
                         }
                     },
                     {
@@ -442,7 +459,7 @@
                                                 "readonly": false,
                                                 "valid": true
                                             },
-                                            "value": "SECRET:ldKHS/1N7fUUfQDDYI64UQ=="
+                                            "value": "SECRET:InfnllL6CPkRqrrh6BR1tw=="
                                         },
                                         {
                                             "name": "authCode",
@@ -481,7 +498,7 @@
                                                 "type": "password",
                                                 "visible": false
                                             },
-                                            "value": "SECRET:LiCJYsF/mhMfRMS5FEck+Q=="
+                                            "value": "SECRET:lRM1fjknD0MclJJ2ZKIOcA=="
                                         },
                                         {
                                             "name": "accessTokenExpiry",
@@ -503,7 +520,7 @@
                                                 "type": "password",
                                                 "visible": false
                                             },
-                                            "value": "SECRET:0LolsgHj3TFy56KwJ5a4FQ=="
+                                            "value": "SECRET:jndZGQBw9WVlYlI0myv8Yg=="
                                         },
                                         {
                                             "name": "refreshTokenExpiry",
@@ -733,7 +750,7 @@
                         "activity": {
                             "ref": "#log",
                             "input": {
-                                "Log Level": "INFO",
+                                "Log Level": "=$property[\"Logging.LogLevel\"]",
                                 "flowInfo": false,
                                 "message": "=\"Insert result: \" + $activity[SnowflakeInsert].output"
                             }
@@ -836,7 +853,7 @@
                         "from": "LogMessage",
                         "to": "LogMessage2",
                         "type": "expression",
-                        "label": "LogMessage to ",
+                        "label": "LogMessage to LogMessage2",
                         "value": "string.matchRegEx(\"^(-?\\d+\\.\\d+)$|^(-?\\d+)$\", $flow.reading.value)"
                     },
                     {
@@ -856,7 +873,7 @@
                         "from": "LogMessage",
                         "to": "LogMessage3",
                         "type": "exprOtherwise",
-                        "label": "LogMessage to "
+                        "label": "LogMessage to LogMessage3"
                     },
                     {
                         "id": 5,
@@ -879,7 +896,7 @@
                         "activity": {
                             "ref": "#log",
                             "input": {
-                                "Log Level": "INFO",
+                                "Log Level": "=$property[\"Logging.LogLevel\"]",
                                 "flowInfo": false,
                                 "message": "Saving Reading"
                             }
@@ -892,7 +909,7 @@
                         "activity": {
                             "ref": "#log",
                             "input": {
-                                "Log Level": "INFO",
+                                "Log Level": "=$property[\"Logging.LogLevel\"]",
                                 "flowInfo": false,
                                 "message": "Saving Reading Numeric"
                             }
@@ -1054,7 +1071,7 @@
                                                 "readonly": false,
                                                 "valid": true
                                             },
-                                            "value": "SECRET:62UDYEjeqWgLxnzSDjWJLg=="
+                                            "value": "SECRET:I4Ou2hyZ7BrmP/VRmDf3/Q=="
                                         },
                                         {
                                             "name": "authCode",
@@ -1093,7 +1110,7 @@
                                                 "type": "password",
                                                 "visible": false
                                             },
-                                            "value": "SECRET:R0U9znJ15CV+6v6imFuShg=="
+                                            "value": "SECRET:9PIMkIzTq95cSod87iqoBg=="
                                         },
                                         {
                                             "name": "accessTokenExpiry",
@@ -1115,7 +1132,7 @@
                                                 "type": "password",
                                                 "visible": false
                                             },
-                                            "value": "SECRET:7LIOK8bsxS67KwZdLjfuXQ=="
+                                            "value": "SECRET:G3NVCde3hfIzPiEJ9Qk1OA=="
                                         },
                                         {
                                             "name": "refreshTokenExpiry",
@@ -1353,7 +1370,7 @@
                         "activity": {
                             "ref": "#log",
                             "input": {
-                                "Log Level": "INFO",
+                                "Log Level": "=$property[\"Logging.LogLevel\"]",
                                 "flowInfo": false,
                                 "message": "Saving Reading String"
                             }
@@ -1515,7 +1532,7 @@
                                                 "readonly": false,
                                                 "valid": true
                                             },
-                                            "value": "SECRET:8rHTyOqsMLKtZmi8bk4ZiA=="
+                                            "value": "SECRET:dy/t6BpyZ+kieyzG5POO+g=="
                                         },
                                         {
                                             "name": "authCode",
@@ -1554,7 +1571,7 @@
                                                 "type": "password",
                                                 "visible": false
                                             },
-                                            "value": "SECRET:hNhZGKKWiwM2Ct8ydGsUPg=="
+                                            "value": "SECRET:rGySy3GOPz3wv024CFqUsQ=="
                                         },
                                         {
                                             "name": "accessTokenExpiry",
@@ -1576,7 +1593,7 @@
                                                 "type": "password",
                                                 "visible": false
                                             },
-                                            "value": "SECRET:LLCjOfuH1FUMHOHXCRQWeA=="
+                                            "value": "SECRET:CSQD9zkOMO50jHBLsBQQPw=="
                                         },
                                         {
                                             "name": "refreshTokenExpiry",
@@ -1856,7 +1873,7 @@
         {
             "name": "Snowflake.SnowflakeTCR.Password",
             "type": "string",
-            "value": "SECRET:E1q+mdCUEkKLWJjngcFi5+35pZrdVIIC"
+            "value": "SECRET:yZ2ZhmjNOnSCU14b67PBUjo86GmT4jKj"
         },
         {
             "name": "Snowflake.SnowflakeTCR.Role",
@@ -1891,10 +1908,20 @@
         {
             "name": "Mqtt.IoTMQTT.Password",
             "type": "string",
-            "value": "SECRET:pqtuXOwhpPILBtB8epKde1Puc46Z0udwGb8="
+            "value": "SECRET:J3/1coQ7h0TinhxlKNCIwb8Ebh3MwQIng2U="
+        },
+        {
+            "name": "Filtering.DeviceNames",
+            "type": "string",
+            "value": " "
+        },
+        {
+            "name": "Logging.LogLevel",
+            "type": "string",
+            "value": "DEBUG"
         }
     ],
     "connections": {},
     "contrib": "W3sicmVmIjoiZ2l0LnRpYmNvLmNvbS9naXQvcHJvZHVjdC9pcGFhcy93aS1jb250cmliLmdpdC9jb250cmlidXRpb25zL0dlbmVyYWwiLCJzM2xvY2F0aW9uIjoiVGliY28vR2VuZXJhbCJ9LHsicmVmIjoiZ2l0LnRpYmNvLmNvbS9naXQvcHJvZHVjdC9pcGFhcy93aS1zbm93Zmxha2UuZ2l0L3NyYy9hcHAvU25vd2ZsYWtlIiwiczNsb2NhdGlvbiI6IlRpYmNvL1Nub3dmbGFrZSJ9LHsicmVmIjoiZ2l0LnRpYmNvLmNvbS9naXQvcHJvZHVjdC9pcGFhcy93aS1tcXR0LmdpdC9NcXR0IiwiczNsb2NhdGlvbiI6IlRpYmNvL01xdHQifV0=",
-    "fe_metadata": "UEsDBAoAAAAIAAKYa1CrqSRGFQAAABMAAAAIAAAAYXBwLmpzb26rViopykxPTy1yy8kvL1ayio6tBQBQSwECFAAKAAAACAACmGtQq6kkRhUAAAATAAAACAAAAAAAAAAAAAAAAAAAAAAAYXBwLmpzb25QSwUGAAAAAAEAAQA2AAAAOwAAAAAA"
+    "fe_metadata": "UEsDBAoAAAAIANWrhVCrqSRGFQAAABMAAAAIAAAAYXBwLmpzb26rViopykxPTy1yy8kvL1ayio6tBQBQSwECFAAKAAAACADVq4VQq6kkRhUAAAATAAAACAAAAAAAAAAAAAAAAAAAAAAAYXBwLmpzb25QSwUGAAAAAAEAAQA2AAAAOwAAAAAA"
 }
