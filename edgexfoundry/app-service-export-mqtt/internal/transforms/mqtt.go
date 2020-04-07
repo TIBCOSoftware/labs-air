@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"strings"
+	"time"
 
 	MQTT "github.com/eclipse/paho.mqtt.golang"
 	"github.com/edgexfoundry/app-functions-sdk-go/appsdk"
@@ -110,7 +111,8 @@ func NewMQTTSender(logging logger.LoggingClient, keyCertPair *KeyCertPair, mqttC
 	opts.SetClientID(mqttConfig.Publisher)
 	opts.SetUsername(mqttConfig.User)
 	opts.SetPassword(mqttConfig.Password)
-	opts.SetAutoReconnect(mqttConfig.AutoReconnect)
+	// opts.SetAutoReconnect(mqttConfig.AutoReconnect)
+	opts.SetKeepAlive(time.Second * time.Duration(30))
 
 	if (protocol == "tcps" || protocol == "ssl" || protocol == "tls") && keyCertPair != nil {
 		var cert tls.Certificate
@@ -160,17 +162,20 @@ func (sender MQTTSender) MQTTSend(msg string) (bool, interface{}) {
 		}
 		loggingClient.Info("Connected to mqtt server")
 	}
+
 	data, err := util.CoerceType(msg)
 	if err != nil {
 		return false, err
 	}
+
 	token := sender.client.Publish(sender.topic, sender.opts.QOS, sender.opts.Retain, data)
 	// FIXME: could be removed? set of tokens?
 	token.Wait()
+
 	if token.Error() != nil {
 		return false, token.Error()
 	}
-	loggingClient.Info("Sent data to MQTT Broker")
+
 	loggingClient.Trace("Data exported", "Transport", "MQTT", clients.CorrelationHeader)
 
 	return true, nil
