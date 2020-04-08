@@ -1,9 +1,0 @@
-FROM alpine:3.7
-
-RUN mkdir /iot
-
-COPY executables/IoTNotificationSubscriberMQTT-Gateway1-K8-linux_amd64 /iot
-
-RUN chmod +x /iot/IoTNotificationSubscriberMQTT-Gateway1-K8-linux_amd64
-
-ENTRYPOINT ["/iot/IoTNotificationSubscriberMQTT-Gateway1-K8-linux_amd64"]
