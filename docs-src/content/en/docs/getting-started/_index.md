@@ -3,7 +3,7 @@ title: "Getting Started"
 linkTitle: "Getting Started"
 weight: 1
 description: >
-  your first Steps into TIBCO Project Air.
+  Your first steps into TIBCO Project Air.
 ---
 
-first Steps to start
+First steps to start
