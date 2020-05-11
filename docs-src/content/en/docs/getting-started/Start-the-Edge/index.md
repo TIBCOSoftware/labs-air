@@ -78,6 +78,30 @@ Copy the access token for tibuser, you will need it for the edge group registrat
 Congratulations!! Project Air edge basic demo is running
 
 
+## Uninstallation Steps
 
+#### Step 1: stop the demo
+
+Inside your basicdemo folder run
+
+```
+./stopEdgex.sh
+```
+
+#### Step 2: call delete command on cli
+
+Note: This installation deletes the Kubernetes cluster.
+
+```
+docker run -it tibcosoftware/labs-air-aws-cli air delete
+```
+
+Enter the AWS information when prompted
+
+```
+Please enter your AWS_ACCESS_KEY_ID:
+
+Please enter your AWS_SECRET_ACCESS_KEY:
+```
 
 
