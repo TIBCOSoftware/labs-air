@@ -77,9 +77,9 @@ aws:
 
 Then just mount a volume with the config.yaml file when calling the cli for example:
 
-'''
+```
 docker run -it -v /path/to/config/file/:/configuration tibcosoftware/labs-air-aws-cli air install
-'''
+```
 
 
 ## Uninstallation Steps

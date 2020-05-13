@@ -20,21 +20,24 @@
 <link rel="icon" type="image/png" href="/labs-air/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/labs-air/favicons/android-192x192.png" sizes="192x192">
 
-<title>Search Results | Project Air</title><meta property="og:title" content="Search Results" />
-<meta property="og:description" content="" />
+<title>Install on AWS | Project Air</title><meta property="og:title" content="Install on AWS" />
+<meta property="og:description" content="Installation of Project Air on Amazon Web Services (AWS)
+" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://tibcosoftware.github.io/labs-air/search/" />
-<meta property="article:modified_time" content="2020-02-26T11:25:45+01:00" /><meta property="og:site_name" content="Project Air" />
-<meta itemprop="name" content="Search Results">
-<meta itemprop="description" content="">
-<meta itemprop="dateModified" content="2020-02-26T11:25:45&#43;01:00" />
-<meta itemprop="wordCount" content="0">
+<meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/getting-started/install-on-aws/" />
+<meta property="article:modified_time" content="2020-05-12T19:14:15-07:00" /><meta property="og:site_name" content="Project Air" />
+<meta itemprop="name" content="Install on AWS">
+<meta itemprop="description" content="Installation of Project Air on Amazon Web Services (AWS)
+">
+<meta itemprop="dateModified" content="2020-05-12T19:14:15-07:00" />
+<meta itemprop="wordCount" content="314">
 
 
 
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Search Results"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="Install on AWS"/>
+<meta name="twitter:description" content="Installation of Project Air on Amazon Web Services (AWS)
+"/>
 
 
 
@@ -55,6 +58,7 @@
 <script src="/js/offline-search.js"></script>
 
 
+    <title>Install on AWS | Project Air</title>
   </head>
   <body class="td-page">
     <header>
@@ -84,7 +88,7 @@
 				
 				
 				
-				<a class="nav-link" href="/labs-air/docs/" ><span>Documentation</span></a>
+				<a class="nav-link active" href="/labs-air/docs/" ><span class="active">Documentation</span></a>
 			</li>
 			
 			<li class="nav-item mr-4 mb-2 mb-lg-0">
@@ -120,18 +124,340 @@
 </nav>
 
     </header>
-    <div class="container-fluid td-default td-outer">
-      <main role="main" class="td-main">
-        
-<section class="row td-search-result">
-<div class="col-12 col-md-8 offset-md-2">
-<h2 class="ml-4">Search Results</h2>
+    <div class="container-fluid td-outer">
+      <div class="td-main">
+        <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+
+
+
+
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  
+  <form class="td-sidebar__search d-flex align-items-center">
+    
+<div id="search-nav-container">
+<input type="search" id="search-input" autocomplete="off" class="form-control td-search-input" placeholder="&#xf002 Search this site…" autocomplete="on">
+<div id="search-results" class="container"></div>
+</div>
+
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  
+  <nav class="collapse td-sidebar-nav pt-2 pl-4" id="td-section-nav">
+    
+    
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/labs-air/docs/" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">Documentation</a>
+  </li>
+  <ul>
+    <li class="collapse show" id="labs-airdocs">
+      
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/labs-air/docs/getting-started/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Getting Started</a>
+  </li>
+  <ul>
+    <li class="collapse show" id="labs-airdocsgetting-started">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-labs-airdocsgetting-startedinstall-on-aws" href="/labs-air/docs/getting-started/install-on-aws/">Install on AWS</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airdocsgetting-startedstart-the-edge" href="/labs-air/docs/getting-started/start-the-edge/">Start the Edge</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airdocsgetting-startedstart-the-ui" href="/labs-air/docs/getting-started/start-the-ui/">Start the UI</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/labs-air/docs/overview/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Overview</a>
+  </li>
+  <ul>
+    <li class="collapse " id="labs-airdocsoverview">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airdocsoverviewedgex-foundry" href="/labs-air/docs/overview/edgex-foundry/">EdgeX Foundry</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+    </li>
+  </ul>
+</ul>
+
+  </nav>
+</div>
+
+
+
+
+          </div>
+          <div class="d-none d-xl-block col-xl-2 td-toc d-print-none">
+            
+
+
+
+
+<div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
+
+
+
+
+
+
+<a href="https://github.com/TIBCOSoftware/labs-air//issues/new?title=Install%20on%20AWS" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+
+
+<a href="https://github.com/TIBCOSoftware/labs-air//issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
 
 </div>
-</section>
 
 
-      </main>
+
+
+
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#prerequisites">Prerequisites</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#installation-steps">Installation Steps</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#advanced-install-configuration">Advanced install configuration</a></li>
+    <li><a href="#uninstallation-steps">Uninstallation Steps</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+          </div>
+          <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
+            <nav aria-label="breadcrumb" class="d-none d-md-block d-print-none">
+	<ol class="breadcrumb spb-1">
+		
+
+
+
+
+
+
+
+
+
+
+<li class="breadcrumb-item" >
+	<a href="https://tibcosoftware.github.io/labs-air/docs/">Documentation</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item" >
+	<a href="https://tibcosoftware.github.io/labs-air/docs/getting-started/">Getting Started</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item active" aria-current="page">
+	<a href="https://tibcosoftware.github.io/labs-air/docs/getting-started/install-on-aws/">Install on AWS</a>
+</li>
+
+	</ol>
+</nav	>
+
+            
+
+
+
+<p class="-text-primary pt-3 h6" >Reading time: 1 minutes and 25 seconds.</p>
+<p>
+<div class="td-content">
+	<h1>Install on AWS</h1>
+	<div class="lead">Installation of Project Air on Amazon Web Services (AWS)</div>
+	<h2 id="introduction">Introduction</h2>
+<p>The following steps will guide you through the full infrastructure installation on Amazon Web Services.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<h4 id="prerequisite-1-docker">Prerequisite 1: Docker</h4>
+<p>Air&rsquo;s CLI is wrapped in a docker container to ease the installation process:</p>
+<ul>
+<li><a href="https://www.docker.com/get-started">Docker</a></li>
+</ul>
+<h4 id="prerequisite-2-aws-account-information">Prerequisite 2: AWS Account Information</h4>
+<p>All the infrastructure components needed for Project Air will be installed in your provided AWS account, you will need the following information to install it:</p>
+<p>Your AWS access and secret keys: More information <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html">here</a></p>
+<h2 id="installation-steps">Installation Steps</h2>
+<h4 id="step-1-pull-aws-cli">Step 1: pull aws cli</h4>
+<pre><code>docker pull tibcosoftware/labs-air-aws-cli
+</code></pre><h4 id="step-2-call-install-command-on-cli">Step 2: call install command on cli</h4>
+<p>Note: This installation installs a Kubernetes cluster using EKS in your aws account so it takes around ~20minutes to finish.</p>
+<pre><code>docker run -it tibcosoftware/labs-air-aws-cli air install
+</code></pre><p>Enter the AWS information when prompted (Note: To avoid prompt look at the Advanced install configuration section below)</p>
+<pre><code>Please enter your AWS_ACCESS_KEY_ID:
+
+Please enter your AWS_SECRET_ACCESS_KEY:
+</code></pre><h4 id="step-3-optional-check-installation">Step 3 [optional]: check installation</h4>
+<p>This command will allow you to connect to the kubernetes cluster to see the different components</p>
+<pre><code>docker run -it -p 8001:8001 tibcosoftware/labs-air-aws-cli air dashboard
+</code></pre><p>Copy the token printed in the terminal</p>
+<p>And follow the dashboard link also printed in the terminal</p>
+<p>Congratulations!! Project Air infrastructure has been installed</p>
+<h2 id="advanced-install-configuration">Advanced install configuration</h2>
+<p>There is a way to avoid being prompted for your credentials as well as adding advanced configuration.</p>
+<p>You need to create a config.yaml file with the following content:</p>
+<pre><code>aws:
+  AWS_ACCESS_KEY_ID: &lt;YOUR ACCESS KEY ID HERE&gt;
+  AWS_SECRET_ACCESS_KEY: &lt;YOUR SECRET ACCESS KEY ID HERE&gt;
+  AWS_DEFAULT_REGION: &lt;YOUR DEFAULT REGION HERE&gt;
+</code></pre><p>Then just mount a volume with the config.yaml file when calling the cli for example:</p>
+<p>'&rsquo;&rsquo;
+docker run -it -v /path/to/config/file/:/configuration tibcosoftware/labs-air-aws-cli air install
+'&rsquo;&rsquo;</p>
+<h2 id="uninstallation-steps">Uninstallation Steps</h2>
+<h4 id="step-1-pull-aws-cli-1">Step 1: pull aws cli</h4>
+<pre><code>docker pull tibcosoftware/labs-air-aws-cli
+</code></pre><h4 id="step-2-call-delete-command-on-cli">Step 2: call delete command on cli</h4>
+<p>Note: This installation deletes the Kubernetes cluster.</p>
+<pre><code>docker run -it tibcosoftware/labs-air-aws-cli air delete
+</code></pre><p>Enter the AWS information when prompted</p>
+<pre><code>Please enter your AWS_ACCESS_KEY_ID:
+
+Please enter your AWS_SECRET_ACCESS_KEY:
+</code></pre>
+	
+		<style>
+  .feedback--answer {
+    display: inline-block;
+  }
+  .feedback--answer-no {
+    margin-left: 1em;
+  }
+  .feedback--response {
+    display: none;
+    margin-top: 1em;
+  }
+  .feedback--response__visible {
+    display: block;
+  }
+</style>
+<h2 class="feedback--title">Feedback</h2>
+<p class="feedback--question">Was this page helpful?</p>
+<button class="feedback--answer feedback--answer-yes">Yes</button>
+<button class="feedback--answer feedback--answer-no">No</button>
+<p class="feedback--response feedback--response-yes">
+  Glad to hear it! Please <a href="https://github.com/TIBCOSoftware/labs-air/issues/new">tell us how we can improve</a>.
+</p>
+<p class="feedback--response feedback--response-no">
+  Sorry to hear that. Please <a href="https://github.com/TIBCOSoftware/labs-air/issues/new">tell us how we can improve</a>.
+</p>
+<script>
+  const yesButton = document.querySelector('.feedback--answer-yes');
+  const noButton = document.querySelector('.feedback--answer-no');
+  const yesResponse = document.querySelector('.feedback--response-yes');
+  const noResponse = document.querySelector('.feedback--response-no');
+  const disableButtons = () => {
+    yesButton.disabled = true;
+    noButton.disabled = true;
+  };
+  const sendFeedback = (value) => {
+    if (typeof ga !== 'function') return;
+    const args = {
+      command: 'send',
+      hitType: 'event',
+      category: 'Helpful',
+      action: 'click',
+      label: window.location.pathname,
+      value: value
+    };
+    ga(args.command, args.hitType, args.category, args.action, args.label, args.value);
+  };
+  yesButton.addEventListener('click', () => {
+    yesResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback(1);
+  });
+  noButton.addEventListener('click', () => {
+    noResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback(0);
+  });
+</script>
+
+		<br />
+	
+	
+	<div class="text-muted mt-5 pt-3 border-top">Last modified May 12, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/82fc78c22ebfe6969b06eee512db698572425b24">Add advanced configuration (82fc78c2)</a>
+</div>
+</div>
+
+
+          </main>
+        </div>
+      </div>
       
 <footer class="bg-dark py-5 row d-print-none">
   <div class="container-fluid mx-sm-5">
