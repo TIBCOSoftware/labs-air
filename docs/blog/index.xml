@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Project Air – Blog</title>
+    <title>Project AIR™ – Blog</title>
     <link>https://tibcosoftware.github.io/labs-air/blog/</link>
-    <description>Recent content in Blog on Project Air</description>
+    <description>Recent content in Blog on Project AIR™</description>
     <generator>Hugo -- gohugo.io</generator>
     
 	  <atom:link href="https://tibcosoftware.github.io/labs-air/blog/index.xml" rel="self" type="application/rss+xml" />
@@ -22,7 +22,7 @@
       <description>
         
         
-        &lt;p&gt;first public Implementation of the TIBCO LABS™ Project Air, containing:&lt;/p&gt;
+        &lt;p&gt;first public Implementation of the TIBCO LABS™ Project AIR™, containing:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;used EdgeX Foundry Assets&lt;/li&gt;
 &lt;li&gt;TIBCO Flogo Services&lt;/li&gt;
@@ -34,20 +34,6 @@
 &lt;blockquote&gt;
 &lt;p&gt;please have a look back soon here.&lt;/p&gt;
 &lt;/blockquote&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Blog: Second Release</title>
-      <link>https://tibcosoftware.github.io/labs-air/blog/2020/02/06/second-release/</link>
-      <pubDate>Thu, 06 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://tibcosoftware.github.io/labs-air/blog/2020/02/06/second-release/</guid>
-      <description>
-        
-        
-        &lt;p&gt;not yet available&lt;/p&gt;
 
       </description>
     </item>

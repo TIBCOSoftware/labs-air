@@ -1,5 +1,5 @@
 baseURL = "https://tibcosoftware.github.io/labs-air/"
-title = "Project Air"
+title = "Project AIR"
 
 enableRobotsTXT = true
 
@@ -55,7 +55,7 @@ id = "UA-218413-1"
 
 [languages]
 [languages.en]
-title = "Project Air"
+title = "Project AIR™"
 description = "Intelligent insights from device to boardroom"
 languageName ="English"
 

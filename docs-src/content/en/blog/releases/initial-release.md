@@ -6,7 +6,7 @@ description: >
   First **public** Release.
 ---
 
-first public Implementation of the TIBCO LABS™ Project Air, containing:
+first public Implementation of the TIBCO LABS™ Project AIR™, containing:
 
 - used EdgeX Foundry Assets
 - TIBCO Flogo Services

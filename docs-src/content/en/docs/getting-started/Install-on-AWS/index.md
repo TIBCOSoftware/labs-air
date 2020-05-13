@@ -3,7 +3,7 @@ title: "Install on AWS"
 linkTitle: "Install on AWS"
 weight: 1
 description: >
-  Installation of Project Air on Amazon Web Services (AWS)
+  Installation of Project AIR™ on Amazon Web Services (AWS)
 ---
 
 ## Introduction
