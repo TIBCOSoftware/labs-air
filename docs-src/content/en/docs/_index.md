@@ -8,5 +8,5 @@ menu:
     weight: 20
 ---
 
-TIBCO LABS Project Air Details
+TIBCO LABS Project AIR™ Details
 
