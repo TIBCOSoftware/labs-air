@@ -37,7 +37,7 @@ Note: This installation installs a Kubernetes cluster using EKS in your aws acco
 docker run -it tibcosoftware/labs-air-aws-cli air install
 ```
 
-Enter the AWS information when prompted
+Enter the AWS information when prompted (Note: To avoid prompt look at the Advanced install configuration section below)
 
 ```
 Please enter your AWS_ACCESS_KEY_ID:
@@ -62,6 +62,24 @@ And follow the dashboard link also printed in the terminal
 
 Congratulations!! Project Air infrastructure has been installed
 
+
+## Advanced install configuration
+There is a way to avoid being prompted for your credentials as well as adding advanced configuration.
+
+You need to create a config.yaml file with the following content:
+
+```
+aws:
+  AWS_ACCESS_KEY_ID: <YOUR ACCESS KEY ID HERE>
+  AWS_SECRET_ACCESS_KEY: <YOUR SECRET ACCESS KEY ID HERE>
+  AWS_DEFAULT_REGION: <YOUR DEFAULT REGION HERE>
+```
+
+Then just mount a volume with the config.yaml file when calling the cli for example:
+
+'''
+docker run -it -v /path/to/config/file/:/configuration tibcosoftware/labs-air-aws-cli air install
+'''
 
 
 ## Uninstallation Steps
