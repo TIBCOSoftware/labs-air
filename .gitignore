@@ -3,9 +3,10 @@
 # compiled output
 
 # dependencies
+node_modules/
 
 # profiling files
-/node_modules
+
 
 # IDEs and editors
 
