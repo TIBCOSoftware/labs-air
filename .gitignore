@@ -5,6 +5,7 @@
 # dependencies
 
 # profiling files
+/node_modules/*
 
 # IDEs and editors
 
