@@ -205,35 +205,6 @@
 
       
       
-      
-      
-
-
-
-
-
-
-<ul class="td-sidebar-nav__section pr-md-3">
-  <li class="td-sidebar-nav__section-title">
-    <a  href="/labs-air/docs/overview/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Overview</a>
-  </li>
-  <ul>
-    <li class="collapse " id="labs-airdocsoverview">
-      
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airdocsoverviewedgex-foundry" href="/labs-air/docs/overview/edgex-foundry/">EdgeX Foundry</a>
-      
-      
-    </li>
-  </ul>
-</ul>
-
-      
-      
     </li>
   </ul>
 </ul>
@@ -361,8 +332,8 @@
 
 
 {'service_name': 'core-mosquitto-service', 'hostname': '&lt;someawsdns&gt;.us-west-2.elb.amazonaws.com', 'ports': [443]}
-</code></pre><p>Then, let's use those endpoints to configure the UI.</p>
-<p>Open the file proxy.conf.prod.ui.json and replace the following entries at the end of the json file with the endpoints from previous step.</p>
+</code></pre><p>Then, let&rsquo;s use those endpoints to configure the UI.</p>
+<p>Open the file proxy.conf.prod.us.json and replace the following entries at the end of the json file with the endpoints from previous step.</p>
 <pre><code>,
   &quot;/edgex/localgateway/*&quot;: {
     &quot;target&quot;: &quot;https://localhost:8443&quot;,

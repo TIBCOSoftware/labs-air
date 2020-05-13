@@ -52,7 +52,7 @@ You should see 3 endpoints being displayed something like:
 
 Then, let's use those endpoints to configure the UI.
 
-Open the file proxy.conf.prod.ui.json and replace the following entries at the end of the json file with the endpoints from previous step.
+Open the file proxy.conf.prod.us.json and replace the following entries at the end of the json file with the endpoints from previous step.
 
 ```
 ,
