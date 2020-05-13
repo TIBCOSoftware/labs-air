@@ -162,7 +162,7 @@ Please enter your AWS_SECRET_ACCESS_KEY:
 
 {&#39;service_name&#39;: &#39;core-mosquitto-service&#39;, &#39;hostname&#39;: &#39;&amp;lt;someawsdns&amp;gt;.us-west-2.elb.amazonaws.com&#39;, &#39;ports&#39;: [443]}
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then, let&amp;rsquo;s use those endpoints to configure the UI.&lt;/p&gt;
-&lt;p&gt;Open the file proxy.conf.prod.ui.json and replace the following entries at the end of the json file with the endpoints from previous step.&lt;/p&gt;
+&lt;p&gt;Open the file proxy.conf.prod.us.json and replace the following entries at the end of the json file with the endpoints from previous step.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;,
   &amp;quot;/edgex/localgateway/*&amp;quot;: {
     &amp;quot;target&amp;quot;: &amp;quot;https://localhost:8443&amp;quot;,
