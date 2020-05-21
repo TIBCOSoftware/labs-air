@@ -39,7 +39,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;step-2-call-install-command-on-cli&#34;&gt;Step 2: call install command on cli&lt;/h4&gt;
 &lt;p&gt;Note: This installation installs a Kubernetes cluster using EKS in your aws account so it takes around ~20minutes to finish.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;docker run -it tibcosoftware/labs-air-aws-cli air install
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Enter the AWS information when prompted (Note: To avoid prompt look at the Advanced install configuration section below)&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Enter the AWS information when prompted (Note: To avoid prompt look at the Advanced install configuration section &lt;a href=&#34;#advanced-install-configuration&#34;&gt;here&lt;/a&gt;)&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;Please enter your AWS_ACCESS_KEY_ID:
 
 Please enter your AWS_SECRET_ACCESS_KEY:
@@ -76,11 +76,19 @@ Please enter your AWS_SECRET_ACCESS_KEY:
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;step-2-call-delete-command-on-cli&#34;&gt;Step 2: call delete command on cli&lt;/h4&gt;
 &lt;p&gt;Note: This installation deletes the Kubernetes cluster.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;docker run -it tibcosoftware/labs-air-aws-cli air delete
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Enter the AWS information when prompted&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Enter the AWS information when prompted (Note: To avoid prompt look at the Advanced install configuration section &lt;a href=&#34;#advanced-install-configuration&#34;&gt;here&lt;/a&gt;)&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;Please enter your AWS_ACCESS_KEY_ID:
 
 Please enter your AWS_SECRET_ACCESS_KEY:
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;troubleshooting&#34;&gt;Troubleshooting&lt;/h2&gt;
+&lt;h3 id=&#34;alreadyexistexception&#34;&gt;AlreadyExistException&lt;/h3&gt;
+&lt;p&gt;If you get a message similar to this&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[✖]  creating CloudFormation stack &amp;quot;eksctl-air-cluster-cluster&amp;quot;: AlreadyExistsException: Stack [eksctl-air-cluster-cluster] already exists
+        status code: 400, request id: a4eba6b2-bd4a-475d-b3a1-93fc6cfd5d1f
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This means that there is an already existing cluster with that name the solution is:&lt;/p&gt;
+&lt;p&gt;1.- Delete the cluster, go &lt;a href=&#34;#uninstallation-steps&#34;&gt;here&lt;/a&gt; for more information.&lt;/p&gt;
+&lt;p&gt;2.- Create a cluster with a different name, go &lt;a href=&#34;#advanced-configuration-for-choosing-a-different-cluster-name&#34;&gt;here&lt;/a&gt; for more information.&lt;/p&gt;
+
       </description>
     </item>
     
