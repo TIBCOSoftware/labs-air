@@ -25,12 +25,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/getting-started/install-on-aws/" />
-<meta property="article:modified_time" content="2020-05-13T09:56:38+02:00" /><meta property="og:site_name" content="Project AIR™" />
+<meta property="article:modified_time" content="2020-05-20T18:38:46-07:00" /><meta property="og:site_name" content="Project AIR™" />
 <meta itemprop="name" content="Install on AWS">
 <meta itemprop="description" content="Installation of Project AIR™ on Amazon Web Services (AWS)
 ">
-<meta itemprop="dateModified" content="2020-05-13T09:56:38&#43;02:00" />
-<meta itemprop="wordCount" content="399">
+<meta itemprop="dateModified" content="2020-05-20T18:38:46-07:00" />
+<meta itemprop="wordCount" content="474">
 
 
 
@@ -265,6 +265,11 @@
         <li></li>
       </ul>
     </li>
+    <li><a href="#troubleshooting">Troubleshooting</a>
+      <ul>
+        <li><a href="#alreadyexistexception">AlreadyExistException</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -310,7 +315,7 @@
 
 
 
-<p class="-text-primary pt-3 h6" >Reading time: 1 minutes and 48 seconds.</p>
+<p class="-text-primary pt-3 h6" >Reading time: 2 minutes and 9 seconds.</p>
 <p>
 <div class="td-content">
 	<h1>Install on AWS</h1>
@@ -332,7 +337,7 @@
 </code></pre><h4 id="step-2-call-install-command-on-cli">Step 2: call install command on cli</h4>
 <p>Note: This installation installs a Kubernetes cluster using EKS in your aws account so it takes around ~20minutes to finish.</p>
 <pre><code>docker run -it tibcosoftware/labs-air-aws-cli air install
-</code></pre><p>Enter the AWS information when prompted (Note: To avoid prompt look at the Advanced install configuration section below)</p>
+</code></pre><p>Enter the AWS information when prompted (Note: To avoid prompt look at the Advanced install configuration section <a href="#advanced-install-configuration">here</a>)</p>
 <pre><code>Please enter your AWS_ACCESS_KEY_ID:
 
 Please enter your AWS_SECRET_ACCESS_KEY:
@@ -369,11 +374,19 @@ Please enter your AWS_SECRET_ACCESS_KEY:
 </code></pre><h4 id="step-2-call-delete-command-on-cli">Step 2: call delete command on cli</h4>
 <p>Note: This installation deletes the Kubernetes cluster.</p>
 <pre><code>docker run -it tibcosoftware/labs-air-aws-cli air delete
-</code></pre><p>Enter the AWS information when prompted</p>
+</code></pre><p>Enter the AWS information when prompted (Note: To avoid prompt look at the Advanced install configuration section <a href="#advanced-install-configuration">here</a>)</p>
 <pre><code>Please enter your AWS_ACCESS_KEY_ID:
 
 Please enter your AWS_SECRET_ACCESS_KEY:
-</code></pre>
+</code></pre><h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="alreadyexistexception">AlreadyExistException</h3>
+<p>If you get a message similar to this</p>
+<pre><code>[✖]  creating CloudFormation stack &quot;eksctl-air-cluster-cluster&quot;: AlreadyExistsException: Stack [eksctl-air-cluster-cluster] already exists
+        status code: 400, request id: a4eba6b2-bd4a-475d-b3a1-93fc6cfd5d1f
+</code></pre><p>This means that there is an already existing cluster with that name the solution is:</p>
+<p>1.- Delete the cluster, go <a href="#uninstallation-steps">here</a> for more information.</p>
+<p>2.- Create a cluster with a different name, go <a href="#advanced-configuration-for-choosing-a-different-cluster-name">here</a> for more information.</p>
+
 	
 		<style>
   .feedback--answer {
@@ -436,7 +449,7 @@ Please enter your AWS_SECRET_ACCESS_KEY:
 		<br />
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified May 13, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/82dc09f7eb1947fdf1ef49b58182f7c4502cf90b">fix name (82dc09f7)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified May 20, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/8a56447720c47567f1de7e35c2b9fc425fd16705">Update docs, add assuming role information (8a564477)</a>
 </div>
 </div>
 

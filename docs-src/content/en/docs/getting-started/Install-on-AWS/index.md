@@ -37,7 +37,7 @@ Note: This installation installs a Kubernetes cluster using EKS in your aws acco
 docker run -it tibcosoftware/labs-air-aws-cli air install
 ```
 
-Enter the AWS information when prompted (Note: To avoid prompt look at the Advanced install configuration section below)
+Enter the AWS information when prompted (Note: To avoid prompt look at the Advanced install configuration section [here](#advanced-install-configuration))
 
 ```
 Please enter your AWS_ACCESS_KEY_ID:
@@ -121,13 +121,30 @@ Note: This installation deletes the Kubernetes cluster.
 docker run -it tibcosoftware/labs-air-aws-cli air delete
 ```
 
-Enter the AWS information when prompted
+Enter the AWS information when prompted (Note: To avoid prompt look at the Advanced install configuration section [here](#advanced-install-configuration))
 
 ```
 Please enter your AWS_ACCESS_KEY_ID:
 
 Please enter your AWS_SECRET_ACCESS_KEY:
 ```
+
+## Troubleshooting
+
+### AlreadyExistException
+
+If you get a message similar to this
+
+```
+[✖]  creating CloudFormation stack "eksctl-air-cluster-cluster": AlreadyExistsException: Stack [eksctl-air-cluster-cluster] already exists
+        status code: 400, request id: a4eba6b2-bd4a-475d-b3a1-93fc6cfd5d1f
+```
+
+This means that there is an already existing cluster with that name the solution is:
+
+1.- Delete the cluster, go [here](#uninstallation-steps) for more information.
+
+2.- Create a cluster with a different name, go [here](#advanced-configuration-for-choosing-a-different-cluster-name) for more information.
 
 
 
