@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.64.1" />
 
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
@@ -313,7 +313,7 @@
 <p>The following steps will guide you through the configuration and how to run the edge elements locally.</p>
 <h2 id="prerequisites">Prerequisites</h2>
 <h4 id="prerequisite-1-docker">Prerequisite 1: Docker</h4>
-<p>Air's CLI is wrapped in a docker container to ease the installation process:</p>
+<p>Air&rsquo;s CLI is wrapped in a docker container to ease the installation process:</p>
 <ul>
 <li><a href="https://www.docker.com/get-started">Docker</a></li>
 </ul>
@@ -322,7 +322,7 @@
 <p>Download the <a href="./basicdemo.zip">basic demo file</a></p>
 <p>Unzip basicdemo.zip</p>
 <h4 id="step-2-configure-basic-demo">Step 2: Configure basic demo</h4>
-<p>First let's query the endpoints</p>
+<p>First let&rsquo;s query the endpoints</p>
 <pre><code>docker run -it tibcosoftware/labs-air-aws-cli air show-endpoints
 </code></pre><p>You should see 3 endpoints being displayed something like:</p>
 <pre><code>{'service_name': 'core-air-cors-anywhere-service', 'hostname': '&lt;someawsdns&gt;.us-west-2.elb.amazonaws.com', 'ports': [80]}
@@ -332,7 +332,7 @@
 
 
 {'service_name': 'core-mosquitto-service', 'hostname': '&lt;someawsdns&gt;.us-west-2.elb.amazonaws.com', 'ports': [443]}
-</code></pre><p>Then, let's use those endpoints to configure the Edge example.</p>
+</code></pre><p>Then, let&rsquo;s use those endpoints to configure the Edge example.</p>
 <pre><code>cd basicdemo
 </code></pre><p>Modify basicdemo/export_mqtt/configuration.toml</p>
 <p>Replace <Add-Your-mosquitto-service-Enpoint-Here> with your mosquitto-service endpoint also ensure the port is correct.</p>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.64.1" />
 
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
@@ -25,12 +25,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/getting-started/install-on-aws/" />
-<meta property="article:modified_time" content="2020-05-12T19:22:27-07:00" /><meta property="og:site_name" content="Project AIR™" />
+<meta property="article:modified_time" content="2020-05-13T09:56:38+02:00" /><meta property="og:site_name" content="Project AIR™" />
 <meta itemprop="name" content="Install on AWS">
 <meta itemprop="description" content="Installation of Project AIR™ on Amazon Web Services (AWS)
 ">
-<meta itemprop="dateModified" content="2020-05-12T19:22:27-07:00" />
-<meta itemprop="wordCount" content="312">
+<meta itemprop="dateModified" content="2020-05-13T09:56:38&#43;02:00" />
+<meta itemprop="wordCount" content="399">
 
 
 
@@ -254,7 +254,12 @@
         <li></li>
       </ul>
     </li>
-    <li><a href="#advanced-install-configuration">Advanced install configuration</a></li>
+    <li><a href="#advanced-install-configuration">Advanced install configuration</a>
+      <ul>
+        <li><a href="#advanced-configuration-for-assuming-a-different-role">Advanced configuration for Assuming a different role</a></li>
+        <li><a href="#advanced-configuration-for-choosing-a-different-cluster-name">Advanced configuration for choosing a different cluster name</a></li>
+      </ul>
+    </li>
     <li><a href="#uninstallation-steps">Uninstallation Steps</a>
       <ul>
         <li></li>
@@ -305,7 +310,7 @@
 
 
 
-<p class="-text-primary pt-3 h6" >Reading time: 1 minutes and 25 seconds.</p>
+<p class="-text-primary pt-3 h6" >Reading time: 1 minutes and 48 seconds.</p>
 <p>
 <div class="td-content">
 	<h1>Install on AWS</h1>
@@ -314,7 +319,7 @@
 <p>The following steps will guide you through the full infrastructure installation on Amazon Web Services.</p>
 <h2 id="prerequisites">Prerequisites</h2>
 <h4 id="prerequisite-1-docker">Prerequisite 1: Docker</h4>
-<p>Air's CLI is wrapped in a docker container to ease the installation process:</p>
+<p>Air&rsquo;s CLI is wrapped in a docker container to ease the installation process:</p>
 <ul>
 <li><a href="https://www.docker.com/get-started">Docker</a></li>
 </ul>
@@ -346,6 +351,18 @@ Please enter your AWS_SECRET_ACCESS_KEY:
   AWS_DEFAULT_REGION: &lt;YOUR DEFAULT REGION HERE&gt;
 </code></pre><p>Then just mount a volume with the config.yaml file when calling the cli for example:</p>
 <pre><code>docker run -it -v /path/to/config/file/:/configuration tibcosoftware/labs-air-aws-cli air install
+</code></pre><h3 id="advanced-configuration-for-assuming-a-different-role">Advanced configuration for Assuming a different role</h3>
+<p>Add the following entry to the config.yaml file:</p>
+<pre><code>aws:
+  ...&lt;Your previous configuration goes here&gt;...
+  AWS_ASSUME_ROLE_ARN: &quot;&lt;Add your Role ARN&gt;&quot;
+  AWS_ASSUME_ROLE_SESSION_DURATION: &quot;&lt;Add your session duration for example 3600&gt;&quot;
+</code></pre><p>Note that the role session duration also implies how often you need to &ldquo;air upgrade-charts&rdquo; refresh the token</p>
+<h3 id="advanced-configuration-for-choosing-a-different-cluster-name">Advanced configuration for choosing a different cluster name</h3>
+<p>Sometimes if you are shareing an AWS account you want to choose a different kubernetes cluster name.</p>
+<pre><code>aws:
+  ...&lt;Your previous configuration goes here&gt;...
+  KUBE_CLUSTER_NAME: &quot;&lt;Your cluster name&gt;&quot;
 </code></pre><h2 id="uninstallation-steps">Uninstallation Steps</h2>
 <h4 id="step-1-pull-aws-cli-1">Step 1: pull aws cli</h4>
 <pre><code>docker pull tibcosoftware/labs-air-aws-cli
@@ -419,7 +436,7 @@ Please enter your AWS_SECRET_ACCESS_KEY:
 		<br />
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified May 12, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/e758471c5102abbb89c845a7ff89e0ed1be11840">Add advanced configuration (e758471c)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified May 13, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/82dc09f7eb1947fdf1ef49b58182f7c4502cf90b">fix name (82dc09f7)</a>
 </div>
 </div>
 

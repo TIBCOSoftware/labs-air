@@ -26,7 +26,7 @@
 &lt;p&gt;The following steps will guide you through the full infrastructure installation on Amazon Web Services.&lt;/p&gt;
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;h4 id=&#34;prerequisite-1-docker&#34;&gt;Prerequisite 1: Docker&lt;/h4&gt;
-&lt;p&gt;Air&#39;s CLI is wrapped in a docker container to ease the installation process:&lt;/p&gt;
+&lt;p&gt;Air&amp;rsquo;s CLI is wrapped in a docker container to ease the installation process:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.docker.com/get-started&#34;&gt;Docker&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -58,6 +58,18 @@ Please enter your AWS_SECRET_ACCESS_KEY:
   AWS_DEFAULT_REGION: &amp;lt;YOUR DEFAULT REGION HERE&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then just mount a volume with the config.yaml file when calling the cli for example:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;docker run -it -v /path/to/config/file/:/configuration tibcosoftware/labs-air-aws-cli air install
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;advanced-configuration-for-assuming-a-different-role&#34;&gt;Advanced configuration for Assuming a different role&lt;/h3&gt;
+&lt;p&gt;Add the following entry to the config.yaml file:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;aws:
+  ...&amp;lt;Your previous configuration goes here&amp;gt;...
+  AWS_ASSUME_ROLE_ARN: &amp;quot;&amp;lt;Add your Role ARN&amp;gt;&amp;quot;
+  AWS_ASSUME_ROLE_SESSION_DURATION: &amp;quot;&amp;lt;Add your session duration for example 3600&amp;gt;&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Note that the role session duration also implies how often you need to &amp;ldquo;air upgrade-charts&amp;rdquo; refresh the token&lt;/p&gt;
+&lt;h3 id=&#34;advanced-configuration-for-choosing-a-different-cluster-name&#34;&gt;Advanced configuration for choosing a different cluster name&lt;/h3&gt;
+&lt;p&gt;Sometimes if you are shareing an AWS account you want to choose a different kubernetes cluster name.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;aws:
+  ...&amp;lt;Your previous configuration goes here&amp;gt;...
+  KUBE_CLUSTER_NAME: &amp;quot;&amp;lt;Your cluster name&amp;gt;&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;uninstallation-steps&#34;&gt;Uninstallation Steps&lt;/h2&gt;
 &lt;h4 id=&#34;step-1-pull-aws-cli-1&#34;&gt;Step 1: pull aws cli&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;docker pull tibcosoftware/labs-air-aws-cli
@@ -85,7 +97,7 @@ Please enter your AWS_SECRET_ACCESS_KEY:
 &lt;p&gt;The following steps will guide you through the configuration and how to run the edge elements locally.&lt;/p&gt;
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;h4 id=&#34;prerequisite-1-docker&#34;&gt;Prerequisite 1: Docker&lt;/h4&gt;
-&lt;p&gt;Air&#39;s CLI is wrapped in a docker container to ease the installation process:&lt;/p&gt;
+&lt;p&gt;Air&amp;rsquo;s CLI is wrapped in a docker container to ease the installation process:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.docker.com/get-started&#34;&gt;Docker&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -94,7 +106,7 @@ Please enter your AWS_SECRET_ACCESS_KEY:
 &lt;p&gt;Download the &lt;a href=&#34;./basicdemo.zip&#34;&gt;basic demo file&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Unzip basicdemo.zip&lt;/p&gt;
 &lt;h4 id=&#34;step-2-configure-basic-demo&#34;&gt;Step 2: Configure basic demo&lt;/h4&gt;
-&lt;p&gt;First let&#39;s query the endpoints&lt;/p&gt;
+&lt;p&gt;First let&amp;rsquo;s query the endpoints&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;docker run -it tibcosoftware/labs-air-aws-cli air show-endpoints
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You should see 3 endpoints being displayed something like:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;{&#39;service_name&#39;: &#39;core-air-cors-anywhere-service&#39;, &#39;hostname&#39;: &#39;&amp;lt;someawsdns&amp;gt;.us-west-2.elb.amazonaws.com&#39;, &#39;ports&#39;: [80]}
@@ -104,7 +116,7 @@ Please enter your AWS_SECRET_ACCESS_KEY:
 
 
 {&#39;service_name&#39;: &#39;core-mosquitto-service&#39;, &#39;hostname&#39;: &#39;&amp;lt;someawsdns&amp;gt;.us-west-2.elb.amazonaws.com&#39;, &#39;ports&#39;: [443]}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then, let&#39;s use those endpoints to configure the Edge example.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then, let&amp;rsquo;s use those endpoints to configure the Edge example.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;cd basicdemo
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Modify basicdemo/export_mqtt/configuration.toml&lt;/p&gt;
 &lt;p&gt;Replace &lt;Add-Your-mosquitto-service-Enpoint-Here&gt; with your mosquitto-service endpoint also ensure the port is correct.&lt;/p&gt;
@@ -137,12 +149,12 @@ Please enter your AWS_SECRET_ACCESS_KEY:
 &lt;p&gt;The following steps will guide you through the configuration and how to run the UI locally.&lt;/p&gt;
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;h4 id=&#34;prerequisite-1-git&#34;&gt;Prerequisite 1: Git&lt;/h4&gt;
-&lt;p&gt;Air&#39;s UI is located in a github repository:&lt;/p&gt;
+&lt;p&gt;Air&amp;rsquo;s UI is located in a github repository:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://git-scm.com/&#34;&gt;Git&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;prerequisite-2-npm&#34;&gt;Prerequisite 2: npm&lt;/h4&gt;
-&lt;p&gt;Air&#39;s UI is an angular application that uses npm to install dependencies:&lt;/p&gt;
+&lt;p&gt;Air&amp;rsquo;s UI is an angular application that uses npm to install dependencies:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.npmjs.com/&#34;&gt;npm&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -150,8 +162,8 @@ Please enter your AWS_SECRET_ACCESS_KEY:
 &lt;h4 id=&#34;step-1-clone-ui&#34;&gt;Step 1: clone UI&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;git clone https://github.com/TIBCOSoftware/labs-air-ui.git
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;step-2-configure-ui-endpoints&#34;&gt;Step 2: configure UI endpoints&lt;/h4&gt;
-&lt;p&gt;In this steps we are connecting the UI to Air&#39;s infrastructure endpoints&lt;/p&gt;
-&lt;p&gt;First let&#39;s query the endpoints&lt;/p&gt;
+&lt;p&gt;In this steps we are connecting the UI to Air&amp;rsquo;s infrastructure endpoints&lt;/p&gt;
+&lt;p&gt;First let&amp;rsquo;s query the endpoints&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;docker run -it tibcosoftware/labs-air-aws-cli air show-endpoints
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You should see 3 endpoints being displayed something like:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;{&#39;service_name&#39;: &#39;core-air-cors-anywhere-service&#39;, &#39;hostname&#39;: &#39;&amp;lt;someawsdns&amp;gt;.us-west-2.elb.amazonaws.com&#39;, &#39;ports&#39;: [80]}

@@ -81,6 +81,29 @@ Then just mount a volume with the config.yaml file when calling the cli for exam
 docker run -it -v /path/to/config/file/:/configuration tibcosoftware/labs-air-aws-cli air install
 ```
 
+### Advanced configuration for Assuming a different role
+
+Add the following entry to the config.yaml file:
+
+```
+aws:
+  ...<Your previous configuration goes here>...
+  AWS_ASSUME_ROLE_ARN: "<Add your Role ARN>"
+  AWS_ASSUME_ROLE_SESSION_DURATION: "<Add your session duration for example 3600>"
+```
+
+Note that the role session duration also implies how often you need to "air upgrade-charts" refresh the token
+
+### Advanced configuration for choosing a different cluster name
+
+Sometimes if you are shareing an AWS account you want to choose a different kubernetes cluster name.
+
+```
+aws:
+  ...<Your previous configuration goes here>...
+  KUBE_CLUSTER_NAME: "<Your cluster name>"
+```
+
 
 ## Uninstallation Steps
 
