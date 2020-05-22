@@ -18,7 +18,9 @@
   "homepage": "https://github.com/bep/tech-doc-hugo#readme",
   "dependencies": {
     "node": "^12.13.0",
-    "postcss": "^7.0.24"
+    "postcss": "^7.0.24",
+    "minimist": ">=1.2.3",
+    "kind-of": ">=6.0.3"
   },
   "devDependencies": {
     "autoprefixer": "^9.7.3",
