@@ -3,6 +3,8 @@ title: "Edge Rules"
 weight: 6
 date: 2020-05-25T13:26:04-04:00
 draft: false
+description: >
+    Edge Rules - How to configure rules at the edge.
 ---
 
 ## Introduction

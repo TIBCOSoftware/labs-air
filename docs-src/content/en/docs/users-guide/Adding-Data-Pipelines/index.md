@@ -3,6 +3,8 @@ title: "Data Pipelines"
 weight: 4
 date: 2020-05-25T12:36:01-04:00
 draft: false
+description: >
+    Data Pipelines - How to configure pipelines to sequence, filter, stream data and store data based on business logic.
 ---
 
 ## Introduction

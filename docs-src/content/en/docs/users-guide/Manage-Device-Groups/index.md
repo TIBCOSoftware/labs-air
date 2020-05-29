@@ -3,6 +3,8 @@ title: "Manage Device Groups"
 linkTitle: "Manage Device Groups"
 weight: 2
 date: 2020-05-24T15:42:50-04:00
+description: >
+    Managing Device Groups - How to create and manage device groups
 ---
 
 ## Introduction
