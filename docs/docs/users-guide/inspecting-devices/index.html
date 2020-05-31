@@ -7,7 +7,6 @@
 
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
-<link rel="alternate" type="application/rss&#43;xml" href="https://tibcosoftware.github.io/labs-air/docs/getting-started/index.xml">
 
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -21,17 +20,25 @@
 <link rel="icon" type="image/png" href="/labs-air/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/labs-air/favicons/android-192x192.png" sizes="192x192">
 
-<title>Getting Started | Project AIR™</title><meta property="og:title" content="Getting Started" />
-<meta property="og:description" content="Your first steps into TIBCO Project AIR™.
+<title>Inspecting Devices | Project AIR™</title><meta property="og:title" content="Inspecting Devices" />
+<meta property="og:description" content="Inspecting Devices - How to inspect device metadata and instrument data.
 " />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/getting-started/" />
-<meta property="og:site_name" content="Project AIR™" />
-<meta itemprop="name" content="Getting Started">
-<meta itemprop="description" content="Your first steps into TIBCO Project AIR™.
-"><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Getting Started"/>
-<meta name="twitter:description" content="Your first steps into TIBCO Project AIR™.
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/users-guide/inspecting-devices/" />
+<meta property="article:published_time" content="2020-05-25T13:24:39-04:00" />
+<meta property="article:modified_time" content="2020-05-29T18:32:18+02:00" /><meta property="og:site_name" content="Project AIR™" />
+<meta itemprop="name" content="Inspecting Devices">
+<meta itemprop="description" content="Inspecting Devices - How to inspect device metadata and instrument data.
+">
+<meta itemprop="datePublished" content="2020-05-25T13:24:39-04:00" />
+<meta itemprop="dateModified" content="2020-05-29T18:32:18&#43;02:00" />
+<meta itemprop="wordCount" content="423">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Inspecting Devices"/>
+<meta name="twitter:description" content="Inspecting Devices - How to inspect device metadata and instrument data.
 "/>
 
 
@@ -53,9 +60,9 @@
 <script src="/js/offline-search.js"></script>
 
 
-    <title>Getting Started | Project AIR™</title>
+    <title>Inspecting Devices | Project AIR™</title>
   </head>
-  <body class="td-section">
+  <body class="td-page">
     <header>
       
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
@@ -169,10 +176,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/labs-air/docs/getting-started/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Getting Started</a>
+    <a  href="/labs-air/docs/getting-started/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Getting Started</a>
   </li>
   <ul>
-    <li class="collapse show" id="labs-airdocsgetting-started">
+    <li class="collapse " id="labs-airdocsgetting-started">
       
       
       
@@ -210,10 +217,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/labs-air/docs/users-guide/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Using TIBCO Project AIR™</a>
+    <a  href="/labs-air/docs/users-guide/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Using TIBCO Project AIR™</a>
   </li>
   <ul>
-    <li class="collapse " id="labs-airdocsusers-guide">
+    <li class="collapse show" id="labs-airdocsusers-guide">
       
       
       
@@ -244,7 +251,7 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airdocsusers-guideinspecting-devices" href="/labs-air/docs/users-guide/inspecting-devices/">Inspecting Devices</a>
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-labs-airdocsusers-guideinspecting-devices" href="/labs-air/docs/users-guide/inspecting-devices/">Inspecting Devices</a>
       
       
       
@@ -289,7 +296,7 @@
 
 
 
-<a href="https://github.com/TIBCOSoftware/labs-air//issues/new?title=Getting%20Started" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href="https://github.com/TIBCOSoftware/labs-air//issues/new?title=Inspecting%20Devices" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
 
 
 <a href="https://github.com/TIBCOSoftware/labs-air//issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
@@ -300,6 +307,21 @@
 
 
 
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#prerequisites">Prerequisites</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#inspecting-device-metadata">Inspecting Device Metadata</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
 
 
@@ -315,6 +337,9 @@
 
 
 
+
+
+
 <li class="breadcrumb-item" >
 	<a href="https://tibcosoftware.github.io/labs-air/docs/">Documentation</a>
 </li>
@@ -322,79 +347,66 @@
 
 
 
+<li class="breadcrumb-item" >
+	<a href="https://tibcosoftware.github.io/labs-air/docs/users-guide/">Using TIBCO Project AIR™</a>
+</li>
+
+
+
+
 <li class="breadcrumb-item active" aria-current="page">
-	<a href="https://tibcosoftware.github.io/labs-air/docs/getting-started/">Getting Started</a>
+	<a href="https://tibcosoftware.github.io/labs-air/docs/users-guide/inspecting-devices/">Inspecting Devices</a>
 </li>
 
 	</ol>
 </nav	>
 
             
-<div class="td-content">
-	
-	
-	
-	<p class="-text-secondary pt-3 h6" >Reading time: 0 minutes and 1 second.</p>
-	<h1>Getting Started</h1>
-	<div class="lead">Your first steps into TIBCO Project AIR™.</div>
-	<p>First steps to start</p>
 
-        <div class="section-index">
-    
-    
-    
-    
-    <hr class="panel-line">
-        
-            
-        
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/getting-started/install-on-aws/">Install on AWS</a>
-                    </h5>
-                    <p>Installation of Project AIR™ on Amazon Web Services (AWS)</p>
-                </div>
-            
-        
-            
-        
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/getting-started/start-the-edge/">Start the Edge</a>
-                    </h5>
-                    <p>Run Edgex foundry at the edge with a basic example</p>
-                </div>
-            
-        
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/getting-started/start-the-ui/">Start the UI</a>
-                    </h5>
-                    <p>Run the UI locally</p>
-                </div>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-    
-</div>
+
+
+<p class="-text-primary pt-3 h6" >Reading time: 1 minutes and 55 seconds.</p>
+<p>
+<div class="td-content">
+	<h1>Inspecting Devices</h1>
+	<div class="lead">Inspecting Devices - How to inspect device metadata and instrument data.</div>
+	<p>TIBCO Project AIR has the capabilities to inspect edge devices metadata as well as data generated by those devices.
+Device Metadata provides information about the device and all the instruments (sensors, actuators) associated with the device. It provides information on all the operations available on the devices as well as the type of data generated by the devices.
+This section will guide you through all the steps to inspect device metadata as well as how to visualize data generated by the devices.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<h4 id="prerequisite-1-edgex-connection">Prerequisite 1: Edgex Connection</h4>
+<p>In order to access device metadata, Project AIR needs to be configured to access an Edgex Gateway. See Manage Device Groups</p>
+<h4 id="prerequisite-2-device-groups-configuration">Prerequisite 2: Device Groups Configuration</h4>
+<p>Before you can see device data, make sure the messaging protocols and data stores configuration for device groups have been configured.  See Configuring Device Groups.</p>
+<h2 id="inspecting-device-metadata">Inspecting Device Metadata</h2>
+<h4 id="step-1-from-the-main-menu-select-devices">Step 1: From the Main Menu, select Devices.</h4>
+<p><img src="./air_menu_devices.png" alt="Device Menu image"></p>
+<h4 id="step-2-select-the-device-group-for-the-devices-you-want-to-inspect">Step 2: Select the Device Group for the devices you want to inspect.</h4>
+<p><img src="./air_device_grouping.png" alt="Device Grouping image"></p>
+<h4 id="step-3-viewing-all-devices">Step 3: Viewing all devices</h4>
+<p>The list of devices available will be displayed. Now you can select any of those devices to see the metadata and data details</p>
+<p><img src="./air_device_1.png" alt="Device List image"></p>
+<h4 id="step-4-inspect-device-latest-data-and-metadata">Step 4: Inspect Device Latest Data and Metadata</h4>
+<p>Select a device from the Devices table (1) to see a summary of the current data sent by the device instruments (2) and a list of the instrument with a description for each of them (3)</p>
+<p><img src="./air_device_2.png" alt="Device List image"></p>
+<h4 id="step-5-inspecting-device-metadata">Step 5: Inspecting Device Metadata</h4>
+<p>Select an instrument from the Instruments table (1) to view the device metadata information (2) like data value type, minimun value, maximun value, etc.</p>
+<p><img src="./air_device_3.png" alt="Device List image"></p>
+<h4 id="step-6-visualizing-data">Step 6: Visualizing Data</h4>
+<p>Data will also be visualized.  Data is viewved depending the data type. For example, for an instrument emitting status information (discrete value), a timeline is displayed showing the different states and times the instrument has been on that state.</p>
+<p><img src="./air_device_4.png" alt="Device List image"></p>
+<h4 id="step-7-visualizing-time-series-data">Step 7: Visualizing time series data</h4>
+<p>Selecting a different instrument, the metadata and data information will be displayed. For example, the Voltage instrument emits numeric data.  In that case, a chart with a history of values is displayed.</p>
+<p><img src="./air_device_5.png" alt="Device List image"></p>
+<h4 id="step-8-viewing-streaming-data">Step 8: Viewing Streaming Data</h4>
+<p>If the device is transmitting data, the last chart will display an streaming chart with the latest values transmitted by the device</p>
+<p><img src="./air_device_6.png" alt="Device List image"></p>
+<h4 id="step-9-visualization-for-different-data-types">Step 9: Visualization for different data types</h4>
+<p>As indicated previously, different visualization can be used for different data types.  In this example, data from a vehicle will be shown</p>
+<p><img src="./air_device_7.png" alt="Device List image"></p>
+<h4 id="step-10-visualizing-geo-location-data">Step 10: Visualizing geo location data</h4>
+<p>Selecting an instrument with geo location data will display the position of the instrument on a map.</p>
+<p><img src="./air_device_9.png" alt="Device List image"></p>
 
 	
 		<style>
@@ -458,9 +470,10 @@
 		<br />
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified May 13, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/82dc09f7eb1947fdf1ef49b58182f7c4502cf90b">fix name (82dc09f7)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified May 29, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/460db00798d7e976606b15dc24c92193fe44d1eb">move description (460db007)</a>
 </div>
 </div>
+
 
           </main>
         </div>

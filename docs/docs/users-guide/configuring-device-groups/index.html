@@ -7,7 +7,6 @@
 
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
-<link rel="alternate" type="application/rss&#43;xml" href="https://tibcosoftware.github.io/labs-air/docs/getting-started/index.xml">
 
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -21,17 +20,25 @@
 <link rel="icon" type="image/png" href="/labs-air/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/labs-air/favicons/android-192x192.png" sizes="192x192">
 
-<title>Getting Started | Project AIR™</title><meta property="og:title" content="Getting Started" />
-<meta property="og:description" content="Your first steps into TIBCO Project AIR™.
+<title>Configuring Device Groups | Project AIR™</title><meta property="og:title" content="Configuring Device Groups" />
+<meta property="og:description" content="Configuring Device Groups - How to configure messaging protocols and data store targets for data.
 " />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/getting-started/" />
-<meta property="og:site_name" content="Project AIR™" />
-<meta itemprop="name" content="Getting Started">
-<meta itemprop="description" content="Your first steps into TIBCO Project AIR™.
-"><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Getting Started"/>
-<meta name="twitter:description" content="Your first steps into TIBCO Project AIR™.
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/users-guide/configuring-device-groups/" />
+<meta property="article:published_time" content="2020-05-25T12:33:17-04:00" />
+<meta property="article:modified_time" content="2020-05-29T18:32:18+02:00" /><meta property="og:site_name" content="Project AIR™" />
+<meta itemprop="name" content="Configuring Device Groups">
+<meta itemprop="description" content="Configuring Device Groups - How to configure messaging protocols and data store targets for data.
+">
+<meta itemprop="datePublished" content="2020-05-25T12:33:17-04:00" />
+<meta itemprop="dateModified" content="2020-05-29T18:32:18&#43;02:00" />
+<meta itemprop="wordCount" content="344">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Configuring Device Groups"/>
+<meta name="twitter:description" content="Configuring Device Groups - How to configure messaging protocols and data store targets for data.
 "/>
 
 
@@ -53,9 +60,9 @@
 <script src="/js/offline-search.js"></script>
 
 
-    <title>Getting Started | Project AIR™</title>
+    <title>Configuring Device Groups | Project AIR™</title>
   </head>
-  <body class="td-section">
+  <body class="td-page">
     <header>
       
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
@@ -169,10 +176,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/labs-air/docs/getting-started/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Getting Started</a>
+    <a  href="/labs-air/docs/getting-started/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Getting Started</a>
   </li>
   <ul>
-    <li class="collapse show" id="labs-airdocsgetting-started">
+    <li class="collapse " id="labs-airdocsgetting-started">
       
       
       
@@ -210,10 +217,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/labs-air/docs/users-guide/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Using TIBCO Project AIR™</a>
+    <a  href="/labs-air/docs/users-guide/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Using TIBCO Project AIR™</a>
   </li>
   <ul>
-    <li class="collapse " id="labs-airdocsusers-guide">
+    <li class="collapse show" id="labs-airdocsusers-guide">
       
       
       
@@ -232,7 +239,7 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airdocsusers-guideconfiguring-device-groups" href="/labs-air/docs/users-guide/configuring-device-groups/">Configuring Device Groups</a>
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-labs-airdocsusers-guideconfiguring-device-groups" href="/labs-air/docs/users-guide/configuring-device-groups/">Configuring Device Groups</a>
       
       
       
@@ -289,7 +296,7 @@
 
 
 
-<a href="https://github.com/TIBCOSoftware/labs-air//issues/new?title=Getting%20Started" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href="https://github.com/TIBCOSoftware/labs-air//issues/new?title=Configuring%20Device%20Groups" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
 
 
 <a href="https://github.com/TIBCOSoftware/labs-air//issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
@@ -300,6 +307,32 @@
 
 
 
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#prerequisites">Prerequisites</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#accessing-endpoints-configuration">Accessing Endpoints Configuration</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#adding-messaging-protocols">Adding Messaging Protocols</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#adding-data-stores">Adding Data Stores</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
 
 
@@ -315,6 +348,9 @@
 
 
 
+
+
+
 <li class="breadcrumb-item" >
 	<a href="https://tibcosoftware.github.io/labs-air/docs/">Documentation</a>
 </li>
@@ -322,79 +358,73 @@
 
 
 
+<li class="breadcrumb-item" >
+	<a href="https://tibcosoftware.github.io/labs-air/docs/users-guide/">Using TIBCO Project AIR™</a>
+</li>
+
+
+
+
 <li class="breadcrumb-item active" aria-current="page">
-	<a href="https://tibcosoftware.github.io/labs-air/docs/getting-started/">Getting Started</a>
+	<a href="https://tibcosoftware.github.io/labs-air/docs/users-guide/configuring-device-groups/">Configuring Device Groups</a>
 </li>
 
 	</ol>
 </nav	>
 
             
-<div class="td-content">
-	
-	
-	
-	<p class="-text-secondary pt-3 h6" >Reading time: 0 minutes and 1 second.</p>
-	<h1>Getting Started</h1>
-	<div class="lead">Your first steps into TIBCO Project AIR™.</div>
-	<p>First steps to start</p>
 
-        <div class="section-index">
-    
-    
-    
-    
-    <hr class="panel-line">
-        
-            
-        
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/getting-started/install-on-aws/">Install on AWS</a>
-                    </h5>
-                    <p>Installation of Project AIR™ on Amazon Web Services (AWS)</p>
-                </div>
-            
-        
-            
-        
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/getting-started/start-the-edge/">Start the Edge</a>
-                    </h5>
-                    <p>Run Edgex foundry at the edge with a basic example</p>
-                </div>
-            
-        
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/getting-started/start-the-ui/">Start the UI</a>
-                    </h5>
-                    <p>Run the UI locally</p>
-                </div>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-    
-</div>
+
+
+<p class="-text-primary pt-3 h6" >Reading time: 1 minutes and 33 seconds.</p>
+<p>
+<div class="td-content">
+	<h1>Configuring Device Groups</h1>
+	<div class="lead">Configuring Device Groups - How to configure messaging protocols and data store targets for data.</div>
+	<h2 id="introduction">Introduction</h2>
+<p>Once a Device Grouping has been created, a connection has been established with Edgex devices and now we wil show you how to configure Messaging Protocos and Data Stores that will be used to receive and store data from devices.
+The following steps will guide you through the configuration of messaging protocols and data stores.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<h4 id="prerequisite-1-edgex">Prerequisite 1: Edgex</h4>
+<p>Edgex is a vendor neutral open source platform at the edge of the network that interacts with physical devices, sensors, actuators and other IoT objects. It enables the interoperability between devices and applications at the edge and at the cloud.</p>
+<ul>
+<li><a href="edgexfoundry.org">Edgex</a></li>
+</ul>
+<p>Every running Edgex platform will provide one or more Service to export data from the edge. From a running instance of Edgex, gather the following information from each of the available Export Services:</p>
+<ul>
+<li>Transport used: MQTT, Kafka or TCM</li>
+<li>Connection URL</li>
+<li>Connection credentials</li>
+</ul>
+<h4 id="prerequisite-2-data-store-information">Prerequisite 2: Data Store Information</h4>
+<p>Device data can be stored in one or several data stores depending on the use case requirements. Gather the following information for each data store:</p>
+<ul>
+<li>Connection URL</li>
+<li>Connection Credentials</li>
+</ul>
+<h4 id="prerequisite-3-data-store-table-setup">Prerequisite 3: Data Store Table Setup</h4>
+<p>For each data store, tables to store the data need to be created. Project AIR scripts with SQL commands to create the required artifacts.</p>
+<h2 id="accessing-endpoints-configuration">Accessing Endpoints Configuration</h2>
+<h4 id="step-1-from-the-gateways-page-select-the-device-group-you-want-to-configure">Step 1: From the Gateways page, select the Device Group you want to configure.</h4>
+<h4 id="step-2-click-the-endpoints-configuration-button">Step 2: Click the Endpoints Configuration button.</h4>
+<p><img src="./air_config_endpoint_gateway.png" alt="Gateway Endpoint Config image"></p>
+<h4 id="step-3-the-endpoint-configuration-page-should-be-displayed">Step 3: The Endpoint configuration page should be displayed.</h4>
+<p><img src="./air_config_endpoint.png" alt="Gateway Endpoint Config image"></p>
+<h2 id="adding-messaging-protocols">Adding Messaging Protocols</h2>
+<h4 id="step-1-select-the-desired-protocol-from-the-pulldown-menu-under-the-protocol-details-panel">Step 1: Select the desired protocol from the pulldown menu under the Protocol Details panel</h4>
+<p><img src="./air_config_mqtt_1.png" alt="Adding Protocol MQTT1 image"></p>
+<h4 id="step-2-enter-required-information-for-the-selected-protocol">Step 2: Enter required information for the selected protocol</h4>
+<p><img src="./air_config_mqtt_2.png" alt="Adding Protocol MQTT2 image"></p>
+<h4 id="step-2-click-the-add-protocol-button-the-new-protocol-configuration-should-be-shown-in-the-inbound-protocols-panel">Step 2: Click the Add Protocol button. The new protocol configuration should be shown in the Inbound Protocols panel</h4>
+<p><img src="./air_config_mqtt_3.png" alt="Adding Protocol MQTT2 image"></p>
+<h2 id="adding-data-stores">Adding Data Stores</h2>
+<h4 id="step-1-click-the-data-stores-tab">Step 1: Click the Data Stores tab</h4>
+<h4 id="step-2-select-the-desired-data-store-from-the-pulldown-menu-under-the-datastore-details-panel">Step 2: Select the desired data store from the pulldown menu under the DataStore Details panel</h4>
+<p><img src="./air_config_dgraph_1.png" alt="Adding DS Dgraph1 image"></p>
+<h4 id="step-3-enter-required-information-for-the-selected-data-store">Step 3: Enter required information for the selected data store</h4>
+<p><img src="./air_config_dgraph_2.png" alt="Adding DS Dgraph2 image"></p>
+<h4 id="step-4-click-the-add-data-store-button-the-new-data-store-configuration-should-be-shown-in-the-data-stores-panel">Step 4: Click the Add Data Store button. The new data store configuration should be shown in the Data Stores panel</h4>
+<p><img src="./air_config_dgraph_3.png" alt="Adding Protocol MQTT2 image"></p>
 
 	
 		<style>
@@ -458,9 +488,10 @@
 		<br />
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified May 13, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/82dc09f7eb1947fdf1ef49b58182f7c4502cf90b">fix name (82dc09f7)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified May 29, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/460db00798d7e976606b15dc24c92193fe44d1eb">move description (460db007)</a>
 </div>
 </div>
+
 
           </main>
         </div>
