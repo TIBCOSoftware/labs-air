@@ -7,7 +7,6 @@
 
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
-<link rel="alternate" type="application/rss&#43;xml" href="https://tibcosoftware.github.io/labs-air/docs/getting-started/index.xml">
 
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -21,17 +20,25 @@
 <link rel="icon" type="image/png" href="/labs-air/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/labs-air/favicons/android-192x192.png" sizes="192x192">
 
-<title>Getting Started | Project AIR™</title><meta property="og:title" content="Getting Started" />
-<meta property="og:description" content="Your first steps into TIBCO Project AIR™.
+<title>Data Pipelines | Project AIR™</title><meta property="og:title" content="Data Pipelines" />
+<meta property="og:description" content="Data Pipelines - How to configure pipelines to sequence, filter, stream data and store data based on business logic.
 " />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/getting-started/" />
-<meta property="og:site_name" content="Project AIR™" />
-<meta itemprop="name" content="Getting Started">
-<meta itemprop="description" content="Your first steps into TIBCO Project AIR™.
-"><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Getting Started"/>
-<meta name="twitter:description" content="Your first steps into TIBCO Project AIR™.
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/users-guide/adding-data-pipelines/" />
+<meta property="article:published_time" content="2020-05-25T12:36:01-04:00" />
+<meta property="article:modified_time" content="2020-05-29T18:32:18+02:00" /><meta property="og:site_name" content="Project AIR™" />
+<meta itemprop="name" content="Data Pipelines">
+<meta itemprop="description" content="Data Pipelines - How to configure pipelines to sequence, filter, stream data and store data based on business logic.
+">
+<meta itemprop="datePublished" content="2020-05-25T12:36:01-04:00" />
+<meta itemprop="dateModified" content="2020-05-29T18:32:18&#43;02:00" />
+<meta itemprop="wordCount" content="489">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Data Pipelines"/>
+<meta name="twitter:description" content="Data Pipelines - How to configure pipelines to sequence, filter, stream data and store data based on business logic.
 "/>
 
 
@@ -53,9 +60,9 @@
 <script src="/js/offline-search.js"></script>
 
 
-    <title>Getting Started | Project AIR™</title>
+    <title>Data Pipelines | Project AIR™</title>
   </head>
-  <body class="td-section">
+  <body class="td-page">
     <header>
       
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
@@ -169,10 +176,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/labs-air/docs/getting-started/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Getting Started</a>
+    <a  href="/labs-air/docs/getting-started/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Getting Started</a>
   </li>
   <ul>
-    <li class="collapse show" id="labs-airdocsgetting-started">
+    <li class="collapse " id="labs-airdocsgetting-started">
       
       
       
@@ -210,10 +217,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/labs-air/docs/users-guide/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Using TIBCO Project AIR™</a>
+    <a  href="/labs-air/docs/users-guide/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Using TIBCO Project AIR™</a>
   </li>
   <ul>
-    <li class="collapse " id="labs-airdocsusers-guide">
+    <li class="collapse show" id="labs-airdocsusers-guide">
       
       
       
@@ -238,7 +245,7 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airdocsusers-guideadding-data-pipelines" href="/labs-air/docs/users-guide/adding-data-pipelines/">Data Pipelines</a>
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-labs-airdocsusers-guideadding-data-pipelines" href="/labs-air/docs/users-guide/adding-data-pipelines/">Data Pipelines</a>
       
       
       
@@ -289,7 +296,7 @@
 
 
 
-<a href="https://github.com/TIBCOSoftware/labs-air//issues/new?title=Getting%20Started" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href="https://github.com/TIBCOSoftware/labs-air//issues/new?title=Data%20Pipelines" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
 
 
 <a href="https://github.com/TIBCOSoftware/labs-air//issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
@@ -300,6 +307,37 @@
 
 
 
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#prerequisites">Prerequisites</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#adding-data-pipelines">Adding Data Pipelines</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#deploying-data-pipelines">Deploying Data Pipelines</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#updeploying-data-pipelines">Updeploying Data Pipelines</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#deleting-data-pipelines">Deleting Data Pipelines</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
 
 
@@ -315,6 +353,9 @@
 
 
 
+
+
+
 <li class="breadcrumb-item" >
 	<a href="https://tibcosoftware.github.io/labs-air/docs/">Documentation</a>
 </li>
@@ -322,79 +363,77 @@
 
 
 
+<li class="breadcrumb-item" >
+	<a href="https://tibcosoftware.github.io/labs-air/docs/users-guide/">Using TIBCO Project AIR™</a>
+</li>
+
+
+
+
 <li class="breadcrumb-item active" aria-current="page">
-	<a href="https://tibcosoftware.github.io/labs-air/docs/getting-started/">Getting Started</a>
+	<a href="https://tibcosoftware.github.io/labs-air/docs/users-guide/adding-data-pipelines/">Data Pipelines</a>
 </li>
 
 	</ol>
 </nav	>
 
             
-<div class="td-content">
-	
-	
-	
-	<p class="-text-secondary pt-3 h6" >Reading time: 0 minutes and 1 second.</p>
-	<h1>Getting Started</h1>
-	<div class="lead">Your first steps into TIBCO Project AIR™.</div>
-	<p>First steps to start</p>
 
-        <div class="section-index">
-    
-    
-    
-    
-    <hr class="panel-line">
-        
-            
-        
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/getting-started/install-on-aws/">Install on AWS</a>
-                    </h5>
-                    <p>Installation of Project AIR™ on Amazon Web Services (AWS)</p>
-                </div>
-            
-        
-            
-        
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/getting-started/start-the-edge/">Start the Edge</a>
-                    </h5>
-                    <p>Run Edgex foundry at the edge with a basic example</p>
-                </div>
-            
-        
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/getting-started/start-the-ui/">Start the UI</a>
-                    </h5>
-                    <p>Run the UI locally</p>
-                </div>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-    
-</div>
+
+
+<p class="-text-primary pt-3 h6" >Reading time: 2 minutes and 13 seconds.</p>
+<p>
+<div class="td-content">
+	<h1>Data Pipelines</h1>
+	<div class="lead">Data Pipelines - How to configure pipelines to sequence, filter, stream data and store data based on business logic.</div>
+	<h2 id="introduction">Introduction</h2>
+<p>TIBCO Project AIR enables users to configure what to do with data from edge devices.
+Users can configure a Data Pipeline to sequence, filter, stream data and specify a data store based on your business logic.
+A typical pipeline configuration consists of activities that define the messaging protocol to receive data, define operations on the data (filtering, streaming, rules) and the data stores.
+This section will guide you through all the steps required to  create data pipelines.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<h4 id="prerequisite-1-device-groups-configuration">Prerequisite 1: Device Groups Configuration</h4>
+<p>Before you begin, make sure the messaging protocols and data stores configuration for device groups have been configured.  See Configuring Device Groups.</p>
+<h2 id="adding-data-pipelines">Adding Data Pipelines</h2>
+<h4 id="step-1-from-the-gateways-page-select-the-device-group-you-want-to-configure-and-click-data-pipelines">Step 1: From the Gateways page, select the Device Group you want to configure and click Data Pipelines.</h4>
+<p><img src="./air_gateway_pipeline.png" alt="Gateway Pipeline Config image"></p>
+<h4 id="step-2-the-data-pipelines-page-should-be-displayed">Step 2: The Data Pipelines page should be displayed.</h4>
+<p><img src="./air_config_pipeline.png" alt="Pipeline Config image"></p>
+<h4 id="step-3-on-the-steps-panel-select-the-type-of-pipeline-and-then-click-next">Step 3: On the Steps Panel, select the type of Pipeline and then click Next.</h4>
+<p>You can configure pipelines for device data as well as pipelines for notificatios.</p>
+<p><img src="./air_config_pipeline_1.png" alt="Pipeline Config Type image"></p>
+<h4 id="step-4-select-and-review-the-messaging-protocol-and-then-click-next">Step 4: Select and review the messaging protocol and then click Next</h4>
+<p>All the messaging protocols that have previously been configured in the Device Groups Configuration will be available for selection</p>
+<p><img src="./air_config_pipeline_2.png" alt="Pipeline Config Protocol image"></p>
+<h4 id="step-5-select-the-devices-to-filter-and-then-click-next">Step 5: Select the devices to filter and then click Next.</h4>
+<p>Data can be filtered from going through the pipeline.</p>
+<p><img src="./air_config_pipeline_3.png" alt="Pipeline Config Filter image"></p>
+<h4 id="step-6-configure-streaming-operations-for-a-device-instrument-and-then-click-next">Step 6: Configure streaming operations for a device instrument and then click Next</h4>
+<p>TIBCO Project AIR allows users to perform streaming operations on instrument data. For example you can aggregate the values on a time window and prapagate only the results of the aggregation operation.</p>
+<p><img src="./air_config_pipeline_4.png" alt="Pipeline Config Aggregate image"></p>
+<h4 id="step-7-select-and-review-the-data-store-and-then-click-next">Step 7: Select and review the data store and then click Next</h4>
+<p>All the data stores that have previously been configured in the Device Groups Configuration will be available for selection</p>
+<p><img src="./air_config_pipeline_5.png" alt="Pipeline Config DS image"></p>
+<h4 id="step-8-click-save-data-pipeline-button">Step 8: Click Save Data Pipeline button.</h4>
+<p>Save the pipeline configuration.  The configuration can then be deployed to a Kubernetes cluster either local or on the cloud.</p>
+<p><img src="./air_config_pipeline_6.png" alt="Pipeline Config Type image"></p>
+<h2 id="deploying-data-pipelines">Deploying Data Pipelines</h2>
+<p>Once data pipelines have been configured, they can be deployed dynamically to Kubernetes cluster running locally or on the cloud.</p>
+<h4 id="step-1-select-the-desired-pipeline-from-the-pipelines-table-and-then-click--deploy-pipeline">Step 1: Select the desired pipeline from the Pipelines table and then click  Deploy Pipeline</h4>
+<p><img src="./air_deploy_pipeline_1.png" alt="Pipeline Deploy Select image"></p>
+<h4 id="step-2-the-pipeline-is-deployed-and-should-show-the-status-as-deployedready">Step 2: The pipeline is deployed and should show the Status as Deployed/Ready</h4>
+<p><img src="./air_deploy_pipeline_2.png" alt="Pipeline Deploy Result image"></p>
+<h2 id="updeploying-data-pipelines">Updeploying Data Pipelines</h2>
+<p>If data from a device is not longer required or if needs to be modified, you can undeploy the pipeline.  Undeploying will remove the engine processing the data from the Kubernetes cluster.</p>
+<h4 id="step-1-select-the-desired-pipeline-from-the-pipelines-table-and-then-click--undeploy-pipeline">Step 1: Select the desired pipeline from the Pipelines table and then click  Undeploy Pipeline</h4>
+<p><img src="./air_undeploy_pipeline_1.png" alt="Pipeline Undeploy Select image"></p>
+<h4 id="step-2-the-pipeline-is-undeployed-and-should-show-the-status-as-undeployed">Step 2: The pipeline is undeployed and should show the Status as Undeployed</h4>
+<p><img src="./air_undeploy_pipeline_2.png" alt="Pipeline Undeploy Final image"></p>
+<h2 id="deleting-data-pipelines">Deleting Data Pipelines</h2>
+<p>If data pipelines are not longer required, you can delete the pipeline. Notice that deployed pipelines can&rsquo;t be deleted.  They need to be undeployed first.</p>
+<h4 id="step-1-select-the-desired-pipeline-from-the-pipelines-table-and-then-click--delete-pipeline">Step 1: Select the desired pipeline from the Pipelines table and then click  Delete Pipeline</h4>
+<p><img src="./air_delete_pipeline_1.png" alt="Pipeline Delete Select image"></p>
+<h4 id="step-2-the-pipeline-is-deleted-and-should-not-appear-in-the-pipelines-table">Step 2: The pipeline is deleted and should not appear in the Pipelines table.</h4>
 
 	
 		<style>
@@ -458,9 +497,10 @@
 		<br />
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified May 13, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/82dc09f7eb1947fdf1ef49b58182f7c4502cf90b">fix name (82dc09f7)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified May 29, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/460db00798d7e976606b15dc24c92193fe44d1eb">move description (460db007)</a>
 </div>
 </div>
+
 
           </main>
         </div>
