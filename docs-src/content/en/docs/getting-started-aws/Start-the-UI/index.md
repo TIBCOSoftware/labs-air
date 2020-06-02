@@ -55,14 +55,6 @@ Then, let's use those endpoints to configure the UI.
 Open the file proxy.conf.prod.us.json and replace the following entries at the end of the json file with the endpoints from previous step.
 
 ```
-,
-  "/edgex/localgateway/*": {
-    "target": "https://localhost:8443",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "info",
-    "pathRewrite":{"^/edgex/localgateway" : ""}
-  },
   "/edgex/remotegateway/*": {
     "target": "http://<Add-Your-air-cors-anywhere-service-Enpoint-Here>",
     "secure": false,

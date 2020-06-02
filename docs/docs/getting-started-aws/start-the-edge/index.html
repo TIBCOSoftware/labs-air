@@ -7,7 +7,6 @@
 
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
-<link rel="alternate" type="application/rss&#43;xml" href="https://tibcosoftware.github.io/labs-air/docs/users-guide/index.xml">
 
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -21,17 +20,23 @@
 <link rel="icon" type="image/png" href="/labs-air/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/labs-air/favicons/android-192x192.png" sizes="192x192">
 
-<title>Using TIBCO Project AIR™ Guide | Project AIR™</title><meta property="og:title" content="Using TIBCO Project AIR™ Guide" />
-<meta property="og:description" content="Steps to configure TIBCO Project AIR™ to manage devices and their data.
+<title>Start the Edge | Project AIR™</title><meta property="og:title" content="Start the Edge" />
+<meta property="og:description" content="Run Edgex foundry at the edge with a basic example
 " />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/users-guide/" />
-<meta property="og:updated_time" content="2020-05-24T15:20:49-04:00" /><meta property="og:site_name" content="Project AIR™" />
-<meta itemprop="name" content="Using TIBCO Project AIR™ Guide">
-<meta itemprop="description" content="Steps to configure TIBCO Project AIR™ to manage devices and their data.
-"><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Using TIBCO Project AIR™ Guide"/>
-<meta name="twitter:description" content="Steps to configure TIBCO Project AIR™ to manage devices and their data.
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/getting-started-aws/start-the-edge/" />
+<meta property="og:site_name" content="Project AIR™" />
+<meta itemprop="name" content="Start the Edge">
+<meta itemprop="description" content="Run Edgex foundry at the edge with a basic example
+">
+
+<meta itemprop="wordCount" content="182">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Start the Edge"/>
+<meta name="twitter:description" content="Run Edgex foundry at the edge with a basic example
 "/>
 
 
@@ -53,9 +58,9 @@
 <script src="/js/offline-search.js"></script>
 
 
-    <title>Using TIBCO Project AIR™ Guide | Project AIR™</title>
+    <title>Start the Edge | Project AIR™</title>
   </head>
-  <body class="td-section">
+  <body class="td-page">
     <header>
       
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
@@ -210,10 +215,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/labs-air/docs/getting-started-aws/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Getting Started on AWS</a>
+    <a  href="/labs-air/docs/getting-started-aws/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Getting Started on AWS</a>
   </li>
   <ul>
-    <li class="collapse " id="labs-airdocsgetting-started-aws">
+    <li class="collapse show" id="labs-airdocsgetting-started-aws">
       
       
       
@@ -226,7 +231,7 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airdocsgetting-started-awsstart-the-edge" href="/labs-air/docs/getting-started-aws/start-the-edge/">Start the Edge</a>
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-labs-airdocsgetting-started-awsstart-the-edge" href="/labs-air/docs/getting-started-aws/start-the-edge/">Start the Edge</a>
       
       
       
@@ -251,10 +256,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/labs-air/docs/users-guide/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Using TIBCO Project AIR™</a>
+    <a  href="/labs-air/docs/users-guide/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Using TIBCO Project AIR™</a>
   </li>
   <ul>
-    <li class="collapse show" id="labs-airdocsusers-guide">
+    <li class="collapse " id="labs-airdocsusers-guide">
       
       
       
@@ -330,7 +335,7 @@
 
 
 
-<a href="https://github.com/TIBCOSoftware/labs-air//issues/new?title=Using%20TIBCO%20Project%20AIR%e2%84%a2%20Guide" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href="https://github.com/TIBCOSoftware/labs-air//issues/new?title=Start%20the%20Edge" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
 
 
 <a href="https://github.com/TIBCOSoftware/labs-air//issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
@@ -341,6 +346,27 @@
 
 
 
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#prerequisites">Prerequisites</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#running-steps">Running Steps</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#uninstallation-steps">Uninstallation Steps</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
 
 
@@ -356,6 +382,9 @@
 
 
 
+
+
+
 <li class="breadcrumb-item" >
 	<a href="https://tibcosoftware.github.io/labs-air/docs/">Documentation</a>
 </li>
@@ -363,117 +392,69 @@
 
 
 
+<li class="breadcrumb-item" >
+	<a href="https://tibcosoftware.github.io/labs-air/docs/getting-started-aws/">Getting Started on AWS</a>
+</li>
+
+
+
+
 <li class="breadcrumb-item active" aria-current="page">
-	<a href="https://tibcosoftware.github.io/labs-air/docs/users-guide/">Using TIBCO Project AIR™</a>
+	<a href="https://tibcosoftware.github.io/labs-air/docs/getting-started-aws/start-the-edge/">Start the Edge</a>
 </li>
 
 	</ol>
 </nav	>
 
             
+
+
+
+<p class="-text-primary pt-3 h6" >Reading time: 0 minutes and 49 seconds.</p>
+<p>
 <div class="td-content">
-	
-	
-	
-	<p class="-text-secondary pt-3 h6" >Reading time: 0 minutes and 4 seconds.</p>
-	<h1>Using TIBCO Project AIR™ Guide</h1>
-	<div class="lead">Steps to configure TIBCO Project AIR™ to manage devices and their data.</div>
-	<p>Welcome to the Using TIBCO Project AIR™ Guide.</p>
-<p>This guide contains the following:</p>
+	<h1>Start the Edge</h1>
+	<div class="lead">Run Edgex foundry at the edge with a basic example</div>
+	<h2 id="introduction">Introduction</h2>
+<p>The following steps will guide you through the configuration and how to run the edge elements locally.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<h4 id="prerequisite-1-docker">Prerequisite 1: Docker</h4>
+<p>Air&rsquo;s CLI is wrapped in a docker container to ease the installation process:</p>
+<ul>
+<li><a href="https://www.docker.com/get-started">Docker</a></li>
+</ul>
+<h2 id="running-steps">Running Steps</h2>
+<h4 id="step-1-download-basic-demo">Step 1: Download basic demo</h4>
+<p>Download the <a href="./basicdemo.zip">basic demo file</a></p>
+<p>Unzip basicdemo.zip</p>
+<h4 id="step-2-configure-basic-demo">Step 2: Configure basic demo</h4>
+<p>First let&rsquo;s query the endpoints</p>
+<pre><code>docker run -it tibcosoftware/labs-air-aws-cli air show-endpoints
+</code></pre><p>You should see 3 endpoints being displayed something like:</p>
+<pre><code>{'service_name': 'core-air-cors-anywhere-service', 'hostname': '&lt;someawsdns&gt;.us-west-2.elb.amazonaws.com', 'ports': [80]}
 
-        <div class="section-index">
-    
-    
-    
-    
-    <hr class="panel-line">
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/users-guide/login-to-ui/">Login to UI</a>
-                    </h5>
-                    <p>Login in to Project AIR UI - How to obtain credentials and keys and then login to the UI</p>
-                </div>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/users-guide/manage-device-groups/">Manage Device Groups</a>
-                    </h5>
-                    <p>Managing Device Groups - How to create and manage device groups</p>
-                </div>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/users-guide/configuring-device-groups/">Configuring Device Groups</a>
-                    </h5>
-                    <p>Configuring Device Groups - How to configure messaging protocols and data store targets for data.</p>
-                </div>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/users-guide/adding-data-pipelines/">Data Pipelines</a>
-                    </h5>
-                    <p>Data Pipelines - How to configure pipelines to sequence, filter, stream data and store data based on business logic.</p>
-                </div>
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/users-guide/inspecting-devices/">Inspecting Devices</a>
-                    </h5>
-                    <p>Inspecting Devices - How to inspect device metadata and instrument data.</p>
-                </div>
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/users-guide/adding-edge-rules/">Edge Rules</a>
-                    </h5>
-                    <p>Edge Rules - How to configure rules at the edge.</p>
-                </div>
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/users-guide/onboarding-new-devices/">Onboarding New Devices</a>
-                    </h5>
-                    <p>Onboarding New Devices - How to onboard new devices to an existing group of devices.</p>
-                </div>
-            
-        
-            
-        
-    
-</div>
 
+{'service_name': 'core-ingress-nginx-controller', 'hostname': '&lt;someawsdns&gt;.us-west-2.elb.amazonaws.com', 'ports': [80, 443]}
+
+
+{'service_name': 'core-mosquitto-service', 'hostname': '&lt;someawsdns&gt;.us-west-2.elb.amazonaws.com', 'ports': [443]}
+</code></pre><p>Then, let&rsquo;s use those endpoints to configure the Edge example.</p>
+<pre><code>cd basicdemo
+</code></pre><p>Modify basicdemo/export_mqtt/configuration.toml</p>
+<p>Replace &lsquo;&lt;Add-Your-minikube-mosquitto-service-Enpoint-Here&gt;&rsquo; with your mosquitto-service endpoint also ensure the port is correct.</p>
+<h4 id="step-3-run-the-basic-demo">Step 3: run the basic demo</h4>
+<p>Inside your basicdemo folder run</p>
+<pre><code>./startEdgex.sh
+</code></pre><h4 id="step-4-get-the-basic-demo-security-token">Step 4: get the basic demo security token</h4>
+<p>Inside your basicdemo folder run</p>
+<pre><code>./getSecurityToken.sh
+</code></pre><p>Copy the access token for tibuser, you will need it for the edge group registration.</p>
+<p>Congratulations!! Project Air edge basic demo is running</p>
+<h2 id="uninstallation-steps">Uninstallation Steps</h2>
+<h4 id="step-1-stop-the-demo">Step 1: stop the demo</h4>
+<p>Inside your basicdemo folder run</p>
+<pre><code>./stopEdgex.sh
+</code></pre>
 	
 		<style>
   .feedback--answer {
@@ -536,9 +517,10 @@
 		<br />
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified May 29, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/a5267a6a66ea712404112fcd52fa1ea479c85c0c">Update _index.md (a5267a6a)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified January 1, 0001
 </div>
 </div>
+
 
           </main>
         </div>

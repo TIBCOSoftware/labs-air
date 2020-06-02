@@ -7,7 +7,6 @@
 
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
-<link rel="alternate" type="application/rss&#43;xml" href="https://tibcosoftware.github.io/labs-air/docs/users-guide/index.xml">
 
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -21,17 +20,23 @@
 <link rel="icon" type="image/png" href="/labs-air/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/labs-air/favicons/android-192x192.png" sizes="192x192">
 
-<title>Using TIBCO Project AIR™ Guide | Project AIR™</title><meta property="og:title" content="Using TIBCO Project AIR™ Guide" />
-<meta property="og:description" content="Steps to configure TIBCO Project AIR™ to manage devices and their data.
+<title>Install infrastructure on AWS | Project AIR™</title><meta property="og:title" content="Install infrastructure on AWS" />
+<meta property="og:description" content="Installation of Project AIR™ on Amazon Web Services (AWS)
 " />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/users-guide/" />
-<meta property="og:updated_time" content="2020-05-24T15:20:49-04:00" /><meta property="og:site_name" content="Project AIR™" />
-<meta itemprop="name" content="Using TIBCO Project AIR™ Guide">
-<meta itemprop="description" content="Steps to configure TIBCO Project AIR™ to manage devices and their data.
-"><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Using TIBCO Project AIR™ Guide"/>
-<meta name="twitter:description" content="Steps to configure TIBCO Project AIR™ to manage devices and their data.
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/getting-started-aws/install-the-infrastructure/" />
+<meta property="og:site_name" content="Project AIR™" />
+<meta itemprop="name" content="Install infrastructure on AWS">
+<meta itemprop="description" content="Installation of Project AIR™ on Amazon Web Services (AWS)
+">
+
+<meta itemprop="wordCount" content="474">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Install infrastructure on AWS"/>
+<meta name="twitter:description" content="Installation of Project AIR™ on Amazon Web Services (AWS)
 "/>
 
 
@@ -53,9 +58,9 @@
 <script src="/js/offline-search.js"></script>
 
 
-    <title>Using TIBCO Project AIR™ Guide | Project AIR™</title>
+    <title>Install infrastructure on AWS | Project AIR™</title>
   </head>
-  <body class="td-section">
+  <body class="td-page">
     <header>
       
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
@@ -210,17 +215,17 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/labs-air/docs/getting-started-aws/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Getting Started on AWS</a>
+    <a  href="/labs-air/docs/getting-started-aws/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Getting Started on AWS</a>
   </li>
   <ul>
-    <li class="collapse " id="labs-airdocsgetting-started-aws">
+    <li class="collapse show" id="labs-airdocsgetting-started-aws">
       
       
       
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airdocsgetting-started-awsinstall-the-infrastructure" href="/labs-air/docs/getting-started-aws/install-the-infrastructure/">Install infrastructure on AWS</a>
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-labs-airdocsgetting-started-awsinstall-the-infrastructure" href="/labs-air/docs/getting-started-aws/install-the-infrastructure/">Install infrastructure on AWS</a>
       
       
       
@@ -251,10 +256,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/labs-air/docs/users-guide/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Using TIBCO Project AIR™</a>
+    <a  href="/labs-air/docs/users-guide/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Using TIBCO Project AIR™</a>
   </li>
   <ul>
-    <li class="collapse show" id="labs-airdocsusers-guide">
+    <li class="collapse " id="labs-airdocsusers-guide">
       
       
       
@@ -330,7 +335,7 @@
 
 
 
-<a href="https://github.com/TIBCOSoftware/labs-air//issues/new?title=Using%20TIBCO%20Project%20AIR%e2%84%a2%20Guide" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href="https://github.com/TIBCOSoftware/labs-air//issues/new?title=Install%20infrastructure%20on%20AWS" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
 
 
 <a href="https://github.com/TIBCOSoftware/labs-air//issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
@@ -341,6 +346,38 @@
 
 
 
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#prerequisites">Prerequisites</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#installation-steps">Installation Steps</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#advanced-install-configuration">Advanced install configuration</a>
+      <ul>
+        <li><a href="#advanced-configuration-for-assuming-a-different-role">Advanced configuration for Assuming a different role</a></li>
+        <li><a href="#advanced-configuration-for-choosing-a-different-cluster-name">Advanced configuration for choosing a different cluster name</a></li>
+      </ul>
+    </li>
+    <li><a href="#uninstallation-steps">Uninstallation Steps</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#troubleshooting">Troubleshooting</a>
+      <ul>
+        <li><a href="#alreadyexistexception">AlreadyExistException</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
 
 
@@ -356,6 +393,9 @@
 
 
 
+
+
+
 <li class="breadcrumb-item" >
 	<a href="https://tibcosoftware.github.io/labs-air/docs/">Documentation</a>
 </li>
@@ -363,116 +403,95 @@
 
 
 
+<li class="breadcrumb-item" >
+	<a href="https://tibcosoftware.github.io/labs-air/docs/getting-started-aws/">Getting Started on AWS</a>
+</li>
+
+
+
+
 <li class="breadcrumb-item active" aria-current="page">
-	<a href="https://tibcosoftware.github.io/labs-air/docs/users-guide/">Using TIBCO Project AIR™</a>
+	<a href="https://tibcosoftware.github.io/labs-air/docs/getting-started-aws/install-the-infrastructure/">Install infrastructure on AWS</a>
 </li>
 
 	</ol>
 </nav	>
 
             
-<div class="td-content">
-	
-	
-	
-	<p class="-text-secondary pt-3 h6" >Reading time: 0 minutes and 4 seconds.</p>
-	<h1>Using TIBCO Project AIR™ Guide</h1>
-	<div class="lead">Steps to configure TIBCO Project AIR™ to manage devices and their data.</div>
-	<p>Welcome to the Using TIBCO Project AIR™ Guide.</p>
-<p>This guide contains the following:</p>
 
-        <div class="section-index">
-    
-    
-    
-    
-    <hr class="panel-line">
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/users-guide/login-to-ui/">Login to UI</a>
-                    </h5>
-                    <p>Login in to Project AIR UI - How to obtain credentials and keys and then login to the UI</p>
-                </div>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/users-guide/manage-device-groups/">Manage Device Groups</a>
-                    </h5>
-                    <p>Managing Device Groups - How to create and manage device groups</p>
-                </div>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/users-guide/configuring-device-groups/">Configuring Device Groups</a>
-                    </h5>
-                    <p>Configuring Device Groups - How to configure messaging protocols and data store targets for data.</p>
-                </div>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/users-guide/adding-data-pipelines/">Data Pipelines</a>
-                    </h5>
-                    <p>Data Pipelines - How to configure pipelines to sequence, filter, stream data and store data based on business logic.</p>
-                </div>
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/users-guide/inspecting-devices/">Inspecting Devices</a>
-                    </h5>
-                    <p>Inspecting Devices - How to inspect device metadata and instrument data.</p>
-                </div>
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/users-guide/adding-edge-rules/">Edge Rules</a>
-                    </h5>
-                    <p>Edge Rules - How to configure rules at the edge.</p>
-                </div>
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/users-guide/onboarding-new-devices/">Onboarding New Devices</a>
-                    </h5>
-                    <p>Onboarding New Devices - How to onboard new devices to an existing group of devices.</p>
-                </div>
-            
-        
-            
-        
-    
-</div>
+
+
+<p class="-text-primary pt-3 h6" >Reading time: 2 minutes and 9 seconds.</p>
+<p>
+<div class="td-content">
+	<h1>Install infrastructure on AWS</h1>
+	<div class="lead">Installation of Project AIR™ on Amazon Web Services (AWS)</div>
+	<h2 id="introduction">Introduction</h2>
+<p>The following steps will guide you through the full infrastructure installation on Amazon Web Services.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<h4 id="prerequisite-1-docker">Prerequisite 1: Docker</h4>
+<p>Air&rsquo;s CLI is wrapped in a docker container to ease the installation process:</p>
+<ul>
+<li><a href="https://www.docker.com/get-started">Docker</a></li>
+</ul>
+<h4 id="prerequisite-2-aws-account-information">Prerequisite 2: AWS Account Information</h4>
+<p>All the infrastructure components needed for Project Air will be installed in your provided AWS account, you will need the following information to install it:</p>
+<p>Your AWS access and secret keys: More information <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html">here</a></p>
+<h2 id="installation-steps">Installation Steps</h2>
+<h4 id="step-1-pull-aws-cli">Step 1: pull aws cli</h4>
+<pre><code>docker pull tibcosoftware/labs-air-aws-cli
+</code></pre><h4 id="step-2-call-install-command-on-cli">Step 2: call install command on cli</h4>
+<p>Note: This installation installs a Kubernetes cluster using EKS in your aws account so it takes around ~20minutes to finish.</p>
+<pre><code>docker run -it tibcosoftware/labs-air-aws-cli air install
+</code></pre><p>Enter the AWS information when prompted (Note: To avoid prompt look at the Advanced install configuration section <a href="#advanced-install-configuration">here</a>)</p>
+<pre><code>Please enter your AWS_ACCESS_KEY_ID:
+
+Please enter your AWS_SECRET_ACCESS_KEY:
+</code></pre><h4 id="step-3-optional-check-installation">Step 3 [optional]: check installation</h4>
+<p>This command will allow you to connect to the kubernetes cluster to see the different components</p>
+<pre><code>docker run -it -p 8001:8001 tibcosoftware/labs-air-aws-cli air dashboard
+</code></pre><p>Copy the token printed in the terminal</p>
+<p>And follow the dashboard link also printed in the terminal</p>
+<p>Congratulations!! Project Air infrastructure has been installed</p>
+<h2 id="advanced-install-configuration">Advanced install configuration</h2>
+<p>There is a way to avoid being prompted for your credentials as well as adding advanced configuration.</p>
+<p>You need to create a config.yaml file with the following content:</p>
+<pre><code>aws:
+  AWS_ACCESS_KEY_ID: &lt;YOUR ACCESS KEY ID HERE&gt;
+  AWS_SECRET_ACCESS_KEY: &lt;YOUR SECRET ACCESS KEY ID HERE&gt;
+  AWS_DEFAULT_REGION: &lt;YOUR DEFAULT REGION HERE&gt;
+</code></pre><p>Then just mount a volume with the config.yaml file when calling the cli for example:</p>
+<pre><code>docker run -it -v /path/to/config/file/:/configuration tibcosoftware/labs-air-aws-cli air install
+</code></pre><h3 id="advanced-configuration-for-assuming-a-different-role">Advanced configuration for Assuming a different role</h3>
+<p>Add the following entry to the config.yaml file:</p>
+<pre><code>aws:
+  ...&lt;Your previous configuration goes here&gt;...
+  AWS_ASSUME_ROLE_ARN: &quot;&lt;Add your Role ARN&gt;&quot;
+  AWS_ASSUME_ROLE_SESSION_DURATION: &quot;&lt;Add your session duration for example 3600&gt;&quot;
+</code></pre><p>Note that the role session duration also implies how often you need to &ldquo;air upgrade-charts&rdquo; refresh the token</p>
+<h3 id="advanced-configuration-for-choosing-a-different-cluster-name">Advanced configuration for choosing a different cluster name</h3>
+<p>Sometimes if you are shareing an AWS account you want to choose a different kubernetes cluster name.</p>
+<pre><code>aws:
+  ...&lt;Your previous configuration goes here&gt;...
+  KUBE_CLUSTER_NAME: &quot;&lt;Your cluster name&gt;&quot;
+</code></pre><h2 id="uninstallation-steps">Uninstallation Steps</h2>
+<h4 id="step-1-pull-aws-cli-1">Step 1: pull aws cli</h4>
+<pre><code>docker pull tibcosoftware/labs-air-aws-cli
+</code></pre><h4 id="step-2-call-delete-command-on-cli">Step 2: call delete command on cli</h4>
+<p>Note: This installation deletes the Kubernetes cluster.</p>
+<pre><code>docker run -it tibcosoftware/labs-air-aws-cli air delete
+</code></pre><p>Enter the AWS information when prompted (Note: To avoid prompt look at the Advanced install configuration section <a href="#advanced-install-configuration">here</a>)</p>
+<pre><code>Please enter your AWS_ACCESS_KEY_ID:
+
+Please enter your AWS_SECRET_ACCESS_KEY:
+</code></pre><h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="alreadyexistexception">AlreadyExistException</h3>
+<p>If you get a message similar to this</p>
+<pre><code>[✖]  creating CloudFormation stack &quot;eksctl-air-cluster-cluster&quot;: AlreadyExistsException: Stack [eksctl-air-cluster-cluster] already exists
+        status code: 400, request id: a4eba6b2-bd4a-475d-b3a1-93fc6cfd5d1f
+</code></pre><p>This means that there is an already existing cluster with that name the solution is:</p>
+<p>1.- Delete the cluster, go <a href="#uninstallation-steps">here</a> for more information.</p>
+<p>2.- Create a cluster with a different name, go <a href="#advanced-configuration-for-choosing-a-different-cluster-name">here</a> for more information.</p>
 
 	
 		<style>
@@ -536,9 +555,10 @@
 		<br />
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified May 29, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/a5267a6a66ea712404112fcd52fa1ea479c85c0c">Update _index.md (a5267a6a)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified January 1, 0001
 </div>
 </div>
+
 
           </main>
         </div>
