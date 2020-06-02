@@ -532,7 +532,7 @@ npm install
     &amp;quot;pathRewrite&amp;quot;:{&amp;quot;^/edgex/remotegateway&amp;quot; : &amp;quot;&amp;quot;}
   },
   &amp;quot;/airEndpoint/*&amp;quot;: {
-    &amp;quot;target&amp;quot;: &amp;quot;http://&amp;lt;Add-Your-minikube-ip-Here&amp;gt;&amp;quot;,
+    &amp;quot;target&amp;quot;: &amp;quot;http://&amp;lt;Add-Your-minikube-ip-Here&amp;gt;:80&amp;quot;,
     &amp;quot;secure&amp;quot;: &amp;quot;false&amp;quot;,
     &amp;quot;changeOrigin&amp;quot;: true,
     &amp;quot;logLevel&amp;quot;: &amp;quot;info&amp;quot;,
