@@ -7,7 +7,6 @@
 
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
-<link rel="alternate" type="application/rss&#43;xml" href="https://tibcosoftware.github.io/labs-air/docs/users-guide/index.xml">
 
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -21,17 +20,23 @@
 <link rel="icon" type="image/png" href="/labs-air/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/labs-air/favicons/android-192x192.png" sizes="192x192">
 
-<title>Using TIBCO Project AIR™ Guide | Project AIR™</title><meta property="og:title" content="Using TIBCO Project AIR™ Guide" />
-<meta property="og:description" content="Steps to configure TIBCO Project AIR™ to manage devices and their data.
+<title>Install infrastructure on Minikube | Project AIR™</title><meta property="og:title" content="Install infrastructure on Minikube" />
+<meta property="og:description" content="Installation of Project AIR™ on your computer using Minikube
 " />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/users-guide/" />
-<meta property="og:updated_time" content="2020-05-24T15:20:49-04:00" /><meta property="og:site_name" content="Project AIR™" />
-<meta itemprop="name" content="Using TIBCO Project AIR™ Guide">
-<meta itemprop="description" content="Steps to configure TIBCO Project AIR™ to manage devices and their data.
-"><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Using TIBCO Project AIR™ Guide"/>
-<meta name="twitter:description" content="Steps to configure TIBCO Project AIR™ to manage devices and their data.
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/getting-started-minikube/install-the-infrastructure/" />
+<meta property="og:site_name" content="Project AIR™" />
+<meta itemprop="name" content="Install infrastructure on Minikube">
+<meta itemprop="description" content="Installation of Project AIR™ on your computer using Minikube
+">
+
+<meta itemprop="wordCount" content="237">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Install infrastructure on Minikube"/>
+<meta name="twitter:description" content="Installation of Project AIR™ on your computer using Minikube
 "/>
 
 
@@ -53,9 +58,9 @@
 <script src="/js/offline-search.js"></script>
 
 
-    <title>Using TIBCO Project AIR™ Guide | Project AIR™</title>
+    <title>Install infrastructure on Minikube | Project AIR™</title>
   </head>
-  <body class="td-section">
+  <body class="td-page">
     <header>
       
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
@@ -169,17 +174,17 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/labs-air/docs/getting-started-minikube/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Getting Started on Minikube</a>
+    <a  href="/labs-air/docs/getting-started-minikube/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Getting Started on Minikube</a>
   </li>
   <ul>
-    <li class="collapse " id="labs-airdocsgetting-started-minikube">
+    <li class="collapse show" id="labs-airdocsgetting-started-minikube">
       
       
       
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airdocsgetting-started-minikubeinstall-the-infrastructure" href="/labs-air/docs/getting-started-minikube/install-the-infrastructure/">Install infrastructure on Minikube</a>
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-labs-airdocsgetting-started-minikubeinstall-the-infrastructure" href="/labs-air/docs/getting-started-minikube/install-the-infrastructure/">Install infrastructure on Minikube</a>
       
       
       
@@ -251,10 +256,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/labs-air/docs/users-guide/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Using TIBCO Project AIR™</a>
+    <a  href="/labs-air/docs/users-guide/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Using TIBCO Project AIR™</a>
   </li>
   <ul>
-    <li class="collapse show" id="labs-airdocsusers-guide">
+    <li class="collapse " id="labs-airdocsusers-guide">
       
       
       
@@ -330,7 +335,7 @@
 
 
 
-<a href="https://github.com/TIBCOSoftware/labs-air//issues/new?title=Using%20TIBCO%20Project%20AIR%e2%84%a2%20Guide" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href="https://github.com/TIBCOSoftware/labs-air//issues/new?title=Install%20infrastructure%20on%20Minikube" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
 
 
 <a href="https://github.com/TIBCOSoftware/labs-air//issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
@@ -341,6 +346,27 @@
 
 
 
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#prerequisites">Prerequisites</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#installation-steps">Installation Steps</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#uninstallation-steps">Uninstallation Steps</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
 
 
@@ -356,6 +382,9 @@
 
 
 
+
+
+
 <li class="breadcrumb-item" >
 	<a href="https://tibcosoftware.github.io/labs-air/docs/">Documentation</a>
 </li>
@@ -363,117 +392,71 @@
 
 
 
+<li class="breadcrumb-item" >
+	<a href="https://tibcosoftware.github.io/labs-air/docs/getting-started-minikube/">Getting Started on Minikube</a>
+</li>
+
+
+
+
 <li class="breadcrumb-item active" aria-current="page">
-	<a href="https://tibcosoftware.github.io/labs-air/docs/users-guide/">Using TIBCO Project AIR™</a>
+	<a href="https://tibcosoftware.github.io/labs-air/docs/getting-started-minikube/install-the-infrastructure/">Install infrastructure on Minikube</a>
 </li>
 
 	</ol>
 </nav	>
 
             
+
+
+
+<p class="-text-primary pt-3 h6" >Reading time: 1 minutes and 4 seconds.</p>
+<p>
 <div class="td-content">
-	
-	
-	
-	<p class="-text-secondary pt-3 h6" >Reading time: 0 minutes and 4 seconds.</p>
-	<h1>Using TIBCO Project AIR™ Guide</h1>
-	<div class="lead">Steps to configure TIBCO Project AIR™ to manage devices and their data.</div>
-	<p>Welcome to the Using TIBCO Project AIR™ Guide.</p>
-<p>This guide contains the following:</p>
-
-        <div class="section-index">
-    
-    
-    
-    
-    <hr class="panel-line">
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/users-guide/login-to-ui/">Login to UI</a>
-                    </h5>
-                    <p>Login in to Project AIR UI - How to obtain credentials and keys and then login to the UI</p>
-                </div>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/users-guide/manage-device-groups/">Manage Device Groups</a>
-                    </h5>
-                    <p>Managing Device Groups - How to create and manage device groups</p>
-                </div>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/users-guide/configuring-device-groups/">Configuring Device Groups</a>
-                    </h5>
-                    <p>Configuring Device Groups - How to configure messaging protocols and data store targets for data.</p>
-                </div>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/users-guide/adding-data-pipelines/">Data Pipelines</a>
-                    </h5>
-                    <p>Data Pipelines - How to configure pipelines to sequence, filter, stream data and store data based on business logic.</p>
-                </div>
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/users-guide/inspecting-devices/">Inspecting Devices</a>
-                    </h5>
-                    <p>Inspecting Devices - How to inspect device metadata and instrument data.</p>
-                </div>
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/users-guide/adding-edge-rules/">Edge Rules</a>
-                    </h5>
-                    <p>Edge Rules - How to configure rules at the edge.</p>
-                </div>
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/labs-air/docs/users-guide/onboarding-new-devices/">Onboarding New Devices</a>
-                    </h5>
-                    <p>Onboarding New Devices - How to onboard new devices to an existing group of devices.</p>
-                </div>
-            
-        
-            
-        
-    
-</div>
-
+	<h1>Install infrastructure on Minikube</h1>
+	<div class="lead">Installation of Project AIR™ on your computer using Minikube</div>
+	<h2 id="introduction">Introduction</h2>
+<p>The following steps will guide you through the full infrastructure installation on Minikube.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<h4 id="prerequisite-1-docker">Prerequisite 1: Docker</h4>
+<p>Air&rsquo;s CLI is wrapped in a docker container to ease the installation process:</p>
+<ul>
+<li><a href="https://www.docker.com/get-started">Docker</a></li>
+</ul>
+<h4 id="prerequisite-2-minikube">Prerequisite 2: Minikube</h4>
+<p>All the infrastructure components needed for Project Air will be installed in your provided minikube cluster</p>
+<p>More information to install minikube <a href="https://kubernetes.io/docs/tasks/tools/install-minikube/">here</a></p>
+<h2 id="installation-steps">Installation Steps</h2>
+<h4 id="step-1-start-minikube">Step 1: start minikube</h4>
+<pre><code>minikube start
+</code></pre><p>Note: make sure your driver is correct and that the minikube installation is correct as indicated <a href="https://kubernetes.io/docs/tasks/tools/install-minikube/#confirm-installation">here</a></p>
+<h4 id="step-2-enable-ingress">Step 2: enable ingress</h4>
+<pre><code>minikube addons enable ingress
+</code></pre><h4 id="step-3-pull-minikube-cli">Step 3: pull minikube cli</h4>
+<pre><code>docker pull tibcosoftware/labs-air-minikube-cli
+</code></pre><h4 id="step-4-for-mac-users-call-install-command-on-cli">Step 4 [FOR MAC USERS]: call install command on cli</h4>
+<p>In one terminal</p>
+<pre><code>kubectl proxy --port=8080 --disable-filter=true
+</code></pre><p>In a different terminal</p>
+<pre><code>docker run -e MINIKUBE_IP=$(minikube ip) -it --network host -v ${HOME}/.minikube:/.minikube -v ${HOME}/.kube:/.kube -e MINIKUBE_HOST_OS=mac tibcosoftware/labs-air-minikube-cli air install
+</code></pre><h4 id="step-4-for-linux-users-call-install-command-on-cli">Step 4 [FOR LINUX USERS]: call install command on cli</h4>
+<p>In one terminal</p>
+<pre><code>kubectl proxy --port=8080
+</code></pre><p>In a different terminal</p>
+<pre><code>docker run -e MINIKUBE_IP=$(minikube ip) -it --network host -v ${HOME}/.minikube:/.minikube -v ${HOME}/.kube:/.kube tibcosoftware/labs-air-minikube-cli air install
+</code></pre><h4 id="step-5-optional-check-installation">Step 5 [optional]: check installation</h4>
+<p>This command will allow you to connect to the kubernetes cluster to see the different components</p>
+<pre><code>minikube dashboard
+</code></pre><p>Congratulations!! Project Air infrastructure has been installed</p>
+<h2 id="uninstallation-steps">Uninstallation Steps</h2>
+<h4 id="step-1-pull-minikube-cli">Step 1: pull minikube cli</h4>
+<pre><code>docker pull tibcosoftware/labs-air-minikube-cli
+</code></pre><h4 id="step-2-call-delete-command-on-cli">Step 2: call delete command on cli</h4>
+<pre><code>docker run -it tibcosoftware/labs-air-minikube-cli air delete
+</code></pre><h4 id="step-3-delete-minikube">Step 3: delete minikube</h4>
+<p>Note: This installation deletes the Kubernetes cluster.</p>
+<pre><code>minikube delete
+</code></pre>
 	
 		<style>
   .feedback--answer {
@@ -536,9 +519,10 @@
 		<br />
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified May 29, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/a5267a6a66ea712404112fcd52fa1ea479c85c0c">Update _index.md (a5267a6a)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified January 1, 0001
 </div>
 </div>
+
 
           </main>
         </div>

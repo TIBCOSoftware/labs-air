@@ -8,17 +8,36 @@
   </url>
   
   <url>
-    <loc>https://tibcosoftware.github.io/labs-air/docs/getting-started/</loc>
-    <lastmod>2020-05-13T09:56:38+02:00</lastmod>
+    <loc>https://tibcosoftware.github.io/labs-air/docs/getting-started-minikube/</loc>
   </url>
   
   <url>
-    <loc>https://tibcosoftware.github.io/labs-air/docs/getting-started/install-on-aws/</loc>
-    <lastmod>2020-05-21T16:33:56-07:00</lastmod>
+    <loc>https://tibcosoftware.github.io/labs-air/docs/getting-started-aws/install-the-infrastructure/</loc>
+  </url>
+  
+  <url>
+    <loc>https://tibcosoftware.github.io/labs-air/docs/getting-started-minikube/install-the-infrastructure/</loc>
   </url>
   
   <url>
     <loc>https://tibcosoftware.github.io/labs-air/docs/users-guide/manage-device-groups/</loc>
+    <lastmod>2020-05-29T18:32:18+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tibcosoftware.github.io/labs-air/docs/getting-started-aws/</loc>
+  </url>
+  
+  <url>
+    <loc>https://tibcosoftware.github.io/labs-air/docs/getting-started-aws/start-the-edge/</loc>
+  </url>
+  
+  <url>
+    <loc>https://tibcosoftware.github.io/labs-air/docs/getting-started-minikube/start-the-edge/</loc>
+  </url>
+  
+  <url>
+    <loc>https://tibcosoftware.github.io/labs-air/docs/users-guide/configuring-device-groups/</loc>
     <lastmod>2020-05-29T18:32:18+02:00</lastmod>
   </url>
   
@@ -28,18 +47,11 @@
   </url>
   
   <url>
-    <loc>https://tibcosoftware.github.io/labs-air/docs/getting-started/start-the-edge/</loc>
-    <lastmod>2020-05-11T13:23:15-07:00</lastmod>
+    <loc>https://tibcosoftware.github.io/labs-air/docs/getting-started-aws/start-the-ui/</loc>
   </url>
   
   <url>
-    <loc>https://tibcosoftware.github.io/labs-air/docs/users-guide/configuring-device-groups/</loc>
-    <lastmod>2020-05-29T18:32:18+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://tibcosoftware.github.io/labs-air/docs/getting-started/start-the-ui/</loc>
-    <lastmod>2020-05-13T11:02:21-07:00</lastmod>
+    <loc>https://tibcosoftware.github.io/labs-air/docs/getting-started-minikube/start-the-ui/</loc>
   </url>
   
   <url>
