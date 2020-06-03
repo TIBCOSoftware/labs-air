@@ -79,7 +79,7 @@ Open the file proxy.conf.prod.us.json and replace the following entries at the e
     "pathRewrite":{"^/edgex/remotegateway" : ""}
   },
   "/airEndpoint/*": {
-    "target": "http://<Add-Your-minikube-ip-Here>",
+    "target": "http://<Add-Your-minikube-ip-Here>:80",
     "secure": "false",
     "changeOrigin": true,
     "logLevel": "info",
