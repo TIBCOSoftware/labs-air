@@ -20,7 +20,7 @@ Air's CLI is wrapped in a docker container to ease the installation process:
 
 #### Step 1: Download basic demo
 
-Download the [basic demo file](./basicdemo.zip)
+Download the [basic demo file](../../basicdemo.zip)
 
 Unzip basicdemo.zip
 
