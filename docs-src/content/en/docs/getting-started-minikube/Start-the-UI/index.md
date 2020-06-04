@@ -21,6 +21,11 @@ Air's UI is an angular application that uses npm to install dependencies:
 
 * [npm](https://www.npmjs.com/)
 
+#### Prerequisite 3: TIBCO Live Apps subscription (Free trial available)
+Project Air makes use of TIBCO Live Apps user management and application hosting capabilities, for a free trial please go to the page:
+
+* [TIBCO Cloud™ Live Apps](https://www.tibco.com/products/tibco-cloud-live-apps)
+
 ## Running Steps
 
 #### Step 1: clone UI
