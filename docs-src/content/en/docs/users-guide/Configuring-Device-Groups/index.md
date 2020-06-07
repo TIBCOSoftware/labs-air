@@ -34,7 +34,11 @@ Device data can be stored in one or several data stores depending on the use cas
 
 #### Prerequisite 3: Data Store Table Setup
 
-For each data store, tables to store the data need to be created. Project AIR scripts with SQL commands to create the required artifacts.
+For each required data store, the user needs to configure the datastate and create tables to store the data. 
+Project AIR provides scripts with SQL commands to create the required artifacts. 
+
+Following is an example sql script to create the artifact for a Postgres Database.
+[Postgres SQL script](./setup.sql)
 
  ## Accessing Endpoints Configuration
 
