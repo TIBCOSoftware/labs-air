@@ -1,6 +1,6 @@
 ---
-title: "Install on AWS"
-linkTitle: "Install on AWS"
+title: "Install infrastructure on AWS"
+linkTitle: "Install infrastructure on AWS"
 weight: 1
 description: >
   Installation of Project AIR™ on Amazon Web Services (AWS)

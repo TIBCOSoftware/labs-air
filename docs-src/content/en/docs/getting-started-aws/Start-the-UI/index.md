@@ -21,6 +21,11 @@ Air's UI is an angular application that uses npm to install dependencies:
 
 * [npm](https://www.npmjs.com/)
 
+#### Prerequisite 3: TIBCO Live Apps subscription (Free trial available)
+Project Air makes use of TIBCO Live Apps user management and application hosting capabilities, for a free trial please go to the page:
+
+* [TIBCO Cloud™ Live Apps](https://www.tibco.com/products/tibco-cloud-live-apps)
+
 ## Running Steps
 
 #### Step 1: clone UI
@@ -55,14 +60,6 @@ Then, let's use those endpoints to configure the UI.
 Open the file proxy.conf.prod.us.json and replace the following entries at the end of the json file with the endpoints from previous step.
 
 ```
-,
-  "/edgex/localgateway/*": {
-    "target": "https://localhost:8443",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "info",
-    "pathRewrite":{"^/edgex/localgateway" : ""}
-  },
   "/edgex/remotegateway/*": {
     "target": "http://<Add-Your-air-cors-anywhere-service-Enpoint-Here>",
     "secure": false,

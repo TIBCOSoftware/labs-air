@@ -3,6 +3,8 @@ title: "Configuring Device Groups"
 weight: 3
 date: 2020-05-25T12:33:17-04:00
 draft: false
+description: >
+    Configuring Device Groups - How to configure messaging protocols and data store targets for data.
 ---
 
 ## Introduction

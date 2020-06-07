@@ -20,7 +20,7 @@ Air's CLI is wrapped in a docker container to ease the installation process:
 
 #### Step 1: Download basic demo
 
-Download the [basic demo file](./basicdemo.zip)
+Download the [basic demo file](../../basicdemo.zip)
 
 Unzip basicdemo.zip
 
@@ -54,7 +54,7 @@ cd basicdemo
 
 Modify basicdemo/export_mqtt/configuration.toml
 
-Replace <Add-Your-mosquitto-service-Enpoint-Here> with your mosquitto-service endpoint also ensure the port is correct.
+Replace '\<Add-Your-minikube-mosquitto-service-Enpoint-Here\>' with your mosquitto-service endpoint also ensure the port is correct.
 
 
 #### Step 3: run the basic demo
