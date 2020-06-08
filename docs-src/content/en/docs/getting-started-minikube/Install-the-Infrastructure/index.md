@@ -83,6 +83,7 @@ In a different terminal
 
 ```
 docker run -e MINIKUBE_IP=$(minikube ip) -it --network host -v ${HOME}/.minikube:/.minikube -v ${HOME}/.kube:/.kube -e MINIKUBE_HOST_OS=windows tibcosoftware/labs-air-minikube-cli air install
+```
 
 #### Step 5 [optional]: check installation
 

@@ -25,12 +25,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/getting-started-minikube/install-the-infrastructure/" />
-<meta property="article:modified_time" content="2020-06-01T18:46:26-07:00" /><meta property="og:site_name" content="Project AIR™" />
+<meta property="article:modified_time" content="2020-06-08T12:48:19-07:00" /><meta property="og:site_name" content="Project AIR™" />
 <meta itemprop="name" content="Install infrastructure on Minikube">
 <meta itemprop="description" content="Installation of Project AIR™ on your computer using Minikube
 ">
-<meta itemprop="dateModified" content="2020-06-01T18:46:26-07:00" />
-<meta itemprop="wordCount" content="280">
+<meta itemprop="dateModified" content="2020-06-08T12:48:19-07:00" />
+<meta itemprop="wordCount" content="275">
 
 
 
@@ -360,6 +360,11 @@
         <li></li>
       </ul>
     </li>
+    <li><a href="#uninstallation-steps">Uninstallation Steps</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -405,7 +410,7 @@
 
 
 
-<p class="-text-primary pt-3 h6" >Reading time: 1 minutes and 16 seconds.</p>
+<p class="-text-primary pt-3 h6" >Reading time: 1 minutes and 15 seconds.</p>
 <p>
 <div class="td-content">
 	<h1>Install infrastructure on Minikube</h1>
@@ -444,31 +449,19 @@
 <pre><code>kubectl proxy --port=8080 --disable-filter=true
 </code></pre><p>In a different terminal</p>
 <pre><code>docker run -e MINIKUBE_IP=$(minikube ip) -it --network host -v ${HOME}/.minikube:/.minikube -v ${HOME}/.kube:/.kube -e MINIKUBE_HOST_OS=windows tibcosoftware/labs-air-minikube-cli air install
-
-#### Step 5 [optional]: check installation
-
-This command will allow you to connect to the kubernetes cluster to see the different components
-
-</code></pre><p>minikube dashboard</p>
-<pre><code>
-Congratulations!! Project Air infrastructure has been installed
-
-## Uninstallation Steps
-
-#### Step 1: pull minikube cli
-
-</code></pre><p>docker pull tibcosoftware/labs-air-minikube-cli</p>
-<pre><code>
-#### Step 2: call delete command on cli
-
-</code></pre><p>docker run -it tibcosoftware/labs-air-minikube-cli air delete</p>
-<pre><code>
-#### Step 3: delete minikube
-
-Note: This installation deletes the Kubernetes cluster.
-
-</code></pre><p>minikube delete</p>
-<pre><code></code></pre>
+</code></pre><h4 id="step-5-optional-check-installation">Step 5 [optional]: check installation</h4>
+<p>This command will allow you to connect to the kubernetes cluster to see the different components</p>
+<pre><code>minikube dashboard
+</code></pre><p>Congratulations!! Project Air infrastructure has been installed</p>
+<h2 id="uninstallation-steps">Uninstallation Steps</h2>
+<h4 id="step-1-pull-minikube-cli">Step 1: pull minikube cli</h4>
+<pre><code>docker pull tibcosoftware/labs-air-minikube-cli
+</code></pre><h4 id="step-2-call-delete-command-on-cli">Step 2: call delete command on cli</h4>
+<pre><code>docker run -it tibcosoftware/labs-air-minikube-cli air delete
+</code></pre><h4 id="step-3-delete-minikube">Step 3: delete minikube</h4>
+<p>Note: This installation deletes the Kubernetes cluster.</p>
+<pre><code>minikube delete
+</code></pre>
 	
 		<style>
   .feedback--answer {
@@ -531,7 +524,7 @@ Note: This installation deletes the Kubernetes cluster.
 		<br />
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified June 1, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/30514868dfbad649f3942f04d7e17bf77ca23919">Add minikube docs (30514868)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified June 8, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/2e6f6a567da040e75f19fa89c13c5b65de68a6ff">Add minikube support for windoes (2e6f6a56)</a>
 </div>
 </div>
 
