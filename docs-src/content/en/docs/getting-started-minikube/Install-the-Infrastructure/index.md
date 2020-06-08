@@ -71,6 +71,19 @@ In a different terminal
 docker run -e MINIKUBE_IP=$(minikube ip) -it --network host -v ${HOME}/.minikube:/.minikube -v ${HOME}/.kube:/.kube tibcosoftware/labs-air-minikube-cli air install
 ```
 
+#### Step 4 [FOR WINDOWS USERS]: call install command on cli
+
+In one terminal 
+
+```
+kubectl proxy --port=8080 --disable-filter=true
+```
+
+In a different terminal
+
+```
+docker run -e MINIKUBE_IP=$(minikube ip) -it --network host -v ${HOME}/.minikube:/.minikube -v ${HOME}/.kube:/.kube -e MINIKUBE_HOST_OS=windows tibcosoftware/labs-air-minikube-cli air install
+
 #### Step 5 [optional]: check installation
 
 This command will allow you to connect to the kubernetes cluster to see the different components
