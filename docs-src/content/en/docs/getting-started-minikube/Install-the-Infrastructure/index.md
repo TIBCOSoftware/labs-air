@@ -37,6 +37,12 @@ Note: make sure your driver is correct and that the minikube installation is cor
 minikube addons enable ingress
 ```
 
+IMPORTANT: Make sure your ingress-nginx-controller is running!!, you can wait a couple of minutes or you can check it by running:
+
+```
+kubectl get pods -n kube-system
+```
+
 #### Step 3: pull minikube cli
 
 ```

@@ -127,7 +127,7 @@ Please enter your AWS_SECRET_ACCESS_KEY:
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then, let&amp;rsquo;s use those endpoints to configure the Edge example.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;cd basicdemo
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Modify basicdemo/export_mqtt/configuration.toml&lt;/p&gt;
-&lt;p&gt;Replace &amp;lsquo;&amp;lt;Add-Your-minikube-mosquitto-service-Enpoint-Here&amp;gt;&amp;rsquo; with your mosquitto-service endpoint also ensure the port is correct.&lt;/p&gt;
+&lt;p&gt;Replace &amp;lsquo;&amp;lt;Add-Your-mosquitto-service-Enpoint-Here&amp;gt;&amp;rsquo; with your mosquitto-service endpoint also ensure the port is correct.&lt;/p&gt;
 &lt;h4 id=&#34;step-3-run-the-basic-demo&#34;&gt;Step 3: run the basic demo&lt;/h4&gt;
 &lt;p&gt;Inside your basicdemo folder run&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;./startEdgex.sh

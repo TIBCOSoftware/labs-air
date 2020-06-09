@@ -30,7 +30,7 @@
 <meta itemprop="description" content="Run the UI locally
 ">
 <meta itemprop="dateModified" content="2020-06-04T12:53:01-07:00" />
-<meta itemprop="wordCount" content="341">
+<meta itemprop="wordCount" content="354">
 
 
 
@@ -405,7 +405,7 @@
 
 
 
-<p class="-text-primary pt-3 h6" >Reading time: 1 minutes and 34 seconds.</p>
+<p class="-text-primary pt-3 h6" >Reading time: 1 minutes and 37 seconds.</p>
 <p>
 <div class="td-content">
 	<h1>Start the UI</h1>
@@ -457,15 +457,16 @@
 |----------------------|------------------------------------|--------------------|-----------------------------|
 </code></pre><p>Then, let&rsquo;s use those endpoints to configure the UI.</p>
 <p>Open the file proxy.conf.prod.us.json and replace the following entries at the end of the json file with the endpoints from previous step.</p>
+<p>Replace <Add-Your-ingress-nginx-controller-Enpoint-Here> with the ip you got from &lsquo;minikube ip&rsquo; command in step 2.</p>
 <pre><code>  &quot;/edgex/remotegateway/*&quot;: {
-    &quot;target&quot;: &quot;http://&lt;Add-Your-minikube-air-cors-anywhe-service-Enpoint-Here&gt;&quot;,
+    &quot;target&quot;: &quot;http://&lt;Add-Your-air-cors-anywhere-service-Enpoint-Here&gt;&quot;,
     &quot;secure&quot;: false,
     &quot;changeOrigin&quot;: true,
     &quot;logLevel&quot;: &quot;info&quot;,
     &quot;pathRewrite&quot;:{&quot;^/edgex/remotegateway&quot; : &quot;&quot;}
   },
   &quot;/airEndpoint/*&quot;: {
-    &quot;target&quot;: &quot;http://&lt;Add-Your-minikube-ip-Here&gt;:80&quot;,
+    &quot;target&quot;: &quot;http://&lt;Add-Your-ingress-nginx-controller-Enpoint-Here&gt;&quot;,
     &quot;secure&quot;: &quot;false&quot;,
     &quot;changeOrigin&quot;: true,
     &quot;logLevel&quot;: &quot;info&quot;,

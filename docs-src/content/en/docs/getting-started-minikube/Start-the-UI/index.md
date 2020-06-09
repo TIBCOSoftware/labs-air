@@ -75,16 +75,18 @@ Then, let's use those endpoints to configure the UI.
 
 Open the file proxy.conf.prod.us.json and replace the following entries at the end of the json file with the endpoints from previous step.
 
+Replace <Add-Your-ingress-nginx-controller-Enpoint-Here> with the ip you got from 'minikube ip' command in step 2.
+
 ```
   "/edgex/remotegateway/*": {
-    "target": "http://<Add-Your-minikube-air-cors-anywhe-service-Enpoint-Here>",
+    "target": "http://<Add-Your-air-cors-anywhere-service-Enpoint-Here>",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "info",
     "pathRewrite":{"^/edgex/remotegateway" : ""}
   },
   "/airEndpoint/*": {
-    "target": "http://<Add-Your-minikube-ip-Here>:80",
+    "target": "http://<Add-Your-ingress-nginx-controller-Enpoint-Here>",
     "secure": "false",
     "changeOrigin": true,
     "logLevel": "info",

@@ -25,12 +25,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/getting-started-minikube/install-the-infrastructure/" />
-<meta property="article:modified_time" content="2020-06-08T12:48:19-07:00" /><meta property="og:site_name" content="Project AIR™" />
+<meta property="article:modified_time" content="2020-06-08T12:55:13-07:00" /><meta property="og:site_name" content="Project AIR™" />
 <meta itemprop="name" content="Install infrastructure on Minikube">
 <meta itemprop="description" content="Installation of Project AIR™ on your computer using Minikube
 ">
-<meta itemprop="dateModified" content="2020-06-08T12:48:19-07:00" />
-<meta itemprop="wordCount" content="275">
+<meta itemprop="dateModified" content="2020-06-08T12:55:13-07:00" />
+<meta itemprop="wordCount" content="301">
 
 
 
@@ -410,7 +410,7 @@
 
 
 
-<p class="-text-primary pt-3 h6" >Reading time: 1 minutes and 15 seconds.</p>
+<p class="-text-primary pt-3 h6" >Reading time: 1 minutes and 22 seconds.</p>
 <p>
 <div class="td-content">
 	<h1>Install infrastructure on Minikube</h1>
@@ -432,6 +432,8 @@
 </code></pre><p>Note: make sure your driver is correct and that the minikube installation is correct as indicated <a href="https://kubernetes.io/docs/tasks/tools/install-minikube/#confirm-installation">here</a></p>
 <h4 id="step-2-enable-ingress">Step 2: enable ingress</h4>
 <pre><code>minikube addons enable ingress
+</code></pre><p>IMPORTANT: Make sure your ingress-nginx-controller is running!!, you can wait a couple of minutes or you can check it by running:</p>
+<pre><code>kubectl get pods -n kube-system
 </code></pre><h4 id="step-3-pull-minikube-cli">Step 3: pull minikube cli</h4>
 <pre><code>docker pull tibcosoftware/labs-air-minikube-cli
 </code></pre><h4 id="step-4-for-mac-users-call-install-command-on-cli">Step 4 [FOR MAC USERS]: call install command on cli</h4>
@@ -524,7 +526,7 @@
 		<br />
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified June 8, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/2e6f6a567da040e75f19fa89c13c5b65de68a6ff">Add minikube support for windoes (2e6f6a56)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified June 8, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/2add77a70bab2ce05a1a5b1b8b17f55760d7b341">Add minikube support for windoes (2add77a7)</a>
 </div>
 </div>
 
