@@ -65,7 +65,7 @@ cd basicdemo
 
 Modify basicdemo/export_mqtt/configuration.toml
 
-Replace '\<Add-Your-minikube-mosquitto-service-Enpoint-Here\>' with your mosquitto-service endpoint also ensure the port is correct.
+Replace '\<Add-Your-mosquitto-service-Enpoint-Here\>' with your mosquitto-service endpoint also ensure the port is correct.
 
 
 #### Step 3: run the basic demo

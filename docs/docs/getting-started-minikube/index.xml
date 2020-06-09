@@ -39,6 +39,8 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Note: make sure your driver is correct and that the minikube installation is correct as indicated &lt;a href=&#34;https://kubernetes.io/docs/tasks/tools/install-minikube/#confirm-installation&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 &lt;h4 id=&#34;step-2-enable-ingress&#34;&gt;Step 2: enable ingress&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;minikube addons enable ingress
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;IMPORTANT: Make sure your ingress-nginx-controller is running!!, you can wait a couple of minutes or you can check it by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl get pods -n kube-system
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;step-3-pull-minikube-cli&#34;&gt;Step 3: pull minikube cli&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;docker pull tibcosoftware/labs-air-minikube-cli
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;step-4-for-mac-users-call-install-command-on-cli&#34;&gt;Step 4 [FOR MAC USERS]: call install command on cli&lt;/h4&gt;
@@ -117,7 +119,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then, let&amp;rsquo;s use those endpoints to configure the Edge example.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;cd basicdemo
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Modify basicdemo/export_mqtt/configuration.toml&lt;/p&gt;
-&lt;p&gt;Replace &amp;lsquo;&amp;lt;Add-Your-minikube-mosquitto-service-Enpoint-Here&amp;gt;&amp;rsquo; with your mosquitto-service endpoint also ensure the port is correct.&lt;/p&gt;
+&lt;p&gt;Replace &amp;lsquo;&amp;lt;Add-Your-mosquitto-service-Enpoint-Here&amp;gt;&amp;rsquo; with your mosquitto-service endpoint also ensure the port is correct.&lt;/p&gt;
 &lt;h4 id=&#34;step-3-run-the-basic-demo&#34;&gt;Step 3: run the basic demo&lt;/h4&gt;
 &lt;p&gt;Inside your basicdemo folder run&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;./startEdgex.sh
@@ -190,15 +192,16 @@
 |----------------------|------------------------------------|--------------------|-----------------------------|
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then, let&amp;rsquo;s use those endpoints to configure the UI.&lt;/p&gt;
 &lt;p&gt;Open the file proxy.conf.prod.us.json and replace the following entries at the end of the json file with the endpoints from previous step.&lt;/p&gt;
+&lt;p&gt;Replace &lt;Add-Your-ingress-nginx-controller-Enpoint-Here&gt; with the ip you got from &amp;lsquo;minikube ip&amp;rsquo; command in step 2.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;  &amp;quot;/edgex/remotegateway/*&amp;quot;: {
-    &amp;quot;target&amp;quot;: &amp;quot;http://&amp;lt;Add-Your-minikube-air-cors-anywhe-service-Enpoint-Here&amp;gt;&amp;quot;,
+    &amp;quot;target&amp;quot;: &amp;quot;http://&amp;lt;Add-Your-air-cors-anywhere-service-Enpoint-Here&amp;gt;&amp;quot;,
     &amp;quot;secure&amp;quot;: false,
     &amp;quot;changeOrigin&amp;quot;: true,
     &amp;quot;logLevel&amp;quot;: &amp;quot;info&amp;quot;,
     &amp;quot;pathRewrite&amp;quot;:{&amp;quot;^/edgex/remotegateway&amp;quot; : &amp;quot;&amp;quot;}
   },
   &amp;quot;/airEndpoint/*&amp;quot;: {
-    &amp;quot;target&amp;quot;: &amp;quot;http://&amp;lt;Add-Your-minikube-ip-Here&amp;gt;:80&amp;quot;,
+    &amp;quot;target&amp;quot;: &amp;quot;http://&amp;lt;Add-Your-ingress-nginx-controller-Enpoint-Here&amp;gt;&amp;quot;,
     &amp;quot;secure&amp;quot;: &amp;quot;false&amp;quot;,
     &amp;quot;changeOrigin&amp;quot;: true,
     &amp;quot;logLevel&amp;quot;: &amp;quot;info&amp;quot;,
