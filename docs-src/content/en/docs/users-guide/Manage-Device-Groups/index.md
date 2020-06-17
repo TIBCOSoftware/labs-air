@@ -17,7 +17,7 @@ A device group represent a number of edge devices controlled and managed by the 
 
 Edgex is a vendor neutral open source platform at the edge of the network that interacts with physical devices, sensors, actuators and other IoT objects. It enables the interoperability between devices and applications at the edge and at the cloud.
 
-* [Edgex](edgexfoundry.org)
+* [Edgex](https://www.edgexfoundry.org)
 
 From a running instance of Edgex, gather the following information:
 

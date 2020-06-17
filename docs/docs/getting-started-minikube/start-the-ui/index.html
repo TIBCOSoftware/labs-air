@@ -25,12 +25,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/getting-started-minikube/start-the-ui/" />
-<meta property="article:modified_time" content="2020-06-04T12:53:01-07:00" /><meta property="og:site_name" content="Project AIR™" />
+<meta property="article:modified_time" content="2020-06-09T12:30:22-07:00" /><meta property="og:site_name" content="Project AIR™" />
 <meta itemprop="name" content="Start the UI">
 <meta itemprop="description" content="Run the UI locally
 ">
-<meta itemprop="dateModified" content="2020-06-04T12:53:01-07:00" />
-<meta itemprop="wordCount" content="354">
+<meta itemprop="dateModified" content="2020-06-09T12:30:22-07:00" />
+<meta itemprop="wordCount" content="355">
 
 
 
@@ -256,6 +256,41 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
+    <a  href="/labs-air/docs/configuration/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Configuration Guide</a>
+  </li>
+  <ul>
+    <li class="collapse " id="labs-airdocsconfiguration">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airdocsconfigurationinfrastructure-config" href="/labs-air/docs/configuration/infrastructure-config/">Infrastructure Config</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airdocsconfigurationbasic-auth" href="/labs-air/docs/configuration/basic-auth/">Basic Authentication</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
     <a  href="/labs-air/docs/users-guide/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Using TIBCO Project AIR™</a>
   </li>
   <ul>
@@ -405,7 +440,7 @@
 
 
 
-<p class="-text-primary pt-3 h6" >Reading time: 1 minutes and 37 seconds.</p>
+<p class="-text-primary pt-3 h6" >Reading time: 1 minutes and 38 seconds.</p>
 <p>
 <div class="td-content">
 	<h1>Start the UI</h1>
@@ -457,7 +492,7 @@
 |----------------------|------------------------------------|--------------------|-----------------------------|
 </code></pre><p>Then, let&rsquo;s use those endpoints to configure the UI.</p>
 <p>Open the file proxy.conf.prod.us.json and replace the following entries at the end of the json file with the endpoints from previous step.</p>
-<p>Replace <Add-Your-ingress-nginx-controller-Enpoint-Here> with the ip you got from &lsquo;minikube ip&rsquo; command in step 2.</p>
+<p>Replace &lt;Add-Your-ingress-nginx-controller-Enpoint-Here&gt; with the ip you got from &lsquo;minikube ip&rsquo; command in step 2.</p>
 <pre><code>  &quot;/edgex/remotegateway/*&quot;: {
     &quot;target&quot;: &quot;http://&lt;Add-Your-air-cors-anywhere-service-Enpoint-Here&gt;&quot;,
     &quot;secure&quot;: false,
@@ -541,7 +576,7 @@ npm install
 		<br />
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified June 4, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/a26d034115762996f50860b8055c10cc355825f0">Add tibco live apps trial (a26d0341)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified June 9, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/4163a2fa3d85e206380acd856bb1723d15316899">Fix docs (4163a2fa)</a>
 </div>
 </div>
 

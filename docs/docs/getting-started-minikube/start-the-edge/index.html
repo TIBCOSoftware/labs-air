@@ -25,12 +25,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/getting-started-minikube/start-the-edge/" />
-<meta property="article:modified_time" content="2020-06-02T17:45:33-07:00" /><meta property="og:site_name" content="Project AIR™" />
+<meta property="article:modified_time" content="2020-06-09T12:30:22-07:00" /><meta property="og:site_name" content="Project AIR™" />
 <meta itemprop="name" content="Start the Edge">
 <meta itemprop="description" content="Run Edgex foundry at the edge with a basic example
 ">
-<meta itemprop="dateModified" content="2020-06-02T17:45:33-07:00" />
-<meta itemprop="wordCount" content="288">
+<meta itemprop="dateModified" content="2020-06-09T12:30:22-07:00" />
+<meta itemprop="wordCount" content="324">
 
 
 
@@ -256,6 +256,41 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
+    <a  href="/labs-air/docs/configuration/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Configuration Guide</a>
+  </li>
+  <ul>
+    <li class="collapse " id="labs-airdocsconfiguration">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airdocsconfigurationinfrastructure-config" href="/labs-air/docs/configuration/infrastructure-config/">Infrastructure Config</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airdocsconfigurationbasic-auth" href="/labs-air/docs/configuration/basic-auth/">Basic Authentication</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
     <a  href="/labs-air/docs/users-guide/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Using TIBCO Project AIR™</a>
   </li>
   <ul>
@@ -410,7 +445,7 @@
 
 
 
-<p class="-text-primary pt-3 h6" >Reading time: 1 minutes and 18 seconds.</p>
+<p class="-text-primary pt-3 h6" >Reading time: 1 minutes and 28 seconds.</p>
 <p>
 <div class="td-content">
 	<h1>Start the Edge</h1>
@@ -450,8 +485,9 @@
 |----------------------|------------------------------------|--------------------|-----------------------------|
 </code></pre><p>Then, let&rsquo;s use those endpoints to configure the Edge example.</p>
 <pre><code>cd basicdemo
-</code></pre><p>Modify basicdemo/export_mqtt/configuration.toml</p>
-<p>Replace &lsquo;&lt;Add-Your-mosquitto-service-Enpoint-Here&gt;&rsquo; with your mosquitto-service endpoint also ensure the port is correct.</p>
+</code></pre><p>Modify basicdemo/export_mqtt/configuration.toml the following way</p>
+<p>1.- Replace &lsquo;&lt;Add-Your-mosquitto-service-Enpoint-Here&gt;&rsquo; with your minikube-mosquitto-service endpoint (the value under the URL column without the http:// and without :<port> section in this particular example &lsquo;192.168.99.117&rsquo;).
+2.- Replace &lsquo;&lt;Add-Your-mosquitto-service-port-Here&gt;&rsquo; with your minikube-mosquitto-service endpoint port (the port value under the URL column in this particular example &lsquo;30987&rsquo;).</p>
 <h4 id="step-3-run-the-basic-demo">Step 3: run the basic demo</h4>
 <p>Inside your basicdemo folder run</p>
 <pre><code>./startEdgex.sh
@@ -527,7 +563,7 @@
 		<br />
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified June 2, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/edb8ff5dcae249d5397b85810716d3f335ed728c">Update basic demo config (edb8ff5d)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified June 9, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/4163a2fa3d85e206380acd856bb1723d15316899">Fix docs (4163a2fa)</a>
 </div>
 </div>
 

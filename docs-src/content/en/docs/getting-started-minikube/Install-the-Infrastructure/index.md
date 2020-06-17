@@ -112,7 +112,7 @@ docker pull tibcosoftware/labs-air-minikube-cli
 #### Step 2: call delete command on cli
 
 ```
-docker run -it tibcosoftware/labs-air-minikube-cli air delete
+docker run -it -v ${HOME}/.minikube:/.minikube -v ${HOME}/.kube:/.kube tibcosoftware/labs-air-minikube-cli air delete
 ```
 
 #### Step 3: delete minikube

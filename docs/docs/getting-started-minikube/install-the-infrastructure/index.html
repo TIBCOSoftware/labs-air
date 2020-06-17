@@ -25,12 +25,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/getting-started-minikube/install-the-infrastructure/" />
-<meta property="article:modified_time" content="2020-06-08T12:55:13-07:00" /><meta property="og:site_name" content="Project AIR™" />
+<meta property="article:modified_time" content="2020-06-09T12:30:22-07:00" /><meta property="og:site_name" content="Project AIR™" />
 <meta itemprop="name" content="Install infrastructure on Minikube">
 <meta itemprop="description" content="Installation of Project AIR™ on your computer using Minikube
 ">
-<meta itemprop="dateModified" content="2020-06-08T12:55:13-07:00" />
-<meta itemprop="wordCount" content="301">
+<meta itemprop="dateModified" content="2020-06-09T12:30:22-07:00" />
+<meta itemprop="wordCount" content="305">
 
 
 
@@ -256,6 +256,41 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
+    <a  href="/labs-air/docs/configuration/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Configuration Guide</a>
+  </li>
+  <ul>
+    <li class="collapse " id="labs-airdocsconfiguration">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airdocsconfigurationinfrastructure-config" href="/labs-air/docs/configuration/infrastructure-config/">Infrastructure Config</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airdocsconfigurationbasic-auth" href="/labs-air/docs/configuration/basic-auth/">Basic Authentication</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
     <a  href="/labs-air/docs/users-guide/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Using TIBCO Project AIR™</a>
   </li>
   <ul>
@@ -410,7 +445,7 @@
 
 
 
-<p class="-text-primary pt-3 h6" >Reading time: 1 minutes and 22 seconds.</p>
+<p class="-text-primary pt-3 h6" >Reading time: 1 minutes and 23 seconds.</p>
 <p>
 <div class="td-content">
 	<h1>Install infrastructure on Minikube</h1>
@@ -459,7 +494,7 @@
 <h4 id="step-1-pull-minikube-cli">Step 1: pull minikube cli</h4>
 <pre><code>docker pull tibcosoftware/labs-air-minikube-cli
 </code></pre><h4 id="step-2-call-delete-command-on-cli">Step 2: call delete command on cli</h4>
-<pre><code>docker run -it tibcosoftware/labs-air-minikube-cli air delete
+<pre><code>docker run -it -v ${HOME}/.minikube:/.minikube -v ${HOME}/.kube:/.kube tibcosoftware/labs-air-minikube-cli air delete
 </code></pre><h4 id="step-3-delete-minikube">Step 3: delete minikube</h4>
 <p>Note: This installation deletes the Kubernetes cluster.</p>
 <pre><code>minikube delete
@@ -526,7 +561,7 @@
 		<br />
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified June 8, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/2add77a70bab2ce05a1a5b1b8b17f55760d7b341">Add minikube support for windoes (2add77a7)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified June 9, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/4163a2fa3d85e206380acd856bb1723d15316899">Fix docs (4163a2fa)</a>
 </div>
 </div>
 

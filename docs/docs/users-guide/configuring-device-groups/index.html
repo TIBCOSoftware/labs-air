@@ -26,13 +26,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/users-guide/configuring-device-groups/" />
 <meta property="article:published_time" content="2020-05-25T12:33:17-04:00" />
-<meta property="article:modified_time" content="2020-05-29T18:32:18+02:00" /><meta property="og:site_name" content="Project AIR™" />
+<meta property="article:modified_time" content="2020-06-07T15:04:40-04:00" /><meta property="og:site_name" content="Project AIR™" />
 <meta itemprop="name" content="Configuring Device Groups">
 <meta itemprop="description" content="Configuring Device Groups - How to configure messaging protocols and data store targets for data.
 ">
 <meta itemprop="datePublished" content="2020-05-25T12:33:17-04:00" />
-<meta itemprop="dateModified" content="2020-05-29T18:32:18&#43;02:00" />
-<meta itemprop="wordCount" content="344">
+<meta itemprop="dateModified" content="2020-06-07T15:04:40-04:00" />
+<meta itemprop="wordCount" content="368">
 
 
 
@@ -258,6 +258,41 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
+    <a  href="/labs-air/docs/configuration/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Configuration Guide</a>
+  </li>
+  <ul>
+    <li class="collapse " id="labs-airdocsconfiguration">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airdocsconfigurationinfrastructure-config" href="/labs-air/docs/configuration/infrastructure-config/">Infrastructure Config</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airdocsconfigurationbasic-auth" href="/labs-air/docs/configuration/basic-auth/">Basic Authentication</a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
     <a  href="/labs-air/docs/users-guide/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Using TIBCO Project AIR™</a>
   </li>
   <ul>
@@ -417,7 +452,7 @@
 
 
 
-<p class="-text-primary pt-3 h6" >Reading time: 1 minutes and 33 seconds.</p>
+<p class="-text-primary pt-3 h6" >Reading time: 1 minutes and 40 seconds.</p>
 <p>
 <div class="td-content">
 	<h1>Configuring Device Groups</h1>
@@ -444,7 +479,10 @@ The following steps will guide you through the configuration of messaging protoc
 <li>Connection Credentials</li>
 </ul>
 <h4 id="prerequisite-3-data-store-table-setup">Prerequisite 3: Data Store Table Setup</h4>
-<p>For each data store, tables to store the data need to be created. Project AIR scripts with SQL commands to create the required artifacts.</p>
+<p>For each required data store, the user needs to configure the datastate and create tables to store the data.
+Project AIR provides scripts with SQL commands to create the required artifacts.</p>
+<p>Following is an example sql script to create the artifact for a Postgres Database.
+<a href="./setup.sql">Postgres SQL script</a></p>
 <h2 id="accessing-endpoints-configuration">Accessing Endpoints Configuration</h2>
 <h4 id="step-1-from-the-gateways-page-select-the-device-group-you-want-to-configure">Step 1: From the Gateways page, select the Device Group you want to configure.</h4>
 <h4 id="step-2-click-the-endpoints-configuration-button">Step 2: Click the Endpoints Configuration button.</h4>
@@ -529,7 +567,7 @@ The following steps will guide you through the configuration of messaging protoc
 		<br />
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified May 29, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/460db00798d7e976606b15dc24c92193fe44d1eb">move description (460db007)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified June 7, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/841887471c9e8a8c2c7f3c27939850ef964cb93c">Updated data store configuration section (84188747)</a>
 </div>
 </div>
 

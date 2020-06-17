@@ -63,9 +63,10 @@ Then, let's use those endpoints to configure the Edge example.
 cd basicdemo
 ```
 
-Modify basicdemo/export_mqtt/configuration.toml
+Modify basicdemo/export_mqtt/configuration.toml the following way
 
-Replace '\<Add-Your-mosquitto-service-Enpoint-Here\>' with your mosquitto-service endpoint also ensure the port is correct.
+1.- Replace '\<Add-Your-mosquitto-service-Enpoint-Here\>' with your minikube-mosquitto-service endpoint (the value under the URL column without the http:// and without :<port> section in this particular example '192.168.99.117').
+2.- Replace '\<Add-Your-mosquitto-service-port-Here\>' with your minikube-mosquitto-service endpoint port (the port value under the URL column in this particular example '30987').
 
 
 #### Step 3: run the basic demo

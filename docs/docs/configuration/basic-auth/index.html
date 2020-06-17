@@ -20,25 +20,23 @@
 <link rel="icon" type="image/png" href="/labs-air/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/labs-air/favicons/android-192x192.png" sizes="192x192">
 
-<title>Manage Device Groups | Project AIR™</title><meta property="og:title" content="Manage Device Groups" />
-<meta property="og:description" content="Managing Device Groups - How to create and manage device groups
+<title>Basic Authentication | Project AIR™</title><meta property="og:title" content="Basic Authentication" />
+<meta property="og:description" content="Basic Authentication
 " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/users-guide/manage-device-groups/" />
-<meta property="article:published_time" content="2020-05-24T15:42:50-04:00" />
-<meta property="article:modified_time" content="2020-05-29T18:32:18+02:00" /><meta property="og:site_name" content="Project AIR™" />
-<meta itemprop="name" content="Manage Device Groups">
-<meta itemprop="description" content="Managing Device Groups - How to create and manage device groups
+<meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/configuration/basic-auth/" />
+<meta property="og:site_name" content="Project AIR™" />
+<meta itemprop="name" content="Basic Authentication">
+<meta itemprop="description" content="Basic Authentication
 ">
-<meta itemprop="datePublished" content="2020-05-24T15:42:50-04:00" />
-<meta itemprop="dateModified" content="2020-05-29T18:32:18&#43;02:00" />
-<meta itemprop="wordCount" content="332">
+
+<meta itemprop="wordCount" content="175">
 
 
 
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Manage Device Groups"/>
-<meta name="twitter:description" content="Managing Device Groups - How to create and manage device groups
+<meta name="twitter:title" content="Basic Authentication"/>
+<meta name="twitter:description" content="Basic Authentication
 "/>
 
 
@@ -60,7 +58,7 @@
 <script src="/js/offline-search.js"></script>
 
 
-    <title>Manage Device Groups | Project AIR™</title>
+    <title>Basic Authentication | Project AIR™</title>
   </head>
   <body class="td-page">
     <header>
@@ -258,10 +256,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/labs-air/docs/configuration/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Configuration Guide</a>
+    <a  href="/labs-air/docs/configuration/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Configuration Guide</a>
   </li>
   <ul>
-    <li class="collapse " id="labs-airdocsconfiguration">
+    <li class="collapse show" id="labs-airdocsconfiguration">
       
       
       
@@ -274,7 +272,7 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airdocsconfigurationbasic-auth" href="/labs-air/docs/configuration/basic-auth/">Basic Authentication</a>
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-labs-airdocsconfigurationbasic-auth" href="/labs-air/docs/configuration/basic-auth/">Basic Authentication</a>
       
       
     </li>
@@ -293,10 +291,10 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/labs-air/docs/users-guide/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Using TIBCO Project AIR™</a>
+    <a  href="/labs-air/docs/users-guide/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Using TIBCO Project AIR™</a>
   </li>
   <ul>
-    <li class="collapse show" id="labs-airdocsusers-guide">
+    <li class="collapse " id="labs-airdocsusers-guide">
       
       
       
@@ -309,7 +307,7 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-labs-airdocsusers-guidemanage-device-groups" href="/labs-air/docs/users-guide/manage-device-groups/">Manage Device Groups</a>
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airdocsusers-guidemanage-device-groups" href="/labs-air/docs/users-guide/manage-device-groups/">Manage Device Groups</a>
       
       
       
@@ -372,7 +370,7 @@
 
 
 
-<a href="https://github.com/TIBCOSoftware/labs-air//issues/new?title=Manage%20Device%20Groups" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href="https://github.com/TIBCOSoftware/labs-air//issues/new?title=Basic%20Authentication" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
 
 
 <a href="https://github.com/TIBCOSoftware/labs-air//issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
@@ -387,26 +385,7 @@
 <nav id="TableOfContents">
   <ul>
     <li><a href="#introduction">Introduction</a></li>
-    <li><a href="#prerequisites">Prerequisites</a>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
-    <li><a href="#adding-device-groups-steps">Adding Device Groups Steps</a>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
-    <li><a href="#updating-device-group-steps">Updating Device Group Steps</a>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
-    <li><a href="#removing-device-group-steps">Removing Device Group Steps</a>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
+    <li><a href="#how-to-override-default-basic-auth-configuration">How to override default basic auth configuration</a></li>
   </ul>
 </nav>
 
@@ -435,14 +414,14 @@
 
 
 <li class="breadcrumb-item" >
-	<a href="https://tibcosoftware.github.io/labs-air/docs/users-guide/">Using TIBCO Project AIR™</a>
+	<a href="https://tibcosoftware.github.io/labs-air/docs/configuration/">Configuration Guide</a>
 </li>
 
 
 
 
 <li class="breadcrumb-item active" aria-current="page">
-	<a href="https://tibcosoftware.github.io/labs-air/docs/users-guide/manage-device-groups/">Manage Device Groups</a>
+	<a href="https://tibcosoftware.github.io/labs-air/docs/configuration/basic-auth/">Basic Authentication</a>
 </li>
 
 	</ol>
@@ -452,56 +431,37 @@
 
 
 
-<p class="-text-primary pt-3 h6" >Reading time: 1 minutes and 31 seconds.</p>
+<p class="-text-primary pt-3 h6" >Reading time: 0 minutes and 47 seconds.</p>
 <p>
 <div class="td-content">
-	<h1>Manage Device Groups</h1>
-	<div class="lead">Managing Device Groups - How to create and manage device groups</div>
+	<h1>Basic Authentication</h1>
+	<div class="lead">Basic Authentication</div>
 	<h2 id="introduction">Introduction</h2>
-<p>The following steps will guide you through the creation  and management of device groups.
-A device group represent a number of edge devices controlled and managed by the Edgex platform.</p>
-<h2 id="prerequisites">Prerequisites</h2>
-<h4 id="prerequisite-1-edgex">Prerequisite 1: Edgex</h4>
-<p>Edgex is a vendor neutral open source platform at the edge of the network that interacts with physical devices, sensors, actuators and other IoT objects. It enables the interoperability between devices and applications at the edge and at the cloud.</p>
-<ul>
-<li><a href="https://www.edgexfoundry.org">Edgex</a></li>
-</ul>
-<p>From a running instance of Edgex, gather the following information:</p>
-<ul>
-<li>Edgex Instance Name</li>
-<li>Overall gps coordinates of where the Edgex platform is running</li>
-<li>Edgex gateway api security token</li>
-</ul>
-<h4 id="prerequisite-2-project-air-ui">Prerequisite 2: Project AIR UI</h4>
-<p>Login to TIBCO Project AIR™ UI</p>
-<h2 id="adding-device-groups-steps">Adding Device Groups Steps</h2>
-<h4 id="step-1-click-the-iot-management-menu-on-the-top-left-corner-and-select-gateways">Step 1: Click the IoT Management menu on the top left corner and select Gateways.</h4>
-<p><img src="./air_side_menu.png" alt="Gateway Page image"></p>
-<h4 id="step-2-on-the-gateways-page-enter-the-following-information-and-then-click-add-gateway">Step 2: On the Gateways page, enter the following information and then click Add Gateway:</h4>
-<ul>
-<li>Device Group Id: the grouping name from Edgex</li>
-<li>Description: a description for the group of devices</li>
-<li>Address: the ip address of the machine where Edgex Gateway is running.</li>
-<li>Latitude: Edgex machine latitude</li>
-<li>Longitude: Edgex machine longitude</li>
-<li>Access Token: The Edgex security token</li>
-</ul>
-<p><img src="./air_add_gateway.png" alt="Gateway Add image"></p>
-<h4 id="step-3-verify-connection-to-edgex">Step 3: Verify connection to Edgex</h4>
-<p>Once the grouping has been added, click the grouping on the Device Groups table on the top-left corner, and then click Ping Gateway.  If the connection is succesful, you should see a Success banner. Otherwise, a Failure banner is displayed and you should review that Edgex is running or make sure the Address and Access Token parameters are correct.</p>
-<p><img src="./air_gateway_added.png" alt="Gateway Verify image"></p>
-<h2 id="updating-device-group-steps">Updating Device Group Steps</h2>
-<h4 id="step-1-select-grouping-to-be-updated-from-the-device-groups-table">Step 1: Select grouping to be updated from the Device Groups table.</h4>
-<h4 id="step-2-modify-groupin-parameters-as-required-note-that-the-device-group-id-can-not-be-modified">Step 2: Modify groupin parameters as required. Note that the Device Group Id can not be modified.</h4>
-<h4 id="step-3-click-the-update-gateway-button">Step 3: Click the Update Gateway button.</h4>
-<p><img src="./air_update_gateway.png" alt="Update Gateway image"></p>
-<h2 id="removing-device-group-steps">Removing Device Group Steps</h2>
-<h4 id="step-1-select-grouping-to-be-removed-from-the-device-groups-table">Step 1: Select grouping to be removed from the Device Groups table.</h4>
-<h4 id="step-3-click-the-delete-gateway-button">Step 3: Click the Delete Gateway button.</h4>
-<p><img src="./air_remove_gateway.png" alt="Delete Gateway image"></p>
-<h4 id="step-3-verify-removed-gateway-is-not-longer-in-the-device-groups-table">Step 3: Verify removed gateway is not longer in the Device Groups table.</h4>
-<p><img src="./air_gateway_removed.png" alt="Delete Gateway image"></p>
-
+<p>Project Air provides with basic authentication out of the box, this basic auth can be configured and even removed if desired.</p>
+<blockquote>
+<p>Note: It is highly encouraged to change the default basic authentication secrets to your own secrets.</p>
+</blockquote>
+<h2 id="how-to-override-default-basic-auth-configuration">How to override default basic auth configuration</h2>
+<p>In order to override the basic auth configuration the following is needed</p>
+<p>Step 1.-  Create a new secret overriding the basic auth values</p>
+<p>To create your new secret in a terminal create the auth file (Replace <YourDesiredUsername> with your username for example admin)</p>
+<pre><code>htpasswd -c auth &lt;YourDesiredUsername&gt;
+base64 auth
+</code></pre><p>Step 2.- Override secret on install or upgrade</p>
+<p>In this step we are going to use secret created in Step 1.</p>
+<p>Create a new override-values.yml file as defined in <a href="../infrastructure-config#how-to-override-configuration">here</a> with the current content:</p>
+<pre><code>basicauth:
+  secret: &lt;AddYourSecretHere&gt;
+</code></pre><p>Step 3.- Use the new override-values.yaml to install or upgrade air infrastructure</p>
+<blockquote>
+<p>More information about overriding values <a href="../infrastructure-config#how-to-override-configuration">here</a></p>
+</blockquote>
+<p>Step 4.- Change UI to use new BasicAuth http headers</p>
+<p>Open labs-air-ui/src/app/services/auth/auth.service.ts and replace the line <AddYourBase64BasicAuthHere> with your base64 header.</p>
+<pre><code>this.basicAuthHeaders = {
+        'Authorization': 'Basic &lt;AddYourBase64BasicAuthHere&gt;'
+    }
+</code></pre>
 	
 		<style>
   .feedback--answer {
@@ -564,7 +524,7 @@ A device group represent a number of edge devices controlled and managed by the 
 		<br />
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified May 29, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/460db00798d7e976606b15dc24c92193fe44d1eb">move description (460db007)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified January 1, 0001
 </div>
 </div>
 

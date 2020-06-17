@@ -50,6 +50,39 @@
     </item>
     
     <item>
+      <title>Docs: Infrastructure Config</title>
+      <link>https://tibcosoftware.github.io/labs-air/docs/configuration/infrastructure-config/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://tibcosoftware.github.io/labs-air/docs/configuration/infrastructure-config/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Project Air&amp;rsquo;s infrastructure is mainly composed of &lt;a href=&#34;https://helm.sh/&#34;&gt;helm charts&lt;/a&gt; that run on a &lt;a href=&#34;https://kubernetes.io/&#34;&gt;kubernetes&lt;/a&gt; cluster, which makes overriding the default configuration very simple.&lt;/p&gt;
+&lt;h2 id=&#34;how-to-override-configuration&#34;&gt;How to override configuration&lt;/h2&gt;
+&lt;p&gt;During &amp;ldquo;air install&amp;rdquo; or &amp;ldquo;air upgrade-charts&amp;rdquo; commands a values.yml file can be passed as a parameter that will override the default configuration (more information about helm values files &lt;a href=&#34;https://helm.sh/docs/chart_template_guide/values_files/&#34;&gt;here&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;In order to pass the values.yml file 2 things are needed:&lt;/p&gt;
+&lt;p&gt;1.- Mount your &amp;ldquo;values.yml&amp;rdquo; file using the docker option -v, more info about docker volumes &lt;a href=&#34;https://docs.docker.com/storage/volumes/&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;2.- Pass &amp;ndash;values flag to &amp;ldquo;air install&amp;rdquo; or &amp;ldquo;air upgrade-charts&amp;rdquo; command&lt;/p&gt;
+&lt;p&gt;For example to increase the mosquitto pod number create a file called override-values.yml&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;mosquitto:
+  deployment:
+    replicaCount: 2
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then use that file when calling &amp;ldquo;air install&amp;rdquo; or &amp;ldquo;air upgrade-charts&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;Command example overriding default values:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker run -e MINIKUBE_IP=$(minikube ip) -it --network host -v ${HOME}/.minikube:/.minikube -v ${HOME}/.kube:/.kube -v /path/to/override-values/folder:/values -e MINIKUBE_HOST_OS=mac tibcosoftware/labs-air-minikube-cli air install --values /values/override-values.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;Note: &lt;strong&gt;-v /path/to/override-values/folder:/values&lt;/strong&gt; (Will mount your override-values.yml inside the container)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: &lt;strong&gt;&amp;ndash;values /values/override-values.yaml&lt;/strong&gt; (Parameter with the file path that will override the helm values)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Docs: Install infrastructure on AWS</title>
       <link>https://tibcosoftware.github.io/labs-air/docs/getting-started-aws/install-the-infrastructure/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -181,7 +214,7 @@ Please enter your AWS_SECRET_ACCESS_KEY:
 &lt;h4 id=&#34;step-1-pull-minikube-cli&#34;&gt;Step 1: pull minikube cli&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;docker pull tibcosoftware/labs-air-minikube-cli
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;step-2-call-delete-command-on-cli&#34;&gt;Step 2: call delete command on cli&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;docker run -it tibcosoftware/labs-air-minikube-cli air delete
+&lt;pre&gt;&lt;code&gt;docker run -it -v ${HOME}/.minikube:/.minikube -v ${HOME}/.kube:/.kube tibcosoftware/labs-air-minikube-cli air delete
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;step-3-delete-minikube&#34;&gt;Step 3: delete minikube&lt;/h4&gt;
 &lt;p&gt;Note: This installation deletes the Kubernetes cluster.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;minikube delete
@@ -205,7 +238,7 @@ A device group represent a number of edge devices controlled and managed by the 
 &lt;h4 id=&#34;prerequisite-1-edgex&#34;&gt;Prerequisite 1: Edgex&lt;/h4&gt;
 &lt;p&gt;Edgex is a vendor neutral open source platform at the edge of the network that interacts with physical devices, sensors, actuators and other IoT objects. It enables the interoperability between devices and applications at the edge and at the cloud.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;edgexfoundry.org&#34;&gt;Edgex&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.edgexfoundry.org&#34;&gt;Edgex&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;From a running instance of Edgex, gather the following information:&lt;/p&gt;
 &lt;ul&gt;
@@ -243,6 +276,44 @@ A device group represent a number of edge devices controlled and managed by the 
 &lt;h4 id=&#34;step-3-verify-removed-gateway-is-not-longer-in-the-device-groups-table&#34;&gt;Step 3: Verify removed gateway is not longer in the Device Groups table.&lt;/h4&gt;
 &lt;p&gt;&lt;img src=&#34;./air_gateway_removed.png&#34; alt=&#34;Delete Gateway image&#34;&gt;&lt;/p&gt;
 
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Basic Authentication</title>
+      <link>https://tibcosoftware.github.io/labs-air/docs/configuration/basic-auth/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://tibcosoftware.github.io/labs-air/docs/configuration/basic-auth/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Project Air provides with basic authentication out of the box, this basic auth can be configured and even removed if desired.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: It is highly encouraged to change the default basic authentication secrets to your own secrets.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;how-to-override-default-basic-auth-configuration&#34;&gt;How to override default basic auth configuration&lt;/h2&gt;
+&lt;p&gt;In order to override the basic auth configuration the following is needed&lt;/p&gt;
+&lt;p&gt;Step 1.-  Create a new secret overriding the basic auth values&lt;/p&gt;
+&lt;p&gt;To create your new secret in a terminal create the auth file (Replace &lt;YourDesiredUsername&gt; with your username for example admin)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;htpasswd -c auth &amp;lt;YourDesiredUsername&amp;gt;
+base64 auth
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Step 2.- Override secret on install or upgrade&lt;/p&gt;
+&lt;p&gt;In this step we are going to use secret created in Step 1.&lt;/p&gt;
+&lt;p&gt;Create a new override-values.yml file as defined in &lt;a href=&#34;../infrastructure-config#how-to-override-configuration&#34;&gt;here&lt;/a&gt; with the current content:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;basicauth:
+  secret: &amp;lt;AddYourSecretHere&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Step 3.- Use the new override-values.yaml to install or upgrade air infrastructure&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;More information about overriding values &lt;a href=&#34;../infrastructure-config#how-to-override-configuration&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Step 4.- Change UI to use new BasicAuth http headers&lt;/p&gt;
+&lt;p&gt;Open labs-air-ui/src/app/services/auth/auth.service.ts and replace the line &lt;AddYourBase64BasicAuthHere&gt; with your base64 header.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;this.basicAuthHeaders = {
+        &#39;Authorization&#39;: &#39;Basic &amp;lt;AddYourBase64BasicAuthHere&amp;gt;&#39;
+    }
+&lt;/code&gt;&lt;/pre&gt;
       </description>
     </item>
     
@@ -342,8 +413,9 @@ A device group represent a number of edge devices controlled and managed by the 
 |----------------------|------------------------------------|--------------------|-----------------------------|
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then, let&amp;rsquo;s use those endpoints to configure the Edge example.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;cd basicdemo
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Modify basicdemo/export_mqtt/configuration.toml&lt;/p&gt;
-&lt;p&gt;Replace &amp;lsquo;&amp;lt;Add-Your-mosquitto-service-Enpoint-Here&amp;gt;&amp;rsquo; with your mosquitto-service endpoint also ensure the port is correct.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Modify basicdemo/export_mqtt/configuration.toml the following way&lt;/p&gt;
+&lt;p&gt;1.- Replace &amp;lsquo;&amp;lt;Add-Your-mosquitto-service-Enpoint-Here&amp;gt;&amp;rsquo; with your minikube-mosquitto-service endpoint (the value under the URL column without the http:// and without :&lt;port&gt; section in this particular example &amp;lsquo;192.168.99.117&amp;rsquo;).
+2.- Replace &amp;lsquo;&amp;lt;Add-Your-mosquitto-service-port-Here&amp;gt;&amp;rsquo; with your minikube-mosquitto-service endpoint port (the port value under the URL column in this particular example &amp;lsquo;30987&amp;rsquo;).&lt;/p&gt;
 &lt;h4 id=&#34;step-3-run-the-basic-demo&#34;&gt;Step 3: run the basic demo&lt;/h4&gt;
 &lt;p&gt;Inside your basicdemo folder run&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;./startEdgex.sh
@@ -391,7 +463,10 @@ The following steps will guide you through the configuration of messaging protoc
 &lt;li&gt;Connection Credentials&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;prerequisite-3-data-store-table-setup&#34;&gt;Prerequisite 3: Data Store Table Setup&lt;/h4&gt;
-&lt;p&gt;For each data store, tables to store the data need to be created. Project AIR scripts with SQL commands to create the required artifacts.&lt;/p&gt;
+&lt;p&gt;For each required data store, the user needs to configure the datastate and create tables to store the data.
+Project AIR provides scripts with SQL commands to create the required artifacts.&lt;/p&gt;
+&lt;p&gt;Following is an example sql script to create the artifact for a Postgres Database.
+&lt;a href=&#34;./setup.sql&#34;&gt;Postgres SQL script&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;accessing-endpoints-configuration&#34;&gt;Accessing Endpoints Configuration&lt;/h2&gt;
 &lt;h4 id=&#34;step-1-from-the-gateways-page-select-the-device-group-you-want-to-configure&#34;&gt;Step 1: From the Gateways page, select the Device Group you want to configure.&lt;/h4&gt;
 &lt;h4 id=&#34;step-2-click-the-endpoints-configuration-button&#34;&gt;Step 2: Click the Endpoints Configuration button.&lt;/h4&gt;
@@ -541,7 +616,7 @@ npm install
 |----------------------|------------------------------------|--------------------|-----------------------------|
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then, let&amp;rsquo;s use those endpoints to configure the UI.&lt;/p&gt;
 &lt;p&gt;Open the file proxy.conf.prod.us.json and replace the following entries at the end of the json file with the endpoints from previous step.&lt;/p&gt;
-&lt;p&gt;Replace &lt;Add-Your-ingress-nginx-controller-Enpoint-Here&gt; with the ip you got from &amp;lsquo;minikube ip&amp;rsquo; command in step 2.&lt;/p&gt;
+&lt;p&gt;Replace &amp;lt;Add-Your-ingress-nginx-controller-Enpoint-Here&amp;gt; with the ip you got from &amp;lsquo;minikube ip&amp;rsquo; command in step 2.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;  &amp;quot;/edgex/remotegateway/*&amp;quot;: {
     &amp;quot;target&amp;quot;: &amp;quot;http://&amp;lt;Add-Your-air-cors-anywhere-service-Enpoint-Here&amp;gt;&amp;quot;,
     &amp;quot;secure&amp;quot;: false,
