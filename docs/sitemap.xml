@@ -13,18 +13,26 @@
   </url>
   
   <url>
+    <loc>https://tibcosoftware.github.io/labs-air/docs/configuration/infrastructure-config/</loc>
+  </url>
+  
+  <url>
     <loc>https://tibcosoftware.github.io/labs-air/docs/getting-started-aws/install-the-infrastructure/</loc>
     <lastmod>2020-06-01T18:46:26-07:00</lastmod>
   </url>
   
   <url>
     <loc>https://tibcosoftware.github.io/labs-air/docs/getting-started-minikube/install-the-infrastructure/</loc>
-    <lastmod>2020-06-08T12:55:13-07:00</lastmod>
+    <lastmod>2020-06-09T12:30:22-07:00</lastmod>
   </url>
   
   <url>
     <loc>https://tibcosoftware.github.io/labs-air/docs/users-guide/manage-device-groups/</loc>
     <lastmod>2020-05-29T18:32:18+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tibcosoftware.github.io/labs-air/docs/configuration/basic-auth/</loc>
   </url>
   
   <url>
@@ -34,22 +42,21 @@
   
   <url>
     <loc>https://tibcosoftware.github.io/labs-air/docs/getting-started-aws/start-the-edge/</loc>
-    <lastmod>2020-06-02T17:45:33-07:00</lastmod>
+    <lastmod>2020-06-09T12:30:22-07:00</lastmod>
   </url>
   
   <url>
     <loc>https://tibcosoftware.github.io/labs-air/docs/getting-started-minikube/start-the-edge/</loc>
-    <lastmod>2020-06-02T17:45:33-07:00</lastmod>
+    <lastmod>2020-06-09T12:30:22-07:00</lastmod>
   </url>
   
   <url>
     <loc>https://tibcosoftware.github.io/labs-air/docs/users-guide/configuring-device-groups/</loc>
-    <lastmod>2020-05-29T18:32:18+02:00</lastmod>
+    <lastmod>2020-06-07T15:04:40-04:00</lastmod>
   </url>
   
   <url>
-    <loc>https://tibcosoftware.github.io/labs-air/docs/users-guide/</loc>
-    <lastmod>2020-06-01T18:46:26-07:00</lastmod>
+    <loc>https://tibcosoftware.github.io/labs-air/docs/configuration/</loc>
   </url>
   
   <url>
@@ -59,12 +66,17 @@
   
   <url>
     <loc>https://tibcosoftware.github.io/labs-air/docs/getting-started-minikube/start-the-ui/</loc>
-    <lastmod>2020-06-04T12:53:01-07:00</lastmod>
+    <lastmod>2020-06-09T12:30:22-07:00</lastmod>
   </url>
   
   <url>
     <loc>https://tibcosoftware.github.io/labs-air/docs/users-guide/adding-data-pipelines/</loc>
     <lastmod>2020-05-29T18:32:18+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tibcosoftware.github.io/labs-air/docs/users-guide/</loc>
+    <lastmod>2020-06-01T18:46:26-07:00</lastmod>
   </url>
   
   <url>

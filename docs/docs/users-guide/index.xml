@@ -66,7 +66,7 @@ A device group represent a number of edge devices controlled and managed by the 
 &lt;h4 id=&#34;prerequisite-1-edgex&#34;&gt;Prerequisite 1: Edgex&lt;/h4&gt;
 &lt;p&gt;Edgex is a vendor neutral open source platform at the edge of the network that interacts with physical devices, sensors, actuators and other IoT objects. It enables the interoperability between devices and applications at the edge and at the cloud.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;edgexfoundry.org&#34;&gt;Edgex&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.edgexfoundry.org&#34;&gt;Edgex&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;From a running instance of Edgex, gather the following information:&lt;/p&gt;
 &lt;ul&gt;
@@ -138,7 +138,10 @@ The following steps will guide you through the configuration of messaging protoc
 &lt;li&gt;Connection Credentials&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;prerequisite-3-data-store-table-setup&#34;&gt;Prerequisite 3: Data Store Table Setup&lt;/h4&gt;
-&lt;p&gt;For each data store, tables to store the data need to be created. Project AIR scripts with SQL commands to create the required artifacts.&lt;/p&gt;
+&lt;p&gt;For each required data store, the user needs to configure the datastate and create tables to store the data.
+Project AIR provides scripts with SQL commands to create the required artifacts.&lt;/p&gt;
+&lt;p&gt;Following is an example sql script to create the artifact for a Postgres Database.
+&lt;a href=&#34;./setup.sql&#34;&gt;Postgres SQL script&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;accessing-endpoints-configuration&#34;&gt;Accessing Endpoints Configuration&lt;/h2&gt;
 &lt;h4 id=&#34;step-1-from-the-gateways-page-select-the-device-group-you-want-to-configure&#34;&gt;Step 1: From the Gateways page, select the Device Group you want to configure.&lt;/h4&gt;
 &lt;h4 id=&#34;step-2-click-the-endpoints-configuration-button&#34;&gt;Step 2: Click the Endpoints Configuration button.&lt;/h4&gt;

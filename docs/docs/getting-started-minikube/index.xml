@@ -66,7 +66,7 @@
 &lt;h4 id=&#34;step-1-pull-minikube-cli&#34;&gt;Step 1: pull minikube cli&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;docker pull tibcosoftware/labs-air-minikube-cli
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;step-2-call-delete-command-on-cli&#34;&gt;Step 2: call delete command on cli&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;docker run -it tibcosoftware/labs-air-minikube-cli air delete
+&lt;pre&gt;&lt;code&gt;docker run -it -v ${HOME}/.minikube:/.minikube -v ${HOME}/.kube:/.kube tibcosoftware/labs-air-minikube-cli air delete
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;step-3-delete-minikube&#34;&gt;Step 3: delete minikube&lt;/h4&gt;
 &lt;p&gt;Note: This installation deletes the Kubernetes cluster.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;minikube delete
@@ -118,8 +118,9 @@
 |----------------------|------------------------------------|--------------------|-----------------------------|
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then, let&amp;rsquo;s use those endpoints to configure the Edge example.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;cd basicdemo
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Modify basicdemo/export_mqtt/configuration.toml&lt;/p&gt;
-&lt;p&gt;Replace &amp;lsquo;&amp;lt;Add-Your-mosquitto-service-Enpoint-Here&amp;gt;&amp;rsquo; with your mosquitto-service endpoint also ensure the port is correct.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Modify basicdemo/export_mqtt/configuration.toml the following way&lt;/p&gt;
+&lt;p&gt;1.- Replace &amp;lsquo;&amp;lt;Add-Your-mosquitto-service-Enpoint-Here&amp;gt;&amp;rsquo; with your minikube-mosquitto-service endpoint (the value under the URL column without the http:// and without :&lt;port&gt; section in this particular example &amp;lsquo;192.168.99.117&amp;rsquo;).
+2.- Replace &amp;lsquo;&amp;lt;Add-Your-mosquitto-service-port-Here&amp;gt;&amp;rsquo; with your minikube-mosquitto-service endpoint port (the port value under the URL column in this particular example &amp;lsquo;30987&amp;rsquo;).&lt;/p&gt;
 &lt;h4 id=&#34;step-3-run-the-basic-demo&#34;&gt;Step 3: run the basic demo&lt;/h4&gt;
 &lt;p&gt;Inside your basicdemo folder run&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;./startEdgex.sh
@@ -192,7 +193,7 @@
 |----------------------|------------------------------------|--------------------|-----------------------------|
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then, let&amp;rsquo;s use those endpoints to configure the UI.&lt;/p&gt;
 &lt;p&gt;Open the file proxy.conf.prod.us.json and replace the following entries at the end of the json file with the endpoints from previous step.&lt;/p&gt;
-&lt;p&gt;Replace &lt;Add-Your-ingress-nginx-controller-Enpoint-Here&gt; with the ip you got from &amp;lsquo;minikube ip&amp;rsquo; command in step 2.&lt;/p&gt;
+&lt;p&gt;Replace &amp;lt;Add-Your-ingress-nginx-controller-Enpoint-Here&amp;gt; with the ip you got from &amp;lsquo;minikube ip&amp;rsquo; command in step 2.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;  &amp;quot;/edgex/remotegateway/*&amp;quot;: {
     &amp;quot;target&amp;quot;: &amp;quot;http://&amp;lt;Add-Your-air-cors-anywhere-service-Enpoint-Here&amp;gt;&amp;quot;,
     &amp;quot;secure&amp;quot;: false,

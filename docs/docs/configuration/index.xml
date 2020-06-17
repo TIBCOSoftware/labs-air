@@ -1,0 +1,88 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Project AIR™ – Configuration Guide</title>
+    <link>https://tibcosoftware.github.io/labs-air/docs/configuration/</link>
+    <description>Recent content in Configuration Guide on Project AIR™</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://tibcosoftware.github.io/labs-air/docs/configuration/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: Infrastructure Config</title>
+      <link>https://tibcosoftware.github.io/labs-air/docs/configuration/infrastructure-config/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://tibcosoftware.github.io/labs-air/docs/configuration/infrastructure-config/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Project Air&amp;rsquo;s infrastructure is mainly composed of &lt;a href=&#34;https://helm.sh/&#34;&gt;helm charts&lt;/a&gt; that run on a &lt;a href=&#34;https://kubernetes.io/&#34;&gt;kubernetes&lt;/a&gt; cluster, which makes overriding the default configuration very simple.&lt;/p&gt;
+&lt;h2 id=&#34;how-to-override-configuration&#34;&gt;How to override configuration&lt;/h2&gt;
+&lt;p&gt;During &amp;ldquo;air install&amp;rdquo; or &amp;ldquo;air upgrade-charts&amp;rdquo; commands a values.yml file can be passed as a parameter that will override the default configuration (more information about helm values files &lt;a href=&#34;https://helm.sh/docs/chart_template_guide/values_files/&#34;&gt;here&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;In order to pass the values.yml file 2 things are needed:&lt;/p&gt;
+&lt;p&gt;1.- Mount your &amp;ldquo;values.yml&amp;rdquo; file using the docker option -v, more info about docker volumes &lt;a href=&#34;https://docs.docker.com/storage/volumes/&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;2.- Pass &amp;ndash;values flag to &amp;ldquo;air install&amp;rdquo; or &amp;ldquo;air upgrade-charts&amp;rdquo; command&lt;/p&gt;
+&lt;p&gt;For example to increase the mosquitto pod number create a file called override-values.yml&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;mosquitto:
+  deployment:
+    replicaCount: 2
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then use that file when calling &amp;ldquo;air install&amp;rdquo; or &amp;ldquo;air upgrade-charts&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;Command example overriding default values:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker run -e MINIKUBE_IP=$(minikube ip) -it --network host -v ${HOME}/.minikube:/.minikube -v ${HOME}/.kube:/.kube -v /path/to/override-values/folder:/values -e MINIKUBE_HOST_OS=mac tibcosoftware/labs-air-minikube-cli air install --values /values/override-values.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;Note: &lt;strong&gt;-v /path/to/override-values/folder:/values&lt;/strong&gt; (Will mount your override-values.yml inside the container)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: &lt;strong&gt;&amp;ndash;values /values/override-values.yaml&lt;/strong&gt; (Parameter with the file path that will override the helm values)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Basic Authentication</title>
+      <link>https://tibcosoftware.github.io/labs-air/docs/configuration/basic-auth/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://tibcosoftware.github.io/labs-air/docs/configuration/basic-auth/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Project Air provides with basic authentication out of the box, this basic auth can be configured and even removed if desired.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: It is highly encouraged to change the default basic authentication secrets to your own secrets.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;how-to-override-default-basic-auth-configuration&#34;&gt;How to override default basic auth configuration&lt;/h2&gt;
+&lt;p&gt;In order to override the basic auth configuration the following is needed&lt;/p&gt;
+&lt;p&gt;Step 1.-  Create a new secret overriding the basic auth values&lt;/p&gt;
+&lt;p&gt;To create your new secret in a terminal create the auth file (Replace &lt;YourDesiredUsername&gt; with your username for example admin)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;htpasswd -c auth &amp;lt;YourDesiredUsername&amp;gt;
+base64 auth
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Step 2.- Override secret on install or upgrade&lt;/p&gt;
+&lt;p&gt;In this step we are going to use secret created in Step 1.&lt;/p&gt;
+&lt;p&gt;Create a new override-values.yml file as defined in &lt;a href=&#34;../infrastructure-config#how-to-override-configuration&#34;&gt;here&lt;/a&gt; with the current content:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;basicauth:
+  secret: &amp;lt;AddYourSecretHere&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Step 3.- Use the new override-values.yaml to install or upgrade air infrastructure&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;More information about overriding values &lt;a href=&#34;../infrastructure-config#how-to-override-configuration&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Step 4.- Change UI to use new BasicAuth http headers&lt;/p&gt;
+&lt;p&gt;Open labs-air-ui/src/app/services/auth/auth.service.ts and replace the line &lt;AddYourBase64BasicAuthHere&gt; with your base64 header.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;this.basicAuthHeaders = {
+        &#39;Authorization&#39;: &#39;Basic &amp;lt;AddYourBase64BasicAuthHere&amp;gt;&#39;
+    }
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+  </channel>
+</rss>
