@@ -63,9 +63,21 @@ Then, let's use those endpoints to configure the Edge example.
 cd basicdemo
 ```
 
-Modify basicdemo/export_mqtt/configuration.toml
+Modify basicdemo/.env file which is used to provide AIR environment variables to docker-compose
 
-Replace '\<Add-Your-minikube-mosquitto-service-Enpoint-Here\>' with your mosquitto-service endpoint also ensure the port is correct.
+Open the file and replace the following variables using values for your environment and the information returned from the service list:
+
+```
+GATEWAY_ID=changeme
+AIR_MQTT_HOSTNAME=changeme
+AIR_MQTT_PORT=changeme
+AIR_MQTT_USER=mqtt_admin
+AIR_MQTT_PASSWORD=mqtt_admin
+AIR_MQTT_DATA_TOPIC=EdgexGatewayData
+AIR_MQTT_NOTIFICATION_TOPIC=EdgexGatewayNotification
+```
+
+Please note that the GATEWAY_ID is the name that will be used when you configure your device groups in the AIR UI.
 
 
 #### Step 3: run the basic demo
