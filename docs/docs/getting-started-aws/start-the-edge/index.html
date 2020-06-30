@@ -25,12 +25,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/getting-started-aws/start-the-edge/" />
-<meta property="article:modified_time" content="2020-06-09T12:30:22-07:00" /><meta property="og:site_name" content="Project AIR™" />
+<meta property="article:modified_time" content="2020-06-24T21:00:57-04:00" /><meta property="og:site_name" content="Project AIR™" />
 <meta itemprop="name" content="Start the Edge">
 <meta itemprop="description" content="Run Edgex foundry at the edge with a basic example
 ">
-<meta itemprop="dateModified" content="2020-06-09T12:30:22-07:00" />
-<meta itemprop="wordCount" content="182">
+<meta itemprop="dateModified" content="2020-06-24T21:00:57-04:00" />
+<meta itemprop="wordCount" content="231">
 
 
 
@@ -445,7 +445,7 @@
 
 
 
-<p class="-text-primary pt-3 h6" >Reading time: 0 minutes and 49 seconds.</p>
+<p class="-text-primary pt-3 h6" >Reading time: 1 minutes and 3 seconds.</p>
 <p>
 <div class="td-content">
 	<h1>Start the Edge</h1>
@@ -475,8 +475,16 @@
 {'service_name': 'core-mosquitto-service', 'hostname': '&lt;someawsdns&gt;.us-west-2.elb.amazonaws.com', 'ports': [443]}
 </code></pre><p>Then, let&rsquo;s use those endpoints to configure the Edge example.</p>
 <pre><code>cd basicdemo
-</code></pre><p>Modify basicdemo/export_mqtt/configuration.toml</p>
-<p>Replace &lsquo;&lt;Add-Your-mosquitto-service-Enpoint-Here&gt;&rsquo; with your mosquitto-service endpoint also ensure the port is correct.</p>
+</code></pre><p>Modify basicdemo/.env file which is used to provide AIR environment variables to docker-compose</p>
+<p>Open the file and replace the following variables using values for your environment and the information returned from the service list:</p>
+<pre><code>GATEWAY_ID=changeme
+AIR_MQTT_HOSTNAME=changeme
+AIR_MQTT_PORT=changeme
+AIR_MQTT_USER=mqtt_admin
+AIR_MQTT_PASSWORD=mqtt_admin
+AIR_MQTT_DATA_TOPIC=EdgexGatewayData
+AIR_MQTT_NOTIFICATION_TOPIC=EdgexGatewayNotification
+</code></pre><p>Please note that the GATEWAY_ID is the name that will be used when you configure your device groups in the AIR UI.</p>
 <h4 id="step-3-run-the-basic-demo">Step 3: run the basic demo</h4>
 <p>Inside your basicdemo folder run</p>
 <pre><code>./startEdgex.sh
@@ -552,7 +560,7 @@
 		<br />
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified June 9, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/4163a2fa3d85e206380acd856bb1723d15316899">Fix docs (4163a2fa)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified June 24, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/23df1b9ee6dd7be4a32af53841ac0ff4bd1c19e3">Updated Edge startup instructions to use environment variables from file (23df1b9e)</a>
 </div>
 </div>
 
