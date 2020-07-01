@@ -18,39 +18,9 @@ Air's CLI is wrapped in a docker container to ease the installation process:
 
 ## Running Steps
 
-#### Step 1: Download basic demo
+#### Step 1: Get Project AIR Infrastructure endpoints
 
-Download the [basic demo file](../../basicdemo.zip)
-
-Unzip basicdemo.zip
-
-Then, change to the folder just unzipped 
-
-```
-cd basicdemo
-```
-
-#### Step 2: Startup Edgex components
-
-Inside your basicdemo folder run
-
-```
-./startEdgex.sh
-```
-
-#### Step 3: Get Edgex Gateway API security token
-
-Inside your basicdemo folder run
-
-```
-./getSecurityToken.sh
-```
-
-Copy the access token for tibuser, you will need it to configure AIR components.
-
-#### Step 4: Configure AIR Edgex Components
-
-First let's query the endpoints
+Query the endpoints. Take note of the returned information as it will be used to configure AIR Edge components in subsequent steps.
 
 ```
 docker run -it tibcosoftware/labs-air-aws-cli air show-endpoints
@@ -68,10 +38,39 @@ You should see 3 endpoints being displayed something like:
 {'service_name': 'core-mosquitto-service', 'hostname': '<someawsdns>.us-west-2.elb.amazonaws.com', 'ports': [443]}
 ```
 
-Then, let's use those endpoints to configure the Edge example.
+#### Step 2: Download basic demo
 
+Download the [basic demo file](../../basicdemo.zip)
 
-Modify basicdemo/.env file which is used to provide AIR environment variables to docker-compose
+Unzip basicdemo.zip
+
+Then, change to the folder just unzipped 
+
+```
+cd basicdemo
+```
+
+#### Step 3: Start Edgex Core components
+
+Inside your basicdemo folder run
+
+```
+./startEdgex.sh
+```
+
+#### Step 4: Get Edgex Gateway API security token
+
+Inside your basicdemo folder run
+
+```
+./getSecurityToken.sh
+```
+
+Copy the access token for tibuser, you will need it to configure AIR components.
+
+#### Step 5: Configure Edgex AIR Components
+
+Use the information from step 1 (endpoints) and step 4 (security token) to modify the basicdemo/.env file.  This file is used to provide AIR environment variables to docker-compose. 
 
 Open the file and replace the following variables using values for your environment and the information returned from the service list:
 
@@ -93,7 +92,7 @@ AIR_MQTT_NOTIFICATION_TOPIC=EdgexGatewayNotification
 
 Please note that the GATEWAY_ID is the identifier that will be used to identify your deployment in the AIR UI.
 
-#### Step 5: Startup AIR Edgex components
+#### Step 6: Start Edgex AIR components
 
 Inside your basicdemo folder run
 
