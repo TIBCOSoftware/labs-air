@@ -24,9 +24,31 @@ Download the [basic demo file](../../basicdemo.zip)
 
 Unzip basicdemo.zip
 
+Then, change to the folder just unzipped 
 
+```
+cd basicdemo
+```
 
-#### Step 2: Configure basic demo
+#### Step 2: Startup Edgex components
+
+Inside your basicdemo folder run
+
+```
+./startEdgex.sh
+```
+
+#### Step 3: Get Edgex Gateway API security token
+
+Inside your basicdemo folder run
+
+```
+./getSecurityToken.sh
+```
+
+Copy the access token for tibuser, you will need it to configure AIR components.
+
+#### Step 4: Configure AIR Edgex Components
 
 First let's get the service list
 
@@ -59,9 +81,6 @@ You should see something like this:
 
 Then, let's use those endpoints to configure the Edge example.
 
-```
-cd basicdemo
-```
 
 Modify basicdemo/.env file which is used to provide AIR environment variables to docker-compose
 
@@ -69,6 +88,12 @@ Open the file and replace the following variables using values for your environm
 
 ```
 GATEWAY_ID=changeme
+GATEWAY_DESCRIPTION=changeme
+GATEWAY_HOSTNAME=localhost
+GATEWAY_LATITUDE=36.0
+GATEWAY_LONGITUDE=-98.0
+GATEWAY_ACCESS_TOKEN=changeme
+GATEWAY_METADATA_PUBLISH_INTERVAL_SECS=30
 AIR_MQTT_HOSTNAME=changeme
 AIR_MQTT_PORT=changeme
 AIR_MQTT_USER=mqtt_admin
@@ -77,25 +102,16 @@ AIR_MQTT_DATA_TOPIC=EdgexGatewayData
 AIR_MQTT_NOTIFICATION_TOPIC=EdgexGatewayNotification
 ```
 
-Please note that the GATEWAY_ID is the name that will be used when you configure your device groups in the AIR UI.
+Please note that the GATEWAY_ID is the identifier that will be used to identify your deployment in the AIR UI.
 
-#### Step 3: run the basic demo
-
-Inside your basicdemo folder run
-
-```
-./startEdgex.sh
-```
-
-#### Step 4: get the basic demo security token
+#### Step 5: Startup AIR Edgex components
 
 Inside your basicdemo folder run
 
 ```
-./getSecurityToken.sh
+./startEdgeAIR.sh
 ```
 
-Copy the access token for tibuser, you will need it for the edge group registration.
 
 Congratulations!! Project Air edge basic demo is running
 
