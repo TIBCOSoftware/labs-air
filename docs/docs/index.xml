@@ -335,20 +335,8 @@ base64 auth
 &lt;li&gt;&lt;a href=&#34;https://www.docker.com/get-started&#34;&gt;Docker&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;running-steps&#34;&gt;Running Steps&lt;/h2&gt;
-&lt;h4 id=&#34;step-1-download-basic-demo&#34;&gt;Step 1: Download basic demo&lt;/h4&gt;
-&lt;p&gt;Download the &lt;a href=&#34;../../basicdemo.zip&#34;&gt;basic demo file&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Unzip basicdemo.zip&lt;/p&gt;
-&lt;p&gt;Then, change to the folder just unzipped&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;cd basicdemo
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;step-2-startup-edgex-components&#34;&gt;Step 2: Startup Edgex components&lt;/h4&gt;
-&lt;p&gt;Inside your basicdemo folder run&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;./startEdgex.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;step-3-get-edgex-gateway-api-security-token&#34;&gt;Step 3: Get Edgex Gateway API security token&lt;/h4&gt;
-&lt;p&gt;Inside your basicdemo folder run&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;./getSecurityToken.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Copy the access token for tibuser, you will need it to configure AIR components.&lt;/p&gt;
-&lt;h4 id=&#34;step-4-configure-air-edgex-components&#34;&gt;Step 4: Configure AIR Edgex Components&lt;/h4&gt;
-&lt;p&gt;First let&amp;rsquo;s query the endpoints&lt;/p&gt;
+&lt;h4 id=&#34;step-1-get-project-air-infrastructure-endpoints&#34;&gt;Step 1: Get Project AIR Infrastructure endpoints&lt;/h4&gt;
+&lt;p&gt;Query the endpoints. Take note of the returned information as it will be used to configure AIR Edge components in subsequent steps.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;docker run -it tibcosoftware/labs-air-aws-cli air show-endpoints
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You should see 3 endpoints being displayed something like:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;{&#39;service_name&#39;: &#39;core-air-cors-anywhere-service&#39;, &#39;hostname&#39;: &#39;&amp;lt;someawsdns&amp;gt;.us-west-2.elb.amazonaws.com&#39;, &#39;ports&#39;: [80]}
@@ -358,8 +346,20 @@ base64 auth
 
 
 {&#39;service_name&#39;: &#39;core-mosquitto-service&#39;, &#39;hostname&#39;: &#39;&amp;lt;someawsdns&amp;gt;.us-west-2.elb.amazonaws.com&#39;, &#39;ports&#39;: [443]}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then, let&amp;rsquo;s use those endpoints to configure the Edge example.&lt;/p&gt;
-&lt;p&gt;Modify basicdemo/.env file which is used to provide AIR environment variables to docker-compose&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;step-2-download-basic-demo&#34;&gt;Step 2: Download basic demo&lt;/h4&gt;
+&lt;p&gt;Download the &lt;a href=&#34;../../basicdemo.zip&#34;&gt;basic demo file&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Unzip basicdemo.zip&lt;/p&gt;
+&lt;p&gt;Then, change to the folder just unzipped&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cd basicdemo
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;step-3-start-edgex-core-components&#34;&gt;Step 3: Start Edgex Core components&lt;/h4&gt;
+&lt;p&gt;Inside your basicdemo folder run&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;./startEdgex.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;step-4-get-edgex-gateway-api-security-token&#34;&gt;Step 4: Get Edgex Gateway API security token&lt;/h4&gt;
+&lt;p&gt;Inside your basicdemo folder run&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;./getSecurityToken.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Copy the access token for tibuser, you will need it to configure AIR components.&lt;/p&gt;
+&lt;h4 id=&#34;step-5-configure-edgex-air-components&#34;&gt;Step 5: Configure Edgex AIR Components&lt;/h4&gt;
+&lt;p&gt;Use the information from step 1 (endpoints) and step 4 (security token) to modify the basicdemo/.env file.  This file is used to provide AIR environment variables to docker-compose.&lt;/p&gt;
 &lt;p&gt;Open the file and replace the following variables using values for your environment and the information returned from the service list:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;GATEWAY_ID=changeme
 GATEWAY_DESCRIPTION=changeme
@@ -375,7 +375,7 @@ AIR_MQTT_PASSWORD=mqtt_admin
 AIR_MQTT_DATA_TOPIC=EdgexGatewayData
 AIR_MQTT_NOTIFICATION_TOPIC=EdgexGatewayNotification
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Please note that the GATEWAY_ID is the identifier that will be used to identify your deployment in the AIR UI.&lt;/p&gt;
-&lt;h4 id=&#34;step-5-startup-air-edgex-components&#34;&gt;Step 5: Startup AIR Edgex components&lt;/h4&gt;
+&lt;h4 id=&#34;step-6-start-edgex-air-components&#34;&gt;Step 6: Start Edgex AIR components&lt;/h4&gt;
 &lt;p&gt;Inside your basicdemo folder run&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;./startEdgeAIR.sh
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Congratulations!! Project Air edge basic demo is running&lt;/p&gt;
@@ -405,20 +405,8 @@ AIR_MQTT_NOTIFICATION_TOPIC=EdgexGatewayNotification
 &lt;li&gt;&lt;a href=&#34;https://www.docker.com/get-started&#34;&gt;Docker&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;running-steps&#34;&gt;Running Steps&lt;/h2&gt;
-&lt;h4 id=&#34;step-1-download-basic-demo&#34;&gt;Step 1: Download basic demo&lt;/h4&gt;
-&lt;p&gt;Download the &lt;a href=&#34;../../basicdemo.zip&#34;&gt;basic demo file&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Unzip basicdemo.zip&lt;/p&gt;
-&lt;p&gt;Then, change to the folder just unzipped&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;cd basicdemo
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;step-2-startup-edgex-components&#34;&gt;Step 2: Startup Edgex components&lt;/h4&gt;
-&lt;p&gt;Inside your basicdemo folder run&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;./startEdgex.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;step-3-get-edgex-gateway-api-security-token&#34;&gt;Step 3: Get Edgex Gateway API security token&lt;/h4&gt;
-&lt;p&gt;Inside your basicdemo folder run&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;./getSecurityToken.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Copy the access token for tibuser, you will need it to configure AIR components.&lt;/p&gt;
-&lt;h4 id=&#34;step-4-configure-air-edgex-components&#34;&gt;Step 4: Configure AIR Edgex Components&lt;/h4&gt;
-&lt;p&gt;First let&amp;rsquo;s get the service list&lt;/p&gt;
+&lt;h4 id=&#34;step-1-get-project-air-infrastructure-endpoints&#34;&gt;Step 1: Get Project AIR Infrastructure endpoints&lt;/h4&gt;
+&lt;p&gt;Query the service list. Take note of the returned information as it will be used to configure AIR Edge components in subsequent steps.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;minikube service list
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You should see something like this:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;|----------------------|------------------------------------|--------------------|-----------------------------|
@@ -438,8 +426,20 @@ AIR_MQTT_NOTIFICATION_TOPIC=EdgexGatewayNotification
 | kubernetes-dashboard | dashboard-metrics-scraper          | No node port       |
 | kubernetes-dashboard | kubernetes-dashboard               | No node port       |
 |----------------------|------------------------------------|--------------------|-----------------------------|
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then, let&amp;rsquo;s use those endpoints to configure the Edge example.&lt;/p&gt;
-&lt;p&gt;Modify basicdemo/.env file which is used to provide AIR environment variables to docker-compose&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;step-2-download-basic-demo&#34;&gt;Step 2: Download basic demo&lt;/h4&gt;
+&lt;p&gt;Download the &lt;a href=&#34;../../basicdemo.zip&#34;&gt;basic demo file&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Unzip basicdemo.zip&lt;/p&gt;
+&lt;p&gt;Then, change to the folder just unzipped&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cd basicdemo
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;step-3-start-edgex-core-components&#34;&gt;Step 3: Start Edgex Core components&lt;/h4&gt;
+&lt;p&gt;Inside your basicdemo folder run&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;./startEdgex.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;step-4-get-edgex-gateway-api-security-token&#34;&gt;Step 4: Get Edgex Gateway API security token&lt;/h4&gt;
+&lt;p&gt;Inside your basicdemo folder run&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;./getSecurityToken.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Copy the access token for tibuser, you will need it to configure AIR components.&lt;/p&gt;
+&lt;h4 id=&#34;step-5-configure-edgex-air-components&#34;&gt;Step 5: Configure Edgex AIR Components&lt;/h4&gt;
+&lt;p&gt;Use the information from step 1 (endpoints) and step 4 (security token) to modify the basicdemo/.env file.  This file is used to provide AIR environment variables to docker-compose.&lt;/p&gt;
 &lt;p&gt;Open the file and replace the following variables using values for your environment and the information returned from the service list:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;GATEWAY_ID=changeme
 GATEWAY_DESCRIPTION=changeme
@@ -455,7 +455,7 @@ AIR_MQTT_PASSWORD=mqtt_admin
 AIR_MQTT_DATA_TOPIC=EdgexGatewayData
 AIR_MQTT_NOTIFICATION_TOPIC=EdgexGatewayNotification
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Please note that the GATEWAY_ID is the identifier that will be used to identify your deployment in the AIR UI.&lt;/p&gt;
-&lt;h4 id=&#34;step-5-startup-air-edgex-components&#34;&gt;Step 5: Startup AIR Edgex components&lt;/h4&gt;
+&lt;h4 id=&#34;step-6-start-edgex-air-components&#34;&gt;Step 6: Start Edgex AIR components&lt;/h4&gt;
 &lt;p&gt;Inside your basicdemo folder run&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;./startEdgeAIR.sh
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Congratulations!! Project Air edge basic demo is running&lt;/p&gt;

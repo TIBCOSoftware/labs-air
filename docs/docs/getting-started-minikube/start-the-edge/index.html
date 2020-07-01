@@ -25,12 +25,12 @@
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/getting-started-minikube/start-the-edge/" />
-<meta property="article:modified_time" content="2020-06-30T22:53:40-04:00" /><meta property="og:site_name" content="Project AIR™" />
+<meta property="article:modified_time" content="2020-07-01T16:38:16-04:00" /><meta property="og:site_name" content="Project AIR™" />
 <meta itemprop="name" content="Start the Edge">
 <meta itemprop="description" content="Run Edgex foundry at the edge with a basic example
 ">
-<meta itemprop="dateModified" content="2020-06-30T22:53:40-04:00" />
-<meta itemprop="wordCount" content="359">
+<meta itemprop="dateModified" content="2020-07-01T16:38:16-04:00" />
+<meta itemprop="wordCount" content="389">
 
 
 
@@ -445,7 +445,7 @@
 
 
 
-<p class="-text-primary pt-3 h6" >Reading time: 1 minutes and 37 seconds.</p>
+<p class="-text-primary pt-3 h6" >Reading time: 1 minutes and 46 seconds.</p>
 <p>
 <div class="td-content">
 	<h1>Start the Edge</h1>
@@ -459,20 +459,8 @@
 <li><a href="https://www.docker.com/get-started">Docker</a></li>
 </ul>
 <h2 id="running-steps">Running Steps</h2>
-<h4 id="step-1-download-basic-demo">Step 1: Download basic demo</h4>
-<p>Download the <a href="../../basicdemo.zip">basic demo file</a></p>
-<p>Unzip basicdemo.zip</p>
-<p>Then, change to the folder just unzipped</p>
-<pre><code>cd basicdemo
-</code></pre><h4 id="step-2-startup-edgex-components">Step 2: Startup Edgex components</h4>
-<p>Inside your basicdemo folder run</p>
-<pre><code>./startEdgex.sh
-</code></pre><h4 id="step-3-get-edgex-gateway-api-security-token">Step 3: Get Edgex Gateway API security token</h4>
-<p>Inside your basicdemo folder run</p>
-<pre><code>./getSecurityToken.sh
-</code></pre><p>Copy the access token for tibuser, you will need it to configure AIR components.</p>
-<h4 id="step-4-configure-air-edgex-components">Step 4: Configure AIR Edgex Components</h4>
-<p>First let&rsquo;s get the service list</p>
+<h4 id="step-1-get-project-air-infrastructure-endpoints">Step 1: Get Project AIR Infrastructure endpoints</h4>
+<p>Query the service list. Take note of the returned information as it will be used to configure AIR Edge components in subsequent steps.</p>
 <pre><code>minikube service list
 </code></pre><p>You should see something like this:</p>
 <pre><code>|----------------------|------------------------------------|--------------------|-----------------------------|
@@ -492,8 +480,20 @@
 | kubernetes-dashboard | dashboard-metrics-scraper          | No node port       |
 | kubernetes-dashboard | kubernetes-dashboard               | No node port       |
 |----------------------|------------------------------------|--------------------|-----------------------------|
-</code></pre><p>Then, let&rsquo;s use those endpoints to configure the Edge example.</p>
-<p>Modify basicdemo/.env file which is used to provide AIR environment variables to docker-compose</p>
+</code></pre><h4 id="step-2-download-basic-demo">Step 2: Download basic demo</h4>
+<p>Download the <a href="../../basicdemo.zip">basic demo file</a></p>
+<p>Unzip basicdemo.zip</p>
+<p>Then, change to the folder just unzipped</p>
+<pre><code>cd basicdemo
+</code></pre><h4 id="step-3-start-edgex-core-components">Step 3: Start Edgex Core components</h4>
+<p>Inside your basicdemo folder run</p>
+<pre><code>./startEdgex.sh
+</code></pre><h4 id="step-4-get-edgex-gateway-api-security-token">Step 4: Get Edgex Gateway API security token</h4>
+<p>Inside your basicdemo folder run</p>
+<pre><code>./getSecurityToken.sh
+</code></pre><p>Copy the access token for tibuser, you will need it to configure AIR components.</p>
+<h4 id="step-5-configure-edgex-air-components">Step 5: Configure Edgex AIR Components</h4>
+<p>Use the information from step 1 (endpoints) and step 4 (security token) to modify the basicdemo/.env file.  This file is used to provide AIR environment variables to docker-compose.</p>
 <p>Open the file and replace the following variables using values for your environment and the information returned from the service list:</p>
 <pre><code>GATEWAY_ID=changeme
 GATEWAY_DESCRIPTION=changeme
@@ -509,7 +509,7 @@ AIR_MQTT_PASSWORD=mqtt_admin
 AIR_MQTT_DATA_TOPIC=EdgexGatewayData
 AIR_MQTT_NOTIFICATION_TOPIC=EdgexGatewayNotification
 </code></pre><p>Please note that the GATEWAY_ID is the identifier that will be used to identify your deployment in the AIR UI.</p>
-<h4 id="step-5-startup-air-edgex-components">Step 5: Startup AIR Edgex components</h4>
+<h4 id="step-6-start-edgex-air-components">Step 6: Start Edgex AIR components</h4>
 <p>Inside your basicdemo folder run</p>
 <pre><code>./startEdgeAIR.sh
 </code></pre><p>Congratulations!! Project Air edge basic demo is running</p>
@@ -580,7 +580,7 @@ AIR_MQTT_NOTIFICATION_TOPIC=EdgexGatewayNotification
 		<br />
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified June 30, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/331f8f5d91f110a78a56d7f46bb8786e9b3d010d">Updated steps to start edge components (331f8f5d)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified July 1, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/33ef571c5abfbda3f204233ee19761b349cac3e7">Updated steps for starting edge components (33ef571c)</a>
 </div>
 </div>
 
