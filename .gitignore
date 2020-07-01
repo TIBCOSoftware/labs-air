@@ -2,6 +2,9 @@
 
 # compiled output
 
+# preview
+/docs-preview
+
 # dependencies
 node_modules/
 
