@@ -44,7 +44,14 @@
 &lt;h4 id=&#34;step-3-once-you-are-in-click-the-get-started-button&#34;&gt;Step 3: Once you are in, click the Get started button.&lt;/h4&gt;
 &lt;p&gt;&lt;img src=&#34;./air_landing.png&#34; alt=&#34;Landing image&#34;&gt;&lt;/p&gt;
 &lt;h4 id=&#34;step-4-you-are-ready-to-manage-your-devices&#34;&gt;Step 4: You are ready to manage your devices.&lt;/h4&gt;
+&lt;p&gt;All edge gateways connected to the AIR infrastructure should be displayed automatically.  Note that gateways are auto registered by default.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./air_start1.png&#34; alt=&#34;Start image&#34;&gt;&lt;/p&gt;
+&lt;p&gt;If no gateways are running or are not enabled for auto registration, then an empty list of device groups should be displayed.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;./air_start.png&#34; alt=&#34;Start image&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;step-3-verify-connection-to-edgex-gateways&#34;&gt;Step 3: Verify connection to Edgex Gateways&lt;/h4&gt;
+&lt;p&gt;You can verify the connection to the edge gateways by clicking an entry under Device Groups table on the top-left corner panel and then click Ping Gateway.
+If the connection is succesful, you should see a Success banner. Otherwise, a Failure banner is displayed and you should review that Edgex is running or make sure the Address and Access Token parameters are correct.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./air_gateway_verify.png&#34; alt=&#34;Gateway Verify image&#34;&gt;&lt;/p&gt;
 
       </description>
     </item>
@@ -234,6 +241,7 @@ Please enter your AWS_SECRET_ACCESS_KEY:
         &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;The following steps will guide you through the creation  and management of device groups.
 A device group represent a number of edge devices controlled and managed by the Edgex platform.&lt;/p&gt;
+&lt;p&gt;Please note that device groups are auto registered by default and you will need to manage them manually only if they are not enabled for auto registration.&lt;/p&gt;
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;h4 id=&#34;prerequisite-1-edgex&#34;&gt;Prerequisite 1: Edgex&lt;/h4&gt;
 &lt;p&gt;Edgex is a vendor neutral open source platform at the edge of the network that interacts with physical devices, sensors, actuators and other IoT objects. It enables the interoperability between devices and applications at the edge and at the cloud.&lt;/p&gt;
