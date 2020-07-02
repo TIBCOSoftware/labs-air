@@ -11,6 +11,8 @@ description: >
 The following steps will guide you through the creation  and management of device groups.
 A device group represent a number of edge devices controlled and managed by the Edgex platform.
 
+Please note that device groups are auto registered by default and you will need to manage them manually only if they are not enabled for auto registration.
+
 ## Prerequisites
 
 #### Prerequisite 1: Edgex

@@ -42,4 +42,16 @@ Open TIBCO Project AIR™ UI by clicking the link below:
 
 #### Step 4: You are ready to manage your devices.
 
+All edge gateways connected to the AIR infrastructure should be displayed automatically.  Note that gateways are auto registered by default.  
+
+![Start image](./air_start1.png)
+
+If no gateways are running or are not enabled for auto registration, then an empty list of device groups should be displayed. 
+
 ![Start image](./air_start.png)
+
+#### Step 3: Verify connection to Edgex Gateways
+You can verify the connection to the edge gateways by clicking an entry under Device Groups table on the top-left corner panel and then click Ping Gateway.
+If the connection is succesful, you should see a Success banner. Otherwise, a Failure banner is displayed and you should review that Edgex is running or make sure the Address and Access Token parameters are correct.
+
+![Gateway Verify image](./air_gateway_verify.png)
