@@ -26,13 +26,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/users-guide/login-to-ui/" />
 <meta property="article:published_time" content="2020-05-24T16:24:47-04:00" />
-<meta property="article:modified_time" content="2020-05-29T18:32:18+02:00" /><meta property="og:site_name" content="Project AIR™" />
+<meta property="article:modified_time" content="2020-07-01T20:49:25-04:00" /><meta property="og:site_name" content="Project AIR™" />
 <meta itemprop="name" content="Login to UI">
 <meta itemprop="description" content="Login in to Project AIR UI - How to obtain credentials and keys and then login to the UI
 ">
 <meta itemprop="datePublished" content="2020-05-24T16:24:47-04:00" />
-<meta itemprop="dateModified" content="2020-05-29T18:32:18&#43;02:00" />
-<meta itemprop="wordCount" content="109">
+<meta itemprop="dateModified" content="2020-07-01T20:49:25-04:00" />
+<meta itemprop="wordCount" content="221">
 
 
 
@@ -442,7 +442,7 @@
 
 
 
-<p class="-text-primary pt-3 h6" >Reading time: 0 minutes and 40 seconds.</p>
+<p class="-text-primary pt-3 h6" >Reading time: 1 minutes and 11 seconds.</p>
 <p>
 <div class="td-content">
 	<h1>Login to UI</h1>
@@ -469,7 +469,14 @@
 <h4 id="step-3-once-you-are-in-click-the-get-started-button">Step 3: Once you are in, click the Get started button.</h4>
 <p><img src="./air_landing.png" alt="Landing image"></p>
 <h4 id="step-4-you-are-ready-to-manage-your-devices">Step 4: You are ready to manage your devices.</h4>
+<p>All edge gateways connected to the AIR infrastructure should be displayed automatically.  Note that gateways are auto registered by default.</p>
+<p><img src="./air_start1.png" alt="Start image"></p>
+<p>If no gateways are running or are not enabled for auto registration, then an empty list of device groups should be displayed.</p>
 <p><img src="./air_start.png" alt="Start image"></p>
+<h4 id="step-3-verify-connection-to-edgex-gateways">Step 3: Verify connection to Edgex Gateways</h4>
+<p>You can verify the connection to the edge gateways by clicking an entry under Device Groups table on the top-left corner panel and then click Ping Gateway.
+If the connection is succesful, you should see a Success banner. Otherwise, a Failure banner is displayed and you should review that Edgex is running or make sure the Address and Access Token parameters are correct.</p>
+<p><img src="./air_gateway_verify.png" alt="Gateway Verify image"></p>
 
 	
 		<style>
@@ -533,7 +540,7 @@
 		<br />
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified May 29, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/460db00798d7e976606b15dc24c92193fe44d1eb">move description (460db007)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified July 1, 2020: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/105e46b6c97cc0dc13caa24f2c3563721564728d">Updated document for device groups auto registration (105e46b6)</a>
 </div>
 </div>
 
