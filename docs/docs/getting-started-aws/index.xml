@@ -24,6 +24,9 @@
         
         &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;The following steps will guide you through the full infrastructure installation on Amazon Web Services.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;by installing on AWS, remember there are some usage costs associated to it.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
 &lt;h4 id=&#34;prerequisite-1-docker&#34;&gt;Prerequisite 1: Docker&lt;/h4&gt;
 &lt;p&gt;Air&amp;rsquo;s CLI is wrapped in a docker container to ease the installation process:&lt;/p&gt;

@@ -13,6 +13,24 @@
     
     
     <item>
+      <title>Blog: Second Release</title>
+      <link>https://tibcosoftware.github.io/labs-air/blog/2020/06/01/second-release/</link>
+      <pubDate>Mon, 01 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://tibcosoftware.github.io/labs-air/blog/2020/06/01/second-release/</guid>
+      <description>
+        
+        
+        &lt;p&gt;More documentation Details got added, along with new features!&lt;br&gt;
+We support now Minikube and AWS Installations.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;please have a look back soon here.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Blog: Initial Release</title>
       <link>https://tibcosoftware.github.io/labs-air/blog/2020/02/26/initial-release/</link>
       <pubDate>Wed, 26 Feb 2020 00:00:00 +0000</pubDate>

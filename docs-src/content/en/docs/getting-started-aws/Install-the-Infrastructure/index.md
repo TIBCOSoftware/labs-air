@@ -9,6 +9,8 @@ description: >
 ## Introduction
 The following steps will guide you through the full infrastructure installation on Amazon Web Services.
 
+> by installing on AWS, remember there are some usage costs associated to it.
+
 ## Prerequisites
 
 #### Prerequisite 1: Docker

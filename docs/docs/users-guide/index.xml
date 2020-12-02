@@ -146,7 +146,7 @@ The following steps will guide you through the configuration of messaging protoc
 &lt;li&gt;Connection Credentials&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;prerequisite-3-data-store-table-setup&#34;&gt;Prerequisite 3: Data Store Table Setup&lt;/h4&gt;
-&lt;p&gt;For each required data store, the user needs to configure the datastate and create tables to store the data.
+&lt;p&gt;For each required data store, the user needs to configure the datastate and create tables to store the data. 
 Project AIR provides scripts with SQL commands to create the required artifacts.&lt;/p&gt;
 &lt;p&gt;Following is an example sql script to create the artifact for a Postgres Database.
 &lt;a href=&#34;./setup.sql&#34;&gt;Postgres SQL script&lt;/a&gt;&lt;/p&gt;
