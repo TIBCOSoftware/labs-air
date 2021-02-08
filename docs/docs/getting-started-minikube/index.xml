@@ -47,17 +47,17 @@
 &lt;p&gt;In one terminal&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;kubectl proxy --port=8080 --disable-filter=true
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In a different terminal&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;docker run -e MINIKUBE_IP=$(minikube ip) -it --network host -v ${HOME}/.minikube:/.minikube -v ${HOME}/.kube:/.kube -e MINIKUBE_HOST_OS=mac tibcosoftware/labs-air-minikube-cli air install
+&lt;pre&gt;&lt;code&gt;docker run -e MINIKUBE_IP=$(minikube ip) -e MINIKUBE_HOST_OS=mac -it --network host -v ${HOME}/.minikube:/.minikube -v ${HOME}/.kube:/.kube tibcosoftware/labs-air-minikube-cli air install
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;step-4-for-linux-users-call-install-command-on-cli&#34;&gt;Step 4 [FOR LINUX USERS]: call install command on cli&lt;/h4&gt;
 &lt;p&gt;In one terminal&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;kubectl proxy --port=8080
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In a different terminal&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;docker run -e MINIKUBE_IP=$(minikube ip) -it --network host -v ${HOME}/.minikube:/.minikube -v ${HOME}/.kube:/.kube tibcosoftware/labs-air-minikube-cli air install
+&lt;pre&gt;&lt;code&gt;docker run -e MINIKUBE_IP=$(minikube ip) -e MINIKUBE_HOST_OS=linux -it --network host -v ${HOME}/.minikube:/.minikube -v ${HOME}/.kube:/.kube tibcosoftware/labs-air-minikube-cli air install
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;step-4-for-windows-users-call-install-command-on-cli&#34;&gt;Step 4 [FOR WINDOWS USERS]: call install command on cli&lt;/h4&gt;
 &lt;p&gt;In one terminal&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;kubectl proxy --port=8080 --disable-filter=true
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In a different terminal&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;docker run -e MINIKUBE_IP=$(minikube ip) -it --network host -v ${HOME}/.minikube:/.minikube -v ${HOME}/.kube:/.kube -e MINIKUBE_HOST_OS=windows tibcosoftware/labs-air-minikube-cli air install
+&lt;pre&gt;&lt;code&gt;docker run -e MINIKUBE_IP=$(minikube ip) -e MINIKUBE_HOST_OS=windows -it --network host -v ${HOME}/.minikube:/.minikube -v ${HOME}/.kube:/.kube tibcosoftware/labs-air-minikube-cli air install
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;step-5-optional-check-installation&#34;&gt;Step 5 [optional]: check installation&lt;/h4&gt;
 &lt;p&gt;This command will allow you to connect to the kubernetes cluster to see the different components&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;minikube dashboard
