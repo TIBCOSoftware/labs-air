@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Project AIR™ – Getting Started on AWS</title>
+    <title>Project Air – Getting Started on AWS</title>
     <link>https://tibcosoftware.github.io/labs-air/docs/getting-started-aws/</link>
-    <description>Recent content in Getting Started on AWS on Project AIR™</description>
+    <description>Recent content in Getting Started on AWS on Project Air</description>
     <generator>Hugo -- gohugo.io</generator>
     
 	  <atom:link href="https://tibcosoftware.github.io/labs-air/docs/getting-started-aws/index.xml" rel="self" type="application/rss+xml" />
@@ -113,7 +113,7 @@ Please enter your AWS_SECRET_ACCESS_KEY:
 &lt;li&gt;&lt;a href=&#34;https://www.docker.com/get-started&#34;&gt;Docker&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;running-steps&#34;&gt;Running Steps&lt;/h2&gt;
-&lt;h4 id=&#34;step-1-get-project-air-infrastructure-endpoints&#34;&gt;Step 1: Get Project AIR Infrastructure endpoints&lt;/h4&gt;
+&lt;h4 id=&#34;step-1-get-project-air-infrastructure-endpoints&#34;&gt;Step 1: Get Project Air Infrastructure endpoints&lt;/h4&gt;
 &lt;p&gt;Query the endpoints. Take note of the returned information as it will be used to configure AIR Edge components in subsequent steps.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;docker run -it tibcosoftware/labs-air-aws-cli air show-endpoints
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You should see 3 endpoints being displayed something like:&lt;/p&gt;

@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Project AIR™ – Project AIR™</title>
+    <title>Project Air – Project Air</title>
     <link>https://tibcosoftware.github.io/labs-air/</link>
-    <description>Recent content on Project AIR™</description>
+    <description>Recent content on Project Air</description>
     <generator>Hugo -- gohugo.io</generator>
     
 	  <atom:link href="https://tibcosoftware.github.io/labs-air/index.xml" rel="self" type="application/rss+xml" />
@@ -11,6 +11,29 @@
       
       
     
+    
+    <item>
+      <title>Blog: Third Release</title>
+      <link>https://tibcosoftware.github.io/labs-air/blog/2021/06/11/third-release/</link>
+      <pubDate>Fri, 11 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://tibcosoftware.github.io/labs-air/blog/2021/06/11/third-release/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Update Release containing&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;bug fixes&lt;/li&gt;
+&lt;li&gt;performance enhancments&lt;/li&gt;
+&lt;li&gt;security fixes&lt;/li&gt;
+&lt;li&gt;3rd party updates&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;please have a look back soon here.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+      </description>
+    </item>
     
     <item>
       <title>Blog: Second Release</title>
@@ -39,7 +62,7 @@ We support now Minikube and AWS Installations.&lt;/p&gt;
       <description>
         
         
-        &lt;p&gt;first public Implementation of the TIBCO LABS™ Project AIR™, containing:&lt;/p&gt;
+        &lt;p&gt;first public Implementation of the TIBCO LABS™ Project Air, containing:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;used EdgeX Foundry Assets&lt;/li&gt;
 &lt;li&gt;TIBCO Flogo Services&lt;/li&gt;

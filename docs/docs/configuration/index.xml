@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Project AIR™ – Configuration Guide</title>
+    <title>Project Air – Configuration Guide</title>
     <link>https://tibcosoftware.github.io/labs-air/docs/configuration/</link>
-    <description>Recent content in Configuration Guide on Project AIR™</description>
+    <description>Recent content in Configuration Guide on Project Air</description>
     <generator>Hugo -- gohugo.io</generator>
     
 	  <atom:link href="https://tibcosoftware.github.io/labs-air/docs/configuration/index.xml" rel="self" type="application/rss+xml" />

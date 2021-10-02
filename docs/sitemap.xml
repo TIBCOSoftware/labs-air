@@ -73,12 +73,12 @@
   </url>
   
   <url>
-    <loc>https://tibcosoftware.github.io/labs-air/docs/users-guide/adding-data-pipelines/</loc>
+    <loc>https://tibcosoftware.github.io/labs-air/docs/users-guide/</loc>
     <lastmod>2020-12-03T10:58:03+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://tibcosoftware.github.io/labs-air/docs/users-guide/</loc>
+    <loc>https://tibcosoftware.github.io/labs-air/docs/users-guide/adding-data-pipelines/</loc>
     <lastmod>2020-12-03T10:58:03+01:00</lastmod>
   </url>
   
@@ -105,6 +105,11 @@
   <url>
     <loc>https://tibcosoftware.github.io/labs-air/blog/releases/</loc>
     <lastmod>2020-12-03T10:58:03+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://tibcosoftware.github.io/labs-air/blog/2021/06/11/third-release/</loc>
+    <lastmod>2021-06-11T00:00:00+00:00</lastmod>
   </url>
   
   <url>
