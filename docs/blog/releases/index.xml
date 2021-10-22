@@ -4,6 +4,7 @@
     <link>https://tibcosoftware.github.io/labs-air/blog/releases/</link>
     <description>Recent content in New Releases on Project Air</description>
     <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 22 Oct 2021 00:00:00 +0000</lastBuildDate>
     
 	  <atom:link href="https://tibcosoftware.github.io/labs-air/blog/releases/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,11 +15,29 @@
     
     
     <item>
-      <title>Blog: Third Release</title>
-      <link>https://tibcosoftware.github.io/labs-air/blog/2021/06/11/third-release/</link>
+      <title>Blog: November &#39;21 Release</title>
+      <link>https://tibcosoftware.github.io/labs-air/blog/2021/10/22/november-21-release/</link>
+      <pubDate>Fri, 22 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://tibcosoftware.github.io/labs-air/blog/2021/10/22/november-21-release/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Coming soon &amp;hellip;&lt;/p&gt;
+&lt;p&gt;Complete makeover, include a new / &amp;ldquo;one-click&amp;rdquo; installation experience, new edge capabilities, and a new user experience!  Create model-driven / real-time IoT data pipelines, incorporate AI/ML models (including computer vision), deploy everything to the edge, and more!&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;please have a look back soon here.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: June &#39;21 Release</title>
+      <link>https://tibcosoftware.github.io/labs-air/blog/2021/06/11/june-21-release/</link>
       <pubDate>Fri, 11 Jun 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://tibcosoftware.github.io/labs-air/blog/2021/06/11/third-release/</guid>
+      <guid>https://tibcosoftware.github.io/labs-air/blog/2021/06/11/june-21-release/</guid>
       <description>
         
         
