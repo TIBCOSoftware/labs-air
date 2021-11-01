@@ -42,7 +42,9 @@ Connect your IoT Device Farm and take action in TIBCO&amp;rsquo;s connected inte
 &lt;li&gt;GCP *&lt;/li&gt;
 &lt;li&gt;On-Prem *&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Note: * = Runs on pre-existing Kubernetes cluster&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; * = Runs on pre-existing Kubernetes cluster&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;technology-stack&#34;&gt;Technology Stack&lt;/h3&gt;
 &lt;p&gt;Edge to Cloud Ecosystem&lt;/p&gt;
 &lt;ul&gt;
@@ -58,6 +60,308 @@ Connect your IoT Device Farm and take action in TIBCO&amp;rsquo;s connected inte
 &lt;li&gt;Data Stores&lt;/li&gt;
 &lt;/ul&gt;
 &lt;br&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Getting Started</title>
+      <link>https://tibcosoftware.github.io/labs-air/docs/gettingstarted/gettingstarted/</link>
+      <pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://tibcosoftware.github.io/labs-air/docs/gettingstarted/gettingstarted/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h1&gt;
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;ul class=&#34;nav nav-tabs&#34; id=&#34;tabs-0&#34; role=&#34;tablist&#34;&gt;&lt;li class=&#34;nav-item&#34;&gt;
+      &lt;a class=&#34;nav-link active tab-MacOs&#34;
+        id=&#34;tabs-0-0-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#tabs-0-0&#34; role=&#34;tab&#34; onclick=&#34;handleClick(&amp;#34;MacOs&amp;#34;);&#34;
+        aria-controls=&#34;tabs-0-0&#34; aria-selected=&#34;true&#34;&gt;
+        MacOs
+      &lt;/a&gt;
+    &lt;/li&gt;&lt;li class=&#34;nav-item&#34;&gt;
+      &lt;a class=&#34;nav-link tab-Linux&#34;
+        id=&#34;tabs-0-1-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#tabs-0-1&#34; role=&#34;tab&#34; onclick=&#34;handleClick(&amp;#34;Linux&amp;#34;);&#34;
+        aria-controls=&#34;tabs-0-1&#34; aria-selected=&#34;false&#34;&gt;
+        Linux
+      &lt;/a&gt;
+    &lt;/li&gt;&lt;li class=&#34;nav-item&#34;&gt;
+      &lt;a class=&#34;nav-link tab-Windows&#34;
+        id=&#34;tabs-0-2-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#tabs-0-2&#34; role=&#34;tab&#34; onclick=&#34;handleClick(&amp;#34;Windows&amp;#34;);&#34;
+        aria-controls=&#34;tabs-0-2&#34; aria-selected=&#34;false&#34;&gt;
+        Windows
+      &lt;/a&gt;
+    &lt;/li&gt;&lt;/ul&gt;
+
+
+&lt;div class=&#34;tab-content&#34; id=&#34;tabs-0-content&#34;&gt;&lt;div class=&#34;tab-pane fade show active&#34;
+        id=&#34;tabs-0-0&#34; role=&#34;tabpanel&#34; aria-labelled-by=&#34;tabs-0-0-tab&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-en&#34; data-lang=&#34;en&#34;&gt;    MacOs Recommended: Version v11.6 Big Sur
+    * Minikube: Version v1.23.2
+    * Helm: Version v3.7.1
+    * Virtual Box: Version 6.1.26
+    * Docker Desktop: 20.10.8
+  &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+  &lt;div class=&#34;tab-pane fade&#34;
+        id=&#34;tabs-0-1&#34; role=&#34;tabpanel&#34; aria-labelled-by=&#34;tabs-0-1-tab&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-en&#34; data-lang=&#34;en&#34;&gt;    Linux Recommended: Ubuntu v20.04.3 LTS
+    * Minikube: Version v1.23.2
+    * Helm: Version v3.7.1
+    * Virtual Box: Version 6.1.26
+    * Docker: 20.10.9
+    * Docker Compose: 1.29.2
+    * resolvconf
+  &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+  &lt;div class=&#34;tab-pane fade&#34;
+        id=&#34;tabs-0-2&#34; role=&#34;tabpanel&#34; aria-labelled-by=&#34;tabs-0-2-tab&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-en&#34; data-lang=&#34;en&#34;&gt;    Windows Recommended: Version 10 Pro
+    * Minikube: Version v1.23.2
+    * Helm: Version v3.7.1
+    * Hyper-V enabled
+    * Docker Desktop: 20.10.8
+  &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+  
+&lt;/div&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;b&gt;Important:&lt;/b&gt; run minikube delete if you have an old minikube instance running that does not use the virtual box driver&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;install-project-air-locally&#34;&gt;Install Project Air Locally&lt;/h1&gt;
+&lt;p&gt;TIBCO LABS Project Air latest Release Site &lt;a href=&#34;https://github.com/TIBCOSoftware/labs-air/releases&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;ul class=&#34;nav nav-tabs&#34; id=&#34;tabs-1&#34; role=&#34;tablist&#34;&gt;&lt;li class=&#34;nav-item&#34;&gt;
+      &lt;a class=&#34;nav-link active tab-MacOs&#34;
+        id=&#34;tabs-1-0-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#tabs-1-0&#34; role=&#34;tab&#34; onclick=&#34;handleClick(&amp;#34;MacOs&amp;#34;);&#34;
+        aria-controls=&#34;tabs-1-0&#34; aria-selected=&#34;true&#34;&gt;
+        MacOs
+      &lt;/a&gt;
+    &lt;/li&gt;&lt;li class=&#34;nav-item&#34;&gt;
+      &lt;a class=&#34;nav-link tab-Linux&#34;
+        id=&#34;tabs-1-1-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#tabs-1-1&#34; role=&#34;tab&#34; onclick=&#34;handleClick(&amp;#34;Linux&amp;#34;);&#34;
+        aria-controls=&#34;tabs-1-1&#34; aria-selected=&#34;false&#34;&gt;
+        Linux
+      &lt;/a&gt;
+    &lt;/li&gt;&lt;li class=&#34;nav-item&#34;&gt;
+      &lt;a class=&#34;nav-link tab-Windows&#34;
+        id=&#34;tabs-1-2-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#tabs-1-2&#34; role=&#34;tab&#34; onclick=&#34;handleClick(&amp;#34;Windows&amp;#34;);&#34;
+        aria-controls=&#34;tabs-1-2&#34; aria-selected=&#34;false&#34;&gt;
+        Windows
+      &lt;/a&gt;
+    &lt;/li&gt;&lt;/ul&gt;
+
+
+&lt;div class=&#34;tab-content&#34; id=&#34;tabs-1-content&#34;&gt;&lt;div class=&#34;tab-pane fade show active&#34;
+        id=&#34;tabs-1-0&#34; role=&#34;tabpanel&#34; aria-labelled-by=&#34;tabs-1-0-tab&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-en&#34; data-lang=&#34;en&#34;&gt;    1. Download the darwin artifacts from the latest release site
+    2. Extract the artifacts and go to the extracted folder
+    3. Run the following command:
+    
+    ./install.sh myair
+
+  &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+  &lt;div class=&#34;tab-pane fade&#34;
+        id=&#34;tabs-1-1&#34; role=&#34;tabpanel&#34; aria-labelled-by=&#34;tabs-1-1-tab&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-en&#34; data-lang=&#34;en&#34;&gt;    Download the linux artifacts from the latest release site
+    1. Extract the artifacts and go to the extracted folder
+    2. Run the following command:
+    
+    ./install.sh myair
+
+  &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+  &lt;div class=&#34;tab-pane fade&#34;
+        id=&#34;tabs-1-2&#34; role=&#34;tabpanel&#34; aria-labelled-by=&#34;tabs-1-2-tab&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-en&#34; data-lang=&#34;en&#34;&gt;    Download the windows artifacts from the latest release site
+    2. Extract the artifacts and go to the extracted folder
+    3. Run the following command as Administrator:
+   
+    call install.cmd myair
+
+  &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+  
+&lt;/div&gt;
+
+&lt;p&gt;After all the processes are done you can access project air UI by typing: &lt;a href=&#34;http://ui.oss.labs.air/&#34;&gt;http://ui.oss.labs.air/&lt;/a&gt; in your browser locally.&lt;/p&gt;
+&lt;h1 id=&#34;delete-project-air-locally&#34;&gt;Delete Project Air Locally&lt;/h1&gt;
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;ul class=&#34;nav nav-tabs&#34; id=&#34;tabs-2&#34; role=&#34;tablist&#34;&gt;&lt;li class=&#34;nav-item&#34;&gt;
+      &lt;a class=&#34;nav-link active tab-MacOs&#34;
+        id=&#34;tabs-2-0-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#tabs-2-0&#34; role=&#34;tab&#34; onclick=&#34;handleClick(&amp;#34;MacOs&amp;#34;);&#34;
+        aria-controls=&#34;tabs-2-0&#34; aria-selected=&#34;true&#34;&gt;
+        MacOs
+      &lt;/a&gt;
+    &lt;/li&gt;&lt;li class=&#34;nav-item&#34;&gt;
+      &lt;a class=&#34;nav-link tab-Linux&#34;
+        id=&#34;tabs-2-1-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#tabs-2-1&#34; role=&#34;tab&#34; onclick=&#34;handleClick(&amp;#34;Linux&amp;#34;);&#34;
+        aria-controls=&#34;tabs-2-1&#34; aria-selected=&#34;false&#34;&gt;
+        Linux
+      &lt;/a&gt;
+    &lt;/li&gt;&lt;li class=&#34;nav-item&#34;&gt;
+      &lt;a class=&#34;nav-link tab-Windows&#34;
+        id=&#34;tabs-2-2-tab&#34; data-toggle=&#34;tab&#34; href=&#34;#tabs-2-2&#34; role=&#34;tab&#34; onclick=&#34;handleClick(&amp;#34;Windows&amp;#34;);&#34;
+        aria-controls=&#34;tabs-2-2&#34; aria-selected=&#34;false&#34;&gt;
+        Windows
+      &lt;/a&gt;
+    &lt;/li&gt;&lt;/ul&gt;
+
+
+&lt;div class=&#34;tab-content&#34; id=&#34;tabs-2-content&#34;&gt;&lt;div class=&#34;tab-pane fade show active&#34;
+        id=&#34;tabs-2-0&#34; role=&#34;tabpanel&#34; aria-labelled-by=&#34;tabs-2-0-tab&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-en&#34; data-lang=&#34;en&#34;&gt;    1. Download the darwin artifacts from the latest release site
+    2. Extract the artifacts and go to the extracted folder
+    3. Run the following command:
+   
+    ./remove.sh myair
+
+  &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+  &lt;div class=&#34;tab-pane fade&#34;
+        id=&#34;tabs-2-1&#34; role=&#34;tabpanel&#34; aria-labelled-by=&#34;tabs-2-1-tab&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-en&#34; data-lang=&#34;en&#34;&gt;    Download the linux artifacts from the latest release site
+    1. Extract the artifacts and go to the extracted folder
+    2. Run the following command:
+    
+    ./remove.sh myair
+
+  &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+  &lt;div class=&#34;tab-pane fade&#34;
+        id=&#34;tabs-2-2&#34; role=&#34;tabpanel&#34; aria-labelled-by=&#34;tabs-2-2-tab&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-en&#34; data-lang=&#34;en&#34;&gt;    Download the windows artifacts from the latest release site
+    2. Extract the artifacts and go to the extracted folder
+    3. Run the following command as Administrator:
+    
+    call remove.cmd myair
+
+  &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+  
+&lt;/div&gt;
+
+
       </description>
     </item>
     

@@ -48,8 +48,8 @@ if (!doNotTrack) {
 
 
 
-<link rel="preload" href="/labs-air/scss/main.min.b3777d1de130b743f48c5273591e22abddef8c1ed6a1a9c82e69b87a180a7bb6.css" as="style">
-<link href="/labs-air/scss/main.min.b3777d1de130b743f48c5273591e22abddef8c1ed6a1a9c82e69b87a180a7bb6.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/labs-air/scss/main.min.11ae2ee3f9d58aa9a33fb379f3ac0fc46071e53b26a03eb6b094433d1ce414f8.css" as="style">
+<link href="/labs-air/scss/main.min.11ae2ee3f9d58aa9a33fb379f3ac0fc46071e53b26a03eb6b094433d1ce414f8.css" rel="stylesheet" integrity="">
 
 
 <script
@@ -132,7 +132,7 @@ if (!doNotTrack) {
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/labs-air/offline-search-index.c52e0469e2be0d80873fc9828480ec9b.json"
+  data-offline-search-index-json-src="/labs-air/offline-search-index.e40d20569991c5f2de6d9814da3ec391.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -145,42 +145,6 @@ if (!doNotTrack) {
       <main role="main" class="td-main">
         
 
-
-<style>
-	#clockdiv{
-	font-family: sans-serif;
-	color: #fff;
-	display: inline-block;
-	font-weight: 100;
-	text-align: center;
-	font-size: 30px;
-	}
-
-	#clockdiv > div{
-	padding: 10px;
-	border-radius: 3px;
-	background: #1774e5;
-	display: inline-block;
-	}
-
-	#clockdiv div > span{
-	padding: 15px;
-	border-radius: 3px;
-	background: #0e4f9e;
-	display: inline-block;
-	}
-
-	.smalltext{
-	padding-top: 5px;
-	font-size: 16px;
-	}
-
-	#targetdate {
-	  text-align: center;
-	  font-size: 60px;
-	  margin-top: 0px;
-	}
-</style>
 
 
 
@@ -217,66 +181,14 @@ if (!doNotTrack) {
           
           <div class="pt-3 lead">
             <div class="mx-auto">
-<h1>We are almost There!</h1>
-<p id="targetdate" class="lead mt-5"></p>
-<div id="clockdiv">
-		<div>
-		  <span class="days"></span>
-		  <div class="smalltext">Days</div>
-		</div>
-		<div>
-		  <span class="hours"></span>
-		  <div class="smalltext">Hours</div>
-		</div>
-		<div>
-		  <span class="minutes"></span>
-		  <div class="smalltext">Minutes</div>
-		</div>
-		<div>
-		  <span class="seconds"></span>
-		  <div class="smalltext">Seconds</div>
-		</div>
-</div>
-<script>
-
-function getTimeRemaining(endtime) {
-  const total = Date.parse(endtime) - Date.parse(new Date());
-  const seconds = Math.floor((total / 1000) % 60);
-  const minutes = Math.floor((total / 1000 / 60) % 60);
-  const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
-  const days = Math.floor(total / (1000 * 60 * 60 * 24));
-  
-  return {total,days,hours,minutes,seconds};
-}
-
-function initializeClock(id, endtime) {
-  const clock = document.getElementById(id);
-  const daysSpan = clock.querySelector('.days');
-  const hoursSpan = clock.querySelector('.hours');
-  const minutesSpan = clock.querySelector('.minutes');
-  const secondsSpan = clock.querySelector('.seconds');
-
-  function updateClock() {
-    const t = getTimeRemaining(endtime);
-
-    daysSpan.innerHTML = t.days;
-    hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
-    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
-    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
-
-    if (t.total <= 0) {
-      clearInterval(timeinterval);
-    }
-  }
-
-  updateClock();
-  const timeinterval = setInterval(updateClock, 1000);
-}
-
-const deadline = new Date(Date.parse(new Date("Nov 1, 2021 9:00:00 PST")));
-initializeClock('clockdiv', deadline);
-
-</script>
+<a class="btn btn-lg btn-primary mr-3 mb-4" href="/labs-air/docs/overview/">
+	Learn More <i class="fas fa-arrow-alt-circle-right ml-2"></i>
+</a>
+<a class="btn btn-lg btn-warning mr-3 mb-4" href="https://github.com/TIBCOSoftware/labs-air/tree/master/">
+	Download <i class="fab fa-github ml-2 "></i>
+</a>
+<p class="lead mt-5">
+<h1>Intelligent insights from device to boardroom</h1>
 <div class="mx-auto mt-5">
 <p><a class="btn btn-link text-dark" href="#td-block-1"><i class="fa fa-chevron-circle-down" style="font-size: 400%"></i></a></p>
 </div>
@@ -290,7 +202,6 @@ initializeClock('clockdiv', deadline);
 </section>
 
 
-<!--
 
 
 
@@ -307,7 +218,6 @@ Connect your IoT Device Farm and take action in TIBCO&rsquo;s connected intellig
 	</div>
 </section>
 
--->
 
 
 
@@ -318,14 +228,11 @@ Connect your IoT Device Farm and take action in TIBCO&rsquo;s connected intellig
 <section class="row td-box td-box--dark position-relative td-box--gradient td-box--height-auto">
 	<div class="container text-center td-arrow-down">
 		<span class="h4 mb-0">
-			<p>Intelligent insights from device to boardroom</p>
-<p class="lead mt-5">Project Air by TIBCO LABS is undergoing a complete makeover, including a new / "one-click" installation experience, new edge capabilities, and a new user experience! Create model-driven / real-time IoT data pipelines, incorporate AI/ML models (including computer vision), deploy everything to the edge, and more!</p>
+			<p>Latest News</p>
+<p class="lead mt-5">Project Air is now including a new "one-click" installation experience, new edge capabilities, and a new user experience! Create model-driven / real-time IoT data pipelines, incorporate AI/ML models (including computer vision), deploy everything to the edge, and more!</p>
 <br>
 <img width="50%" src="Project-Air.png">
-<p class="lead mt-5">We are excited about the upcoming release, and are sure you will be as well!<br> 
-	Come back and check us out towards <b>1st November</b> for access to the new Project Air experience. <br>
-	<br>
-	<b>The countdown has begun!</b></p>
+<p class="lead mt-5">We are excited about the new release, and are sure you will be as well!</p>
 <div class="mx-auto mt-5">
 <p><a class="btn btn-link text-info" href="#td-block-3"><i class="fa fa-chevron-circle-down" style="font-size: 400%"></i></a></p>
 </div>
