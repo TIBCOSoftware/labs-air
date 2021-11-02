@@ -135,7 +135,7 @@ if (!doNotTrack) {
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/labs-air/offline-search-index.c0aa0ce9994b855188839930b2859711.json"
+  data-offline-search-index-json-src="/labs-air/offline-search-index.9675b951ea8adf130831538bb191df47.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
