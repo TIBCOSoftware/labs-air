@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Project Air – Documentation</title>
+    <title>Project AIR – Documentation</title>
     <link>https://tibcosoftware.github.io/labs-air/docs/</link>
-    <description>Recent content in Documentation on Project Air</description>
+    <description>Recent content in Documentation on Project AIR</description>
     <generator>Hugo -- gohugo.io</generator>
     
 	  <atom:link href="https://tibcosoftware.github.io/labs-air/docs/index.xml" rel="self" type="application/rss+xml" />
@@ -22,13 +22,13 @@
       <description>
         
         
-        &lt;p&gt;With Project Air, you can register and interact with IoT Device Farm to process derived data anywhere that is needed and store the data as needed to analyze and address a large number of analytical use cases extending any layer of its architecture as needed.
+        &lt;p&gt;With Project AIR, you can register and interact with IoT Device Farm to process derived data anywhere that is needed and store the data as needed to analyze and address a large number of analytical use cases extending any layer of its architecture as needed.
 Connect your IoT Device Farm and take action in TIBCO&amp;rsquo;s connected intelligence cloud.&lt;/p&gt;
 &lt;h2 id=&#34;architecture&#34;&gt;Architecture&lt;/h2&gt;
-&lt;p&gt;A little Sneak Peek of our Architecture, &lt;i&gt;more details after 1st. November&lt;/i&gt;&lt;/p&gt;
+&lt;p&gt;A sneak peek of AIR’s architecture, more details coming soon.&lt;/p&gt;
 &lt;img width=&#34;90%&#34; src=&#34;Air-Overview.png&#34;&gt;
 &lt;br&gt;&lt;br&gt;
-&lt;p&gt;Fully Open Platform that can run anywhere and DIGITIZATION OF THE REAL WORLD.&lt;/p&gt;
+&lt;p&gt;Fully open platform that can run anywhere to support the digitalization of the real world.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Register and Interact with IoT Devices&lt;/li&gt;
 &lt;li&gt;Process IoT Data Regardless of Source&lt;/li&gt;
@@ -169,8 +169,8 @@ Connect your IoT Device Farm and take action in TIBCO&amp;rsquo;s connected inte
 &lt;blockquote&gt;
 &lt;p&gt;&lt;b&gt;Important:&lt;/b&gt; run minikube delete if you have an old minikube instance running that does not use the virtual box driver&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1 id=&#34;install-project-air-locally&#34;&gt;Install Project Air Locally&lt;/h1&gt;
-&lt;p&gt;TIBCO LABS Project Air latest Release Site &lt;a href=&#34;https://github.com/TIBCOSoftware/labs-air/releases&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;install-project-air-locally&#34;&gt;Install Project AIR Locally&lt;/h1&gt;
+&lt;p&gt;TIBCO LABS Project AIR latest Release Site &lt;a href=&#34;https://github.com/TIBCOSoftware/labs-air/releases&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 
   
 
@@ -266,7 +266,7 @@ Connect your IoT Device Farm and take action in TIBCO&amp;rsquo;s connected inte
 &lt;/div&gt;
 
 &lt;p&gt;After all the processes are done you can access project air UI by typing: &lt;a href=&#34;http://ui.oss.labs.air/&#34;&gt;http://ui.oss.labs.air/&lt;/a&gt; in your browser locally.&lt;/p&gt;
-&lt;h1 id=&#34;delete-project-air-locally&#34;&gt;Delete Project Air Locally&lt;/h1&gt;
+&lt;h1 id=&#34;delete-project-air-locally&#34;&gt;Delete Project AIR Locally&lt;/h1&gt;
 
   
 
