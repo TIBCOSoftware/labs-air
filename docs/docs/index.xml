@@ -169,6 +169,17 @@ Connect your IoT Device Farm and take action in TIBCO&amp;rsquo;s connected inte
 &lt;blockquote&gt;
 &lt;p&gt;&lt;b&gt;Important:&lt;/b&gt; run minikube delete if you have an old minikube instance running that does not use the virtual box driver&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;h3 id=&#34;helpful-urls&#34;&gt;helpful URL&amp;rsquo;s&lt;/h3&gt;
+&lt;p&gt;some helpful URL&amp;rsquo;s to find your way quickly&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://minikube.sigs.k8s.io/docs/start/&#34;&gt;https://minikube.sigs.k8s.io/docs/start/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://helm.sh/docs/intro/install/&#34;&gt;https://helm.sh/docs/intro/install/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.virtualbox.org/&#34;&gt;https://www.virtualbox.org/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.docker.com/get-docker/&#34;&gt;https://docs.docker.com/get-docker/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; we try to review those in time. &lt;i&gt;Let us know in case a link is broken!&lt;/i&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h1 id=&#34;install-project-air-locally&#34;&gt;Install Project AIR Locally&lt;/h1&gt;
 &lt;p&gt;TIBCO LABS Project AIR latest Release Site &lt;a href=&#34;https://github.com/TIBCOSoftware/labs-air/releases&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 
