@@ -366,7 +366,51 @@ Connect your IoT Device Farm and take action in TIBCO&amp;rsquo;s connected inte
     </item>
     
     <item>
-      <title>Docs: Data Pipelines</title>
+      <title>Docs: Tutorials</title>
+      <link>https://tibcosoftware.github.io/labs-air/docs/tutorials/tutorials/</link>
+      <pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://tibcosoftware.github.io/labs-air/docs/tutorials/tutorials/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;list-of-videos&#34;&gt;List of Videos&lt;/h1&gt;
+&lt;p&gt;We created a list of short Introduction Videos for you to get a quick overview.&lt;br&gt;
+Full Playlist on YouTube &lt;a href=&#34;https://www.youtube.com/playlist?list=PL9ppsUzagLHu14pyyjSyHyiUNQWngAvIu&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;ui-intro&#34;&gt;UI Intro&lt;/h2&gt;
+&lt;p&gt;Overview of the User Interface&lt;/p&gt;
+&lt;iframe width=&#34;350&#34; height=&#34;230&#34; src=&#34;https://www.youtube.com/embed/km_Y5nGfvm8&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;h2 id=&#34;message-connections&#34;&gt;Message Connections&lt;/h2&gt;
+&lt;p&gt;How to configure a Message Broker Connection, e.g. MQTT, Kafka, AMQP&lt;/p&gt;
+&lt;iframe width=&#34;350&#34; height=&#34;230&#34; src=&#34;https://www.youtube.com/embed/G_Yp6zVOBWs&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;h2 id=&#34;ds-connections&#34;&gt;DS Connections&lt;/h2&gt;
+&lt;p&gt;How to configure a Data Store Connections e.g. to PostgreSQL, Snoflake, Oracle, MySQL, TGDB, Dgraph&lt;/p&gt;
+&lt;iframe width=&#34;350&#34; height=&#34;230&#34; src=&#34;https://www.youtube.com/embed/zSew9Jr1Jtw&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;h2 id=&#34;ml-model-connection&#34;&gt;ML Model Connection&lt;/h2&gt;
+&lt;p&gt;How to create a Connection to a ML Model e.g. via REST&lt;/p&gt;
+&lt;iframe width=&#34;350&#34; height=&#34;230&#34; src=&#34;https://www.youtube.com/embed/fddRjjY5VtA&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;h2 id=&#34;basic-pipe&#34;&gt;Basic Pipe&lt;/h2&gt;
+&lt;p&gt;How to define a basic Data Flow to devices&lt;/p&gt;
+&lt;iframe width=&#34;350&#34; height=&#34;230&#34; src=&#34;https://www.youtube.com/embed/21q1F4ko79w&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;h2 id=&#34;basic-pipe-simulation&#34;&gt;Basic Pipe Simulation&lt;/h2&gt;
+&lt;p&gt;Usage of simulation data for for devices&lt;/p&gt;
+&lt;iframe width=&#34;350&#34; height=&#34;230&#34; src=&#34;https://www.youtube.com/embed/_yGV0Cul22Y&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;h2 id=&#34;rule-pipe&#34;&gt;Rule Pipe&lt;/h2&gt;
+&lt;p&gt;How to use a rule activity in a data flow&lt;/p&gt;
+&lt;iframe width=&#34;350&#34; height=&#34;230&#34; src=&#34;https://www.youtube.com/embed/Q6tDgC4TtTo&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;h2 id=&#34;streaming-pipe&#34;&gt;Streaming Pipe&lt;/h2&gt;
+&lt;p&gt;How to use a streaming activity in a data flow&lt;/p&gt;
+&lt;iframe width=&#34;350&#34; height=&#34;230&#34; src=&#34;https://www.youtube.com/embed/wbezN3oAE-U&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;h2 id=&#34;inferencing-pipe&#34;&gt;Inferencing Pipe&lt;/h2&gt;
+&lt;p&gt;How to use a inferencing activity in a data flow, to call a ML model and return the results&lt;/p&gt;
+&lt;iframe width=&#34;350&#34; height=&#34;230&#34; src=&#34;https://www.youtube.com/embed/ekMfXzeGvzI&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Data Pipelines Details</title>
       <link>https://tibcosoftware.github.io/labs-air/docs/datapipelines/</link>
       <pubDate>Mon, 25 May 2020 12:36:01 -0400</pubDate>
       
