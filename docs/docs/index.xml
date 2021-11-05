@@ -65,10 +65,10 @@ Connect your IoT Device Farm and take action in TIBCO&amp;rsquo;s connected inte
     
     <item>
       <title>Docs: Getting Started</title>
-      <link>https://tibcosoftware.github.io/labs-air/docs/gettingstarted/gettingstarted/</link>
+      <link>https://tibcosoftware.github.io/labs-air/docs/gettingstarted/</link>
       <pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://tibcosoftware.github.io/labs-air/docs/gettingstarted/gettingstarted/</guid>
+      <guid>https://tibcosoftware.github.io/labs-air/docs/gettingstarted/</guid>
       <description>
         
         
@@ -276,7 +276,10 @@ Connect your IoT Device Farm and take action in TIBCO&amp;rsquo;s connected inte
   
 &lt;/div&gt;
 
-&lt;p&gt;After all the processes are done you can access project air UI by typing: &lt;a href=&#34;http://ui.oss.labs.air/&#34;&gt;http://ui.oss.labs.air/&lt;/a&gt; in your browser locally.&lt;/p&gt;
+&lt;p&gt;After all the processes are done you should see the following after running&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;minikube dashboard
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;./air_minikube.png&#34; alt=&#34;AIR minikube dashboard&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Now you can access project air UI by typing: &lt;a href=&#34;http://ui.oss.labs.air/&#34;&gt;http://ui.oss.labs.air/&lt;/a&gt; in your browser locally.&lt;/p&gt;
 &lt;h1 id=&#34;delete-project-air-locally&#34;&gt;Delete Project AIR Locally&lt;/h1&gt;
 
   
