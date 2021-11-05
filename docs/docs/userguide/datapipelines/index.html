@@ -17,26 +17,26 @@
 <link rel="icon" type="image/png" href="/labs-air/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/labs-air/favicons/android-192x192.png" sizes="192x192">
 
-<title>June &#39;21 Release | Project AIR</title><meta property="og:title" content="June &#39;21 Release" />
-<meta property="og:description" content="June 2021 **public** Release.
+<title>Data Pipelines Details | Project AIR</title><meta property="og:title" content="Data Pipelines Details" />
+<meta property="og:description" content="Data Pipelines - How to configure pipelines to sequence, filter, stream data and store data based on business logic.
 " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://tibcosoftware.github.io/labs-air/blog/2021/06/11/june-21-release/" />
-<meta property="article:published_time" content="2021-06-11T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-11-01T17:40:54+01:00" /><meta property="og:site_name" content="Project AIR" />
-<meta itemprop="name" content="June &#39;21 Release">
-<meta itemprop="description" content="June 2021 **public** Release.
+<meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/userguide/datapipelines/" />
+<meta property="article:published_time" content="2020-05-25T12:36:01-04:00" />
+<meta property="article:modified_time" content="2021-11-05T18:29:11+01:00" /><meta property="og:site_name" content="Project AIR" />
+<meta itemprop="name" content="Data Pipelines Details">
+<meta itemprop="description" content="Data Pipelines - How to configure pipelines to sequence, filter, stream data and store data based on business logic.
 ">
-<meta itemprop="datePublished" content="2021-06-11T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2021-11-01T17:40:54+01:00" />
-<meta itemprop="wordCount" content="19">
+<meta itemprop="datePublished" content="2020-05-25T12:36:01-04:00" />
+<meta itemprop="dateModified" content="2021-11-05T18:29:11+01:00" />
+<meta itemprop="wordCount" content="586">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="June &#39;21 Release"/>
-<meta name="twitter:description" content="June 2021 **public** Release.
+<meta name="twitter:title" content="Data Pipelines Details"/>
+<meta name="twitter:description" content="Data Pipelines - How to configure pipelines to sequence, filter, stream data and store data based on business logic.
 "/>
 
 
@@ -74,7 +74,7 @@ if (!doNotTrack) {
 
 
   </head>
-  <body class="td-page td-blog">
+  <body class="td-page">
     <header>
       
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
@@ -102,7 +102,7 @@ if (!doNotTrack) {
 				
 				
 				
-				<a class="nav-link" href="/labs-air/docs/" ><span>Documentation</span></a>
+				<a class="nav-link active" href="/labs-air/docs/" ><span class="active">Documentation</span></a>
 			</li>
 			
 			<li class="nav-item mr-4 mb-2 mb-lg-0">
@@ -112,7 +112,7 @@ if (!doNotTrack) {
 				
 				
 				
-				<a class="nav-link" href="/labs-air/docs/userguide/" ><span>Userguide</span></a>
+				<a class="nav-link active" href="/labs-air/docs/userguide/" ><span class="active">Userguide</span></a>
 			</li>
 			
 			<li class="nav-item mr-4 mb-2 mb-lg-0">
@@ -122,7 +122,7 @@ if (!doNotTrack) {
 				
 				
 				
-				<a class="nav-link active" href="/labs-air/blog/" ><span class="active">Blog</span></a>
+				<a class="nav-link" href="/labs-air/blog/" ><span>Blog</span></a>
 			</li>
 			
 			<li class="nav-item mr-4 mb-2 mb-lg-0">
@@ -204,11 +204,35 @@ if (!doNotTrack) {
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/labs-air/blog/" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">Blog</a>
+    <a  href="/labs-air/docs/" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">Documentation</a>
   </li>
   <ul>
-    <li class="collapse show" id="labs-airblog">
+    <li class="collapse show" id="labs-airdocs">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airdocsoverview" href="/labs-air/docs/overview/">Overview</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airdocsgettingstarted" href="/labs-air/docs/gettingstarted/">Getting Started</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airdocstutorialstutorials" href="/labs-air/docs/tutorials/tutorials/">Tutorials</a>
+        
       
       
       
@@ -222,10 +246,10 @@ if (!doNotTrack) {
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/labs-air/blog/releases/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Releases</a>
+    <a  href="/labs-air/docs/userguide/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Userguide</a>
   </li>
   <ul>
-    <li class="collapse show" id="labs-airblogreleases">
+    <li class="collapse show" id="labs-airdocsuserguide">
       
       
       
@@ -233,31 +257,7 @@ if (!doNotTrack) {
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airblog20211101november-21-release" href="/labs-air/blog/2021/11/01/november-21-release/">November &#39;21 public Release</a>
-        
-      
-      
-      
-        
-          
-          
-          <a class="td-sidebar-link td-sidebar-link__page  active" id="m-labs-airblog20210611june-21-release" href="/labs-air/blog/2021/06/11/june-21-release/">June &#39;21 public Release</a>
-        
-      
-      
-      
-        
-          
-          
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airblog20200601second-release" href="/labs-air/blog/2020/06/01/second-release/">second public Release</a>
-        
-      
-      
-      
-        
-          
-          
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airblog20200226initial-release" href="/labs-air/blog/2020/02/26/initial-release/">first public Release</a>
+          <a class="td-sidebar-link td-sidebar-link__page  active" id="m-labs-airdocsuserguidedatapipelines" href="/labs-air/docs/userguide/datapipelines/">Data Pipelines Details</a>
         
       
       
@@ -299,9 +299,9 @@ if (!doNotTrack) {
 
 
 
-<a href="https://github.com/TIBCOSoftware/labs-air//edit/master/docs-src/content/en/blog/releases/third-release.md" target="_blank" rel="noopener noreferrer"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
-<a href="https://github.com/TIBCOSoftware/labs-air//new/master/docs-src/content/en/blog/releases/third-release.md?filename=change-me.md&amp;value=---%0D%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0D%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0D%0Aweight%3A&#43;100%0D%0Adescription%3A&#43;%3E-%0D%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0D%0A---%0D%0A%0D%0A%23%23&#43;Heading%0D%0A%0D%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0D%0A%0D%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0D%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0D%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0D%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0D%0A" target="_blank" rel="noopener noreferrer"><i class="fa fa-edit fa-fw"></i> Create child page</a>
-<a href="https://github.com/TIBCOSoftware/labs-air//issues/new?title=June%20&amp;#39;21%20Release" target="_blank" rel="noopener noreferrer"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href="https://github.com/TIBCOSoftware/labs-air//edit/master/docs-src/content/en/docs/Userguide/DataPipelines/index.md" target="_blank" rel="noopener noreferrer"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+<a href="https://github.com/TIBCOSoftware/labs-air//new/master/docs-src/content/en/docs/Userguide/DataPipelines/index.md?filename=change-me.md&amp;value=---%0D%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0D%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0D%0Aweight%3A&#43;100%0D%0Adescription%3A&#43;%3E-%0D%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0D%0A---%0D%0A%0D%0A%23%23&#43;Heading%0D%0A%0D%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0D%0A%0D%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0D%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0D%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0D%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0D%0A" target="_blank" rel="noopener noreferrer"><i class="fa fa-edit fa-fw"></i> Create child page</a>
+<a href="https://github.com/TIBCOSoftware/labs-air//issues/new?title=Data%20Pipelines%20Details" target="_blank" rel="noopener noreferrer"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
 
 
 <a href="https://github.com/TIBCOSoftware/labs-air//issues/new" target="_blank" rel="noopener noreferrer"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
@@ -317,43 +317,208 @@ if (!doNotTrack) {
 
 
 
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#prerequisites">Prerequisites</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#adding-data-pipelines">Adding Data Pipelines</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#deploying-data-pipelines">Deploying Data Pipelines</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#updeploying-data-pipelines">Updeploying Data Pipelines</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#deleting-data-pipelines">Deleting Data Pipelines</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
 
 
           </div>
-          <main class="col-12 col-md-9 col-xl-8 pl-md-5 pr-md-4" role="main">
-            <a class="btn btn-lg -bg-orange td-rss-button d-none d-lg-block" href="https://tibcosoftware.github.io/labs-air/blog/releases/index.xml" target="_blank">
-              RSS <i class="fa fa-rss ml-2 "></i>
-            </a>
+          <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
+            
+  
+
+            <nav aria-label="breadcrumb" class="d-none d-md-block d-print-none">
+	<ol class="breadcrumb spb-1">
+		
+
+
+
+
+
+
+
+
+
+
+<li class="breadcrumb-item" >
+	<a href="https://tibcosoftware.github.io/labs-air/docs/">Documentation</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item" >
+	<a href="https://tibcosoftware.github.io/labs-air/docs/userguide/">Userguide</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item active" aria-current="page">
+	<a href="https://tibcosoftware.github.io/labs-air/docs/userguide/datapipelines/">Data Pipelines Details</a>
+</li>
+
+	</ol>
+</nav	>
+
             
 <div class="td-content">
-	<h1>June &#39;21 Release</h1>
-	<div class="lead">June 2021 <strong>public</strong> Release.</div>
-	<div class="td-byline mb-4">
-		
-		<time datetime="2021-06-11" class="text-muted">Friday, June 11, 2021</time>
-	</div>
-	
-	<p>Update Release containing</p>
-<ul>
-<li>bug fixes</li>
-<li>performance enhancments</li>
-<li>security fixes</li>
-<li>3rd party updates</li>
-</ul>
-<blockquote>
-<p>please have a look back soon here.</p>
-</blockquote>
+	<h1>Data Pipelines Details</h1>
+    <div class="lead">Data Pipelines - How to configure pipelines to sequence, filter, stream data and store data based on business logic.</div>
+	       
+	<h2 id="introduction">Introduction</h2>
+<p>TIBCO Project Air enables users to configure what to do with data from edge devices.
+Users can configure a Data Pipeline (Data Flow) to sequence, filter, stream data and specify a data store based on your business logic.
+A typical pipeline configuration consists of activities that define the messaging protocol to receive data, define operations on the data (filtering, streaming, inferencing, rules) and the data stores.
+This section will guide you through all the steps required to  create data pipelines.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<h4 id="prerequisite-1-device-groups-configuration">Prerequisite 1: Device Groups Configuration</h4>
+<p>Before you begin, make sure the messaging protocols, data stores and models configuration for device groups have been configured.  See Configuring Device Groups.</p>
+<h2 id="adding-data-pipelines">Adding Data Pipelines</h2>
+<h4 id="step-1-open-pipeline-editor">Step 1: Open Pipeline Editor</h4>
+<p>From the Gateways page, select the Device Group you want to configure and click Pipeline Editor Icon.</p>
+<p><img src="./air_gateway_pipeline.png" alt="Gateway Pipeline Config image"></p>
+<h4 id="step-2-the-pipelines-editor-page-should-be-displayed">Step 2: The Pipelines Editor page should be displayed.</h4>
+<p><img src="./air_config_pipeline.png" alt="Pipeline Config image"></p>
+<h4 id="step-3-subscribe-to-device-events">Step 3: Subscribe to device events</h4>
+<p>On the editor canvas, right click and select the Data Subscriber activity.</p>
+<p>Most data pipelines start subscribing to events coming from devices. The Data Subscriber activity allows users to select the source of the device data.</p>
+<p><img src="./air_config_pipeline_1.png" alt="Subscriber image"></p>
+<h4 id="step-4-configure-data-subscriber">Step 4: Configure Data Subscriber</h4>
+<p>On the activity configuration panel, select and review the messaging protocol</p>
+<p>All the messaging protocols that have previously been configured in the Device Groups Configuration will be available for selection.  Select the the source for device events.</p>
+<p><img src="./air_config_pipeline_2.png" alt="Subscriber Config image"></p>
+<h4 id="step-5-filter-device-data-optional">Step 5: Filter device data (Optional)</h4>
+<p>Select the devices to filter by selecting the Filter Activity.</p>
+<p>Data can be filtered from going through the pipeline. Right click on the editor canvas and select Filters.</p>
+<p><img src="./air_config_pipeline_3.png" alt="Filter image"></p>
+<h4 id="step-6-configure-filter-activity">Step 6: Configure filter activity</h4>
+<p>On the activity configuration panel, select device and resource (sensors) data to be filtered.  All data for the selected resources won&rsquo;t be propagated though the pipeline.
+Connect activities by selecting the connection ports.</p>
+<p><img src="./air_config_pipeline_4.png" alt="Filter Config image"></p>
+<h4 id="step-7-publish-device-data">Step 7: Publish device data</h4>
+<p>On the editor canvas, right click and select the Data Publisher activity.</p>
+<p>Device data can be published to any messaging protocol that has been previously configured in the Device Groups connection pages.</p>
+<p><img src="./air_config_pipeline_5.png" alt="Publisher image"></p>
+<h4 id="step-7-configure-data-publisher">Step 7: Configure Data Publisher</h4>
+<p>On the activity configuration panel, select and review the messaging protocol</p>
+<p>All the messaging protocols that have previously been configured in the Device Groups Configuration will be available for selection.  Select the the destination for device events.</p>
+<p><img src="./air_config_pipeline_6.png" alt="Publisher Config image"></p>
+<h4 id="step-8-name-and-save-data-pipeline">Step 8: Name and Save Data Pipeline.</h4>
+<p>After entering pipeline name, deployment target and deployer type, save the pipeline configuration.  The configuration can then be deployed to a Kubernetes cluster either local or on the cloud.</p>
+<p><img src="./air_config_pipeline_7.png" alt="Pipeline Save image"></p>
+<h2 id="deploying-data-pipelines">Deploying Data Pipelines</h2>
+<p>Once data pipelines have been configured, they can be deployed dynamically to Kubernetes cluster running locally or on the cloud.</p>
+<h4 id="step-1-select-the-desired-pipeline-from-the-pipelines-table-and-then-click--deploy-pipeline">Step 1: Select the desired pipeline from the Pipelines table and then click  Deploy Pipeline</h4>
+<p><img src="./air_deploy_pipeline_1.png" alt="Pipeline Deploy Select image"></p>
+<h4 id="step-2-the-pipeline-is-deployed-and-should-show-the-status-as-deployedready">Step 2: The pipeline is deployed and should show the Status as Deployed/Ready</h4>
+<p><img src="./air_deploy_pipeline_2.png" alt="Pipeline Deploy Result image"></p>
+<h2 id="updeploying-data-pipelines">Updeploying Data Pipelines</h2>
+<p>If data from a device is not longer required or if needs to be modified, you can undeploy the pipeline.  Undeploying will remove the engine processing the data from the Kubernetes cluster.</p>
+<h4 id="step-1-select-the-desired-pipeline-from-the-pipelines-table-and-then-click--undeploy-pipeline">Step 1: Select the desired pipeline from the Pipelines table and then click  Undeploy Pipeline</h4>
+<p><img src="./air_undeploy_pipeline_1.png" alt="Pipeline Undeploy Select image"></p>
+<h4 id="step-2-the-pipeline-is-undeployed-and-should-show-the-status-as-undeployed">Step 2: The pipeline is undeployed and should show the Status as Undeployed</h4>
+<p><img src="./air_undeploy_pipeline_2.png" alt="Pipeline Undeploy Final image"></p>
+<h2 id="deleting-data-pipelines">Deleting Data Pipelines</h2>
+<p>If data pipelines are not longer required, you can delete the pipeline. Notice that deployed pipelines can&rsquo;t be deleted.  They need to be undeployed first.</p>
+<h4 id="step-1-select-the-desired-pipeline-from-the-pipelines-table-and-then-click--delete-pipeline">Step 1: Select the desired pipeline from the Pipelines table and then click  Delete Pipeline</h4>
+<p><img src="./air_delete_pipeline_1.png" alt="Pipeline Delete Select image"></p>
+<h4 id="step-2-the-pipeline-is-deleted-and-should-not-appear-in-the-pipelines-table">Step 2: The pipeline is deleted and should not appear in the Pipelines table.</h4>
 
 	
+		<style>
+  .feedback--answer {
+    display: inline-block;
+  }
+  .feedback--answer-no {
+    margin-left: 1em;
+  }
+  .feedback--response {
+    display: none;
+    margin-top: 1em;
+  }
+  .feedback--response__visible {
+    display: block;
+  }
+</style>
+<div class="d-print-none">
+<h2 class="feedback--title">Feedback</h2>
+<p class="feedback--question">Was this page helpful?</p>
+<button class="feedback--answer feedback--answer-yes">Yes</button>
+<button class="feedback--answer feedback--answer-no">No</button>
+<p class="feedback--response feedback--response-yes">
+  Glad to hear it! Please <a href="https://github.com/TIBCOSoftware/labs-air/issues/new">tell us how we can improve</a>.
+</p>
+<p class="feedback--response feedback--response-no">
+  Sorry to hear that. Please <a href="https://github.com/TIBCOSoftware/labs-air/issues/new">tell us how we can improve</a>.
+</p>
+</div>
+<script>
+  const yesButton = document.querySelector('.feedback--answer-yes');
+  const noButton = document.querySelector('.feedback--answer-no');
+  const yesResponse = document.querySelector('.feedback--response-yes');
+  const noResponse = document.querySelector('.feedback--response-no');
+  const disableButtons = () => {
+    yesButton.disabled = true;
+    noButton.disabled = true;
+  };
+  const sendFeedback = (value) => {
+    if (typeof ga !== 'function') return;
+    const args = {
+      command: 'send',
+      hitType: 'event',
+      category: 'Helpful',
+      action: 'click',
+      label: window.location.pathname,
+      value: value
+    };
+    ga(args.command, args.hitType, args.category, args.action, args.label, args.value);
+  };
+  yesButton.addEventListener('click', () => {
+    yesResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback(1);
+  });
+  noButton.addEventListener('click', () => {
+    noResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback(0);
+  });
+</script>
 
-	<ul class="list-unstyled d-flex justify-content-between align-items-center mb-0 pt-5">
-  <li>
-    <a href="/labs-air/blog/2020/06/01/second-release/" class="btn btn-primary "><span class="mr-1">←</span> Previous</a>
-  </li>
-    <a href="/labs-air/blog/2021/11/01/november-21-release/" class="btn btn-primary ">Next <span class="ml-1">→</span></a>
-  </li>
-</ul>
-
+		<br />
+	
+	
+	<div class="text-muted mt-5 pt-3 border-top">Last modified November 5, 2021: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/8dff5f9dcebbbcd83ff06424e40d039798677c32">add userguide to structure (8dff5f9)</a>
+</div>
 </div>
 
 
