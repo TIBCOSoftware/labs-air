@@ -297,7 +297,7 @@ AIR platform releated TIBCO Flogo extensions, connectors, and functions&lt;/p&gt
     * Helm: Version v3.7.1
     * Virtual Box: Version 6.1.26
     * Docker: 20.10.9
-    * Docker Compose: 1.29.2
+    * Docker Compose: 1.28.2
     * resolvconf
   &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;div class=&#34;tab-pane fade&#34;
