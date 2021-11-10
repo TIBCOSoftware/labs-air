@@ -29,7 +29,7 @@
 ">
 <meta itemprop="datePublished" content="2020-05-25T12:36:01-04:00" />
 <meta itemprop="dateModified" content="2021-11-05T18:29:11+01:00" />
-<meta itemprop="wordCount" content="586">
+<meta itemprop="wordCount" content="584">
 
 
 
@@ -140,7 +140,7 @@ if (!doNotTrack) {
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/labs-air/offline-search-index.b98582dab0495e4e6bd66bdbf05f4807.json"
+  data-offline-search-index-json-src="/labs-air/offline-search-index.d351d9ea8a0006be556947b295874465.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -172,7 +172,7 @@ if (!doNotTrack) {
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/labs-air/offline-search-index.b98582dab0495e4e6bd66bdbf05f4807.json"
+  data-offline-search-index-json-src="/labs-air/offline-search-index.d351d9ea8a0006be556947b295874465.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -205,6 +205,14 @@ if (!doNotTrack) {
         
           
           
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airdocshackathon" href="/labs-air/docs/hackathon/">Hackathon</a>
+        
+      
+      
+      
+        
+          
+          
           <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airdocsoverview" href="/labs-air/docs/overview/">Overview</a>
         
       
@@ -221,7 +229,7 @@ if (!doNotTrack) {
         
           
           
-          <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airdocstutorialstutorials" href="/labs-air/docs/tutorials/tutorials/">Tutorials</a>
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airdocstutorials" href="/labs-air/docs/tutorials/">Tutorials</a>
         
       
       
@@ -385,13 +393,13 @@ if (!doNotTrack) {
     <div class="lead">Data Pipelines - How to configure pipelines to sequence, filter, stream data and store data based on business logic.</div>
 	       
 	<h2 id="introduction">Introduction</h2>
-<p>TIBCO Project Air enables users to configure what to do with data from edge devices.
+<p>TIBCO Project AIR enables users to configure what to do with data from edge devices.
 Users can configure a Data Pipeline (Data Flow) to sequence, filter, stream data and specify a data store based on your business logic.
 A typical pipeline configuration consists of activities that define the messaging protocol to receive data, define operations on the data (filtering, streaming, inferencing, rules) and the data stores.
 This section will guide you through all the steps required to  create data pipelines.</p>
 <h2 id="prerequisites">Prerequisites</h2>
 <h4 id="prerequisite-1-device-groups-configuration">Prerequisite 1: Device Groups Configuration</h4>
-<p>Before you begin, make sure the messaging protocols, data stores and models configuration for device groups have been configured.  See Configuring Device Groups.</p>
+<p>Before you begin, make sure the messaging protocols, data stores and models configuration for device groups have been configured. See <a href="../../tutorials">here</a>.</p>
 <h2 id="adding-data-pipelines">Adding Data Pipelines</h2>
 <h4 id="step-1-open-pipeline-editor">Step 1: Open Pipeline Editor</h4>
 <p>From the Gateways page, select the Device Group you want to configure and click Pipeline Editor Icon.</p>
@@ -404,38 +412,37 @@ This section will guide you through all the steps required to  create data pipel
 <p><img src="./air_config_pipeline_1.png" alt="Subscriber image"></p>
 <h4 id="step-4-configure-data-subscriber">Step 4: Configure Data Subscriber</h4>
 <p>On the activity configuration panel, select and review the messaging protocol</p>
-<p>All the messaging protocols that have previously been configured in the Device Groups Configuration will be available for selection.  Select the the source for device events.</p>
+<p>All the messaging protocols that have previously been configured in the Device Groups Configuration will be available for selection.  Select the source for device events.</p>
 <p><img src="./air_config_pipeline_2.png" alt="Subscriber Config image"></p>
 <h4 id="step-5-filter-device-data-optional">Step 5: Filter device data (Optional)</h4>
 <p>Select the devices to filter by selecting the Filter Activity.</p>
 <p>Data can be filtered from going through the pipeline. Right click on the editor canvas and select Filters.</p>
 <p><img src="./air_config_pipeline_3.png" alt="Filter image"></p>
 <h4 id="step-6-configure-filter-activity">Step 6: Configure filter activity</h4>
-<p>On the activity configuration panel, select device and resource (sensors) data to be filtered.  All data for the selected resources won&rsquo;t be propagated though the pipeline.
-Connect activities by selecting the connection ports.</p>
+<p>On the activity configuration panel, select device and resource (sensors) data to be filtered. Only the sensor data/resources selected in the list will be propagated through the pipeline. Connect activities by selecting the connection ports.</p>
 <p><img src="./air_config_pipeline_4.png" alt="Filter Config image"></p>
 <h4 id="step-7-publish-device-data">Step 7: Publish device data</h4>
 <p>On the editor canvas, right click and select the Data Publisher activity.</p>
 <p>Device data can be published to any messaging protocol that has been previously configured in the Device Groups connection pages.</p>
 <p><img src="./air_config_pipeline_5.png" alt="Publisher image"></p>
-<h4 id="step-7-configure-data-publisher">Step 7: Configure Data Publisher</h4>
+<h4 id="step-8-configure-data-publisher">Step 8: Configure Data Publisher</h4>
 <p>On the activity configuration panel, select and review the messaging protocol</p>
-<p>All the messaging protocols that have previously been configured in the Device Groups Configuration will be available for selection.  Select the the destination for device events.</p>
+<p>All the messaging protocols that have previously been configured in the Device Groups Configuration will be available for selection.  Select the destination for device events.</p>
 <p><img src="./air_config_pipeline_6.png" alt="Publisher Config image"></p>
-<h4 id="step-8-name-and-save-data-pipeline">Step 8: Name and Save Data Pipeline.</h4>
+<h4 id="step-9-name-and-save-data-pipeline">Step 9: Name and Save Data Pipeline.</h4>
 <p>After entering pipeline name, deployment target and deployer type, save the pipeline configuration.  The configuration can then be deployed to a Kubernetes cluster either local or on the cloud.</p>
 <p><img src="./air_config_pipeline_7.png" alt="Pipeline Save image"></p>
 <h2 id="deploying-data-pipelines">Deploying Data Pipelines</h2>
 <p>Once data pipelines have been configured, they can be deployed dynamically to Kubernetes cluster running locally or on the cloud.</p>
 <h4 id="step-1-select-the-desired-pipeline-from-the-pipelines-table-and-then-click--deploy-pipeline">Step 1: Select the desired pipeline from the Pipelines table and then click  Deploy Pipeline</h4>
 <p><img src="./air_deploy_pipeline_1.png" alt="Pipeline Deploy Select image"></p>
-<h4 id="step-2-the-pipeline-is-deployed-and-should-show-the-status-as-deployedready">Step 2: The pipeline is deployed and should show the Status as Deployed/Ready</h4>
+<h4 id="step-2-the-pipeline-is-deployed-and-should-show-the-status-as-readydeployed">Step 2: The pipeline is deployed and should show the Status as Ready/Deployed</h4>
 <p><img src="./air_deploy_pipeline_2.png" alt="Pipeline Deploy Result image"></p>
 <h2 id="updeploying-data-pipelines">Updeploying Data Pipelines</h2>
-<p>If data from a device is not longer required or if needs to be modified, you can undeploy the pipeline.  Undeploying will remove the engine processing the data from the Kubernetes cluster.</p>
-<h4 id="step-1-select-the-desired-pipeline-from-the-pipelines-table-and-then-click--undeploy-pipeline">Step 1: Select the desired pipeline from the Pipelines table and then click  Undeploy Pipeline</h4>
+<p>If data from a device is no longer required or if needs to be modified, you can undeploy the pipeline.  Undeploying will remove the engine processing the data from the Kubernetes cluster.</p>
+<h4 id="step-1-select-the-desired-pipeline-from-the-pipelines-table-and-then-click-undeploy-pipeline">Step 1: Select the desired pipeline from the Pipelines table and then click Undeploy Pipeline</h4>
 <p><img src="./air_undeploy_pipeline_1.png" alt="Pipeline Undeploy Select image"></p>
-<h4 id="step-2-the-pipeline-is-undeployed-and-should-show-the-status-as-undeployed">Step 2: The pipeline is undeployed and should show the Status as Undeployed</h4>
+<h4 id="step-2-the-pipeline-is-undeployed-and-should-show-the-status-as-undeployedsaved">Step 2: The pipeline is undeployed and should show the Status as Undeployed/Saved</h4>
 <p><img src="./air_undeploy_pipeline_2.png" alt="Pipeline Undeploy Final image"></p>
 <h2 id="deleting-data-pipelines">Deleting Data Pipelines</h2>
 <p>If data pipelines are not longer required, you can delete the pipeline. Notice that deployed pipelines can&rsquo;t be deleted.  They need to be undeployed first.</p>

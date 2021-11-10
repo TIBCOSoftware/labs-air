@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://tibcosoftware.github.io/labs-air/docs/hackathon/</loc>
+    <lastmod>2021-11-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://tibcosoftware.github.io/labs-air/docs/overview/</loc>
     <lastmod>2021-11-02T08:36:48+01:00</lastmod>
   </url>
@@ -13,13 +18,13 @@
   </url>
   
   <url>
-    <loc>https://tibcosoftware.github.io/labs-air/docs/tutorials/tutorials/</loc>
-    <lastmod>2021-11-04T11:50:39+01:00</lastmod>
+    <loc>https://tibcosoftware.github.io/labs-air/docs/userguide/datapipelines/</loc>
+    <lastmod>2021-11-05T18:29:11+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://tibcosoftware.github.io/labs-air/docs/userguide/datapipelines/</loc>
-    <lastmod>2021-11-05T18:29:11+01:00</lastmod>
+    <loc>https://tibcosoftware.github.io/labs-air/docs/tutorials/</loc>
+    <lastmod>2021-10-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
