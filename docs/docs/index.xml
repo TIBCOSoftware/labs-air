@@ -172,6 +172,37 @@ Connect your IoT Device Farm and take action in TIBCO&amp;rsquo;s connected inte
 &lt;li&gt;UI&lt;/li&gt;
 &lt;li&gt;Data Stores&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 id=&#34;github-repositories&#34;&gt;GitHub Repositories&lt;/h2&gt;
+&lt;p&gt;TIBCO LABS Project AIR consist of multiple Repos &lt;a href=&#34;https://github.com/orgs/TIBCOSoftware/repositories?language=&amp;q=air&amp;sort=&amp;type=&#34; target=&#34;_blank&#34;&gt;full Query here&lt;/a&gt;.&lt;br&gt;
+Here a quick Introduction &amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/TIBCOSoftware/labs-air&#34; target=&#34;_blank&#34;&gt;labs-air&lt;/a&gt;&lt;br&gt;
+stores the Project Site and Documentation&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/TIBCOSoftware/labs-air-ui&#34; target=&#34;_blank&#34;&gt;labs-air-ui&lt;/a&gt;&lt;br&gt;
+AIR user Interface implemented using Angular.io&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/TIBCOSoftware/labs-air-edgex&#34; target=&#34;_blank&#34;&gt;labs-air-edgex&lt;/a&gt;&lt;br&gt;
+configurations of EdgeX Foundry releated to AIR&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/TIBCOSoftware/labs-air-charts&#34; target=&#34;_blank&#34;&gt;labs-air-charts&lt;/a&gt;&lt;br&gt;
+bootstraps a Project Air deployment on a Kubernetes cluster using the Helm package manager.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/TIBCOSoftware/labs-air-services&#34; target=&#34;_blank&#34;&gt;labs-air-services&lt;/a&gt;&lt;br&gt;
+AIR platform backend and edge services based on TIBCO Flogo&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/TIBCOSoftware/labs-air-contrib&#34; target=&#34;_blank&#34;&gt;labs-air-contrib&lt;/a&gt;&lt;br&gt;
+AIR platform releated TIBCO Flogo extensions, connectors, and functions&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;br&gt;
       </description>
     </item>
