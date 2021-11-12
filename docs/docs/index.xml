@@ -22,8 +22,16 @@
       <description>
         
         
-        &lt;p&gt;In Ideation phase until January 14, 2022&lt;/p&gt;
+        &lt;p&gt;In Ideation phase until January 14, 2022 &lt;div class=&#34;fix&#34;&gt;&lt;img src=&#34;./TIBCO-Labs.png&#34; width=&#34;300px&#34;&gt;&lt;/div&gt;&lt;/p&gt;
 &lt;style&gt;
+    .fix{
+        transform: rotate(-8deg);
+        position: fixed;
+        z-index: 1000;
+        left: 48em;
+        top: 6em;
+    }
+
 	#clockdiv{
 	font-family: sans-serif;
 	color: #fff;
@@ -117,8 +125,8 @@ initializeClock(&#39;clockdiv&#39;, deadline);
 
 &lt;/script&gt;
 &lt;p&gt;&lt;br&gt;&lt;br&gt;
-Not a participant yet? Then you definitely want to check this out: &lt;br&gt;&lt;a href=&#34;https://www.hackerearth.com/challenges/hackathon/tibco-labs-iot-and-sustainability-hack/&#34;&gt;TIBCO LABS IoT and sustainability Hack&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;For all others … welcome to Project AIR! We are excited to have our project be part of this hackathon, and to work with you on innovative solutions in the area of environmental sustainability.&lt;/p&gt;
+&lt;b&gt;Not a participant yet?&lt;/b&gt; Then you definitely want to check this out: &lt;br&gt;&lt;a href=&#34;https://www.hackerearth.com/challenges/hackathon/tibco-labs-iot-and-sustainability-hack/&#34;&gt;TIBCO LABS IoT and sustainability Hack&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;For all others&lt;/b&gt; … welcome to Project AIR! We are excited to have our project be part of this hackathon, and to work with you on innovative solutions in the area of environmental sustainability.&lt;/p&gt;
 &lt;p&gt;As you browse through the materials and learn more about Project AIR, we just want to note that we are working hard to update the docs with more details, including additional tutorials and videos. The Getting Started materials should be enough to help you with the Ideation phase of the hackathon, but let us know via the HackerEarth Discussion forum if you have any questions!&lt;/p&gt;
 &lt;p&gt;As we get closer to the Development phase, we will be releasing more materials. So be sure to check back, or watch the HackerEarth site for details.&lt;/p&gt;
 &lt;p&gt;&lt;b&gt;Happy Hacking!&lt;/b&gt;&lt;/p&gt;
