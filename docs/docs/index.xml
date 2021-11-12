@@ -645,5 +645,40 @@ Full Playlist on &lt;a href=&#34;https://www.youtube.com/playlist?list=PL9ppsUza
       </description>
     </item>
     
+    <item>
+      <title>Docs: Cheat Sheet</title>
+      <link>https://tibcosoftware.github.io/labs-air/docs/cheat-sheet/</link>
+      <pubDate>Fri, 12 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://tibcosoftware.github.io/labs-air/docs/cheat-sheet/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Here you can find additional details and frequently asked questions&lt;/p&gt;
+&lt;h2 id=&#34;default-passwords&#34;&gt;default passwords&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;minikube docker/tcuser&lt;/li&gt;
+&lt;li&gt;MQTT mosquitto/msquitto&lt;/li&gt;
+&lt;li&gt;MQTT mqtt_admin/mqtt_admin&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;default-ports&#34;&gt;default ports&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;f1-proxy 5408&lt;/li&gt;
+&lt;li&gt;kong 8000,8001,8443,8444&lt;/li&gt;
+&lt;li&gt;kong-db 5432&lt;/li&gt;
+&lt;li&gt;edgex-mqtt-brocker 1883&lt;/li&gt;
+&lt;li&gt;edgex-vault 8200&lt;/li&gt;
+&lt;li&gt;edgex-redis 6379&lt;/li&gt;
+&lt;li&gt;edgex-consul 8500&lt;/li&gt;
+&lt;li&gt;AIR 10099&lt;/li&gt;
+&lt;li&gt;AIR-builder 10083&lt;/li&gt;
+&lt;li&gt;AIR-deployer 10082&lt;/li&gt;
+&lt;li&gt;AIR-projectmgr 10090, 10091&lt;/li&gt;
+&lt;li&gt;AIR-service-locator 10080, 10081&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br&gt;
+      </description>
+    </item>
+    
   </channel>
 </rss>
