@@ -646,6 +646,33 @@ Full Playlist on &lt;a href=&#34;https://www.youtube.com/playlist?list=PL9ppsUza
     </item>
     
     <item>
+      <title>Docs: Troubleshooting</title>
+      <link>https://tibcosoftware.github.io/labs-air/docs/troubleshooting/</link>
+      <pubDate>Mon, 15 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://tibcosoftware.github.io/labs-air/docs/troubleshooting/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;installer-issues&#34;&gt;Installer Issues&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;Issue: I can&#39;t install virtual box in my machine&lt;/summary&gt;
+&lt;br&gt;
+&lt;p&gt;If you are having issues installing virtual box there is an alternative:&lt;/p&gt;
+&lt;p&gt;One possible solution is to change the minikube driver used by the installation if an alternative virtualization can be used, the needed changes are:&lt;/p&gt;
+&lt;p&gt;1.- Install the alternative virtualization&lt;/p&gt;
+&lt;p&gt;2.- Modify the following line in &amp;ldquo;installer-folder/labs-air-charts/install_minikube_&amp;lt;os_arch&amp;gt;.sh&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;minikube start --driver=virtualbox --memory 4096 --cpus 2&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;and replace the driver with any other supported in &lt;a href=&#34;https://minikube.sigs.k8s.io/docs/drivers/&#34;&gt;here&lt;/a&gt;, for example:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;minikube start --driver=hyperkit --memory 4096 --cpus 2&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Important:&lt;/b&gt; The only driver not supported for every environment will be the docker driver.&lt;/p&gt;
+&lt;/details&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Docs: Cheat Sheet</title>
       <link>https://tibcosoftware.github.io/labs-air/docs/cheat-sheet/</link>
       <pubDate>Fri, 12 Nov 2021 00:00:00 +0000</pubDate>
