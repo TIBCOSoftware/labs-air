@@ -23,13 +23,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/userguide/datapipelines/" />
 <meta property="article:published_time" content="2020-05-25T12:36:01-04:00" />
-<meta property="article:modified_time" content="2021-11-10T11:02:45+01:00" /><meta property="og:site_name" content="Project AIR" />
+<meta property="article:modified_time" content="2021-11-15T18:51:21-05:00" /><meta property="og:site_name" content="Project AIR" />
 <meta itemprop="name" content="Data Pipelines Details">
 <meta itemprop="description" content="Data Pipelines - How to configure pipelines to sequence, filter, stream data and store data based on business logic.
 ">
 <meta itemprop="datePublished" content="2020-05-25T12:36:01-04:00" />
-<meta itemprop="dateModified" content="2021-11-10T11:02:45+01:00" />
-<meta itemprop="wordCount" content="584">
+<meta itemprop="dateModified" content="2021-11-15T18:51:21-05:00" />
+<meta itemprop="wordCount" content="942">
 
 
 
@@ -140,7 +140,7 @@ if (!doNotTrack) {
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/labs-air/offline-search-index.d79abf85b364d3a10dcdc40713ceb787.json"
+  data-offline-search-index-json-src="/labs-air/offline-search-index.e0788e6a026e5279e93b456992f36922.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -172,7 +172,7 @@ if (!doNotTrack) {
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/labs-air/offline-search-index.d79abf85b364d3a10dcdc40713ceb787.json"
+  data-offline-search-index-json-src="/labs-air/offline-search-index.e0788e6a026e5279e93b456992f36922.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -249,6 +249,14 @@ if (!doNotTrack) {
   <ul>
     <li class="collapse show" id="labs-airdocsuserguide">
       
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-labs-airdocsuserguideconfiguringendpoints" href="/labs-air/docs/userguide/configuringendpoints/">Configuring Endpoints</a>
+        
       
       
       
@@ -334,6 +342,7 @@ if (!doNotTrack) {
 <nav id="TableOfContents">
   <ul>
     <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#architecture-overview">Architecture Overview</a></li>
     <li><a href="#prerequisites">Prerequisites</a>
       <ul>
         <li></li>
@@ -345,6 +354,11 @@ if (!doNotTrack) {
       </ul>
     </li>
     <li><a href="#deploying-data-pipelines">Deploying Data Pipelines</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#verifying-data-pipelines-deployment">Verifying Data Pipelines Deployment</a>
       <ul>
         <li></li>
       </ul>
@@ -409,13 +423,21 @@ if (!doNotTrack) {
     <div class="lead">Data Pipelines - How to configure pipelines to sequence, filter, stream data and store data based on business logic.</div>
 	       
 	<h2 id="introduction">Introduction</h2>
-<p>TIBCO Project AIR enables users to configure what to do with data from edge devices.
+<p>TIBCO Project AIR enables users to configure flows/business logic with data from edge devices.
 Users can configure a Data Pipeline (Data Flow) to sequence, filter, stream data and specify a data store based on your business logic.
 A typical pipeline configuration consists of activities that define the messaging protocol to receive data, define operations on the data (filtering, streaming, inferencing, rules) and the data stores.
 This section will guide you through all the steps required to  create data pipelines.</p>
+<h2 id="architecture-overview">Architecture Overview</h2>
+<p><img src="./air_pipelne_architecture.png" alt="Pipeline Architecture Overview"></p>
+<p>Every AIR deployment consist of edge components (devices, edge framework), as well as components that can be colocated at the edge, on premise, or on a private or public clooud.
+Devices interact with whole AIR infrastructure through Edgex adapters providing the device&rsquo;s required communication protocol and data standard.  Data traverse through the Edgex layers using an internal Edgex messaging protocol (i.e. MQTT).  Data is standardized and converted into a common schema which can then be used by any application at the Edgex Service Layer (.ie. AIR Pipelines).
+AIR Pipelines can be configured from the provided UI which can be running locally or remotely. Pipelines are configured to recieve/subscribe standardized data from devices using the provided Edgex internal messaging protocol, filter, stream, infer, apply rules to the data and then publish the data to other applications.
+Data can be published to AIR applications or other pipelines running at the edge or at the cloud.  Applications can use the messaging protocol (i.e. MQTT) provided by AIR infrastructure.
+Once the pipelines are configured, pipelines are converted into Flogo Applications, compiled to the desired platform, conteinerized and then deployed.</p>
 <h2 id="prerequisites">Prerequisites</h2>
 <h4 id="prerequisite-1-device-groups-configuration">Prerequisite 1: Device Groups Configuration</h4>
-<p>Before you begin, make sure the messaging protocols, data stores and models configuration for device groups have been configured. See <a href="../../tutorials">here</a>.</p>
+<p>Before you begin, make sure the messaging protocols, data stores and models configuration for device groups have been configured. See <a href="../../tutorials">here</a>.
+See Configuring Device Groups.</p>
 <h2 id="adding-data-pipelines">Adding Data Pipelines</h2>
 <h4 id="step-1-open-pipeline-editor">Step 1: Open Pipeline Editor</h4>
 <p>From the Gateways page, select the Device Group you want to configure and click Pipeline Editor Icon.</p>
@@ -435,7 +457,7 @@ This section will guide you through all the steps required to  create data pipel
 <p>Data can be filtered from going through the pipeline. Right click on the editor canvas and select Filters.</p>
 <p><img src="./air_config_pipeline_3.png" alt="Filter image"></p>
 <h4 id="step-6-configure-filter-activity">Step 6: Configure filter activity</h4>
-<p>On the activity configuration panel, select device and resource (sensors) data to be filtered. Only the sensor data/resources selected in the list will be propagated through the pipeline. Connect activities by selecting the connection ports.</p>
+<p>On the activity configuration panel, select device and resource (sensors) data to be filtered. Only the sensor data/resources non-selected in the list will be propagated through the pipeline. Connect activities by selecting the connection ports.</p>
 <p><img src="./air_config_pipeline_4.png" alt="Filter Config image"></p>
 <h4 id="step-7-publish-device-data">Step 7: Publish device data</h4>
 <p>On the editor canvas, right click and select the Data Publisher activity.</p>
@@ -454,8 +476,26 @@ This section will guide you through all the steps required to  create data pipel
 <p><img src="./air_deploy_pipeline_1.png" alt="Pipeline Deploy Select image"></p>
 <h4 id="step-2-the-pipeline-is-deployed-and-should-show-the-status-as-readydeployed">Step 2: The pipeline is deployed and should show the Status as Ready/Deployed</h4>
 <p><img src="./air_deploy_pipeline_2.png" alt="Pipeline Deploy Result image"></p>
+<h2 id="verifying-data-pipelines-deployment">Verifying Data Pipelines Deployment</h2>
+<p>After a pipeline is deployed from the UI, a Docker container is started in the deployment target machine.
+There are several ways to verify the container is up and running. In this section we will use Docker Desktop to verify and inspect the deployed contianer.</p>
+<h4 id="step-1-note-id-of-deployed-pipeline">Step 1: Note Id of deployed Pipeline</h4>
+<p>After the pipeline is deployed, a new entry will be shown in the pipelines table.  Note the id of the pipeline as that will be used to identify the running container.</p>
+<p><img src="./air_deploy_verify_1.png" alt="Verify Pipeline Deploy image1"></p>
+<h4 id="step-2-open-docker-dashboard">Step 2: Open Docker Dashboard</h4>
+<p>Open Docker Dashboard UI and select the Containers/Apps tab. A list of all running containers is shown.</p>
+<p><img src="./air_deploy_verify_2.png" alt="Verify Pipeline Deploy image2"></p>
+<h4 id="step-3-inspect-container">Step 3: Inspect Container</h4>
+<p>From the list of containers, select and open the container matching the Id noted in Step1.</p>
+<p><img src="./air_deploy_verify_3.png" alt="Verify Pipeline Deploy image3"></p>
+<h4 id="step-4-viewing-container-logs">Step 4: Viewing Container Logs</h4>
+<p>After container is selected, select the LOGS tab to view the container logs.</p>
+<p><img src="./air_deploy_verify_4.png" alt="Verify Pipeline Deploy image4"></p>
+<h4 id="step-5-viewing-container-stats">Step 5: Viewing Container Stats</h4>
+<p>From selected container panel, select the STATS tab to review container&rsquo;s cpu usage, memory usage, etc.</p>
+<p><img src="./air_deploy_verify_5.png" alt="Verify Pipeline Deploy image5"></p>
 <h2 id="updeploying-data-pipelines">Updeploying Data Pipelines</h2>
-<p>If data from a device is no longer required or if needs to be modified, you can undeploy the pipeline.  Undeploying will remove the engine processing the data from the Kubernetes cluster.</p>
+<p>If data from a device is not longer required or if needs to be modified, you can undeploy the pipeline.  Undeploying will remove the engine processing the data from the Kubernetes cluster.</p>
 <h4 id="step-1-select-the-desired-pipeline-from-the-pipelines-table-and-then-click-undeploy-pipeline">Step 1: Select the desired pipeline from the Pipelines table and then click Undeploy Pipeline</h4>
 <p><img src="./air_undeploy_pipeline_1.png" alt="Pipeline Undeploy Select image"></p>
 <h4 id="step-2-the-pipeline-is-undeployed-and-should-show-the-status-as-undeployedsaved">Step 2: The pipeline is undeployed and should show the Status as Undeployed/Saved</h4>
@@ -530,7 +570,7 @@ This section will guide you through all the steps required to  create data pipel
 		<br />
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified November 10, 2021: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/188f7f0a2999f72a49646d2acb59d1f90dd2c25f">update docs (188f7f0)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified November 15, 2021: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/8321caeb923871031d73aca2ad05a0b01e0a811e">Added pipeline verification section (8321cae)</a>
 </div>
 </div>
 
