@@ -796,6 +796,14 @@ Full Playlist on &lt;a href=&#34;https://www.youtube.com/playlist?list=PL9ppsUza
         
         
         &lt;h2 id=&#34;installer-issues&#34;&gt;Installer Issues&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;toomanyrequests: Rate exceeded&lt;/summary&gt;
+&lt;br&gt;
+&lt;p&gt;If you are getting this error, it is likely that you are not logged in to docker.&lt;/p&gt;
+&lt;p&gt;Make sure you are logged in to get more pull request limits.&lt;/p&gt;
+&lt;p&gt;If the problem persists, please reach out to us.&lt;/p&gt;
+&lt;/details&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
 
       </description>
     </item>
