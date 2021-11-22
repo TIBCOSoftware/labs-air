@@ -24,4 +24,4 @@ Here a quick Introduction ...
   - <a href="https://github.com/TIBCOSoftware/labs-air-contrib" target="_blank">labs-air-contrib</a><br>
   AIR platform releated TIBCO Flogo extensions, connectors, and functions
 
-![Logo](tibcolabs-brand.png "Labs Logo")
+![Logo](https://tibcosoftware.github.io/TIBCO-LABS/about/tibcolabs-brand.png "Labs Logo")
