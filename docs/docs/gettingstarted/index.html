@@ -23,13 +23,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://tibcosoftware.github.io/labs-air/docs/gettingstarted/" />
 <meta property="article:published_time" content="2021-10-30T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-11-16T12:00:16-08:00" /><meta property="og:site_name" content="Project AIR" />
+<meta property="article:modified_time" content="2021-11-19T11:27:58-08:00" /><meta property="og:site_name" content="Project AIR" />
 <meta itemprop="name" content="Getting Started">
 <meta itemprop="description" content="Getting Started with TIBCO LABS Project AIR
 ">
 <meta itemprop="datePublished" content="2021-10-30T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2021-11-16T12:00:16-08:00" />
-<meta itemprop="wordCount" content="399">
+<meta itemprop="dateModified" content="2021-11-19T11:27:58-08:00" />
+<meta itemprop="wordCount" content="312">
 
 
 
@@ -140,7 +140,7 @@ if (!doNotTrack) {
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/labs-air/offline-search-index.e24f7da0ad3ab37a949eb2ef4939b4f7.json"
+  data-offline-search-index-json-src="/labs-air/offline-search-index.aec0e12d283f8e30ce8f4d60f44e732b.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -172,7 +172,7 @@ if (!doNotTrack) {
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/labs-air/offline-search-index.e24f7da0ad3ab37a949eb2ef4939b4f7.json"
+  data-offline-search-index-json-src="/labs-air/offline-search-index.aec0e12d283f8e30ce8f4d60f44e732b.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -446,44 +446,28 @@ if (!doNotTrack) {
 <div class="tab-content" id="tabs-0-content"><div class="tab-pane fade show active"
         id="tabs-0-0" role="tabpanel" aria-labelled-by="tabs-0-0-tab"><pre><code class="language-en" data-lang="en">
     MacOs Recommended: Version v11.6 Big Sur
-    * Minikube: Version v1.23.2
-    * Helm: Version v3.7.1
-    * Virtual Box: Version 6.1.26
     * Docker Desktop: 20.10.8
   </code></pre></div>
   <div class="tab-pane fade"
         id="tabs-0-1" role="tabpanel" aria-labelled-by="tabs-0-1-tab"><pre><code class="language-en" data-lang="en">
     Linux Recommended: Ubuntu v20.04.3 LTS
-    * Minikube: Version v1.23.2
-    * Helm: Version v3.7.1
-    * Virtual Box: Version 6.1.26
     * Docker: 20.10.9
     * Docker Compose: 1.28.2
-    * resolvconf
   </code></pre></div>
   <div class="tab-pane fade"
         id="tabs-0-2" role="tabpanel" aria-labelled-by="tabs-0-2-tab"><pre><code class="language-en" data-lang="en">
     Windows Recommended: Version 10 Pro
-    * Minikube: Version v1.23.2
-    * Helm: Version v3.7.1
-    * Hyper-V enabled
     * Docker Desktop: 20.10.8
   </code></pre></div>
   
 </div>
 
 <blockquote>
-<p><b>Important:</b> run minikube delete if you have an old minikube instance running that does not use the virtual box driver</p>
-</blockquote>
-<blockquote>
 <p><b>Got more questions?</b> please check the <a href="#advanced-installer-tips">Advance Installation Tips</a> section below or reach out on <a href="mailto:tibcolabs@tibco.com">tibcolabs@tibco.com</a></p>
 </blockquote>
 <h3 id="helpful-urls">helpful URL&rsquo;s</h3>
 <p>some helpful URL&rsquo;s to find your way quickly</p>
 <ul>
-<li><a href="https://minikube.sigs.k8s.io/docs/start/">https://minikube.sigs.k8s.io/docs/start/</a></li>
-<li><a href="https://helm.sh/docs/intro/install/">https://helm.sh/docs/intro/install/</a></li>
-<li><a href="https://www.virtualbox.org/">https://www.virtualbox.org/</a></li>
 <li><a href="https://docs.docker.com/get-docker/">https://docs.docker.com/get-docker/</a></li>
 </ul>
 <blockquote>
@@ -564,7 +548,7 @@ if (!doNotTrack) {
     2. Extract the artifacts and go to the extracted folder
     3. Run the following command:
     
-    ./install.sh myair
+    ./install.sh
 
   </code></pre></div>
   <div class="tab-pane fade"
@@ -573,7 +557,7 @@ if (!doNotTrack) {
     1. Extract the artifacts and go to the extracted folder
     2. Run the following command:
     
-    ./install.sh myair
+    ./install.sh
 
   </code></pre></div>
   <div class="tab-pane fade"
@@ -582,16 +566,18 @@ if (!doNotTrack) {
     2. Extract the artifacts and go to the extracted folder
     3. Run the following command as Administrator:
    
-    call install.cmd myair
+    call install.cmd
 
   </code></pre></div>
   
 </div>
 
-<p>After all the processes are done you see the following after running</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">minikube dashboard
-</code></pre></div><p><img src="./air_minikube.png" alt="AIR minikube dashboard"></p>
-<p>Now you can access project air UI by typing: <a href="http://ui.oss.labs.air/" target="_blank">http - ui.oss.labs.air</a> in your browser locally.</p>
+<p>After all the processes are done you see the following 3 docker compose groups in your docker dashboard</p>
+<p><img src="./air_backend.png" alt="AIR backend"></p>
+<p><img src="./air_lightcrane.png" alt="AIR lightcrane"></p>
+<p><img src="./air_edgex.png" alt="AIR edgex"></p>
+<p><img src="./air_edgex2.png" alt="AIR edgex 2"></p>
+<p>Now you can access project air UI by typing: <a href="http://localhost:8081" target="_blank">http - localhost:8081</a> in your browser locally.</p>
 <blockquote>
 <p><b>Got more questions?</b> please check the <a href="#advanced-installer-tips">Advance Installation Tips</a> section below or reach out on <a href="mailto:tibcolabs@tibco.com">tibcolabs@tibco.com</a></p>
 </blockquote>
@@ -669,7 +655,7 @@ if (!doNotTrack) {
     2. Extract the artifacts and go to the extracted folder
     3. Run the following command:
    
-    ./remove.sh myair
+    ./remove.sh
 
   </code></pre></div>
   <div class="tab-pane fade"
@@ -678,7 +664,7 @@ if (!doNotTrack) {
     1. Extract the artifacts and go to the extracted folder
     2. Run the following command:
     
-    ./remove.sh myair
+    ./remove.sh
 
   </code></pre></div>
   <div class="tab-pane fade"
@@ -687,20 +673,13 @@ if (!doNotTrack) {
     2. Extract the artifacts and go to the extracted folder
     3. Run the following command as Administrator:
     
-    call remove.cmd myair
+    call remove.cmd
 
   </code></pre></div>
   
 </div>
 
 <h1 id="advanced-installer-tips">Advanced installer tips</h1>
-<details>
-<summary>How to use a different minikube driver</summary>
-<br>
-<p>Simply set the environment variable AIR_MINIKUBE_DRIVER to the desired minikube driver name</p>
-<p>For example:</p>
-<p><code>export AIR_MINIKUBE_DRIVER=hyperkit</code></p>
-</details>
 <p><br><br></p>
 
 	
@@ -767,7 +746,7 @@ if (!doNotTrack) {
 		<br />
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified November 16, 2021: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/574cae727ef3cfaf9708b23f380b90d7d994a6ec">Move minikube driver overriding to getting started section (574cae7)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified November 19, 2021: <a  href="https://github.com/TIBCOSoftware/labs-air//commit/e723fb0dc78299fd569e8f3ed61b0eafd4e3ccae">Change docs to docker-compose only installer (e723fb0)</a>
 </div>
 </div>
 

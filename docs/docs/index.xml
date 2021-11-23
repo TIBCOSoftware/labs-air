@@ -295,44 +295,28 @@ AIR platform releated TIBCO Flogo extensions, connectors, and functions&lt;/p&gt
 &lt;div class=&#34;tab-content&#34; id=&#34;tabs-0-content&#34;&gt;&lt;div class=&#34;tab-pane fade show active&#34;
         id=&#34;tabs-0-0&#34; role=&#34;tabpanel&#34; aria-labelled-by=&#34;tabs-0-0-tab&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-en&#34; data-lang=&#34;en&#34;&gt;
     MacOs Recommended: Version v11.6 Big Sur
-    * Minikube: Version v1.23.2
-    * Helm: Version v3.7.1
-    * Virtual Box: Version 6.1.26
     * Docker Desktop: 20.10.8
   &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;div class=&#34;tab-pane fade&#34;
         id=&#34;tabs-0-1&#34; role=&#34;tabpanel&#34; aria-labelled-by=&#34;tabs-0-1-tab&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-en&#34; data-lang=&#34;en&#34;&gt;
     Linux Recommended: Ubuntu v20.04.3 LTS
-    * Minikube: Version v1.23.2
-    * Helm: Version v3.7.1
-    * Virtual Box: Version 6.1.26
     * Docker: 20.10.9
     * Docker Compose: 1.28.2
-    * resolvconf
   &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;div class=&#34;tab-pane fade&#34;
         id=&#34;tabs-0-2&#34; role=&#34;tabpanel&#34; aria-labelled-by=&#34;tabs-0-2-tab&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-en&#34; data-lang=&#34;en&#34;&gt;
     Windows Recommended: Version 10 Pro
-    * Minikube: Version v1.23.2
-    * Helm: Version v3.7.1
-    * Hyper-V enabled
     * Docker Desktop: 20.10.8
   &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   
 &lt;/div&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;&lt;b&gt;Important:&lt;/b&gt; run minikube delete if you have an old minikube instance running that does not use the virtual box driver&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
 &lt;p&gt;&lt;b&gt;Got more questions?&lt;/b&gt; please check the &lt;a href=&#34;#advanced-installer-tips&#34;&gt;Advance Installation Tips&lt;/a&gt; section below or reach out on &lt;a href=&#34;mailto:tibcolabs@tibco.com&#34;&gt;tibcolabs@tibco.com&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;helpful-urls&#34;&gt;helpful URL&amp;rsquo;s&lt;/h3&gt;
 &lt;p&gt;some helpful URL&amp;rsquo;s to find your way quickly&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://minikube.sigs.k8s.io/docs/start/&#34;&gt;https://minikube.sigs.k8s.io/docs/start/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://helm.sh/docs/intro/install/&#34;&gt;https://helm.sh/docs/intro/install/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.virtualbox.org/&#34;&gt;https://www.virtualbox.org/&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://docs.docker.com/get-docker/&#34;&gt;https://docs.docker.com/get-docker/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
@@ -413,7 +397,7 @@ AIR platform releated TIBCO Flogo extensions, connectors, and functions&lt;/p&gt
     2. Extract the artifacts and go to the extracted folder
     3. Run the following command:
     
-    ./install.sh myair
+    ./install.sh
 
   &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;div class=&#34;tab-pane fade&#34;
@@ -422,7 +406,7 @@ AIR platform releated TIBCO Flogo extensions, connectors, and functions&lt;/p&gt
     1. Extract the artifacts and go to the extracted folder
     2. Run the following command:
     
-    ./install.sh myair
+    ./install.sh
 
   &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;div class=&#34;tab-pane fade&#34;
@@ -431,16 +415,18 @@ AIR platform releated TIBCO Flogo extensions, connectors, and functions&lt;/p&gt
     2. Extract the artifacts and go to the extracted folder
     3. Run the following command as Administrator:
    
-    call install.cmd myair
+    call install.cmd
 
   &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   
 &lt;/div&gt;
 
-&lt;p&gt;After all the processes are done you see the following after running&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;minikube dashboard
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;./air_minikube.png&#34; alt=&#34;AIR minikube dashboard&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Now you can access project air UI by typing: &lt;a href=&#34;http://ui.oss.labs.air/&#34; target=&#34;_blank&#34;&gt;http - ui.oss.labs.air&lt;/a&gt; in your browser locally.&lt;/p&gt;
+&lt;p&gt;After all the processes are done you see the following 3 docker compose groups in your docker dashboard&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./air_backend.png&#34; alt=&#34;AIR backend&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./air_lightcrane.png&#34; alt=&#34;AIR lightcrane&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./air_edgex.png&#34; alt=&#34;AIR edgex&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./air_edgex2.png&#34; alt=&#34;AIR edgex 2&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Now you can access project air UI by typing: &lt;a href=&#34;http://localhost:8081&#34; target=&#34;_blank&#34;&gt;http - localhost:8081&lt;/a&gt; in your browser locally.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;b&gt;Got more questions?&lt;/b&gt; please check the &lt;a href=&#34;#advanced-installer-tips&#34;&gt;Advance Installation Tips&lt;/a&gt; section below or reach out on &lt;a href=&#34;mailto:tibcolabs@tibco.com&#34;&gt;tibcolabs@tibco.com&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -518,7 +504,7 @@ AIR platform releated TIBCO Flogo extensions, connectors, and functions&lt;/p&gt
     2. Extract the artifacts and go to the extracted folder
     3. Run the following command:
    
-    ./remove.sh myair
+    ./remove.sh
 
   &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;div class=&#34;tab-pane fade&#34;
@@ -527,7 +513,7 @@ AIR platform releated TIBCO Flogo extensions, connectors, and functions&lt;/p&gt
     1. Extract the artifacts and go to the extracted folder
     2. Run the following command:
     
-    ./remove.sh myair
+    ./remove.sh
 
   &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;div class=&#34;tab-pane fade&#34;
@@ -536,20 +522,13 @@ AIR platform releated TIBCO Flogo extensions, connectors, and functions&lt;/p&gt
     2. Extract the artifacts and go to the extracted folder
     3. Run the following command as Administrator:
     
-    call remove.cmd myair
+    call remove.cmd
 
   &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   
 &lt;/div&gt;
 
 &lt;h1 id=&#34;advanced-installer-tips&#34;&gt;Advanced installer tips&lt;/h1&gt;
-&lt;details&gt;
-&lt;summary&gt;How to use a different minikube driver&lt;/summary&gt;
-&lt;br&gt;
-&lt;p&gt;Simply set the environment variable AIR_MINIKUBE_DRIVER to the desired minikube driver name&lt;/p&gt;
-&lt;p&gt;For example:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;export AIR_MINIKUBE_DRIVER=hyperkit&lt;/code&gt;&lt;/p&gt;
-&lt;/details&gt;
 &lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
 
       </description>
