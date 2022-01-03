@@ -1,29 +1,30 @@
 # TIBCO LABS™ Project AIR
 
-Link to full documentation Site: https://tibcosoftware.github.io/labs-air/
+Link to full documentation Site: <https://tibcosoftware.github.io/labs-air/>
 
 ![Static Analysis](https://github.com/TIBCOSoftware/labs-air/workflows/Static%20Analysis/badge.svg)
 
 ## other Project AIR GitHub Repositories
-TIBCO LABS Project AIR consist of multiple Repos <a href="https://github.com/orgs/TIBCOSoftware/repositories?language=&q=air&sort=&type=" target="_blank">full Query here</a>.<br>
+
+TIBCO LABS Project AIR consist of multiple Repos [full Query here](https://github.com/orgs/TIBCOSoftware/repositories?language=&q=air&sort=&type=).
 Here a quick Introduction ...
 
-- <a href="https://github.com/TIBCOSoftware/labs-air" target="_blank">labs-air</a><br>
+- [labs-air](https://github.com/TIBCOSoftware/labs-air)
   stores the Project Site and Documentation (this Repo)
 
-  - <a href="https://github.com/TIBCOSoftware/labs-air-ui" target="_blank">labs-air-ui</a><br>
-  AIR user Interface implemented using Angular.io 
+- [labs-air-ui](https://github.com/TIBCOSoftware/labs-air-ui)
+  AIR user Interface implemented using Angular.io
 
-  - <a href="https://github.com/TIBCOSoftware/labs-air-edgex" target="_blank">labs-air-edgex</a><br>
-  configurations of EdgeX Foundry releated to AIR
+- [labs-air-edgex](https://github.com/TIBCOSoftware/labs-air-edgex)
+  configurations of EdgeX Foundry related to AIR
 
-  - <a href="https://github.com/TIBCOSoftware/labs-air-charts" target="_blank">labs-air-charts</a><br>
-  bootstraps a Project Air deployment on a Kubernetes cluster using the Helm package manager. 
+- [labs-air-charts](https://github.com/TIBCOSoftware/labs-air-charts)
+  bootstraps a Project Air deployment on a Kubernetes cluster using the Helm package manager.
 
-  - <a href="https://github.com/TIBCOSoftware/labs-air-services" target="_blank">labs-air-services</a><br>
+- [labs-air-services](https://github.com/TIBCOSoftware/labs-air-services)
   AIR platform backend and edge services based on TIBCO Flogo
 
-  - <a href="https://github.com/TIBCOSoftware/labs-air-contrib" target="_blank">labs-air-contrib</a><br>
-  AIR platform releated TIBCO Flogo extensions, connectors, and functions
+- [labs-air-contrib](https://github.com/TIBCOSoftware/labs-air-contrib)
+  AIR platform related TIBCO Flogo extensions, connectors, and functions
 
 ![Logo](https://tibcosoftware.github.io/TIBCO-LABS/about/tibcolabs-brand.png "Labs Logo")
