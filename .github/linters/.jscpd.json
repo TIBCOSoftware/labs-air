@@ -1,0 +1,8 @@
+{
+    "reporters": ["html", "markdown" ],
+    "ignore": [
+        "**/.github/workflows/build.yaml",
+        "**/.github/workflows/deploy.yaml"
+    ],
+    "threshold": 3
+}

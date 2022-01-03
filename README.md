@@ -2,6 +2,8 @@
 
 Link to full documentation Site: https://tibcosoftware.github.io/labs-air/
 
+![Static Analysis](https://github.com/TIBCOSoftware/labs-air/workflows/Static%20Analysis/badge.svg)
+
 ## other Project AIR GitHub Repositories
 TIBCO LABS Project AIR consist of multiple Repos <a href="https://github.com/orgs/TIBCOSoftware/repositories?language=&q=air&sort=&type=" target="_blank">full Query here</a>.<br>
 Here a quick Introduction ...

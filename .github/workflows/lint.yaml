@@ -1,0 +1,44 @@
+---
+name: Static Analysis
+
+#
+# Documentation:
+# https://help.github.com/en/articles/workflow-syntax-for-github-actions
+
+#############################
+# Start the job on all push #
+#############################
+on: [push]
+
+jobs:
+  static-analysis:
+      # Name the Job
+      name: Lint Code Base
+      # Set the agent to run on
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout Code
+          uses: actions/checkout@v2
+          with:
+            # Full git history is needed to get a proper list of changed files within `super-linter`
+            fetch-depth: 0
+
+        - name: Lint Code Base
+          uses: github/super-linter@v4
+          env:
+            VALIDATE_ALL_CODEBASE: false
+            DEFAULT_BRANCH: master
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            FILTER_REGEX_EXCLUDE: 
+            # FILTER_REGEX_INCLUDE: .*src/.*
+            # Prefer typescript
+            VALIDATE_JAVASCRIPT_ES: false
+            VALIDATE_JAVASCRIPT_STANDARD: false
+            # Seems to not match our linter ... prefer the ES version
+            VALIDATE_TYPESCRIPT_STANDARD: false
+            # Too many errors in the project
+            VALIDATE_HTML: false
+            VALIDATE_CLOUDFORMATION: false
+            CSS_FILE_NAME: .stylelintrc.yaml
+
