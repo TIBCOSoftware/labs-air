@@ -41,4 +41,3 @@ jobs:
             VALIDATE_HTML: false
             VALIDATE_CLOUDFORMATION: false
             CSS_FILE_NAME: .stylelintrc.yaml
-
