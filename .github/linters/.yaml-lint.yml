@@ -1,0 +1,6 @@
+rules:
+  line-length:
+    max: 140
+    ignore: |
+      "**/.github/workflows/build.yaml"
+
