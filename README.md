@@ -27,4 +27,9 @@ Here a quick Introduction ...
 - [labs-air-contrib](https://github.com/TIBCOSoftware/labs-air-contrib)
   AIR platform related TIBCO Flogo extensions, connectors, and functions
 
+## Contributing
+
+For information regarding participation in the project, please see our [contributing](./CONTRIBUTING.md)
+document.
+
 ![Logo](https://tibcosoftware.github.io/TIBCO-LABS/about/tibcolabs-brand.png "Labs Logo")
