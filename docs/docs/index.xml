@@ -66,7 +66,7 @@
 	  margin-top: 0px;
 	}
 &lt;/style&gt;
-&lt;p id=&#34;targetdate&#34;&gt;&lt;/p&gt;
+&lt;!--p id=&#34;targetdate&#34;&gt;&lt;/p&gt;
 &lt;div id=&#34;clockdiv&#34;&gt;
 		&lt;div&gt;
 		  &lt;span class=&#34;days&#34;&gt;&lt;/span&gt;
@@ -84,8 +84,8 @@
 		  &lt;span class=&#34;seconds&#34;&gt;&lt;/span&gt;
 		  &lt;div class=&#34;smalltext&#34;&gt;Seconds&lt;/div&gt;
 		&lt;/div&gt;
-&lt;/div&gt;
-&lt;script&gt;
+&lt;/div--&gt;
+&lt;!--script&gt;
 function getTimeRemaining(endtime) {
   const total = Date.parse(endtime) - Date.parse(new Date());
   const seconds = Math.floor((total / 1000) % 60);
@@ -123,7 +123,7 @@ function initializeClock(id, endtime) {
 const deadline = new Date(Date.parse(new Date(&#34;Jan 14, 2022 10:00:00 PST&#34;)));
 initializeClock(&#39;clockdiv&#39;, deadline);
 
-&lt;/script&gt;
+&lt;/script --&gt;
 &lt;p&gt;&lt;br&gt;&lt;br&gt;
 &lt;b&gt;Not a participant yet?&lt;/b&gt; Then you definitely want to check this out: &lt;br&gt;&lt;a href=&#34;https://www.hackerearth.com/challenges/hackathon/tibco-labs-iot-and-sustainability-hack/&#34;&gt;TIBCO LABS IoT and sustainability Hack&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;b&gt;For all others&lt;/b&gt; … welcome to Project AIR! We are excited to have our project be part of this hackathon, and to work with you on innovative solutions in the area of environmental sustainability.&lt;/p&gt;
