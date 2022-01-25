@@ -1,0 +1,23 @@
+{
+  "version": "0.6.0-26",
+  "scripts": {
+    "prepare": "husky install && git config --local commit.template .commit-template",
+    "release": "standard-version",
+    "release:minor": "standard-version --release-as minor",
+    "release:patch": "standard-version --release-as patch",
+    "release:major": "standard-version --release-as major"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^16.0.1",
+    "@commitlint/config-conventional": "^16.0.0",
+    "husky": "^7.0.4",
+    "standard-version": "^9.3.1",
+    "standard-version-updater-yaml": "^1.0.3"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "dependencies": {}
+}
