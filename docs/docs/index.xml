@@ -717,6 +717,79 @@ Project AIR provides scripts with SQL commands to create the required artifacts.
     </item>
     
     <item>
+      <title>Docs: Device Simulators</title>
+      <link>https://tibcosoftware.github.io/labs-air/docs/userguide/devicesimulators/</link>
+      <pubDate>Mon, 25 May 2020 12:33:17 -0400</pubDate>
+      
+      <guid>https://tibcosoftware.github.io/labs-air/docs/userguide/devicesimulators/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Project AIR provides device adapters to allow end users to simulate generation of events and readings without having any real devices.&lt;/p&gt;
+&lt;p&gt;The events and reading go to the Edgex core data micro services and propagated to project AIR pipelines.&lt;/p&gt;
+&lt;h2 id=&#34;rest-device&#34;&gt;REST Device&lt;/h2&gt;
+&lt;p&gt;This device service provides easy way for any application to push data into EdgeX via the REST protocol.&lt;/p&gt;
+&lt;p&gt;The service provides the following resources for simulating data of different data types:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;int16_reading - simulates a resource/sensor generating integer readings&lt;/li&gt;
+&lt;li&gt;float32_reading - simulates a resource/sensor generating float readings&lt;/li&gt;
+&lt;li&gt;bool_reading - simulates a resource/sensor generating boolean readings&lt;/li&gt;
+&lt;li&gt;str_reading - simulates a resource/sensor generating string readings&lt;/li&gt;
+&lt;li&gt;image_reading - simulates a resource/sensor generating image readings&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;rest-endpoints&#34;&gt;REST Endpoints&lt;/h3&gt;
+&lt;p&gt;This device service provides the following REST endpoints:&lt;/p&gt;
+&lt;p&gt;http://&lt;ip-address&gt;:49565/api/v1/resource/RESTDevice/{resourceName}&lt;/p&gt;
+&lt;p&gt;resourceNamerefers to the device resource names listed above.&lt;/p&gt;
+&lt;h3 id=&#34;testingsimulation&#34;&gt;Testing/Simulation&lt;/h3&gt;
+&lt;p&gt;The best way to test this service with simulated data is to use PostMan to send data to the following endpoints.&lt;/p&gt;
+&lt;p&gt;http://localhost:49565/api/v1/resource/RESTDevice/image_reading&lt;/p&gt;
+&lt;p&gt;POSTing an image file (jpeg or png) will result in the BinaryValue of the Reading being set to the JPEG/PNG image data posted.
+Example test JPEG to post:
+Select any JPEG file from your computer or the internet&lt;/p&gt;
+&lt;p&gt;http://localhost:49565/api/v1/resource/RESTDevice/int16_reading&lt;/p&gt;
+&lt;p&gt;POSTing a text integer value will result in the Value of the Reading being set to the string representation of the value as an Int16. The POSTed value is verified to be a valid Int16 value.&lt;/p&gt;
+&lt;p&gt;A 400 error will be returned if the POSTed value fails the Int16 type verification.&lt;/p&gt;
+&lt;p&gt;Example test int value to post:&lt;/p&gt;
+&lt;p&gt;1001&lt;/p&gt;
+&lt;p&gt;http://localhost:49565/api/v1/resource/RESTDevice/float32_reading&lt;/p&gt;
+&lt;p&gt;POSTing a text float value will result in the Value of the Reading being set to the string representation of the value as an Float32. The POSTed value is verified to be a valid Float32 value.&lt;/p&gt;
+&lt;p&gt;A 400 error will be returned if the POSTed value fails the Float32 type verification.&lt;/p&gt;
+&lt;p&gt;Example test float value to post:&lt;/p&gt;
+&lt;p&gt;500.56&lt;/p&gt;
+&lt;p&gt;http://localhost:49565/api/v1/resource/RESTDevice/bool_reading&lt;/p&gt;
+&lt;p&gt;POSTing a text boolean value will result in the Value of the Reading being set to the string representation of the value as a Bool. The POSTed value is verified to be a valid boolean value.&lt;/p&gt;
+&lt;p&gt;A 400 error will be returned if the POSTed value fails the Boolean type verification.&lt;/p&gt;
+&lt;p&gt;Example test boolean value to post:&lt;/p&gt;
+&lt;p&gt;true&lt;/p&gt;
+&lt;p&gt;http://localhost:49565/api/v1/resource/RESTDevice/str_reading&lt;/p&gt;
+&lt;p&gt;POSTing a text value will result in the Value of the Reading being set as a string.&lt;/p&gt;
+&lt;p&gt;Example test string value to post:&lt;/p&gt;
+&lt;p&gt;abc&lt;/p&gt;
+&lt;h2 id=&#34;mqtt-device&#34;&gt;MQTT Device&lt;/h2&gt;
+&lt;p&gt;This device service provides easy way for any application to push data into EdgeX via the MQTT protocol.&lt;/p&gt;
+&lt;p&gt;The device service connects a MQTT topic to EdgeX acting like a device/sensor feed.&lt;/p&gt;
+&lt;p&gt;The service provides the following resources for simulating data of different data types:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;int16_reading - simulates a resource/sensor generating integer readings&lt;/li&gt;
+&lt;li&gt;float32_reading - simulates a resource/sensor generating float readings&lt;/li&gt;
+&lt;li&gt;bool_reading - simulates a resource/sensor generating boolean readings&lt;/li&gt;
+&lt;li&gt;str_reading - simulates a resource/sensor generating string readings&lt;/li&gt;
+&lt;li&gt;image_reading - simulates a resource/sensor generating image readings&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;MQTT Topic
+This device subscribes to a MQTT Topic (/generic/event).  When a value is received it passes to the Edgex core data micro services and propagated to project AIR pipelines.&lt;/p&gt;
+&lt;p&gt;The following examples illustrate the json message required for sending data for the above described resources.&lt;/p&gt;
+&lt;p&gt;{&amp;ldquo;deviceName&amp;rdquo;:&amp;ldquo;MQTTDevice&amp;rdquo;,&amp;ldquo;resourceName&amp;rdquo;:&amp;ldquo;int16_reading&amp;rdquo;,&amp;ldquo;int16_reading&amp;rdquo;:100}&lt;/p&gt;
+&lt;p&gt;{&amp;ldquo;deviceName&amp;rdquo;:&amp;ldquo;MQTTDevice&amp;rdquo;,&amp;ldquo;resourceName&amp;rdquo;:&amp;ldquo;float32_reading&amp;rdquo;,&amp;ldquo;float32_reading&amp;rdquo;:100.0}&lt;/p&gt;
+&lt;p&gt;{&amp;ldquo;deviceName&amp;rdquo;:&amp;ldquo;MQTTDevice&amp;rdquo;,&amp;ldquo;resourceName&amp;rdquo;:&amp;ldquo;str_reading&amp;rdquo;,&amp;ldquo;str_reading&amp;rdquo;:&amp;ldquo;test1&amp;rdquo;}&lt;/p&gt;
+&lt;p&gt;{&amp;ldquo;deviceName&amp;rdquo;:&amp;ldquo;MQTTDevice&amp;rdquo;,&amp;ldquo;resourceName&amp;rdquo;:&amp;ldquo;bool_reading&amp;rdquo;,&amp;ldquo;bool_reading&amp;rdquo;:true}&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Docs: Pipeline Activities</title>
       <link>https://tibcosoftware.github.io/labs-air/docs/userguide/pipelineactivities/</link>
       <pubDate>Mon, 25 May 2020 12:33:17 -0400</pubDate>
