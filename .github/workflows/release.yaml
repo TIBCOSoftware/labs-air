@@ -3,13 +3,12 @@ name: Release Project Air
 
 # This job is meant to be dispatched when a release is published. It shall update the CHANGELOGs.
 on:
-  workflow_dispatch:
   release:
     types: [published]
 
 jobs:
   update-changelog:
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [16.x]
