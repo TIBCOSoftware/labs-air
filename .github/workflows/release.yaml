@@ -26,7 +26,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Checkout ${{ matrix.repository }} for the triggering event ${{ github.event_name }} for release ${{ github.event.release.tag_name }}
+      - name: Checkout ${{ matrix.repository }} for the event ${{ github.event_name }} release ${{ github.event.release.tag_name }}
         uses: actions/checkout@v2
         with:
           repository: TIBCOSoftware/${{ matrix.repository }}
@@ -55,7 +55,7 @@ jobs:
       - name: Update the changelog for the release ${{ github.event.release.tag_name }}
         working-directory: .github/${{ matrix.repository }}
         run: |
-          npm run release -- --release-as ${{ github.event.release.tag_name }}
+          npm run release -- --release-as "${{ github.event.release.tag_name }}"
           DEFAULT_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
-          git push --follow-tags origin ${DEFAULT_BRANCH}
+          git push --follow-tags origin "${DEFAULT_BRANCH}"
 
