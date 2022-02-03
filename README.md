@@ -3,6 +3,7 @@
 Link to full documentation Site: <https://tibcosoftware.github.io/labs-air/>
 
 ![Static Analysis](https://github.com/TIBCOSoftware/labs-air/workflows/Static%20Analysis/badge.svg)
+[![Release Project Air](https://github.com/TIBCOSoftware/labs-air/actions/workflows/release.yaml/badge.svg)](https://github.com/TIBCOSoftware/labs-air/actions/workflows/release.yaml)
 
 ## other Project AIR GitHub Repositories
 
