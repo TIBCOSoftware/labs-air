@@ -22,10 +22,13 @@
       <description>
         
         
-        &lt;p&gt;In Ideation phase until January 14, 2022 &lt;div class=&#34;fix&#34;&gt;&lt;img src=&#34;./TIBCO-Labs.png&#34; width=&#34;300px&#34;&gt;&lt;/div&gt;
+        &lt;div class=&#34;fix&#34;&gt;&lt;img src=&#34;./TIBCO-Labs.png&#34; width=&#34;300px&#34;&gt;&lt;/div&gt;
 &lt;br&gt;
-In Development phase until January 29, 2022
-&lt;br&gt;&lt;/p&gt;
+The requirement was to propose projects that address&lt;br&gt; 
+one or more environmental challenges we face across the &lt;br&gt;
+globe today using Project AIR.&lt;br&gt;&lt;br&gt;
+&lt;a href=&#34;https://www.hackerearth.com/challenges/hackathon/tibco-labs-iot-and-sustainability-hack/&#34;&gt;TIBCO LABS IoT and sustainability Hack&lt;/a&gt;
+&lt;br&gt;
 &lt;style&gt;
     .fix{
         transform: rotate(-8deg);
@@ -128,11 +131,14 @@ initializeClock(&#39;clockdiv&#39;, deadline);
 
 &lt;/script --&gt;
 &lt;p&gt;&lt;br&gt;&lt;br&gt;
-&lt;b&gt;Not a participant yet?&lt;/b&gt; Then you definitely want to check this out: &lt;br&gt;&lt;a href=&#34;https://www.hackerearth.com/challenges/hackathon/tibco-labs-iot-and-sustainability-hack/&#34;&gt;TIBCO LABS IoT and sustainability Hack&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;b&gt;For all others&lt;/b&gt; … welcome to Project AIR! We are excited to have our project be part of this hackathon, and to work with you on innovative solutions in the area of environmental sustainability.&lt;/p&gt;
-&lt;p&gt;As you browse through the materials and learn more about Project AIR, we just want to note that we are working hard to update the docs with more details, including additional tutorials and videos. The Getting Started materials should be enough to help you with the Ideation phase of the hackathon, but let us know via the HackerEarth Discussion forum if you have any questions!&lt;/p&gt;
-&lt;p&gt;As we get closer to the Development phase, we will be releasing more materials. So be sure to check back, or watch the HackerEarth site for details.&lt;/p&gt;
-&lt;p&gt;&lt;b&gt;Happy Hacking!&lt;/b&gt;&lt;/p&gt;
+From enhancing energy efficiency and reducing global emissions to making cities “smarter,” the Internet of Things (IoT) and sustainability are natural partners, so please focus your submissions on this combination. Be creative, and remember that while submissions can target suggestions such as those that follow, you can also propose other ideas.&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Winners&lt;/b&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;First Place: AI-Based Crop Management System, &lt;a href=&#34;https://www.youtube.com/watch?v=gRKB9f1SiPU&#34;&gt;https://www.youtube.com/watch?v=gRKB9f1SiPU&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Second Place: Project Sonora, &lt;a href=&#34;https://www.youtube.com/watch?v=uAYgIvGcOIM&amp;amp;t=9s&#34;&gt;https://www.youtube.com/watch?v=uAYgIvGcOIM&amp;amp;t=9s&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Third Place: Flux, &lt;a href=&#34;https://www.youtube.com/watch?v=qX7wwf9MWbw&#34;&gt;https://www.youtube.com/watch?v=qX7wwf9MWbw&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;b&gt;Thanks for participating!&lt;/b&gt;&lt;/p&gt;
 &lt;br&gt;
       </description>
     </item>
