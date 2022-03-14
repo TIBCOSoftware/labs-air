@@ -59,5 +59,10 @@ jobs:
           git config user.email github-actions@github.com
           npm run release -- --release-as "${{ github.event.release.tag_name }}"
           DEFAULT_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+          echo The default branch is "${DEFAULT_BRANCH}"
+          git remote set-head origin "${DEFAULT_BRANCH}"
+          echo Debug follows
+          git branch -r
+          echo End debug
           git push --follow-tags origin "${DEFAULT_BRANCH}"
 
