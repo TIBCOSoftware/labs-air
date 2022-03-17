@@ -60,9 +60,17 @@ jobs:
           npm run release -- --release-as "${{ github.event.release.tag_name }}"
           DEFAULT_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
           echo The default branch is "${DEFAULT_BRANCH}"
-          git remote set-head origin "${DEFAULT_BRANCH}"
+          if [ -z "${DEFAULT_BRANCH}" ]; then
+            DEFAULT_BRANCH='main'
+            lines=$(git branch -r | grep "${DEFAULT_BRANCH}" | wc -l | tr -d '[:space:]')
+            if [ "${lines}" == "0" ]; then
+              DEFAULT_BRANCH=master
+            fi
+          fi
+          echo The default branch was set to "${DEFAULT_BRANCH}"
           echo Debug follows
           git branch -r
           echo End debug
+          git remote set-head origin "${DEFAULT_BRANCH}" || echo Could not set the origin reference
           git push --follow-tags origin "${DEFAULT_BRANCH}"
 
