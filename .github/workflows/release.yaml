@@ -57,7 +57,9 @@ jobs:
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          npm run release -- --release-as "${{ github.event.release.tag_name }}"
+
+          git symbolic-ref -q HEAD || (echo Head is detached && git switch -)
+
           DEFAULT_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
           echo The default branch is "${DEFAULT_BRANCH}"
           if [ -z "${DEFAULT_BRANCH}" ]; then
@@ -68,9 +70,9 @@ jobs:
             fi
           fi
           echo The default branch was set to "${DEFAULT_BRANCH}"
-          echo Debug follows
-          git branch -r
-          echo End debug
+
+          npm run release -- --release-as "${{ github.event.release.tag_name }}"
+
           git remote set-head origin "${DEFAULT_BRANCH}" || echo Could not set the origin reference
-          git push --follow-tags origin "${DEFAULT_BRANCH}"
+          git push --follow-tags origin "${DEFAULT_BRANCH}" || echo Could not push to changelog
 
