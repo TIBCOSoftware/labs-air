@@ -13,6 +13,8 @@ node_modules/
 
 # IDEs and editors
 
+.idea/**
+
 # IDE - VSCode
 .vscode*
 .vscode/*

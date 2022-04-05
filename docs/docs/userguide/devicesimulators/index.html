@@ -433,30 +433,30 @@ The events and reading go to the Edgex core data micro services and propagated t
 </ul>
 <h3 id="rest-endpoints">REST Endpoints</h3>
 <p>This device service provides the following REST endpoints:</p>
-<p>http://<ip-address>:49565/api/v1/resource/RESTDevice/{resourceName}</p>
+<p>http://<ip-address>:49565/api/v2/resource/RESTDevice/{resourceName}</p>
 <p>resourceNamerefers to the device resource names listed above.</p>
 <h3 id="testingsimulation">Testing/Simulation</h3>
 <p>The best way to test this service with simulated data is to use PostMan to send data to the following endpoints.</p>
-<p>http://localhost:49565/api/v1/resource/RESTDevice/image_reading</p>
+<p>http://localhost:49565/api/v2/resource/RESTDevice/image_reading</p>
 <p>POSTing an image file (jpeg or png) will result in the BinaryValue of the Reading being set to the JPEG/PNG image data posted.
 Example test JPEG to post:
 Select any JPEG file from your computer or the internet</p>
-<p>http://localhost:49565/api/v1/resource/RESTDevice/int16_reading</p>
+<p>http://localhost:49565/api/v2/resource/RESTDevice/int16_reading</p>
 <p>POSTing a text integer value will result in the Value of the Reading being set to the string representation of the value as an Int16. The POSTed value is verified to be a valid Int16 value.</p>
 <p>A 400 error will be returned if the POSTed value fails the Int16 type verification.</p>
 <p>Example test int value to post:</p>
 <p>1001</p>
-<p>http://localhost:49565/api/v1/resource/RESTDevice/float32_reading</p>
+<p>http://localhost:49565/api/v2/resource/RESTDevice/float32_reading</p>
 <p>POSTing a text float value will result in the Value of the Reading being set to the string representation of the value as an Float32. The POSTed value is verified to be a valid Float32 value.</p>
 <p>A 400 error will be returned if the POSTed value fails the Float32 type verification.</p>
 <p>Example test float value to post:</p>
 <p>500.56</p>
-<p>http://localhost:49565/api/v1/resource/RESTDevice/bool_reading</p>
+<p>http://localhost:49565/api/v2/resource/RESTDevice/bool_reading</p>
 <p>POSTing a text boolean value will result in the Value of the Reading being set to the string representation of the value as a Bool. The POSTed value is verified to be a valid boolean value.</p>
 <p>A 400 error will be returned if the POSTed value fails the Boolean type verification.</p>
 <p>Example test boolean value to post:</p>
 <p>true</p>
-<p>http://localhost:49565/api/v1/resource/RESTDevice/str_reading</p>
+<p>http://localhost:49565/api/v2/resource/RESTDevice/str_reading</p>
 <p>POSTing a text value will result in the Value of the Reading being set as a string.</p>
 <p>Example test string value to post:</p>
 <p>abc</p>
