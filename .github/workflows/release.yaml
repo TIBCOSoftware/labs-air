@@ -32,6 +32,7 @@ jobs:
           repository: TIBCOSoftware/${{ matrix.repository }}
           token: ${{ secrets.LABS_ACTIONS_ACCESS_TOKEN }}
           path: .github/${{ matrix.repository }}
+          fetch-depth: 0
 
       - uses: actions/setup-node@v2
         with:
