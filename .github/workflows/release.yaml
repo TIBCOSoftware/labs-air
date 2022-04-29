@@ -59,7 +59,7 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
 
-          git symbolic-ref -q HEAD || (echo Head is detached && git switch -)
+          git symbolic-ref -q HEAD || (echo HEAD is detached && git switch - || echo Could not switch)
 
           DEFAULT_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
           echo The default branch is "${DEFAULT_BRANCH}"
