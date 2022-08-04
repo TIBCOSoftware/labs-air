@@ -8,7 +8,7 @@ description: >
 ---
 
 ## Introduction
-Once a Device Grouping has been discovered by project AIR, a connection has been established with edge devices.
+THIS IS A TEST Once a Device Grouping has been discovered by project AIR, a connection has been established with edge devices.
 In this section we show how to configure Messaging Protocos, Data Stores and ML Model connections which can be used in Data Pipelines to receive, process data from devices, and publish device data to other edge or cloud applications.
 The following steps will guide you through the configuration of messaging protocols, data stores and ML models connections.
 
