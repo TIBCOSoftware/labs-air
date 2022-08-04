@@ -13,15 +13,17 @@ jobs:
       matrix:
         node-version: [16.x]
         repository:
-          - labs-air
-          - labs-air-charts
-          - labs-air-contrib
-          - labs-air-edgex
-          - labs-air-infra
-          - labs-air-services
-          - labs-air-ui
-          - labs-lightcrane-contrib
-          - labs-lightcrane-services
+          - TIBCOSoftware/labs-air
+          - TIBCOSoftware/labs-air-charts
+          - TIBCOSoftware/labs-air-contrib
+          - TIBCOSoftware/labs-air-edgex
+          - TIBCOSoftware/labs-air-infra
+          - TIBCOSoftware/labs-air-services
+          - TIBCOSoftware/labs-air-ui
+          - TIBCOSoftware/labs-lightcrane-contrib
+          - TIBCOSoftware/labs-lightcrane-services
+          - tibco/labs-air-datastore-proxy
+          - tibco/labs-air-authenticator
 
     permissions:
       contents: write
@@ -29,7 +31,7 @@ jobs:
       - name: Checkout ${{ matrix.repository }} for the event ${{ github.event_name }} release ${{ github.event.release.tag_name }}
         uses: actions/checkout@v2
         with:
-          repository: TIBCOSoftware/${{ matrix.repository }}
+          repository: ${{ matrix.repository }}
           token: ${{ secrets.LABS_ACTIONS_ACCESS_TOKEN }}
           path: .github/${{ matrix.repository }}
           fetch-depth: 0
@@ -47,11 +49,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-cicd-${{ matrix.repository }}-
 
-      - name: Set up the node modules
+      - name: Set up the node modules for ${{ matrix.repository }}
         if: steps.cache.outputs.cache-hit != 'true'
         working-directory: .github/${{ matrix.repository }}
         run: |
-          npm ci
+          npm ci || npm install --force
 
       - name: Update the changelog for the release ${{ github.event.release.tag_name }}
         working-directory: .github/${{ matrix.repository }}
