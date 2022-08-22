@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.8.0-164](https://github.com/TIBCOSoftware/labs-air/compare/v0.7.0-970...v0.8.0-164) (2022-08-22)
+
+
+### Bugfixes
+
+* **cicd:** fix issue with npm install and add additional projects ([15256ce](https://github.com/TIBCOSoftware/labs-air/commits/15256cec1d0ec66aab8738591773f807f5ce653f))
+
 ## [0.7.0-970](https://github.com/TIBCOSoftware/labs-air/compare/v0.1.0...v0.7.0-970) (2022-05-31)
 
 
